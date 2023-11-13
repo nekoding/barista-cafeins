@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 
-bunx prisma db push --schema=prisma/barista/schema.prisma
+bunx prisma migrate dev --schema=prisma/barista/schema.prisma
