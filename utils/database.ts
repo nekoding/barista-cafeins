@@ -2,11 +2,11 @@ import { PrismaClient as PrismaClientBarista } from '../prisma/barista/barista-c
 import { PrismaClient as PrismaClientCafeins } from '../prisma/cafeins/cafeins-client'
 
 const baristaClient = new PrismaClientBarista({
-  log: ['error'],
+  log: ['error', 'info', 'warn'],
 })
 
 const cafeinsClient = new PrismaClientCafeins({
-  log: ['error'],
+  log: ['error', 'info', 'warn'],
 })
 
 export { baristaClient, cafeinsClient }

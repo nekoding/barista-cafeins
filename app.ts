@@ -1,5 +1,5 @@
 import { Command } from 'commander'
-import { syncHandler } from './handlers/handler'
+import { syncronizeAction } from './handler'
 
 const barista = new Command()
 barista
@@ -11,13 +11,13 @@ barista
 
 // handler sync command
 barista
-  .command('sync')
+  .command('barista:sync')
   .description('Synchronize table from Silfi to Cafeins')
   .argument('<table>', 'Table name to be synchronized')
-  .action(syncHandler)
+  .action(syncronizeAction)
 
 try {
   await barista.parseAsync(process.argv)
 } catch (error) {
-  console.error(error)
+  console.error("error: Can't parse command")
 }
