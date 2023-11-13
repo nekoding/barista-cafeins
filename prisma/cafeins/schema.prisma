@@ -1,0 +1,1794 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "cafeins-client"
+  previewFeatures = ["multiSchema", "postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_CAFEINS_URL")
+  extensions = [postgis]
+  schemas    = ["administrative_area", "asset", "boq", "cable", "master", "public", "site_point", "topology"]
+}
+
+model cities {
+  id            Int                      @id
+  province_id   Int?
+  name          String?                  @db.VarChar(200)
+  year          String?                  @db.VarChar(4)
+  source_id     Int?
+  area          Decimal?                 @db.Decimal
+  area_in_ha    Decimal?                 @db.Decimal
+  area_in_km    Decimal?                 @db.Decimal
+  geometry      Unsupported("geometry")?
+  status        String?                  @db.VarChar
+  code          String?                  @db.VarChar(20)
+  province_code String?                  @db.VarChar(20)
+
+  @@schema("administrative_area")
+}
+
+model districts {
+  id         Int                      @id
+  city_id    Int?
+  city_code  String?                  @db.VarChar(20)
+  name       String?                  @db.VarChar(200)
+  year       String?                  @db.VarChar(4)
+  source_id  Int?
+  area       Decimal?                 @db.Decimal
+  area_in_ha Decimal?                 @db.Decimal
+  area_in_km Decimal?                 @db.Decimal
+  geometry   Unsupported("geometry")?
+  code       String?                  @db.VarChar(20)
+  status     String?                  @db.VarChar
+
+  @@schema("administrative_area")
+}
+
+model provinces {
+  id             Int                      @id
+  code           String?                  @db.VarChar(10)
+  name           String?                  @db.VarChar(200)
+  source_id      Int?
+  published_year String?                  @db.VarChar(5)
+  area           Decimal?                 @db.Decimal
+  area_in_ha     Decimal?                 @db.Decimal
+  area_in_km     Decimal?                 @db.Decimal
+  geometry       Unsupported("geometry")?
+  status         String?                  @db.VarChar(10)
+  updated_at     DateTime?                @db.Timestamptz(6)
+  created_at     DateTime?                @db.Timestamptz(6)
+
+  @@schema("administrative_area")
+}
+
+model villages {
+  id             Int                      @id
+  district_id    Int?
+  district_code  String?                  @db.VarChar
+  name           String?                  @db.VarChar(200)
+  year           String?                  @db.VarChar(4)
+  source_id      Int?
+  area           Decimal?                 @db.Decimal
+  area_in_ha     Decimal?                 @db.Decimal
+  area_in_km     Decimal?                 @db.Decimal
+  geometry       Unsupported("geometry")?
+  status         String?                  @db.VarChar
+  code           String?                  @db.VarChar(20)
+  old_village_id Int?
+  zip_code       String?                  @db.VarChar
+
+  @@schema("administrative_area")
+}
+
+model asset_categories {
+  id                              BigInt                            @id @default(autoincrement())
+  name                            String
+  description                     String?
+  created_at                      DateTime?                         @db.Timestamp(0)
+  updated_at                      DateTime?                         @db.Timestamp(0)
+  deleted_at                      DateTime?                         @db.Timestamp(0)
+  created_user_id                 BigInt?
+  modified_user_id                BigInt?
+  deleted_user_id                 BigInt?
+  is_terminated_point             Boolean                           @default(false)
+  network_rule_id                 BigInt?
+  domain_rule_id                  BigInt?
+  circuit_type_id                 BigInt?
+  code                            String                            @unique(map: "asset_categories_code_unique")
+  icon_filename                   String?
+  icon_file_url                   String?
+  terminate_type_id               BigInt?
+  uuid                            String?                           @unique(map: "asset_asset_categories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  network_rule_uuid               String?                           @db.VarChar(255)
+  domain_rule_uuid                String?                           @db.VarChar(255)
+  circuit_type_uuid               String?                           @db.VarChar(255)
+  terminate_type_uuid             String?                           @db.VarChar(255)
+  application_parameters          application_parameters?           @relation(fields: [terminate_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "asset_categories_terminate_type_id_foreign")
+  asset_category_equipment_levels asset_category_equipment_levels[]
+
+  @@schema("asset")
+}
+
+model asset_category_attachments {
+  id                BigInt    @id @default(autoincrement())
+  asset_category_id BigInt
+  filename          String
+  file_url          String
+  description       String?
+  created_at        DateTime? @db.Timestamp(0)
+  updated_at        DateTime? @db.Timestamp(0)
+  deleted_at        DateTime? @db.Timestamp(0)
+  created_user_id   BigInt?
+  modified_user_id  BigInt?
+  deleted_user_id   BigInt?
+  uuid              String?   @unique(map: "asset_asset_category_attachments_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@schema("asset")
+}
+
+model asset_category_equipment_levels {
+  id                      BigInt               @id @default(autoincrement())
+  asset_category_id       BigInt
+  equipment_category_id   BigInt
+  level_no                Int
+  created_at              DateTime?            @db.Timestamp(0)
+  updated_at              DateTime?            @db.Timestamp(0)
+  deleted_at              DateTime?            @db.Timestamp(0)
+  created_user_id         BigInt?              @default(1)
+  modified_user_id        BigInt?              @default(1)
+  deleted_user_id         BigInt?
+  asset_category_uuid     String?              @db.VarChar(255)
+  equipment_category_uuid String?              @db.VarChar(255)
+  asset_categories        asset_categories     @relation(fields: [asset_category_id], references: [id], onUpdate: NoAction, map: "asset_category_equipment_levels_asset_category_id_foreign")
+  equipment_categories    equipment_categories @relation(fields: [equipment_category_id], references: [id], onUpdate: NoAction, map: "asset_category_equipment_levels_equipment_category_id_foreign")
+
+  @@schema("asset")
+}
+
+model asset_group_attachments {
+  id               BigInt       @id @default(autoincrement())
+  uuid             String?      @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  file_type        String       @db.VarChar(255)
+  asset_group_id   BigInt
+  filename         String?
+  file_url         String?
+  description      String?
+  created_at       DateTime?    @db.Timestamp(0)
+  updated_at       DateTime?    @db.Timestamp(0)
+  deleted_at       DateTime?    @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  asset_groups     asset_groups @relation(fields: [asset_group_id], references: [id], onUpdate: NoAction, map: "asset_group_attachments_asset_group_id_foreign")
+
+  @@schema("asset")
+}
+
+model asset_groups {
+  id                       BigInt                     @id @default(autoincrement())
+  asset_category_id        BigInt
+  name                     String
+  description              String?
+  created_user_id          BigInt?
+  modified_user_id         BigInt?
+  deleted_user_id          BigInt?
+  created_at               DateTime?                  @db.Timestamp(0)
+  updated_at               DateTime?                  @db.Timestamp(0)
+  deleted_at               DateTime?                  @db.Timestamp(0)
+  code                     String?                    @unique(map: "asset_groups_code_unique") @db.VarChar(255)
+  uuid                     String?                    @unique(map: "asset_asset_groups_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  asset_category_uuid      String?                    @db.VarChar(255)
+  asset_group_attachments  asset_group_attachments[]
+  master_asset_group_items master_asset_group_items[]
+  asset_recaps             asset_recaps[]
+
+  @@schema("asset")
+}
+
+model assets {
+  id                   BigInt               @id @default(autoincrement())
+  asset_category_id    BigInt
+  asset_group_id       BigInt
+  site_point_id        BigInt
+  asset_ownership_id   BigInt
+  area_ownership_id    BigInt
+  name                 String?
+  description          String?
+  created_at           DateTime?            @db.Timestamp(0)
+  updated_at           DateTime?            @db.Timestamp(0)
+  deleted_at           DateTime?            @db.Timestamp(0)
+  created_user_id      BigInt?
+  modified_user_id     BigInt?
+  deleted_user_id      BigInt?
+  uuid                 String?              @unique(map: "asset_assets_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  asset_category_uuid  String?              @db.VarChar(255)
+  asset_group_uuid     String?              @db.VarChar(255)
+  site_point_uuid      String?              @db.VarChar(255)
+  asset_ownership_uuid String?              @db.VarChar(255)
+  area_ownership_uuid  String?              @db.VarChar(255)
+  splice_core_recaps   splice_core_recaps[]
+
+  @@schema("asset")
+}
+
+model equipment_categories {
+  id                              BigInt                            @id @default(autoincrement())
+  name                            String                            @db.VarChar(255)
+  type                            String?                           @db.VarChar(255)
+  is_single                       Boolean                           @default(false)
+  is_transaction                  Boolean                           @default(false)
+  description                     String?
+  created_at                      DateTime?                         @db.Timestamp(0)
+  updated_at                      DateTime?                         @db.Timestamp(0)
+  deleted_at                      DateTime?                         @db.Timestamp(0)
+  created_user_id                 BigInt?                           @default(1)
+  modified_user_id                BigInt?                           @default(1)
+  deleted_user_id                 BigInt?
+  uuid                            String?                           @unique(map: "asset_equipment_categories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  asset_category_equipment_levels asset_category_equipment_levels[]
+  equipments                      equipments[]
+
+  @@schema("asset")
+}
+
+model equipments {
+  id                       BigInt                     @id @default(autoincrement())
+  equipment_category_id    BigInt
+  name                     String                     @db.VarChar(255)
+  description              String?
+  number                   BigInt
+  created_at               DateTime?                  @db.Timestamp(0)
+  updated_at               DateTime?                  @db.Timestamp(0)
+  deleted_at               DateTime?                  @db.Timestamp(0)
+  created_user_id          BigInt?                    @default(1)
+  modified_user_id         BigInt?                    @default(1)
+  deleted_user_id          BigInt?
+  uuid                     String?                    @unique(map: "asset_equipments_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  equipment_category_uuid  String?                    @db.VarChar(255)
+  equipment_categories     equipment_categories       @relation(fields: [equipment_category_id], references: [id], onUpdate: NoAction, map: "equipments_equipment_category_id_foreign")
+  master_asset_group_items master_asset_group_items[]
+
+  @@schema("asset")
+}
+
+model master_asset_group_items {
+  id               BigInt       @id @default(autoincrement())
+  asset_group_id   BigInt
+  equipment_id     BigInt
+  path             String?      @db.VarChar(255)
+  max_slot         Int?
+  max_port         Int?
+  core_in          Int?
+  core_out         Int?
+  port_type_id     BigInt?
+  row              Int?
+  column           Int?
+  orientation      String?      @db.VarChar(255)
+  is_restart       Boolean?     @default(false)
+  number           Int
+  created_at       DateTime?    @db.Timestamp(0)
+  updated_at       DateTime?    @db.Timestamp(0)
+  deleted_at       DateTime?    @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?      @unique(map: "asset_master_asset_group_items_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  asset_group_uuid String?      @db.VarChar(255)
+  equipment_uuid   String?      @db.VarChar(255)
+  path_uuid        String?
+  port_type_uuid   String?      @db.VarChar(255)
+  asset_groups     asset_groups @relation(fields: [asset_group_id], references: [id], onUpdate: NoAction, map: "master_asset_group_items_asset_group_id_foreign")
+  equipments       equipments   @relation(fields: [equipment_id], references: [id], onUpdate: NoAction, map: "master_asset_group_items_equipment_id_foreign")
+  port_types       port_types?  @relation(fields: [port_type_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "master_asset_group_items_port_type_id_foreign")
+
+  @@schema("asset")
+}
+
+model port_categories {
+  id               BigInt       @id @default(autoincrement())
+  name             String       @db.VarChar(255)
+  created_at       DateTime?    @db.Timestamp(0)
+  updated_at       DateTime?    @db.Timestamp(0)
+  deleted_at       DateTime?    @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?      @unique(map: "asset_port_categories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  port_types       port_types[]
+
+  @@schema("asset")
+}
+
+model port_types {
+  id                       BigInt                     @id @default(autoincrement())
+  name                     String?
+  is_front_back            Boolean                    @default(false)
+  created_at               DateTime?                  @db.Timestamp(0)
+  updated_at               DateTime?                  @db.Timestamp(0)
+  deleted_at               DateTime?                  @db.Timestamp(0)
+  created_user_id          BigInt?
+  modified_user_id         BigInt?
+  deleted_user_id          BigInt?
+  port_category_id         BigInt?
+  uuid                     String?                    @unique(map: "asset_port_types_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  port_category_uuid       String?                    @db.VarChar(255)
+  master_asset_group_items master_asset_group_items[]
+  port_categories          port_categories?           @relation(fields: [port_category_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "port_types_port_category_id_foreign")
+
+  @@schema("asset")
+}
+
+model asset_recaps {
+  id               String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?      @unique(map: "asset_recaps_project_uuid_unique") @db.Uuid
+  vendor_uuid      String?      @unique(map: "asset_recaps_vendor_uuid_unique") @db.Uuid
+  milestone_uuid   String?      @unique(map: "asset_recaps_milestone_uuid_unique") @db.Uuid
+  asset_group_uuid String?      @unique(map: "asset_recaps_asset_group_uuid_unique") @db.Uuid
+  project_id       BigInt
+  vendor_id        BigInt
+  milestone_id     BigInt
+  asset_group_id   BigInt
+  is_generated     Boolean      @default(false)
+  code_spec        String?      @db.VarChar(255)
+  total            Int
+  service          Boolean      @default(false)
+  material         Boolean      @default(false)
+  created_at       DateTime?    @db.Timestamp(0)
+  updated_at       DateTime?    @db.Timestamp(0)
+  deleted_at       DateTime?    @db.Timestamp(0)
+  created_user_id  String?      @db.Uuid
+  modified_user_id String?      @db.Uuid
+  deleted_user_id  String?      @db.Uuid
+  asset_groups     asset_groups @relation(fields: [asset_group_id], references: [id], onUpdate: NoAction, map: "asset_recaps_asset_group_id_foreign")
+  milestones       milestones   @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "asset_recaps_milestone_id_foreign")
+  projects         projects     @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "asset_recaps_project_id_foreign")
+  vendors          vendors      @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "asset_recaps_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model budgets {
+  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?    @unique(map: "budgets_project_uuid_unique") @db.Uuid
+  vendor_uuid      String?    @unique(map: "budgets_vendor_uuid_unique") @db.Uuid
+  milestone_uuid   String?    @unique(map: "budgets_milestone_uuid_unique") @db.Uuid
+  project_id       BigInt
+  vendor_id        BigInt
+  milestone_id     BigInt
+  type             String     @db.VarChar(255)
+  is_generated     Boolean
+  is_system        Boolean
+  description      String
+  uom              String
+  total            BigInt     @default(0)
+  material_price   BigInt     @default(0)
+  service_price    BigInt     @default(0)
+  total_price      BigInt     @default(0)
+  is_done          Boolean
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  String?    @db.Uuid
+  modified_user_id String?    @db.Uuid
+  deleted_user_id  String?    @db.Uuid
+  milestones       milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "budgets_milestone_id_foreign")
+  projects         projects   @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "budgets_project_id_foreign")
+  vendors          vendors    @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "budgets_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model cable_recaps {
+  id                     String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid           String?                @unique(map: "cable_recaps_project_uuid_unique") @db.Uuid
+  vendor_uuid            String?                @unique(map: "cable_recaps_vendor_uuid_unique") @db.Uuid
+  milestone_uuid         String?                @unique(map: "cable_recaps_milestone_uuid_unique") @db.Uuid
+  cable_group_uuid       String?                @unique(map: "cable_recaps_cable_group_uuid_unique") @db.Uuid
+  function_uuid          String?                @unique(map: "cable_recaps_function_uuid_unique") @db.Uuid
+  project_id             BigInt
+  vendor_id              BigInt
+  milestone_id           BigInt
+  cable_group_id         BigInt
+  function_id            BigInt
+  is_generated           Boolean                @default(false)
+  code_spec              String?                @db.VarChar(255)
+  total_cable            Int
+  total_slack            Int
+  sub_total              Int
+  uom                    String                 @default("meter") @db.VarChar(255)
+  service                Boolean                @default(false)
+  material               Boolean                @default(false)
+  created_at             DateTime?              @db.Timestamp(0)
+  updated_at             DateTime?              @db.Timestamp(0)
+  deleted_at             DateTime?              @db.Timestamp(0)
+  created_user_id        String?                @db.Uuid
+  modified_user_id       String?                @db.Uuid
+  deleted_user_id        String?                @db.Uuid
+  cable_groups           cable_groups           @relation(fields: [cable_group_id], references: [id], onUpdate: NoAction, map: "cable_recaps_cable_group_id_foreign")
+  application_parameters application_parameters @relation(fields: [function_id], references: [id], onUpdate: NoAction, map: "cable_recaps_function_id_foreign")
+  milestones             milestones             @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "cable_recaps_milestone_id_foreign")
+  projects               projects               @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "cable_recaps_project_id_foreign")
+  vendors                vendors                @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "cable_recaps_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model permit_item_recaps {
+  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?    @unique(map: "permit_item_recaps_project_uuid_unique") @db.Uuid
+  vendor_uuid      String?    @unique(map: "permit_item_recaps_vendor_uuid_unique") @db.Uuid
+  milestone_uuid   String?    @unique(map: "permit_item_recaps_milestone_uuid_unique") @db.Uuid
+  permit_type_uuid String?    @unique(map: "permit_item_recaps_permit_type_uuid_unique") @db.Uuid
+  project_id       BigInt
+  vendor_id        BigInt
+  milestone_id     BigInt
+  is_generated     Boolean    @default(false)
+  total_length     BigInt     @default(0)
+  total_site       BigInt     @default(0)
+  permit_duration  BigInt     @default(0)
+  ownership_name   String     @db.VarChar(255)
+  service          Boolean    @default(false)
+  material         Boolean    @default(false)
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  String?    @db.Uuid
+  modified_user_id String?    @db.Uuid
+  deleted_user_id  String?    @db.Uuid
+  milestones       milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "permit_item_recaps_milestone_id_foreign")
+  projects         projects   @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "permit_item_recaps_project_id_foreign")
+  vendors          vendors    @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "permit_item_recaps_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model recap_mappings {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject_type     String    @db.VarChar(255)
+  service          Boolean
+  material         Boolean
+  created_user_id  String?   @db.Uuid
+  modified_user_id String?   @db.Uuid
+  deleted_user_id  String?   @db.Uuid
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+
+  @@schema("boq")
+}
+
+model route_recaps {
+  id                                                                             String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid                                                                   String?                @unique(map: "route_recaps_project_uuid_unique") @db.Uuid
+  vendor_uuid                                                                    String?                @unique(map: "route_recaps_vendor_uuid_unique") @db.Uuid
+  milestone_uuid                                                                 String?                @unique(map: "route_recaps_milestone_uuid_unique") @db.Uuid
+  route_method_uuid                                                              String?                @unique(map: "route_recaps_route_method_uuid_unique") @db.Uuid
+  route_ownership_uuid                                                           String?                @unique(map: "route_recaps_route_ownership_uuid_unique") @db.Uuid
+  project_id                                                                     BigInt
+  vendor_id                                                                      BigInt
+  milestone_id                                                                   BigInt
+  route_method_id                                                                BigInt
+  route_ownership_id                                                             BigInt
+  is_generated                                                                   Boolean                @default(false)
+  total                                                                          Int
+  uom                                                                            String                 @default("meter") @db.VarChar(255)
+  service                                                                        Boolean                @default(false)
+  material                                                                       Boolean                @default(false)
+  created_at                                                                     DateTime?              @db.Timestamp(0)
+  updated_at                                                                     DateTime?              @db.Timestamp(0)
+  deleted_at                                                                     DateTime?              @db.Timestamp(0)
+  created_user_id                                                                String?                @db.Uuid
+  modified_user_id                                                               String?                @db.Uuid
+  deleted_user_id                                                                String?                @db.Uuid
+  milestones                                                                     milestones             @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "route_recaps_milestone_id_foreign")
+  projects                                                                       projects               @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "route_recaps_project_id_foreign")
+  application_parameters_route_recaps_route_method_idToapplication_parameters    application_parameters @relation("route_recaps_route_method_idToapplication_parameters", fields: [route_method_id], references: [id], onUpdate: NoAction, map: "route_recaps_route_method_id_foreign")
+  application_parameters_route_recaps_route_ownership_idToapplication_parameters application_parameters @relation("route_recaps_route_ownership_idToapplication_parameters", fields: [route_ownership_id], references: [id], onUpdate: NoAction, map: "route_recaps_route_ownership_id_foreign")
+  vendors                                                                        vendors                @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "route_recaps_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model segment_retributions {
+  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?    @unique(map: "segment_retributions_project_uuid_unique") @db.Uuid
+  vendor_uuid      String?    @unique(map: "segment_retributions_vendor_uuid_unique") @db.Uuid
+  milestone_uuid   String?    @unique(map: "segment_retributions_milestone_uuid_unique") @db.Uuid
+  segment_uuid     String?    @unique(map: "segment_retributions_segment_uuid_unique") @db.Uuid
+  project_id       BigInt
+  vendor_id        BigInt
+  milestone_id     BigInt
+  segment_id       BigInt
+  is_generated     Boolean    @default(false)
+  biaya_retribusi  BigInt
+  end_period       DateTime   @db.Date
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  String?    @db.Uuid
+  modified_user_id String?    @db.Uuid
+  deleted_user_id  String?    @db.Uuid
+  milestones       milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "segment_retributions_milestone_id_foreign")
+  projects         projects   @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "segment_retributions_project_id_foreign")
+  segments         segments   @relation(fields: [segment_id], references: [id], onUpdate: NoAction, map: "segment_retributions_segment_id_foreign")
+  vendors          vendors    @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "segment_retributions_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model slack_support_recaps {
+  id                     String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid           String?    @unique(map: "slack_support_recaps_project_uuid_unique") @db.Uuid
+  vendor_uuid            String?    @unique(map: "slack_support_recaps_vendor_uuid_unique") @db.Uuid
+  milestone_uuid         String?    @unique(map: "slack_support_recaps_milestone_uuid_unique") @db.Uuid
+  project_id             BigInt
+  vendor_id              BigInt
+  milestone_id           BigInt
+  is_generated           Boolean    @default(false)
+  quantity_slack         Int
+  quantity_support_slack Int        @default(0)
+  service                Boolean    @default(false)
+  material               Boolean    @default(false)
+  created_at             DateTime?  @db.Timestamp(0)
+  updated_at             DateTime?  @db.Timestamp(0)
+  deleted_at             DateTime?  @db.Timestamp(0)
+  created_user_id        String?    @db.Uuid
+  modified_user_id       String?    @db.Uuid
+  deleted_user_id        String?    @db.Uuid
+  milestones             milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "slack_support_recaps_milestone_id_foreign")
+  projects               projects   @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "slack_support_recaps_project_id_foreign")
+  vendors                vendors    @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "slack_support_recaps_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model splice_core_recaps {
+  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?    @unique(map: "splice_core_recaps_project_uuid_unique") @db.Uuid
+  vendor_uuid      String?    @unique(map: "splice_core_recaps_vendor_uuid_unique") @db.Uuid
+  milestone_uuid   String?    @unique(map: "splice_core_recaps_milestone_uuid_unique") @db.Uuid
+  asset_uuid       String?    @unique(map: "splice_core_recaps_asset_uuid_unique") @db.Uuid
+  project_id       BigInt
+  vendor_id        BigInt
+  milestone_id     BigInt
+  asset_id         BigInt
+  is_generated     Boolean    @default(false)
+  total_splice     BigInt     @default(0)
+  total_patch      BigInt     @default(0)
+  service          Boolean    @default(false)
+  material         Boolean    @default(false)
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  String?    @db.Uuid
+  modified_user_id String?    @db.Uuid
+  deleted_user_id  String?    @db.Uuid
+  assets           assets     @relation(fields: [asset_id], references: [id], onUpdate: NoAction, map: "splice_core_recaps_asset_id_foreign")
+  milestones       milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "splice_core_recaps_milestone_id_foreign")
+  projects         projects   @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "splice_core_recaps_project_id_foreign")
+  vendors          vendors    @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "splice_core_recaps_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model timelines {
+  id               String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?    @unique(map: "timelines_project_uuid_unique") @db.Uuid
+  vendor_uuid      String?    @unique(map: "timelines_vendor_uuid_unique") @db.Uuid
+  milestone_uuid   String?    @unique(map: "timelines_milestone_uuid_unique") @db.Uuid
+  permit_type_uuid String?    @unique(map: "timelines_permit_type_uuid_unique") @db.Uuid
+  project_id       BigInt
+  vendor_id        BigInt
+  milestone_id     BigInt
+  is_generated     Boolean    @default(false)
+  total_length     BigInt     @default(0)
+  total_site       BigInt     @default(0)
+  permit_duration  BigInt     @default(0)
+  ownership_name   String     @db.VarChar(255)
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  String?    @db.Uuid
+  modified_user_id String?    @db.Uuid
+  deleted_user_id  String?    @db.Uuid
+  milestones       milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "timelines_milestone_id_foreign")
+  projects         projects   @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "timelines_project_id_foreign")
+  vendors          vendors    @relation(fields: [vendor_id], references: [id], onUpdate: NoAction, map: "timelines_vendor_id_foreign")
+
+  @@schema("boq")
+}
+
+model cable_categories {
+  id               BigInt         @id @default(autoincrement())
+  name             String?
+  description      String?
+  created_at       DateTime?      @db.Timestamp(0)
+  updated_at       DateTime?      @db.Timestamp(0)
+  deleted_at       DateTime?      @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?        @unique(map: "cable_cable_categories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cable_groups     cable_groups[]
+  cables           cables[]
+
+  @@schema("cable")
+}
+
+model cable_group_items {
+  id                      BigInt                 @id @default(autoincrement())
+  cable_id                BigInt
+  cable_group_id          BigInt
+  component_category_id   BigInt
+  transaction_status_id   BigInt
+  path                    String?
+  number                  BigInt?
+  created_at              DateTime?              @db.Timestamp(0)
+  updated_at              DateTime?              @db.Timestamp(0)
+  deleted_at              DateTime?              @db.Timestamp(0)
+  created_user_id         BigInt?
+  modified_user_id        BigInt?
+  deleted_user_id         BigInt?
+  uuid                    String?                @unique(map: "cable_cable_group_items_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cable_uuid              String?                @db.VarChar(255)
+  cable_group_uuid        String?                @db.VarChar(255)
+  component_category_uuid String?                @db.VarChar(255)
+  transaction_status_uuid String?                @db.VarChar(255)
+  path_uuid               String?
+  cable_groups            cable_groups           @relation(fields: [cable_group_id], references: [id], onUpdate: NoAction, map: "cable_group_items_cable_group_id_foreign")
+  cables                  cables                 @relation(fields: [cable_id], references: [id], onUpdate: NoAction, map: "cable_group_items_cable_id_foreign")
+  component_categories    component_categories   @relation(fields: [component_category_id], references: [id], onUpdate: NoAction, map: "cable_group_items_component_category_id_foreign")
+  application_parameters  application_parameters @relation(fields: [transaction_status_id], references: [id], onUpdate: NoAction, map: "cable_group_items_transaction_status_id_foreign")
+
+  @@schema("cable")
+}
+
+model cable_groups {
+  id                  BigInt              @id @default(autoincrement())
+  cable_category_id   BigInt
+  name                String?
+  description         String?
+  max_tube            BigInt?
+  max_core            BigInt?
+  core_per_tube       BigInt?
+  created_at          DateTime?           @db.Timestamp(0)
+  updated_at          DateTime?           @db.Timestamp(0)
+  deleted_at          DateTime?           @db.Timestamp(0)
+  created_user_id     BigInt?
+  modified_user_id    BigInt?
+  deleted_user_id     BigInt?
+  uuid                String?             @unique(map: "cable_cable_groups_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cable_category_uuid String?             @db.VarChar(255)
+  cable_recaps        cable_recaps[]
+  cable_group_items   cable_group_items[]
+  cable_categories    cable_categories    @relation(fields: [cable_category_id], references: [id], onUpdate: NoAction, map: "cable_groups_cable_category_id_foreign")
+  cables              cables[]
+
+  @@schema("cable")
+}
+
+model cable_histories {
+  id                                             BigInt    @id @default(autoincrement())
+  cable_id                                       BigInt
+  parent_cable_id                                BigInt
+  created_at                                     DateTime? @db.Timestamp(0)
+  updated_at                                     DateTime? @db.Timestamp(0)
+  deleted_at                                     DateTime? @db.Timestamp(0)
+  created_user_id                                BigInt?
+  modified_user_id                               BigInt?
+  deleted_user_id                                BigInt?
+  uuid                                           String?   @unique(map: "cable_cable_histories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cable_uuid                                     String?   @db.VarChar(255)
+  parent_cable_uuid                              String?   @db.VarChar(255)
+  cables_cable_histories_cable_idTocables        cables    @relation("cable_histories_cable_idTocables", fields: [cable_id], references: [id], onUpdate: NoAction, map: "cable_histories_cable_id_foreign")
+  cables_cable_histories_parent_cable_idTocables cables    @relation("cable_histories_parent_cable_idTocables", fields: [parent_cable_id], references: [id], onUpdate: NoAction, map: "cable_histories_parent_cable_id_foreign")
+
+  @@schema("cable")
+}
+
+model cable_routes {
+  id               BigInt    @id @default(autoincrement())
+  cable_id         BigInt
+  route_id         BigInt
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "cable_cable_routes_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cable_uuid       String?   @db.VarChar(255)
+  route_uuid       String?   @db.VarChar(255)
+
+  @@schema("cable")
+}
+
+model cables {
+  id                                                                       BigInt                 @id @default(autoincrement())
+  cable_category_id                                                        BigInt
+  cable_group_id                                                           BigInt
+  name                                                                     String?
+  code                                                                     String?
+  site_from                                                                BigInt
+  site_to                                                                  BigInt
+  description                                                              String?
+  length                                                                   Decimal                @db.Decimal(10, 3)
+  is_active                                                                Boolean                @default(true)
+  asset_ownership_id                                                       BigInt
+  area_ownership_id                                                        BigInt
+  placement_type_id                                                        BigInt
+  function_id                                                              BigInt
+  created_at                                                               DateTime?              @db.Timestamp(0)
+  updated_at                                                               DateTime?              @db.Timestamp(0)
+  deleted_at                                                               DateTime?              @db.Timestamp(0)
+  created_user_id                                                          BigInt?
+  modified_user_id                                                         BigInt?
+  deleted_user_id                                                          BigInt?
+  uuid                                                                     String?                @unique(map: "cable_cables_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cable_category_uuid                                                      String?                @db.VarChar(255)
+  cable_group_uuid                                                         String?                @db.VarChar(255)
+  site_from_uuid                                                           String?                @db.VarChar(255)
+  site_to_uuid                                                             String?                @db.VarChar(255)
+  asset_ownership_uuid                                                     String?                @db.VarChar(255)
+  area_ownership_uuid                                                      String?                @db.VarChar(255)
+  placement_type_uuid                                                      String?                @db.VarChar(255)
+  function_uuid                                                            String?                @db.VarChar(255)
+  cable_group_items                                                        cable_group_items[]
+  cable_histories_cable_histories_cable_idTocables                         cable_histories[]      @relation("cable_histories_cable_idTocables")
+  cable_histories_cable_histories_parent_cable_idTocables                  cable_histories[]      @relation("cable_histories_parent_cable_idTocables")
+  application_parameters_cables_area_ownership_idToapplication_parameters  application_parameters @relation("cables_area_ownership_idToapplication_parameters", fields: [area_ownership_id], references: [id], onUpdate: NoAction, map: "cables_area_ownership_id_foreign")
+  application_parameters_cables_asset_ownership_idToapplication_parameters application_parameters @relation("cables_asset_ownership_idToapplication_parameters", fields: [asset_ownership_id], references: [id], onUpdate: NoAction, map: "cables_asset_ownership_id_foreign")
+  cable_categories                                                         cable_categories       @relation(fields: [cable_category_id], references: [id], onUpdate: NoAction, map: "cables_cable_category_id_foreign")
+  cable_groups                                                             cable_groups           @relation(fields: [cable_group_id], references: [id], onUpdate: NoAction, map: "cables_cable_group_id_foreign")
+  application_parameters_cables_function_idToapplication_parameters        application_parameters @relation("cables_function_idToapplication_parameters", fields: [function_id], references: [id], onUpdate: NoAction, map: "cables_function_id_foreign")
+  application_parameters_cables_placement_type_idToapplication_parameters  application_parameters @relation("cables_placement_type_idToapplication_parameters", fields: [placement_type_id], references: [id], onUpdate: NoAction, map: "cables_placement_type_id_foreign")
+  site_points_cables_site_fromTosite_points                                site_points            @relation("cables_site_fromTosite_points", fields: [site_from], references: [id], onUpdate: NoAction, map: "cables_site_from_foreign")
+  site_points_cables_site_toTosite_points                                  site_points            @relation("cables_site_toTosite_points", fields: [site_to], references: [id], onUpdate: NoAction, map: "cables_site_to_foreign")
+
+  @@schema("cable")
+}
+
+model colors {
+  id               BigInt    @id @default(autoincrement())
+  color_number     BigInt?
+  color            String?
+  hexa_code        String?
+  description      String?
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "cable_colors_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@schema("cable")
+}
+
+model component_categories {
+  id                BigInt              @id @default(autoincrement())
+  name              String?
+  description       String?
+  created_at        DateTime?           @db.Timestamp(0)
+  updated_at        DateTime?           @db.Timestamp(0)
+  deleted_at        DateTime?           @db.Timestamp(0)
+  created_user_id   BigInt?
+  modified_user_id  BigInt?
+  deleted_user_id   BigInt?
+  uuid              String?             @unique(map: "cable_component_categories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cable_group_items cable_group_items[]
+
+  @@schema("cable")
+}
+
+model slacks {
+  id               BigInt    @id @default(autoincrement())
+  site_point_id    BigInt
+  cable_id         BigInt
+  length           Decimal?  @db.Decimal(10, 3)
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "cable_slacks_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  site_point_uuid  String?   @db.VarChar(255)
+  cable_uuid       String?   @db.VarChar(255)
+
+  @@schema("cable")
+}
+
+model application_parameters {
+  id                                                                   BigInt              @id @default(autoincrement())
+  type                                                                 String              @db.VarChar(255)
+  code                                                                 String              @unique(map: "application_parameters_code_unique") @db.VarChar(255)
+  name                                                                 String              @db.VarChar(255)
+  description                                                          String?
+  color                                                                String?
+  order                                                                Int                 @default(0)
+  value                                                                String?
+  is_other                                                             Boolean             @default(false)
+  access_rights                                                        Json?               @db.Json
+  created_at                                                           DateTime?           @db.Timestamp(0)
+  updated_at                                                           DateTime?           @db.Timestamp(0)
+  deleted_at                                                           DateTime?           @db.Timestamp(0)
+  created_user_id                                                      BigInt              @default(1)
+  modified_user_id                                                     BigInt              @default(1)
+  deleted_user_id                                                      BigInt?
+  uuid                                                                 String?             @unique(map: "master_application_parameters_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  asset_categories                                                     asset_categories[]
+  cable_recaps                                                         cable_recaps[]
+  route_recaps_route_recaps_route_method_idToapplication_parameters    route_recaps[]      @relation("route_recaps_route_method_idToapplication_parameters")
+  route_recaps_route_recaps_route_ownership_idToapplication_parameters route_recaps[]      @relation("route_recaps_route_ownership_idToapplication_parameters")
+  cable_group_items                                                    cable_group_items[]
+  cables_cables_area_ownership_idToapplication_parameters              cables[]            @relation("cables_area_ownership_idToapplication_parameters")
+  cables_cables_asset_ownership_idToapplication_parameters             cables[]            @relation("cables_asset_ownership_idToapplication_parameters")
+  cables_cables_function_idToapplication_parameters                    cables[]            @relation("cables_function_idToapplication_parameters")
+  cables_cables_placement_type_idToapplication_parameters              cables[]            @relation("cables_placement_type_idToapplication_parameters")
+  object_variables                                                     object_variables[]
+  variables                                                            variables[]
+  vendors                                                              vendors[]
+
+  @@schema("master")
+}
+
+model areas {
+  id                    BigInt                  @id @default(autoincrement())
+  region_id             BigInt
+  code                  String                  @unique(map: "areas_code_unique")
+  label                 String
+  created_at            DateTime?               @db.Timestamp(0)
+  updated_at            DateTime?               @db.Timestamp(0)
+  deleted_at            DateTime?               @db.Timestamp(0)
+  created_user_id       BigInt?
+  modified_user_id      BigInt?
+  deleted_user_id       BigInt?
+  uuid                  String?                 @unique(map: "master_areas_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  region_uuid           String?                 @db.VarChar(255)
+  regions               regions                 @relation(fields: [region_id], references: [id], onUpdate: NoAction, map: "areas_region_id_foreign")
+  cluster_zipcodes      cluster_zipcodes[]
+  clusters              clusters[]
+  company_coverages     company_coverages[]
+  privilege_group_items privilege_group_items[]
+
+  @@schema("master")
+}
+
+model cluster_zipcodes {
+  id               BigInt    @id @default(autoincrement())
+  zip_code         String    @db.VarChar(255)
+  region_id        BigInt
+  area_id          BigInt
+  cluster_id       BigInt
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "master_cluster_zipcodes_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  region_uuid      String?   @db.VarChar(255)
+  area_uuid        String?   @db.VarChar(255)
+  cluster_uuid     String?   @db.VarChar(255)
+  areas            areas     @relation(fields: [area_id], references: [id], onUpdate: NoAction, map: "cluster_zipcodes_area_id_foreign")
+  clusters         clusters  @relation(fields: [cluster_id], references: [id], onUpdate: NoAction, map: "cluster_zipcodes_cluster_id_foreign")
+  regions          regions   @relation(fields: [region_id], references: [id], onUpdate: NoAction, map: "cluster_zipcodes_region_id_foreign")
+
+  @@schema("master")
+}
+
+model clusters {
+  id                    BigInt                  @id @default(autoincrement())
+  region_id             BigInt
+  area_id               BigInt
+  code                  String                  @unique(map: "clusters_code_unique")
+  label                 String
+  created_at            DateTime?               @db.Timestamp(0)
+  updated_at            DateTime?               @db.Timestamp(0)
+  deleted_at            DateTime?               @db.Timestamp(0)
+  created_user_id       BigInt?
+  modified_user_id      BigInt?
+  deleted_user_id       BigInt?
+  uuid                  String?                 @unique(map: "master_clusters_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  region_uuid           String?                 @db.VarChar(255)
+  area_uuid             String?                 @db.VarChar(255)
+  cluster_zipcodes      cluster_zipcodes[]
+  areas                 areas                   @relation(fields: [area_id], references: [id], onUpdate: NoAction, map: "clusters_area_id_foreign")
+  regions               regions                 @relation(fields: [region_id], references: [id], onUpdate: NoAction, map: "clusters_region_id_foreign")
+  company_coverages     company_coverages[]
+  privilege_group_items privilege_group_items[]
+
+  @@schema("master")
+}
+
+model companies {
+  id                BigInt              @id @default(autoincrement())
+  name              String
+  description       String?
+  created_at        DateTime?           @db.Timestamp(0)
+  updated_at        DateTime?           @db.Timestamp(0)
+  deleted_at        DateTime?           @db.Timestamp(0)
+  created_user_id   BigInt?
+  modified_user_id  BigInt?
+  deleted_user_id   BigInt?
+  code              String?             @unique(map: "companies_code_unique") @db.VarChar(255)
+  uuid              String?             @unique(map: "master_companies_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company_coverages company_coverages[]
+  projects          projects[]
+  user_companies    user_companies[]
+
+  @@schema("master")
+}
+
+model company_coverages {
+  id               BigInt    @id @default(autoincrement())
+  company_id       BigInt
+  region_id        BigInt
+  area_id          BigInt
+  cluster_id       BigInt
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "master_company_coverages_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company_uuid     String?   @db.VarChar(255)
+  region_uuid      String?   @db.VarChar(255)
+  area_uuid        String?   @db.VarChar(255)
+  cluster_uuid     String?   @db.VarChar(255)
+  areas            areas     @relation(fields: [area_id], references: [id], onUpdate: NoAction, map: "company_coverages_area_id_foreign")
+  clusters         clusters  @relation(fields: [cluster_id], references: [id], onUpdate: NoAction, map: "company_coverages_cluster_id_foreign")
+  companies        companies @relation(fields: [company_id], references: [id], onUpdate: NoAction, map: "company_coverages_company_id_foreign")
+  regions          regions   @relation(fields: [region_id], references: [id], onUpdate: NoAction, map: "company_coverages_region_id_foreign")
+
+  @@schema("master")
+}
+
+model employees {
+  id                      BigInt    @id @default(autoincrement())
+  t_employee_id           BigInt
+  employee_name           String    @db.VarChar(255)
+  employee_no             String    @db.VarChar(255)
+  employee_initial        String    @db.VarChar(255)
+  organization_name       String?   @db.VarChar(255)
+  start_of_work           String?   @db.VarChar(255)
+  end_of_work             String?   @db.VarChar(255)
+  jenjang_jabatan_name    String?   @db.VarChar(255)
+  direktorat              String?   @db.VarChar(255)
+  divisi                  String?   @db.VarChar(255)
+  bagian                  String?   @db.VarChar(255)
+  sub_bagian              String?   @db.VarChar(255)
+  email                   String?   @db.VarChar(255)
+  employee_no_atasan      String?   @db.VarChar(255)
+  employee_no_atasan_real String?   @db.VarChar(255)
+  created_at              DateTime? @db.Timestamp(0)
+  updated_at              DateTime? @db.Timestamp(0)
+  deleted_at              DateTime? @db.Timestamp(0)
+  created_user_id         BigInt    @default(1)
+  modified_user_id        BigInt    @default(1)
+  deleted_user_id         BigInt?
+  uuid                    String?   @unique(map: "master_employees_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@schema("master")
+}
+
+model milestones {
+  id                   BigInt                 @id @default(autoincrement())
+  name                 String                 @db.VarChar(255)
+  code                 String                 @unique(map: "milestones_code_unique") @db.VarChar(255)
+  description          String?
+  order                Int
+  created_at           DateTime?              @db.Timestamp(0)
+  updated_at           DateTime?              @db.Timestamp(0)
+  deleted_at           DateTime?              @db.Timestamp(0)
+  created_user_id      BigInt?
+  modified_user_id     BigInt?
+  deleted_user_id      BigInt?
+  uuid                 String?                @unique(map: "master_milestones_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  asset_recaps         asset_recaps[]
+  budgets              budgets[]
+  cable_recaps         cable_recaps[]
+  permit_item_recaps   permit_item_recaps[]
+  route_recaps         route_recaps[]
+  segment_retributions segment_retributions[]
+  slack_support_recaps slack_support_recaps[]
+  splice_core_recaps   splice_core_recaps[]
+  timelines            timelines[]
+  project_milestones   project_milestones[]
+  project_shares       project_shares[]
+  projects             projects[]
+  purpose_milestones   purpose_milestones[]
+
+  @@schema("master")
+}
+
+model object_variables {
+  id                     BigInt                 @id @default(autoincrement())
+  subject_type           String                 @db.VarChar(255)
+  subject_id             BigInt
+  variable_type_id       BigInt
+  variable_id            BigInt
+  option_id              BigInt?
+  created_at             DateTime?              @db.Timestamp(0)
+  updated_at             DateTime?              @db.Timestamp(0)
+  deleted_at             DateTime?              @db.Timestamp(0)
+  created_user_id        BigInt                 @default(1)
+  modified_user_id       BigInt                 @default(1)
+  deleted_user_id        BigInt?
+  uuid                   String?                @unique(map: "master_object_variables_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject_uuid           String?                @db.VarChar(255)
+  variable_type_uuid     String?                @db.VarChar(255)
+  variable_uuid          String?                @db.VarChar(255)
+  option_uuid            String?                @db.VarChar(255)
+  options                options?               @relation(fields: [option_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "object_variables_option_id_foreign")
+  variables              variables              @relation(fields: [variable_id], references: [id], onUpdate: NoAction, map: "object_variables_variable_id_foreign")
+  application_parameters application_parameters @relation(fields: [variable_type_id], references: [id], onUpdate: NoAction, map: "object_variables_variable_type_id_foreign")
+
+  @@schema("master")
+}
+
+model option_items {
+  id               BigInt            @id @default(autoincrement())
+  option_id        BigInt
+  name             String            @db.VarChar(255)
+  code             String            @unique(map: "option_items_code_unique") @db.VarChar(255)
+  created_at       DateTime?         @db.Timestamp(0)
+  updated_at       DateTime?         @db.Timestamp(0)
+  deleted_at       DateTime?         @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?           @unique(map: "master_option_items_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  option_uuid      String?           @db.VarChar(255)
+  options          options           @relation(fields: [option_id], references: [id], onUpdate: NoAction, map: "option_items_option_id_foreign")
+  variable_values  variable_values[]
+
+  @@schema("master")
+}
+
+model options {
+  id               BigInt             @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  code             String             @unique(map: "options_code_unique") @db.VarChar(255)
+  created_at       DateTime?          @db.Timestamp(0)
+  updated_at       DateTime?          @db.Timestamp(0)
+  deleted_at       DateTime?          @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?            @unique(map: "master_options_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  object_variables object_variables[]
+  option_items     option_items[]
+  variables        variables[]
+
+  @@schema("master")
+}
+
+model project_assets {
+  id               BigInt    @id @default(autoincrement())
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  project_id       BigInt
+  asset_id         BigInt
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "master_project_assets_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?   @db.VarChar(255)
+  asset_uuid       String?   @db.VarChar(255)
+
+  @@schema("master")
+}
+
+model project_groups {
+  id               BigInt     @id @default(autoincrement())
+  code             String?    @unique(map: "project_groups_code_unique") @db.VarChar(255)
+  name             String     @db.VarChar(255)
+  description      String?
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?    @unique(map: "master_project_groups_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  projects         projects[]
+
+  @@schema("master")
+}
+
+model project_justifications {
+  id               BigInt    @id @default(autoincrement())
+  project_id       BigInt
+  description      String?
+  filename         String?   @db.VarChar(255)
+  file_url         String?   @db.VarChar(255)
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "master_project_justifications_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?   @db.VarChar(255)
+  projects         projects  @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "project_justifications_project_id_foreign")
+
+  @@schema("master")
+}
+
+model project_milestones {
+  id               BigInt     @id @default(autoincrement())
+  project_id       BigInt
+  milestone_id     BigInt
+  status           String     @db.VarChar(255)
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?    @unique(map: "master_project_milestones_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?    @db.VarChar(255)
+  milestone_uuid   String?    @db.VarChar(255)
+  milestones       milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "project_milestones_milestone_id_foreign")
+  projects         projects   @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "project_milestones_project_id_foreign")
+
+  @@schema("master")
+}
+
+model project_shares {
+  id               BigInt     @id @default(autoincrement())
+  project_id       BigInt
+  milestone_id     BigInt
+  user_type_id     BigInt?
+  user_id          BigInt
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?    @unique(map: "master_project_shares_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  project_uuid     String?    @db.VarChar(255)
+  milestone_uuid   String?    @db.VarChar(255)
+  user_type_uuid   String?    @db.VarChar(255)
+  user_uuid        String?    @db.VarChar(255)
+  milestones       milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "project_shares_milestone_id_foreign")
+  projects         projects   @relation(fields: [project_id], references: [id], onUpdate: NoAction, map: "project_shares_project_id_foreign")
+  users            users      @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "project_shares_user_id_foreign")
+
+  @@schema("master")
+}
+
+model projects {
+  id                     BigInt                   @id @default(autoincrement())
+  company_id             BigInt
+  vendor_id              BigInt?
+  name                   String
+  spk_no                 String?                  @db.VarChar(255)
+  created_at             DateTime?                @db.Timestamp(0)
+  updated_at             DateTime?                @db.Timestamp(0)
+  deleted_at             DateTime?                @db.Timestamp(0)
+  created_user_id        BigInt?
+  modified_user_id       BigInt?
+  deleted_user_id        BigInt?
+  is_done                Boolean                  @default(false)
+  latest_step            String                   @default("0") @db.VarChar(255)
+  project_group_id       BigInt?
+  code                   String?                  @unique(map: "projects_code_unique") @db.VarChar(255)
+  status                 String?                  @db.VarChar(255)
+  tag                    String?                  @db.VarChar(255)
+  purpose_id             BigInt?
+  description            String?
+  project_owner_id       BigInt?
+  milestone_id           BigInt?
+  tag_activity           String?                  @db.VarChar(255)
+  po_number              String?                  @db.VarChar(255)
+  uuid                   String?                  @unique(map: "master_projects_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company_uuid           String?                  @db.VarChar(255)
+  vendor_uuid            String?                  @db.VarChar(255)
+  project_group_uuid     String?                  @db.VarChar(255)
+  purpose_uuid           String?                  @db.VarChar(255)
+  project_owner_uuid     String?                  @db.VarChar(255)
+  milestone_uuid         String?                  @db.VarChar(255)
+  asset_recaps           asset_recaps[]
+  budgets                budgets[]
+  cable_recaps           cable_recaps[]
+  permit_item_recaps     permit_item_recaps[]
+  route_recaps           route_recaps[]
+  segment_retributions   segment_retributions[]
+  slack_support_recaps   slack_support_recaps[]
+  splice_core_recaps     splice_core_recaps[]
+  timelines              timelines[]
+  project_justifications project_justifications[]
+  project_milestones     project_milestones[]
+  project_shares         project_shares[]
+  companies              companies                @relation(fields: [company_id], references: [id], onUpdate: NoAction, map: "projects_company_id_foreign")
+  milestones             milestones?              @relation(fields: [milestone_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "projects_milestone_id_foreign")
+  project_groups         project_groups?          @relation(fields: [project_group_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "projects_project_group_id_foreign")
+  users                  users?                   @relation(fields: [project_owner_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "projects_project_owner_id_foreign")
+  purposes               purposes?                @relation(fields: [purpose_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "projects_purpose_id_foreign")
+  vendors                vendors?                 @relation(fields: [vendor_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "projects_vendor_id_foreign")
+
+  @@schema("master")
+}
+
+model purpose_milestones {
+  id               BigInt     @id @default(autoincrement())
+  purpose_id       BigInt
+  milestone_id     BigInt
+  description      String?
+  created_at       DateTime?  @db.Timestamp(0)
+  updated_at       DateTime?  @db.Timestamp(0)
+  deleted_at       DateTime?  @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?    @unique(map: "master_purpose_milestones_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  purpose_uuid     String?    @db.VarChar(255)
+  milestone_uuid   String?    @db.VarChar(255)
+  milestones       milestones @relation(fields: [milestone_id], references: [id], onUpdate: NoAction, map: "purpose_milestones_milestone_id_foreign")
+  purposes         purposes   @relation(fields: [purpose_id], references: [id], onUpdate: NoAction, map: "purpose_milestones_purpose_id_foreign")
+
+  @@schema("master")
+}
+
+model purposes {
+  id                 BigInt               @id @default(autoincrement())
+  code               String?              @unique(map: "purposes_code_unique") @db.VarChar(255)
+  name               String?              @db.VarChar(255)
+  description        String?
+  created_at         DateTime?            @db.Timestamp(0)
+  updated_at         DateTime?            @db.Timestamp(0)
+  deleted_at         DateTime?            @db.Timestamp(0)
+  created_user_id    BigInt?
+  modified_user_id   BigInt?
+  deleted_user_id    BigInt?
+  uuid               String?              @unique(map: "master_purposes_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  projects           projects[]
+  purpose_milestones purpose_milestones[]
+
+  @@schema("master")
+}
+
+model regions {
+  id                    BigInt                  @id @default(autoincrement())
+  code                  String                  @unique(map: "regions_code_unique")
+  label                 String
+  created_at            DateTime?               @db.Timestamp(0)
+  updated_at            DateTime?               @db.Timestamp(0)
+  deleted_at            DateTime?               @db.Timestamp(0)
+  created_user_id       BigInt?
+  modified_user_id      BigInt?
+  deleted_user_id       BigInt?
+  uuid                  String?                 @unique(map: "master_regions_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  areas                 areas[]
+  cluster_zipcodes      cluster_zipcodes[]
+  clusters              clusters[]
+  company_coverages     company_coverages[]
+  privilege_group_items privilege_group_items[]
+
+  @@schema("master")
+}
+
+model tags {
+  id   BigInt  @id @default(autoincrement())
+  tag  String  @db.VarChar(255)
+  uuid String? @unique(map: "master_tags_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@schema("master")
+}
+
+model user_companies {
+  id               BigInt    @id @default(autoincrement())
+  company_id       BigInt
+  is_active        Boolean   @default(false)
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  user_id          BigInt?
+  uuid             String?   @unique(map: "master_user_companies_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company_uuid     String?   @db.VarChar(255)
+  user_uuid        String?   @db.VarChar(255)
+  companies        companies @relation(fields: [company_id], references: [id], onUpdate: NoAction, map: "user_companies_company_id_foreign")
+  users            users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_companies_user_id_foreign")
+
+  @@schema("master")
+}
+
+model variable_values {
+  id               BigInt        @id @default(autoincrement())
+  subject_type     String        @db.VarChar(255)
+  subject_id       BigInt
+  variable_id      BigInt
+  value            String?       @db.VarChar(255)
+  option_item_id   BigInt?
+  created_at       DateTime?     @db.Timestamp(0)
+  updated_at       DateTime?     @db.Timestamp(0)
+  deleted_at       DateTime?     @db.Timestamp(0)
+  created_user_id  BigInt        @default(1)
+  modified_user_id BigInt        @default(1)
+  deleted_user_id  BigInt?
+  uuid             String?       @unique(map: "master_variable_values_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject_uuid     String?       @db.VarChar(255)
+  variable_uuid    String?       @db.VarChar(255)
+  option_item_uuid String?       @db.VarChar(255)
+  option_items     option_items? @relation(fields: [option_item_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "variable_values_option_item_id_foreign")
+  variables        variables     @relation(fields: [variable_id], references: [id], onUpdate: NoAction, map: "variable_values_variable_id_foreign")
+
+  @@schema("master")
+}
+
+model variables {
+  id                     BigInt                 @id @default(autoincrement())
+  variable_type_id       BigInt
+  option_id              BigInt?
+  variable_name          String                 @db.VarChar(255)
+  description            String?
+  created_at             DateTime?              @db.Timestamp(0)
+  updated_at             DateTime?              @db.Timestamp(0)
+  deleted_at             DateTime?              @db.Timestamp(0)
+  created_user_id        BigInt                 @default(1)
+  modified_user_id       BigInt                 @default(1)
+  deleted_user_id        BigInt?
+  is_thumbnail           Boolean                @default(false)
+  uuid                   String?                @unique(map: "master_variables_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  variable_type_uuid     String?                @db.VarChar(255)
+  option_uuid            String?                @db.VarChar(255)
+  object_variables       object_variables[]
+  variable_values        variable_values[]
+  options                options?               @relation(fields: [option_id], references: [id], onDelete: Restrict, onUpdate: NoAction, map: "variables_option_id_foreign")
+  application_parameters application_parameters @relation(fields: [variable_type_id], references: [id], onUpdate: NoAction, map: "variables_variable_type_id_foreign")
+
+  @@schema("master")
+}
+
+model vendors {
+  id                     BigInt                 @id @default(autoincrement())
+  vendor_type_id         BigInt
+  name                   String
+  description            String?
+  created_at             DateTime?              @db.Timestamp(0)
+  updated_at             DateTime?              @db.Timestamp(0)
+  deleted_at             DateTime?              @db.Timestamp(0)
+  created_user_id        BigInt?
+  modified_user_id       BigInt?
+  deleted_user_id        BigInt?
+  uuid                   String?                @unique(map: "master_vendors_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  vendor_type_uuid       String?                @db.VarChar(255)
+  asset_recaps           asset_recaps[]
+  budgets                budgets[]
+  cable_recaps           cable_recaps[]
+  permit_item_recaps     permit_item_recaps[]
+  route_recaps           route_recaps[]
+  segment_retributions   segment_retributions[]
+  slack_support_recaps   slack_support_recaps[]
+  splice_core_recaps     splice_core_recaps[]
+  timelines              timelines[]
+  projects               projects[]
+  application_parameters application_parameters @relation(fields: [vendor_type_id], references: [id], onUpdate: NoAction, map: "vendors_vendor_type_id_foreign")
+  users                  users[]
+
+  @@schema("master")
+}
+
+model audits {
+  id             BigInt    @id @default(autoincrement())
+  user_type      String?   @db.VarChar(255)
+  user_id        BigInt?
+  event          String    @db.VarChar(255)
+  auditable_type String    @db.VarChar(255)
+  auditable_id   BigInt
+  old_values     String?
+  new_values     String?
+  url            String?
+  ip_address     String?   @db.Inet
+  user_agent     String?   @db.VarChar(1023)
+  tags           String?   @db.VarChar(255)
+  created_at     DateTime? @db.Timestamp(0)
+  updated_at     DateTime? @db.Timestamp(0)
+  deleted_at     DateTime? @db.Timestamp(0)
+
+  @@index([auditable_type, auditable_id], map: "audits_auditable_type_auditable_id_index")
+  @@index([user_id, user_type], map: "audits_user_id_user_type_index")
+  @@schema("public")
+}
+
+model failed_jobs {
+  id         BigInt   @id @default(autoincrement())
+  uuid       String   @unique(map: "failed_jobs_uuid_unique") @db.VarChar(255)
+  connection String
+  queue      String
+  payload    String
+  exception  String
+  failed_at  DateTime @default(now()) @db.Timestamp(0)
+
+  @@schema("public")
+}
+
+model jobs {
+  id           BigInt @id @default(autoincrement())
+  queue        String @db.VarChar(255)
+  payload      String
+  attempts     Int    @db.SmallInt
+  reserved_at  Int?
+  available_at Int
+  created_at   Int
+
+  @@index([queue], map: "jobs_queue_index")
+  @@schema("public")
+}
+
+model menus {
+  id                     BigInt    @id @default(autoincrement())
+  label                  String
+  menu_id                String    @unique(map: "menus_menu_id_unique")
+  icon                   String?
+  sort                   Int
+  router                 String?
+  router_parameter       String?
+  is_heading             Boolean   @default(false)
+  menu_parent_id         BigInt?
+  module                 String?
+  sub_module             String?
+  allowed_permission     String?
+  router_selected_active String?
+  created_at             DateTime? @db.Timestamp(0)
+  updated_at             DateTime? @db.Timestamp(0)
+  deleted_at             DateTime? @db.Timestamp(0)
+  uuid                   String?   @unique(map: "public_menus_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@schema("public")
+}
+
+model migrations {
+  id        Int    @id @default(autoincrement())
+  migration String @db.VarChar(255)
+  batch     Int
+
+  @@schema("public")
+}
+
+model model_has_permissions {
+  permission_id BigInt
+  model_type    String      @db.VarChar(255)
+  model_id      BigInt
+  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "model_has_permissions_permission_id_foreign")
+
+  @@id([permission_id, model_id, model_type])
+  @@index([model_id, model_type], map: "model_has_permissions_model_id_model_type_index")
+  @@schema("public")
+}
+
+model model_has_roles {
+  role_id    BigInt
+  model_type String @db.VarChar(255)
+  model_id   BigInt
+  roles      roles  @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "model_has_roles_role_id_foreign")
+
+  @@id([role_id, model_id, model_type])
+  @@index([model_id, model_type], map: "model_has_roles_model_id_model_type_index")
+  @@schema("public")
+}
+
+model nodejs_migrations {
+  id        Int     @id(map: "PK_ddd866262a3f9574fae30bdf0ba") @default(autoincrement())
+  timestamp BigInt
+  name      String  @db.VarChar
+  uuid      String? @unique(map: "public_nodejs_migrations_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@schema("public")
+}
+
+model password_reset_tokens {
+  email      String    @id @db.VarChar(255)
+  token      String    @db.VarChar(255)
+  created_at DateTime? @db.Timestamp(0)
+  uuid       String?   @unique(map: "public_password_reset_tokens_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@schema("public")
+}
+
+model permissions {
+  id                    BigInt                  @id @default(autoincrement())
+  name                  String                  @db.VarChar(255)
+  guard_name            String                  @db.VarChar(255)
+  group                 String?
+  module                String?                 @db.VarChar(255)
+  sub_module            String?                 @db.VarChar(255)
+  created_at            DateTime?               @db.Timestamp(0)
+  updated_at            DateTime?               @db.Timestamp(0)
+  uuid                  String?                 @unique(map: "public_permissions_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  model_has_permissions model_has_permissions[]
+  role_has_permissions  role_has_permissions[]
+
+  @@unique([name, guard_name], map: "permissions_name_guard_name_unique")
+  @@schema("public")
+}
+
+model personal_access_tokens {
+  id             BigInt    @id @default(autoincrement())
+  tokenable_type String    @db.VarChar(255)
+  tokenable_id   BigInt
+  name           String    @db.VarChar(255)
+  token          String    @unique(map: "personal_access_tokens_token_unique") @db.VarChar(64)
+  abilities      String?
+  last_used_at   DateTime? @db.Timestamp(0)
+  expires_at     DateTime? @db.Timestamp(0)
+  created_at     DateTime? @db.Timestamp(0)
+  updated_at     DateTime? @db.Timestamp(0)
+  uuid           String?   @unique(map: "public_personal_access_tokens_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@index([tokenable_type, tokenable_id], map: "personal_access_tokens_tokenable_type_tokenable_id_index")
+  @@schema("public")
+}
+
+model privilege_group_items {
+  id                   BigInt           @id @default(autoincrement())
+  privilege_group_id   BigInt
+  region_id            BigInt?
+  area_id              BigInt?
+  cluster_id           BigInt?
+  deleted_at           DateTime?        @db.Timestamp(0)
+  created_at           DateTime?        @db.Timestamp(0)
+  updated_at           DateTime?        @db.Timestamp(0)
+  created_user_id      BigInt?
+  modified_user_id     BigInt?
+  deleted_user_id      BigInt?
+  privilege_group_uuid String?          @unique(map: "public_privilege_group_items_privilege_group_uuid_unique") @db.Uuid
+  region_uuid          String?          @unique(map: "public_privilege_group_items_region_uuid_unique") @db.Uuid
+  area_uuid            String?          @unique(map: "public_privilege_group_items_area_uuid_unique") @db.Uuid
+  cluster_uuid         String?          @unique(map: "public_privilege_group_items_cluster_uuid_unique") @db.Uuid
+  uuid                 String?          @unique(map: "public_privilege_group_items_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  areas                areas?           @relation(fields: [area_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "privilege_group_items_area_id_foreign")
+  clusters             clusters?        @relation(fields: [cluster_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "privilege_group_items_cluster_id_foreign")
+  privilege_groups     privilege_groups @relation(fields: [privilege_group_id], references: [id], onUpdate: NoAction, map: "privilege_group_items_privilege_group_id_foreign")
+  regions              regions?         @relation(fields: [region_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "privilege_group_items_region_id_foreign")
+
+  @@schema("public")
+}
+
+model privilege_groups {
+  id                    BigInt                  @id @default(autoincrement())
+  name                  String                  @db.VarChar(255)
+  description           String?
+  deleted_at            DateTime?               @db.Timestamp(0)
+  created_at            DateTime?               @db.Timestamp(0)
+  updated_at            DateTime?               @db.Timestamp(0)
+  created_user_id       BigInt?
+  modified_user_id      BigInt?
+  deleted_user_id       BigInt?
+  uuid                  String?                 @unique(map: "public_privilege_groups_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  privilege_group_items privilege_group_items[]
+
+  @@schema("public")
+}
+
+model role_has_permissions {
+  permission_id BigInt
+  role_id       BigInt
+  permissions   permissions @relation(fields: [permission_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "role_has_permissions_permission_id_foreign")
+  roles         roles       @relation(fields: [role_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "role_has_permissions_role_id_foreign")
+
+  @@id([permission_id, role_id])
+  @@schema("public")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model roles {
+  id                   BigInt                 @id @default(autoincrement())
+  name                 String?                @db.VarChar(255)
+  guard_name           String                 @db.VarChar(255)
+  label                String
+  description          String?
+  is_active            Boolean                @default(true)
+  is_admin             Boolean                @default(false)
+  is_super_admin       Boolean                @default(false)
+  group                String?                @db.VarChar(255)
+  created_at           DateTime?              @db.Timestamp(0)
+  updated_at           DateTime?              @db.Timestamp(0)
+  created_user_id      BigInt?
+  modified_user_id     BigInt?
+  deleted_user_id      BigInt?
+  deleted_at           DateTime?              @db.Timestamp(0)
+  uuid                 String?                @unique(map: "public_roles_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  model_has_roles      model_has_roles[]
+  role_has_permissions role_has_permissions[]
+
+  @@unique([name, guard_name], map: "roles_name_guard_name_unique")
+  @@schema("public")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String? @db.VarChar(256)
+  auth_srid Int?
+  srtext    String? @db.VarChar(2048)
+  proj4text String? @db.VarChar(2048)
+
+  @@schema("public")
+}
+
+model user_password_histories {
+  id               BigInt    @id @default(autoincrement())
+  user_id          BigInt
+  password         String
+  created_at       DateTime? @db.Timestamp(0)
+  updated_at       DateTime? @db.Timestamp(0)
+  deleted_at       DateTime? @db.Timestamp(0)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "public_user_password_histories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  users            users     @relation(fields: [user_id], references: [id], onUpdate: NoAction, map: "user_password_histories_user_id_foreign")
+
+  @@schema("public")
+}
+
+model users {
+  id                        BigInt                    @id @default(autoincrement())
+  user_type_id              BigInt
+  t_employee_id             BigInt?
+  username                  String
+  name                      String
+  email                     String?                   @unique(map: "users_email_unique")
+  phone                     String?
+  password                  String?
+  last_login                DateTime?                 @db.Timestamp(0)
+  account_actived_at        DateTime?                 @db.Timestamp(0)
+  created_user_id           BigInt                    @default(1)
+  modified_user_id          BigInt                    @default(1)
+  deleted_user_id           BigInt?
+  remember_token            String?                   @db.VarChar(100)
+  deleted_at                DateTime?                 @db.Timestamp(0)
+  created_at                DateTime?                 @db.Timestamp(0)
+  updated_at                DateTime?                 @db.Timestamp(0)
+  two_factor_secret         String?
+  two_factor_recovery_codes String?
+  two_factor_confirmed_at   DateTime?                 @db.Timestamp(0)
+  privilege_group_id        BigInt?
+  vendor_id                 BigInt?
+  login_failed_attempt      Int                       @default(0) @db.SmallInt
+  uuid                      String?                   @unique(map: "public_users_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  is_vendor_pic             Boolean                   @default(false)
+  user_type_uuid            String?                   @db.VarChar(255)
+  privilege_group_uuid      String?                   @db.VarChar(255)
+  vendor_uuid               String?                   @db.VarChar(255)
+  project_shares            project_shares[]
+  projects                  projects[]
+  user_companies            user_companies[]
+  user_password_histories   user_password_histories[]
+  vendors                   vendors?                  @relation(fields: [vendor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_vendor_id_foreign")
+
+  @@schema("public")
+}
+
+model routes {
+  created_at         DateTime?                @default(now()) @db.Timestamp(6)
+  updated_at         DateTime?                @default(now()) @db.Timestamp(6)
+  deleted_at         DateTime?                @db.Timestamp(6)
+  created_user_id    BigInt
+  modified_user_id   BigInt
+  deleted_user_id    BigInt?
+  id                 BigInt                   @id(map: "PK_76100511cdfa1d013c859f01d8b") @default(autoincrement())
+  site_category_id   BigInt
+  name               String
+  site_from          BigInt?
+  site_to            BigInt?
+  geometry           Unsupported("geometry")?
+  uuid               String?                  @unique(map: "site_point_routes_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  site_category_uuid String?                  @db.VarChar(255)
+  site_from_uuid     String?                  @db.VarChar(255)
+  site_to_uuid       String?                  @db.VarChar(255)
+
+  @@index([geometry], map: "IDX_3b96fa3503517f8d7a7a3f21dd", type: Gist)
+  @@schema("site_point")
+}
+
+model segment_routes {
+  id               BigInt    @id @default(autoincrement())
+  segment_id       BigInt?
+  route_id         BigInt?
+  created_at       DateTime? @db.Timestamptz(6)
+  updated_at       DateTime? @db.Timestamptz(6)
+  deleted_at       DateTime? @db.Timestamptz(6)
+  created_user_id  BigInt?
+  modified_user_id BigInt?
+  deleted_user_id  BigInt?
+  uuid             String?   @unique(map: "site_point_segment_routes_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  segment_uuid     String?   @db.VarChar(255)
+  route_uuid       String?   @db.VarChar(255)
+
+  @@schema("site_point")
+}
+
+model segments {
+  id                   BigInt                 @id @default(autoincrement())
+  name                 String?
+  site_from            BigInt?
+  site_to              BigInt?
+  created_at           DateTime?              @db.Timestamptz(6)
+  updated_at           DateTime?              @db.Timestamptz(6)
+  deleted_at           DateTime?              @db.Timestamptz(6)
+  created_user_id      BigInt?
+  modified_user_id     BigInt?
+  deleted_user_id      BigInt?
+  uuid                 String?                @unique(map: "site_point_segments_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  site_from_uuid       String?                @db.VarChar(255)
+  site_to_uuid         String?                @db.VarChar(255)
+  segment_retributions segment_retributions[]
+
+  @@schema("site_point")
+}
+
+model site_categories {
+  created_at       DateTime? @default(now()) @db.Timestamp(6)
+  updated_at       DateTime? @default(now()) @db.Timestamp(6)
+  deleted_at       DateTime? @db.Timestamp(6)
+  created_user_id  BigInt
+  modified_user_id BigInt
+  deleted_user_id  BigInt?
+  id               BigInt    @id(map: "PK_5e04fd14d786ef58780bd8dd237") @default(autoincrement())
+  name             String
+  uuid             String?   @unique(map: "site_point_site_categories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  @@schema("site_point")
+}
+
+model site_points {
+  created_at                           DateTime?                @default(now()) @db.Timestamp(6)
+  updated_at                           DateTime?                @default(now()) @db.Timestamp(6)
+  deleted_at                           DateTime?                @db.Timestamp(6)
+  created_user_id                      BigInt
+  modified_user_id                     BigInt
+  deleted_user_id                      BigInt?
+  id                                   BigInt                   @id(map: "PK_41b6f62ef60a0a3d1654b034789") @default(autoincrement())
+  village_id                           BigInt
+  name                                 String
+  latitude                             Float
+  longitude                            Float
+  site_category_id                     BigInt
+  geometry                             Unsupported("geometry")?
+  uuid                                 String?                  @unique(map: "site_point_site_points_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  site_category_uuid                   String?                  @db.VarChar(255)
+  cables_cables_site_fromTosite_points cables[]                 @relation("cables_site_fromTosite_points")
+  cables_cables_site_toTosite_points   cables[]                 @relation("cables_site_toTosite_points")
+
+  @@index([geometry], map: "IDX_a6bfa3085491b35911d722c187", type: Gist)
+  @@schema("site_point")
+}
+
+model layer {
+  topology_id    Int
+  layer_id       Int
+  schema_name    String   @db.VarChar
+  table_name     String   @db.VarChar
+  feature_column String   @db.VarChar
+  feature_type   Int
+  level          Int      @default(0)
+  child_id       Int?
+  topology       topology @relation(fields: [topology_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([topology_id, layer_id])
+  @@unique([schema_name, table_name, feature_column])
+  @@schema("topology")
+}
+
+model topology {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique @db.VarChar
+  srid      Int
+  precision Float
+  hasz      Boolean @default(false)
+  layer     layer[]
+
+  @@schema("topology")
+}

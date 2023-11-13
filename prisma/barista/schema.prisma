@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  output          = "barista-client"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_BARISTA_URL")
+  extensions = [postgis]
+}
+
+enum ProjectStatus {
+  CREATED
+  UPDATED
+}
+
+// Model
+model Project {
+  uuid                 String         @id @default(uuid())
+  cafeins_uuid         String?
+  company_code         String?
+  vendor_no            String?
+  name                 String?
+  project_group_code   String         @unique
+  created_at           DateTime       @default(now())
+  updated_at           DateTime       @updatedAt
+  created_employee_no  BigInt?
+  modified_employee_no BigInt?
+  description          String?
+  po_number            String?
+  owner_name           String?
+  owner_nik            String?
+  status               ProjectStatus?
+  last_read            DateTime?
+  is_migrated          Boolean        @default(false)
+
+  @@map("projects")
+}
+
+model Site {
+  uuid                 String                   @id @default(uuid())
+  name                 String
+  site_group_code      String                   @unique
+  latitude             Float
+  longitude            Float
+  geometry             Unsupported("geometry")?
+  created_at           DateTime                 @default(now())
+  updated_at           DateTime                 @updatedAt
+  created_employee_no  BigInt?
+  modified_employee_no BigInt?
+  description          String?
+  po_number            String?
+  owner_name           String?
+  owner_nik            String?
+  status               ProjectStatus?
+  last_read            DateTime?
+  is_migrated          Boolean                  @default(false)
+
+  @@map("site")
+}

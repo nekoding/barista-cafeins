@@ -1,0 +1,19 @@
+{
+  "name": "barista-cafeins",
+  "module": "app.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest",
+    "husky": "^8.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.5.2",
+    "prisma": "^5.5.2"
+  }
+}
