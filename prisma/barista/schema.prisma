@@ -28,8 +28,8 @@ model Project {
   project_group_code   String         @unique
   created_at           DateTime       @default(now())
   updated_at           DateTime       @updatedAt
-  created_employee_no  BigInt?
-  modified_employee_no BigInt?
+  created_employee_no  String?
+  modified_employee_no String?
   description          String?
   po_number            String?
   owner_name           String?
@@ -50,8 +50,8 @@ model Site {
   geometry             Unsupported("geometry")?
   created_at           DateTime                 @default(now())
   updated_at           DateTime                 @updatedAt
-  created_employee_no  BigInt?
-  modified_employee_no BigInt?
+  created_employee_no  String?
+  modified_employee_no String?
   description          String?
   po_number            String?
   owner_name           String?
