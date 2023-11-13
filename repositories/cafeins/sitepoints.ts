@@ -6,6 +6,7 @@ export const findSitePointsByNearestCoords = async (
   lng: number,
   distance: number = 4,
   limit: number = 1,
+  offset: number = 0,
 ): Promise<site_points[] | null> => {
   return await cafeinsClient.$queryRaw<site_points[]>`SELECT * FROM (
     SELECT 
@@ -15,5 +16,5 @@ export const findSitePointsByNearestCoords = async (
       sp.longitude,
       sp.latitude, 
       ST_DistanceSphere(sp.geometry, ST_Point(${lng}, ${lat})) as distance FROM site_point.site_points sp
-  ) s WHERE s.distance <= ${distance} ORDER BY s.distance ASC LIMIT ${limit}`
+  ) s WHERE s.distance <= ${distance} ORDER BY s.distance ASC LIMIT ${limit} OFFSET ${offset}`
 }
