@@ -1,11 +1,11 @@
-import { PrismaClient as PrismaClientBarista } from './prisma/barista/barista-client'
-import { PrismaClient as PrismaClientCafeins } from './prisma/cafeins/cafeins-client'
+import { Command } from 'commander'
 
+const command = new Command()
+command
+  .name('Barista CLI')
+  .description(
+    'A robust database migration and synchronization tool designed for seamless transition between Silfi and Cafeins'
+  )
+  .version('0.1.0')
 
-const barista_client = new PrismaClientBarista({
-    log: ['error', 'query', 'info']
-})
-
-const cafeins_client = new PrismaClientCafeins({
-    log: ['error', 'query', 'info'],
-})
+command.parse(process.argv)
