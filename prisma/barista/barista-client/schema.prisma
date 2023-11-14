@@ -62,3 +62,15 @@ model Site {
 
   @@map("site")
 }
+
+model Log {
+  uuid       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  level      String
+  message    String
+  meta       Json?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  @@map("logs")
+}
