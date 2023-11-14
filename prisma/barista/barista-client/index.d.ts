@@ -2113,6 +2113,7 @@ export namespace Prisma {
 
   export type SiteMinAggregateOutputType = {
     uuid: string | null
+    cafeins_uuid: string | null
     name: string | null
     site_group_code: string | null
     latitude: number | null
@@ -2128,6 +2129,7 @@ export namespace Prisma {
 
   export type SiteMaxAggregateOutputType = {
     uuid: string | null
+    cafeins_uuid: string | null
     name: string | null
     site_group_code: string | null
     latitude: number | null
@@ -2143,6 +2145,7 @@ export namespace Prisma {
 
   export type SiteCountAggregateOutputType = {
     uuid: number
+    cafeins_uuid: number
     name: number
     site_group_code: number
     latitude: number
@@ -2174,6 +2177,7 @@ export namespace Prisma {
 
   export type SiteMinAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     name?: true
     site_group_code?: true
     latitude?: true
@@ -2189,6 +2193,7 @@ export namespace Prisma {
 
   export type SiteMaxAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     name?: true
     site_group_code?: true
     latitude?: true
@@ -2204,6 +2209,7 @@ export namespace Prisma {
 
   export type SiteCountAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     name?: true
     site_group_code?: true
     latitude?: true
@@ -2306,6 +2312,7 @@ export namespace Prisma {
 
   export type SiteGroupByOutputType = {
     uuid: string
+    cafeins_uuid: string | null
     name: string
     site_group_code: string
     latitude: number
@@ -2340,6 +2347,7 @@ export namespace Prisma {
 
   export type SiteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     uuid?: boolean
+    cafeins_uuid?: boolean
     name?: boolean
     site_group_code?: boolean
     latitude?: boolean
@@ -2355,6 +2363,7 @@ export namespace Prisma {
 
   export type SiteSelectScalar = {
     uuid?: boolean
+    cafeins_uuid?: boolean
     name?: boolean
     site_group_code?: boolean
     latitude?: boolean
@@ -2374,6 +2383,7 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
+      cafeins_uuid: string | null
       name: string
       site_group_code: string
       latitude: number
@@ -2780,6 +2790,7 @@ export namespace Prisma {
    */ 
   interface SiteFieldRefs {
     readonly uuid: FieldRef<"Site", 'String'>
+    readonly cafeins_uuid: FieldRef<"Site", 'String'>
     readonly name: FieldRef<"Site", 'String'>
     readonly site_group_code: FieldRef<"Site", 'String'>
     readonly latitude: FieldRef<"Site", 'Float'>
@@ -4005,6 +4016,7 @@ export namespace Prisma {
 
   export const SiteScalarFieldEnum: {
     uuid: 'uuid',
+    cafeins_uuid: 'cafeins_uuid',
     name: 'name',
     site_group_code: 'site_group_code',
     latitude: 'latitude',
@@ -4300,6 +4312,7 @@ export namespace Prisma {
     OR?: SiteWhereInput[]
     NOT?: SiteWhereInput | SiteWhereInput[]
     uuid?: UuidFilter<"Site"> | string
+    cafeins_uuid?: StringNullableFilter<"Site"> | string | null
     name?: StringFilter<"Site"> | string
     site_group_code?: StringFilter<"Site"> | string
     latitude?: FloatFilter<"Site"> | number
@@ -4315,6 +4328,7 @@ export namespace Prisma {
 
   export type SiteOrderByWithRelationInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrderInput | SortOrder
     name?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
@@ -4334,6 +4348,7 @@ export namespace Prisma {
     AND?: SiteWhereInput | SiteWhereInput[]
     OR?: SiteWhereInput[]
     NOT?: SiteWhereInput | SiteWhereInput[]
+    cafeins_uuid?: StringNullableFilter<"Site"> | string | null
     name?: StringFilter<"Site"> | string
     latitude?: FloatFilter<"Site"> | number
     longitude?: FloatFilter<"Site"> | number
@@ -4348,6 +4363,7 @@ export namespace Prisma {
 
   export type SiteOrderByWithAggregationInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrderInput | SortOrder
     name?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
@@ -4371,6 +4387,7 @@ export namespace Prisma {
     OR?: SiteScalarWhereWithAggregatesInput[]
     NOT?: SiteScalarWhereWithAggregatesInput | SiteScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Site"> | string
+    cafeins_uuid?: StringNullableWithAggregatesFilter<"Site"> | string | null
     name?: StringWithAggregatesFilter<"Site"> | string
     site_group_code?: StringWithAggregatesFilter<"Site"> | string
     latitude?: FloatWithAggregatesFilter<"Site"> | number
@@ -4588,6 +4605,7 @@ export namespace Prisma {
 
   export type SiteCreateInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     name: string
     site_group_code: string
     latitude: number
@@ -4603,6 +4621,7 @@ export namespace Prisma {
 
   export type SiteUncheckedCreateInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     name: string
     site_group_code: string
     latitude: number
@@ -4618,6 +4637,7 @@ export namespace Prisma {
 
   export type SiteUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     site_group_code?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -4633,6 +4653,7 @@ export namespace Prisma {
 
   export type SiteUncheckedUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     site_group_code?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -4648,6 +4669,7 @@ export namespace Prisma {
 
   export type SiteCreateManyInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     name: string
     site_group_code: string
     latitude: number
@@ -4663,6 +4685,7 @@ export namespace Prisma {
 
   export type SiteUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     site_group_code?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -4678,6 +4701,7 @@ export namespace Prisma {
 
   export type SiteUncheckedUpdateManyInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     site_group_code?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -5080,6 +5104,7 @@ export namespace Prisma {
 
   export type SiteCountOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     name?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
@@ -5102,6 +5127,7 @@ export namespace Prisma {
 
   export type SiteMaxOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     name?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
@@ -5117,6 +5143,7 @@ export namespace Prisma {
 
   export type SiteMinOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     name?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder

@@ -43,6 +43,7 @@ model Project {
 
 model Site {
   uuid                 String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cafeins_uuid         String?
   name                 String
   site_group_code      String                   @unique
   latitude             Float
