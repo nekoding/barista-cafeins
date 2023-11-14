@@ -1,5 +1,6 @@
 import { Command } from 'commander'
 import { syncronizeAction } from './handler'
+import { logger } from './utils/logger'
 
 const barista = new Command()
 barista
@@ -18,6 +19,7 @@ barista
 
 try {
   await barista.parseAsync(process.argv)
-} catch (error) {
-  console.error("error: Can't parse command")
+} catch (error: any) {
+  logger.error(error.message)
+  process.exit(1)
 }

@@ -10,6 +10,6 @@ export const syncronizeAction = async (arg: string): Promise<void> => {
       await syncSitePoint()
       break
     default:
-      throw new Error('error: Invalid argument')
+      throw new Error('Invalid argument')
   }
 }
