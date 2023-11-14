@@ -1,6 +1,6 @@
 import type { Prisma } from '../prisma/cafeins/cafeins-client'
 import { getProjectsUnmigrated } from '../repositories/barista/projects'
-import { cafeinsClient } from '../utils/database'
+import { baristaClient, cafeinsClient } from '../utils/database'
 import { LogLevel, writeToLog } from './logs'
 
 export const syncProjects = async (): Promise<void> => {
@@ -40,8 +40,24 @@ export const syncProjects = async (): Promise<void> => {
   }
 
   await cafeinsClient.$transaction(async (trx) => {
+    // migrate data
     await trx.projects.createMany({
       data: createProjects,
+      skipDuplicates: true,
+    })
+
+    // mark data synchronized
+    await baristaClient.project.updateMany({
+      data: {
+        is_migrated: true,
+        last_read: new Date(),
+        status: 'CREATED',
+      },
+      where: {
+        uuid: {
+          in: projects.map((project) => project.uuid),
+        },
+      },
     })
   })
 }
