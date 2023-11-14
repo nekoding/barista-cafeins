@@ -15,15 +15,22 @@ export const syncProjects = async (): Promise<void> => {
     })
 
     if (user == null) {
-      await writeToLog(LogLevel.ERROR, 'user not found', {
-        employee_id: project.created_employee_no,
-        uuid: project.uuid,
-      })
+      await writeToLog(
+        LogLevel.ERROR,
+        'project owner not found cannot migrate data',
+        {
+          employee_no: project.created_employee_no,
+          uuid: project.uuid,
+          name: project.name,
+          code: project.project_group_code,
+        },
+      )
 
-      throw new Error('user not found')
+      throw new Error('project owner not found cannot migrate data')
     }
 
     createProjects.push({
+      uuid: project.uuid,
       company_id: project.company_code,
       vendor_id: project.vendor_no,
       name: project.name,
@@ -47,17 +54,18 @@ export const syncProjects = async (): Promise<void> => {
     })
 
     // mark data synchronized
-    await baristaClient.project.updateMany({
-      data: {
-        is_migrated: true,
-        last_read: new Date(),
-        status: 'CREATED',
-      },
-      where: {
-        uuid: {
-          in: projects.map((project) => project.uuid),
+    for (const project of projects) {
+      await baristaClient.project.update({
+        data: {
+          is_migrated: true,
+          last_read: new Date(),
+          status: 'CREATED',
+          cafeins_uuid: project.uuid,
         },
-      },
-    })
+        where: {
+          uuid: project.uuid,
+        },
+      })
+    }
   })
 }
