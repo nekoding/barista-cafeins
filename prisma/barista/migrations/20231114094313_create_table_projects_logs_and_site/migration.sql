@@ -2,7 +2,7 @@
 CREATE EXTENSION IF NOT EXISTS "postgis";
 
 -- CreateEnum
-CREATE TYPE "ProjectStatus" AS ENUM ('CREATED', 'UPDATED');
+CREATE TYPE "MIGRATION_STATUS" AS ENUM ('CREATED', 'UPDATED');
 
 -- CreateTable
 CREATE TABLE "projects" (
@@ -20,7 +20,7 @@ CREATE TABLE "projects" (
     "po_number" TEXT,
     "owner_name" TEXT,
     "owner_nik" TEXT,
-    "status" "ProjectStatus",
+    "status" "MIGRATION_STATUS",
     "last_read" TIMESTAMP(3),
     "is_migrated" BOOLEAN NOT NULL DEFAULT false,
 
@@ -39,15 +39,24 @@ CREATE TABLE "site" (
     "updated_at" TIMESTAMP(3) NOT NULL,
     "created_employee_no" BIGINT,
     "modified_employee_no" BIGINT,
-    "description" TEXT,
-    "po_number" TEXT,
-    "owner_name" TEXT,
-    "owner_nik" TEXT,
-    "status" "ProjectStatus",
+    "status" "MIGRATION_STATUS",
     "last_read" TIMESTAMP(3),
     "is_migrated" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "site_pkey" PRIMARY KEY ("uuid")
+);
+
+-- CreateTable
+CREATE TABLE "logs" (
+    "uuid" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "level" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "meta" JSONB,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "deleted_at" TIMESTAMP(3),
+
+    CONSTRAINT "logs_pkey" PRIMARY KEY ("uuid")
 );
 
 -- CreateIndex

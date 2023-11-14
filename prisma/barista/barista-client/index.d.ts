@@ -33,18 +33,18 @@ export type Log = $Result.DefaultSelection<Prisma.$LogPayload>
  * Enums
  */
 export namespace $Enums {
-  export const ProjectStatus: {
+  export const MIGRATION_STATUS: {
   CREATED: 'CREATED',
   UPDATED: 'UPDATED'
 };
 
-export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
+export type MIGRATION_STATUS = (typeof MIGRATION_STATUS)[keyof typeof MIGRATION_STATUS]
 
 }
 
-export type ProjectStatus = $Enums.ProjectStatus
+export type MIGRATION_STATUS = $Enums.MIGRATION_STATUS
 
-export const ProjectStatus: typeof $Enums.ProjectStatus
+export const MIGRATION_STATUS: typeof $Enums.MIGRATION_STATUS
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1078,7 +1078,7 @@ export namespace Prisma {
     po_number: string | null
     owner_name: string | null
     owner_nik: string | null
-    status: $Enums.ProjectStatus | null
+    status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean | null
   }
@@ -1098,7 +1098,7 @@ export namespace Prisma {
     po_number: string | null
     owner_name: string | null
     owner_nik: string | null
-    status: $Enums.ProjectStatus | null
+    status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean | null
   }
@@ -1301,7 +1301,7 @@ export namespace Prisma {
     po_number: string | null
     owner_name: string | null
     owner_nik: string | null
-    status: $Enums.ProjectStatus | null
+    status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean
     _count: ProjectCountAggregateOutputType | null
@@ -1384,7 +1384,7 @@ export namespace Prisma {
       po_number: string | null
       owner_name: string | null
       owner_nik: string | null
-      status: $Enums.ProjectStatus | null
+      status: $Enums.MIGRATION_STATUS | null
       last_read: Date | null
       is_migrated: boolean
     }, ExtArgs["result"]["project"]>
@@ -1795,7 +1795,7 @@ export namespace Prisma {
     readonly po_number: FieldRef<"Project", 'String'>
     readonly owner_name: FieldRef<"Project", 'String'>
     readonly owner_nik: FieldRef<"Project", 'String'>
-    readonly status: FieldRef<"Project", 'ProjectStatus'>
+    readonly status: FieldRef<"Project", 'MIGRATION_STATUS'>
     readonly last_read: FieldRef<"Project", 'DateTime'>
     readonly is_migrated: FieldRef<"Project", 'Boolean'>
   }
@@ -2121,11 +2121,7 @@ export namespace Prisma {
     updated_at: Date | null
     created_employee_no: bigint | null
     modified_employee_no: bigint | null
-    description: string | null
-    po_number: string | null
-    owner_name: string | null
-    owner_nik: string | null
-    status: $Enums.ProjectStatus | null
+    status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean | null
   }
@@ -2140,11 +2136,7 @@ export namespace Prisma {
     updated_at: Date | null
     created_employee_no: bigint | null
     modified_employee_no: bigint | null
-    description: string | null
-    po_number: string | null
-    owner_name: string | null
-    owner_nik: string | null
-    status: $Enums.ProjectStatus | null
+    status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean | null
   }
@@ -2159,10 +2151,6 @@ export namespace Prisma {
     updated_at: number
     created_employee_no: number
     modified_employee_no: number
-    description: number
-    po_number: number
-    owner_name: number
-    owner_nik: number
     status: number
     last_read: number
     is_migrated: number
@@ -2194,10 +2182,6 @@ export namespace Prisma {
     updated_at?: true
     created_employee_no?: true
     modified_employee_no?: true
-    description?: true
-    po_number?: true
-    owner_name?: true
-    owner_nik?: true
     status?: true
     last_read?: true
     is_migrated?: true
@@ -2213,10 +2197,6 @@ export namespace Prisma {
     updated_at?: true
     created_employee_no?: true
     modified_employee_no?: true
-    description?: true
-    po_number?: true
-    owner_name?: true
-    owner_nik?: true
     status?: true
     last_read?: true
     is_migrated?: true
@@ -2232,10 +2212,6 @@ export namespace Prisma {
     updated_at?: true
     created_employee_no?: true
     modified_employee_no?: true
-    description?: true
-    po_number?: true
-    owner_name?: true
-    owner_nik?: true
     status?: true
     last_read?: true
     is_migrated?: true
@@ -2338,11 +2314,7 @@ export namespace Prisma {
     updated_at: Date
     created_employee_no: bigint | null
     modified_employee_no: bigint | null
-    description: string | null
-    po_number: string | null
-    owner_name: string | null
-    owner_nik: string | null
-    status: $Enums.ProjectStatus | null
+    status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean
     _count: SiteCountAggregateOutputType | null
@@ -2376,10 +2348,6 @@ export namespace Prisma {
     updated_at?: boolean
     created_employee_no?: boolean
     modified_employee_no?: boolean
-    description?: boolean
-    po_number?: boolean
-    owner_name?: boolean
-    owner_nik?: boolean
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
@@ -2395,10 +2363,6 @@ export namespace Prisma {
     updated_at?: boolean
     created_employee_no?: boolean
     modified_employee_no?: boolean
-    description?: boolean
-    po_number?: boolean
-    owner_name?: boolean
-    owner_nik?: boolean
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
@@ -2418,11 +2382,7 @@ export namespace Prisma {
       updated_at: Date
       created_employee_no: bigint | null
       modified_employee_no: bigint | null
-      description: string | null
-      po_number: string | null
-      owner_name: string | null
-      owner_nik: string | null
-      status: $Enums.ProjectStatus | null
+      status: $Enums.MIGRATION_STATUS | null
       last_read: Date | null
       is_migrated: boolean
     }, ExtArgs["result"]["site"]>
@@ -2828,11 +2788,7 @@ export namespace Prisma {
     readonly updated_at: FieldRef<"Site", 'DateTime'>
     readonly created_employee_no: FieldRef<"Site", 'BigInt'>
     readonly modified_employee_no: FieldRef<"Site", 'BigInt'>
-    readonly description: FieldRef<"Site", 'String'>
-    readonly po_number: FieldRef<"Site", 'String'>
-    readonly owner_name: FieldRef<"Site", 'String'>
-    readonly owner_nik: FieldRef<"Site", 'String'>
-    readonly status: FieldRef<"Site", 'ProjectStatus'>
+    readonly status: FieldRef<"Site", 'MIGRATION_STATUS'>
     readonly last_read: FieldRef<"Site", 'DateTime'>
     readonly is_migrated: FieldRef<"Site", 'Boolean'>
   }
@@ -4057,10 +4013,6 @@ export namespace Prisma {
     updated_at: 'updated_at',
     created_employee_no: 'created_employee_no',
     modified_employee_no: 'modified_employee_no',
-    description: 'description',
-    po_number: 'po_number',
-    owner_name: 'owner_name',
-    owner_nik: 'owner_nik',
     status: 'status',
     last_read: 'last_read',
     is_migrated: 'is_migrated'
@@ -4171,16 +4123,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'ProjectStatus'
+   * Reference to a field of type 'MIGRATION_STATUS'
    */
-  export type EnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus'>
+  export type EnumMIGRATION_STATUSFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MIGRATION_STATUS'>
     
 
 
   /**
-   * Reference to a field of type 'ProjectStatus[]'
+   * Reference to a field of type 'MIGRATION_STATUS[]'
    */
-  export type ListEnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus[]'>
+  export type ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MIGRATION_STATUS[]'>
     
 
 
@@ -4247,7 +4199,7 @@ export namespace Prisma {
     po_number?: StringNullableFilter<"Project"> | string | null
     owner_name?: StringNullableFilter<"Project"> | string | null
     owner_nik?: StringNullableFilter<"Project"> | string | null
-    status?: EnumProjectStatusNullableFilter<"Project"> | $Enums.ProjectStatus | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Project"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Project"> | Date | string | null
     is_migrated?: BoolFilter<"Project"> | boolean
   }
@@ -4290,7 +4242,7 @@ export namespace Prisma {
     po_number?: StringNullableFilter<"Project"> | string | null
     owner_name?: StringNullableFilter<"Project"> | string | null
     owner_nik?: StringNullableFilter<"Project"> | string | null
-    status?: EnumProjectStatusNullableFilter<"Project"> | $Enums.ProjectStatus | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Project"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Project"> | Date | string | null
     is_migrated?: BoolFilter<"Project"> | boolean
   }, "uuid" | "project_group_code">
@@ -4338,7 +4290,7 @@ export namespace Prisma {
     po_number?: StringNullableWithAggregatesFilter<"Project"> | string | null
     owner_name?: StringNullableWithAggregatesFilter<"Project"> | string | null
     owner_nik?: StringNullableWithAggregatesFilter<"Project"> | string | null
-    status?: EnumProjectStatusNullableWithAggregatesFilter<"Project"> | $Enums.ProjectStatus | null
+    status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Project"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
     is_migrated?: BoolWithAggregatesFilter<"Project"> | boolean
   }
@@ -4356,11 +4308,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Site"> | Date | string
     created_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
     modified_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
-    description?: StringNullableFilter<"Site"> | string | null
-    po_number?: StringNullableFilter<"Site"> | string | null
-    owner_name?: StringNullableFilter<"Site"> | string | null
-    owner_nik?: StringNullableFilter<"Site"> | string | null
-    status?: EnumProjectStatusNullableFilter<"Site"> | $Enums.ProjectStatus | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Site"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Site"> | Date | string | null
     is_migrated?: BoolFilter<"Site"> | boolean
   }
@@ -4375,10 +4323,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrderInput | SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
-    po_number?: SortOrderInput | SortOrder
-    owner_name?: SortOrderInput | SortOrder
-    owner_nik?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
@@ -4397,11 +4341,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Site"> | Date | string
     created_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
     modified_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
-    description?: StringNullableFilter<"Site"> | string | null
-    po_number?: StringNullableFilter<"Site"> | string | null
-    owner_name?: StringNullableFilter<"Site"> | string | null
-    owner_nik?: StringNullableFilter<"Site"> | string | null
-    status?: EnumProjectStatusNullableFilter<"Site"> | $Enums.ProjectStatus | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Site"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Site"> | Date | string | null
     is_migrated?: BoolFilter<"Site"> | boolean
   }, "uuid" | "site_group_code">
@@ -4416,10 +4356,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrderInput | SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
-    po_number?: SortOrderInput | SortOrder
-    owner_name?: SortOrderInput | SortOrder
-    owner_nik?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
@@ -4443,11 +4379,7 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"Site"> | Date | string
     created_employee_no?: BigIntNullableWithAggregatesFilter<"Site"> | bigint | number | null
     modified_employee_no?: BigIntNullableWithAggregatesFilter<"Site"> | bigint | number | null
-    description?: StringNullableWithAggregatesFilter<"Site"> | string | null
-    po_number?: StringNullableWithAggregatesFilter<"Site"> | string | null
-    owner_name?: StringNullableWithAggregatesFilter<"Site"> | string | null
-    owner_nik?: StringNullableWithAggregatesFilter<"Site"> | string | null
-    status?: EnumProjectStatusNullableWithAggregatesFilter<"Site"> | $Enums.ProjectStatus | null
+    status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Site"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableWithAggregatesFilter<"Site"> | Date | string | null
     is_migrated?: BoolWithAggregatesFilter<"Site"> | boolean
   }
@@ -4529,7 +4461,7 @@ export namespace Prisma {
     po_number?: string | null
     owner_name?: string | null
     owner_nik?: string | null
-    status?: $Enums.ProjectStatus | null
+    status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
@@ -4549,7 +4481,7 @@ export namespace Prisma {
     po_number?: string | null
     owner_name?: string | null
     owner_nik?: string | null
-    status?: $Enums.ProjectStatus | null
+    status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
@@ -4569,7 +4501,7 @@ export namespace Prisma {
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
     owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -4589,7 +4521,7 @@ export namespace Prisma {
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
     owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -4609,7 +4541,7 @@ export namespace Prisma {
     po_number?: string | null
     owner_name?: string | null
     owner_nik?: string | null
-    status?: $Enums.ProjectStatus | null
+    status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
@@ -4629,7 +4561,7 @@ export namespace Prisma {
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
     owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -4649,7 +4581,7 @@ export namespace Prisma {
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
     owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -4664,11 +4596,7 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: bigint | number | null
     modified_employee_no?: bigint | number | null
-    description?: string | null
-    po_number?: string | null
-    owner_name?: string | null
-    owner_nik?: string | null
-    status?: $Enums.ProjectStatus | null
+    status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
@@ -4683,11 +4611,7 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: bigint | number | null
     modified_employee_no?: bigint | number | null
-    description?: string | null
-    po_number?: string | null
-    owner_name?: string | null
-    owner_nik?: string | null
-    status?: $Enums.ProjectStatus | null
+    status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
@@ -4702,11 +4626,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    po_number?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_name?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -4721,11 +4641,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    po_number?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_name?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -4740,11 +4656,7 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: bigint | number | null
     modified_employee_no?: bigint | number | null
-    description?: string | null
-    po_number?: string | null
-    owner_name?: string | null
-    owner_nik?: string | null
-    status?: $Enums.ProjectStatus | null
+    status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
@@ -4759,11 +4671,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    po_number?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_name?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -4778,11 +4686,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    po_number?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_name?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -4932,11 +4836,11 @@ export namespace Prisma {
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
-  export type EnumProjectStatusNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.ProjectStatus | EnumProjectStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.ProjectStatus[] | ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.ProjectStatus[] | ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumProjectStatusNullableFilter<$PrismaModel> | $Enums.ProjectStatus | null
+  export type EnumMIGRATION_STATUSNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.MIGRATION_STATUS | EnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    in?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel> | $Enums.MIGRATION_STATUS | null
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -5131,14 +5035,14 @@ export namespace Prisma {
     _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
-  export type EnumProjectStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ProjectStatus | EnumProjectStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.ProjectStatus[] | ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.ProjectStatus[] | ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumProjectStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.ProjectStatus | null
+  export type EnumMIGRATION_STATUSNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MIGRATION_STATUS | EnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    in?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumMIGRATION_STATUSNullableWithAggregatesFilter<$PrismaModel> | $Enums.MIGRATION_STATUS | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumProjectStatusNullableFilter<$PrismaModel>
-    _max?: NestedEnumProjectStatusNullableFilter<$PrismaModel>
+    _min?: NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel>
+    _max?: NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5184,10 +5088,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrder
     modified_employee_no?: SortOrder
-    description?: SortOrder
-    po_number?: SortOrder
-    owner_name?: SortOrder
-    owner_nik?: SortOrder
     status?: SortOrder
     last_read?: SortOrder
     is_migrated?: SortOrder
@@ -5210,10 +5110,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrder
     modified_employee_no?: SortOrder
-    description?: SortOrder
-    po_number?: SortOrder
-    owner_name?: SortOrder
-    owner_nik?: SortOrder
     status?: SortOrder
     last_read?: SortOrder
     is_migrated?: SortOrder
@@ -5229,10 +5125,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrder
     modified_employee_no?: SortOrder
-    description?: SortOrder
-    po_number?: SortOrder
-    owner_name?: SortOrder
-    owner_nik?: SortOrder
     status?: SortOrder
     last_read?: SortOrder
     is_migrated?: SortOrder
@@ -5364,8 +5256,8 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
-  export type NullableEnumProjectStatusFieldUpdateOperationsInput = {
-    set?: $Enums.ProjectStatus | null
+  export type NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput = {
+    set?: $Enums.MIGRATION_STATUS | null
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -5456,11 +5348,11 @@ export namespace Prisma {
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
-  export type NestedEnumProjectStatusNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.ProjectStatus | EnumProjectStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.ProjectStatus[] | ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.ProjectStatus[] | ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumProjectStatusNullableFilter<$PrismaModel> | $Enums.ProjectStatus | null
+  export type NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.MIGRATION_STATUS | EnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    in?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel> | $Enums.MIGRATION_STATUS | null
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -5617,14 +5509,14 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumProjectStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ProjectStatus | EnumProjectStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.ProjectStatus[] | ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.ProjectStatus[] | ListEnumProjectStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumProjectStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.ProjectStatus | null
+  export type NestedEnumMIGRATION_STATUSNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MIGRATION_STATUS | EnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    in?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumMIGRATION_STATUSNullableWithAggregatesFilter<$PrismaModel> | $Enums.MIGRATION_STATUS | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumProjectStatusNullableFilter<$PrismaModel>
-    _max?: NestedEnumProjectStatusNullableFilter<$PrismaModel>
+    _min?: NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel>
+    _max?: NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {

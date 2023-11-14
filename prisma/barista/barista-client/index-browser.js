@@ -135,10 +135,6 @@ exports.Prisma.SiteScalarFieldEnum = {
   updated_at: 'updated_at',
   created_employee_no: 'created_employee_no',
   modified_employee_no: 'modified_employee_no',
-  description: 'description',
-  po_number: 'po_number',
-  owner_name: 'owner_name',
-  owner_nik: 'owner_nik',
   status: 'status',
   last_read: 'last_read',
   is_migrated: 'is_migrated',
@@ -179,7 +175,7 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull,
 }
-exports.ProjectStatus = exports.$Enums.ProjectStatus = {
+exports.MIGRATION_STATUS = exports.$Enums.MIGRATION_STATUS = {
   CREATED: 'CREATED',
   UPDATED: 'UPDATED',
 }
