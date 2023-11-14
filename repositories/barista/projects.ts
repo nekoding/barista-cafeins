@@ -6,11 +6,6 @@ export const getProjectsUnmigrated = async (
 ): Promise<Project[]> => {
   return await baristaClient.project.findMany({
     where: {
-      NOT: {
-        company_code: null,
-        vendor_no: null,
-        owner_nik: null,
-      },
       is_migrated: false,
       status: null,
     },

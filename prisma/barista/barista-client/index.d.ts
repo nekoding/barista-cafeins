@@ -961,21 +961,37 @@ export namespace Prisma {
 
   export type AggregateProject = {
     _count: ProjectCountAggregateOutputType | null
+    _avg: ProjectAvgAggregateOutputType | null
+    _sum: ProjectSumAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
     _max: ProjectMaxAggregateOutputType | null
+  }
+
+  export type ProjectAvgAggregateOutputType = {
+    company_code: number | null
+    vendor_no: number | null
+    created_employee_no: number | null
+    modified_employee_no: number | null
+  }
+
+  export type ProjectSumAggregateOutputType = {
+    company_code: bigint | null
+    vendor_no: bigint | null
+    created_employee_no: bigint | null
+    modified_employee_no: bigint | null
   }
 
   export type ProjectMinAggregateOutputType = {
     uuid: string | null
     cafeins_uuid: string | null
-    company_code: string | null
-    vendor_no: string | null
+    company_code: bigint | null
+    vendor_no: bigint | null
     name: string | null
     project_group_code: string | null
     created_at: Date | null
     updated_at: Date | null
-    created_employee_no: string | null
-    modified_employee_no: string | null
+    created_employee_no: bigint | null
+    modified_employee_no: bigint | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -988,14 +1004,14 @@ export namespace Prisma {
   export type ProjectMaxAggregateOutputType = {
     uuid: string | null
     cafeins_uuid: string | null
-    company_code: string | null
-    vendor_no: string | null
+    company_code: bigint | null
+    vendor_no: bigint | null
     name: string | null
     project_group_code: string | null
     created_at: Date | null
     updated_at: Date | null
-    created_employee_no: string | null
-    modified_employee_no: string | null
+    created_employee_no: bigint | null
+    modified_employee_no: bigint | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -1026,6 +1042,20 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type ProjectAvgAggregateInputType = {
+    company_code?: true
+    vendor_no?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+  }
+
+  export type ProjectSumAggregateInputType = {
+    company_code?: true
+    vendor_no?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+  }
 
   export type ProjectMinAggregateInputType = {
     uuid?: true
@@ -1126,6 +1156,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ProjectAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProjectSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ProjectMinAggregateInputType
@@ -1156,6 +1198,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ProjectCountAggregateInputType | true
+    _avg?: ProjectAvgAggregateInputType
+    _sum?: ProjectSumAggregateInputType
     _min?: ProjectMinAggregateInputType
     _max?: ProjectMaxAggregateInputType
   }
@@ -1163,14 +1207,14 @@ export namespace Prisma {
   export type ProjectGroupByOutputType = {
     uuid: string
     cafeins_uuid: string | null
-    company_code: string | null
-    vendor_no: string | null
-    name: string | null
+    company_code: bigint
+    vendor_no: bigint
+    name: string
     project_group_code: string
     created_at: Date
     updated_at: Date
-    created_employee_no: string | null
-    modified_employee_no: string | null
+    created_employee_no: bigint | null
+    modified_employee_no: bigint | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -1179,6 +1223,8 @@ export namespace Prisma {
     last_read: Date | null
     is_migrated: boolean
     _count: ProjectCountAggregateOutputType | null
+    _avg: ProjectAvgAggregateOutputType | null
+    _sum: ProjectSumAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
     _max: ProjectMaxAggregateOutputType | null
   }
@@ -1244,14 +1290,14 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
       cafeins_uuid: string | null
-      company_code: string | null
-      vendor_no: string | null
-      name: string | null
+      company_code: bigint
+      vendor_no: bigint
+      name: string
       project_group_code: string
       created_at: Date
       updated_at: Date
-      created_employee_no: string | null
-      modified_employee_no: string | null
+      created_employee_no: bigint | null
+      modified_employee_no: bigint | null
       description: string | null
       po_number: string | null
       owner_name: string | null
@@ -1655,14 +1701,14 @@ export namespace Prisma {
   interface ProjectFieldRefs {
     readonly uuid: FieldRef<"Project", 'String'>
     readonly cafeins_uuid: FieldRef<"Project", 'String'>
-    readonly company_code: FieldRef<"Project", 'String'>
-    readonly vendor_no: FieldRef<"Project", 'String'>
+    readonly company_code: FieldRef<"Project", 'BigInt'>
+    readonly vendor_no: FieldRef<"Project", 'BigInt'>
     readonly name: FieldRef<"Project", 'String'>
     readonly project_group_code: FieldRef<"Project", 'String'>
     readonly created_at: FieldRef<"Project", 'DateTime'>
     readonly updated_at: FieldRef<"Project", 'DateTime'>
-    readonly created_employee_no: FieldRef<"Project", 'String'>
-    readonly modified_employee_no: FieldRef<"Project", 'String'>
+    readonly created_employee_no: FieldRef<"Project", 'BigInt'>
+    readonly modified_employee_no: FieldRef<"Project", 'BigInt'>
     readonly description: FieldRef<"Project", 'String'>
     readonly po_number: FieldRef<"Project", 'String'>
     readonly owner_name: FieldRef<"Project", 'String'>
@@ -1972,11 +2018,15 @@ export namespace Prisma {
   export type SiteAvgAggregateOutputType = {
     latitude: number | null
     longitude: number | null
+    created_employee_no: number | null
+    modified_employee_no: number | null
   }
 
   export type SiteSumAggregateOutputType = {
     latitude: number | null
     longitude: number | null
+    created_employee_no: bigint | null
+    modified_employee_no: bigint | null
   }
 
   export type SiteMinAggregateOutputType = {
@@ -1987,8 +2037,8 @@ export namespace Prisma {
     longitude: number | null
     created_at: Date | null
     updated_at: Date | null
-    created_employee_no: string | null
-    modified_employee_no: string | null
+    created_employee_no: bigint | null
+    modified_employee_no: bigint | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -2006,8 +2056,8 @@ export namespace Prisma {
     longitude: number | null
     created_at: Date | null
     updated_at: Date | null
-    created_employee_no: string | null
-    modified_employee_no: string | null
+    created_employee_no: bigint | null
+    modified_employee_no: bigint | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -2041,11 +2091,15 @@ export namespace Prisma {
   export type SiteAvgAggregateInputType = {
     latitude?: true
     longitude?: true
+    created_employee_no?: true
+    modified_employee_no?: true
   }
 
   export type SiteSumAggregateInputType = {
     latitude?: true
     longitude?: true
+    created_employee_no?: true
+    modified_employee_no?: true
   }
 
   export type SiteMinAggregateInputType = {
@@ -2200,8 +2254,8 @@ export namespace Prisma {
     longitude: number
     created_at: Date
     updated_at: Date
-    created_employee_no: string | null
-    modified_employee_no: string | null
+    created_employee_no: bigint | null
+    modified_employee_no: bigint | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -2280,8 +2334,8 @@ export namespace Prisma {
       longitude: number
       created_at: Date
       updated_at: Date
-      created_employee_no: string | null
-      modified_employee_no: string | null
+      created_employee_no: bigint | null
+      modified_employee_no: bigint | null
       description: string | null
       po_number: string | null
       owner_name: string | null
@@ -2690,8 +2744,8 @@ export namespace Prisma {
     readonly longitude: FieldRef<"Site", 'Float'>
     readonly created_at: FieldRef<"Site", 'DateTime'>
     readonly updated_at: FieldRef<"Site", 'DateTime'>
-    readonly created_employee_no: FieldRef<"Site", 'String'>
-    readonly modified_employee_no: FieldRef<"Site", 'String'>
+    readonly created_employee_no: FieldRef<"Site", 'BigInt'>
+    readonly modified_employee_no: FieldRef<"Site", 'BigInt'>
     readonly description: FieldRef<"Site", 'String'>
     readonly po_number: FieldRef<"Site", 'String'>
     readonly owner_name: FieldRef<"Site", 'String'>
@@ -3089,6 +3143,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt[]'
+   */
+  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -3160,14 +3228,14 @@ export namespace Prisma {
     NOT?: ProjectWhereInput | ProjectWhereInput[]
     uuid?: UuidFilter<"Project"> | string
     cafeins_uuid?: StringNullableFilter<"Project"> | string | null
-    company_code?: StringNullableFilter<"Project"> | string | null
-    vendor_no?: StringNullableFilter<"Project"> | string | null
-    name?: StringNullableFilter<"Project"> | string | null
+    company_code?: BigIntFilter<"Project"> | bigint | number
+    vendor_no?: BigIntFilter<"Project"> | bigint | number
+    name?: StringFilter<"Project"> | string
     project_group_code?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
     updated_at?: DateTimeFilter<"Project"> | Date | string
-    created_employee_no?: StringNullableFilter<"Project"> | string | null
-    modified_employee_no?: StringNullableFilter<"Project"> | string | null
+    created_employee_no?: BigIntNullableFilter<"Project"> | bigint | number | null
+    modified_employee_no?: BigIntNullableFilter<"Project"> | bigint | number | null
     description?: StringNullableFilter<"Project"> | string | null
     po_number?: StringNullableFilter<"Project"> | string | null
     owner_name?: StringNullableFilter<"Project"> | string | null
@@ -3180,9 +3248,9 @@ export namespace Prisma {
   export type ProjectOrderByWithRelationInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrderInput | SortOrder
-    company_code?: SortOrderInput | SortOrder
-    vendor_no?: SortOrderInput | SortOrder
-    name?: SortOrderInput | SortOrder
+    company_code?: SortOrder
+    vendor_no?: SortOrder
+    name?: SortOrder
     project_group_code?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -3204,13 +3272,13 @@ export namespace Prisma {
     OR?: ProjectWhereInput[]
     NOT?: ProjectWhereInput | ProjectWhereInput[]
     cafeins_uuid?: StringNullableFilter<"Project"> | string | null
-    company_code?: StringNullableFilter<"Project"> | string | null
-    vendor_no?: StringNullableFilter<"Project"> | string | null
-    name?: StringNullableFilter<"Project"> | string | null
+    company_code?: BigIntFilter<"Project"> | bigint | number
+    vendor_no?: BigIntFilter<"Project"> | bigint | number
+    name?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
     updated_at?: DateTimeFilter<"Project"> | Date | string
-    created_employee_no?: StringNullableFilter<"Project"> | string | null
-    modified_employee_no?: StringNullableFilter<"Project"> | string | null
+    created_employee_no?: BigIntNullableFilter<"Project"> | bigint | number | null
+    modified_employee_no?: BigIntNullableFilter<"Project"> | bigint | number | null
     description?: StringNullableFilter<"Project"> | string | null
     po_number?: StringNullableFilter<"Project"> | string | null
     owner_name?: StringNullableFilter<"Project"> | string | null
@@ -3223,9 +3291,9 @@ export namespace Prisma {
   export type ProjectOrderByWithAggregationInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrderInput | SortOrder
-    company_code?: SortOrderInput | SortOrder
-    vendor_no?: SortOrderInput | SortOrder
-    name?: SortOrderInput | SortOrder
+    company_code?: SortOrder
+    vendor_no?: SortOrder
+    name?: SortOrder
     project_group_code?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -3239,8 +3307,10 @@ export namespace Prisma {
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
     _count?: ProjectCountOrderByAggregateInput
+    _avg?: ProjectAvgOrderByAggregateInput
     _max?: ProjectMaxOrderByAggregateInput
     _min?: ProjectMinOrderByAggregateInput
+    _sum?: ProjectSumOrderByAggregateInput
   }
 
   export type ProjectScalarWhereWithAggregatesInput = {
@@ -3249,14 +3319,14 @@ export namespace Prisma {
     NOT?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Project"> | string
     cafeins_uuid?: StringNullableWithAggregatesFilter<"Project"> | string | null
-    company_code?: StringNullableWithAggregatesFilter<"Project"> | string | null
-    vendor_no?: StringNullableWithAggregatesFilter<"Project"> | string | null
-    name?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    company_code?: BigIntWithAggregatesFilter<"Project"> | bigint | number
+    vendor_no?: BigIntWithAggregatesFilter<"Project"> | bigint | number
+    name?: StringWithAggregatesFilter<"Project"> | string
     project_group_code?: StringWithAggregatesFilter<"Project"> | string
     created_at?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-    created_employee_no?: StringNullableWithAggregatesFilter<"Project"> | string | null
-    modified_employee_no?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    created_employee_no?: BigIntNullableWithAggregatesFilter<"Project"> | bigint | number | null
+    modified_employee_no?: BigIntNullableWithAggregatesFilter<"Project"> | bigint | number | null
     description?: StringNullableWithAggregatesFilter<"Project"> | string | null
     po_number?: StringNullableWithAggregatesFilter<"Project"> | string | null
     owner_name?: StringNullableWithAggregatesFilter<"Project"> | string | null
@@ -3277,8 +3347,8 @@ export namespace Prisma {
     longitude?: FloatFilter<"Site"> | number
     created_at?: DateTimeFilter<"Site"> | Date | string
     updated_at?: DateTimeFilter<"Site"> | Date | string
-    created_employee_no?: StringNullableFilter<"Site"> | string | null
-    modified_employee_no?: StringNullableFilter<"Site"> | string | null
+    created_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
+    modified_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
     description?: StringNullableFilter<"Site"> | string | null
     po_number?: StringNullableFilter<"Site"> | string | null
     owner_name?: StringNullableFilter<"Site"> | string | null
@@ -3318,8 +3388,8 @@ export namespace Prisma {
     longitude?: FloatFilter<"Site"> | number
     created_at?: DateTimeFilter<"Site"> | Date | string
     updated_at?: DateTimeFilter<"Site"> | Date | string
-    created_employee_no?: StringNullableFilter<"Site"> | string | null
-    modified_employee_no?: StringNullableFilter<"Site"> | string | null
+    created_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
+    modified_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
     description?: StringNullableFilter<"Site"> | string | null
     po_number?: StringNullableFilter<"Site"> | string | null
     owner_name?: StringNullableFilter<"Site"> | string | null
@@ -3364,8 +3434,8 @@ export namespace Prisma {
     longitude?: FloatWithAggregatesFilter<"Site"> | number
     created_at?: DateTimeWithAggregatesFilter<"Site"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Site"> | Date | string
-    created_employee_no?: StringNullableWithAggregatesFilter<"Site"> | string | null
-    modified_employee_no?: StringNullableWithAggregatesFilter<"Site"> | string | null
+    created_employee_no?: BigIntNullableWithAggregatesFilter<"Site"> | bigint | number | null
+    modified_employee_no?: BigIntNullableWithAggregatesFilter<"Site"> | bigint | number | null
     description?: StringNullableWithAggregatesFilter<"Site"> | string | null
     po_number?: StringNullableWithAggregatesFilter<"Site"> | string | null
     owner_name?: StringNullableWithAggregatesFilter<"Site"> | string | null
@@ -3378,14 +3448,14 @@ export namespace Prisma {
   export type ProjectCreateInput = {
     uuid?: string
     cafeins_uuid?: string | null
-    company_code?: string | null
-    vendor_no?: string | null
-    name?: string | null
+    company_code: bigint | number
+    vendor_no: bigint | number
+    name: string
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
-    modified_employee_no?: string | null
+    created_employee_no?: bigint | number | null
+    modified_employee_no?: bigint | number | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -3398,14 +3468,14 @@ export namespace Prisma {
   export type ProjectUncheckedCreateInput = {
     uuid?: string
     cafeins_uuid?: string | null
-    company_code?: string | null
-    vendor_no?: string | null
-    name?: string | null
+    company_code: bigint | number
+    vendor_no: bigint | number
+    name: string
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
-    modified_employee_no?: string | null
+    created_employee_no?: bigint | number | null
+    modified_employee_no?: bigint | number | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -3418,14 +3488,14 @@ export namespace Prisma {
   export type ProjectUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    company_code?: NullableStringFieldUpdateOperationsInput | string | null
-    vendor_no?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: BigIntFieldUpdateOperationsInput | bigint | number
+    vendor_no?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3438,14 +3508,14 @@ export namespace Prisma {
   export type ProjectUncheckedUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    company_code?: NullableStringFieldUpdateOperationsInput | string | null
-    vendor_no?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: BigIntFieldUpdateOperationsInput | bigint | number
+    vendor_no?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3458,14 +3528,14 @@ export namespace Prisma {
   export type ProjectCreateManyInput = {
     uuid?: string
     cafeins_uuid?: string | null
-    company_code?: string | null
-    vendor_no?: string | null
-    name?: string | null
+    company_code: bigint | number
+    vendor_no: bigint | number
+    name: string
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
-    modified_employee_no?: string | null
+    created_employee_no?: bigint | number | null
+    modified_employee_no?: bigint | number | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -3478,14 +3548,14 @@ export namespace Prisma {
   export type ProjectUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    company_code?: NullableStringFieldUpdateOperationsInput | string | null
-    vendor_no?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: BigIntFieldUpdateOperationsInput | bigint | number
+    vendor_no?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3498,14 +3568,14 @@ export namespace Prisma {
   export type ProjectUncheckedUpdateManyInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
-    company_code?: NullableStringFieldUpdateOperationsInput | string | null
-    vendor_no?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: BigIntFieldUpdateOperationsInput | bigint | number
+    vendor_no?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3523,8 +3593,8 @@ export namespace Prisma {
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
-    modified_employee_no?: string | null
+    created_employee_no?: bigint | number | null
+    modified_employee_no?: bigint | number | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -3542,8 +3612,8 @@ export namespace Prisma {
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
-    modified_employee_no?: string | null
+    created_employee_no?: bigint | number | null
+    modified_employee_no?: bigint | number | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -3561,8 +3631,8 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3580,8 +3650,8 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3599,8 +3669,8 @@ export namespace Prisma {
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
-    modified_employee_no?: string | null
+    created_employee_no?: bigint | number | null
+    modified_employee_no?: bigint | number | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -3618,8 +3688,8 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3637,8 +3707,8 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3675,6 +3745,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3699,6 +3780,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type BigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
   export type EnumProjectStatusNullableFilter<$PrismaModel = never> = {
@@ -3749,6 +3841,13 @@ export namespace Prisma {
     is_migrated?: SortOrder
   }
 
+  export type ProjectAvgOrderByAggregateInput = {
+    company_code?: SortOrder
+    vendor_no?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+  }
+
   export type ProjectMaxOrderByAggregateInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
@@ -3789,6 +3888,13 @@ export namespace Prisma {
     is_migrated?: SortOrder
   }
 
+  export type ProjectSumOrderByAggregateInput = {
+    company_code?: SortOrder
+    vendor_no?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+  }
+
   export type UuidWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3822,6 +3928,22 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3852,6 +3974,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type EnumProjectStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -3919,6 +4057,8 @@ export namespace Prisma {
   export type SiteAvgOrderByAggregateInput = {
     latitude?: SortOrder
     longitude?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
   }
 
   export type SiteMaxOrderByAggregateInput = {
@@ -3962,6 +4102,8 @@ export namespace Prisma {
   export type SiteSumOrderByAggregateInput = {
     latitude?: SortOrder
     longitude?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -3988,8 +4130,24 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableBigIntFieldUpdateOperationsInput = {
+    set?: bigint | number | null
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
   }
 
   export type NullableEnumProjectStatusFieldUpdateOperationsInput = {
@@ -4037,6 +4195,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -4060,6 +4229,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
   export type NestedEnumProjectStatusNullableFilter<$PrismaModel = never> = {
@@ -4138,6 +4318,33 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -4167,6 +4374,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumProjectStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -4199,17 +4433,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
