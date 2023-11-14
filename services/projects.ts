@@ -1,6 +1,7 @@
 import type { Prisma } from '../prisma/cafeins/cafeins-client'
 import { getProjectsUnmigrated } from '../repositories/barista/projects'
 import { cafeinsClient } from '../utils/database'
+import { LogLevel, writeToLog } from './logs'
 
 export const syncProjects = async (): Promise<void> => {
   const projects = await getProjectsUnmigrated()
@@ -14,7 +15,12 @@ export const syncProjects = async (): Promise<void> => {
     })
 
     if (user == null) {
-      throw new Error(`User not found: ${project.created_employee_no}`)
+      await writeToLog(LogLevel.ERROR, 'user not found', {
+        employee_id: project.created_employee_no,
+        uuid: project.uuid,
+      })
+
+      throw new Error('user not found')
     }
 
     createProjects.push({
@@ -28,6 +34,8 @@ export const syncProjects = async (): Promise<void> => {
       created_user_id: user.id,
       modified_user_id: user.id,
       project_owner_id: user.id,
+      created_at: project.created_at,
+      updated_at: project.updated_at,
     })
   }
 
