@@ -1,3 +1,4 @@
+import type { PrismaClient } from '../prisma/barista/barista-client'
 import type { Prisma } from '../prisma/cafeins/cafeins-client'
 import { getProjectsUnmigrated } from '../repositories/barista/projects'
 import { baristaClient, cafeinsClient } from '../utils/database'
@@ -23,6 +24,7 @@ export const syncProjects = async (): Promise<void> => {
           uuid: project.uuid,
           name: project.name,
           code: project.project_group_code,
+          table: 'project',
         },
       )
 
@@ -55,16 +57,31 @@ export const syncProjects = async (): Promise<void> => {
 
     // mark data synchronized
     for (const project of projects) {
-      await baristaClient.project.update({
-        data: {
-          is_migrated: true,
-          last_read: new Date(),
-          status: 'CREATED',
-          cafeins_uuid: project.uuid,
-        },
-        where: {
-          uuid: project.uuid,
-        },
+      await baristaClient.$transaction(async (trx) => {
+        await trx.project.update({
+          data: {
+            is_migrated: true,
+            last_read: new Date(),
+            status: 'CREATED',
+            cafeins_uuid: project.uuid,
+          },
+          where: {
+            uuid: project.uuid,
+          },
+        })
+
+        await writeToLog(
+          LogLevel.INFO,
+          'project created in cafeins',
+          {
+            employee_no: project.created_employee_no,
+            uuid: project.uuid,
+            name: project.name,
+            code: project.project_group_code,
+            table: 'project',
+          },
+          trx as PrismaClient,
+        )
       })
     }
   })

@@ -36,13 +36,14 @@ export const syncSitePoint = async (): Promise<void> => {
 
         await writeToLog(
           LogLevel.INFO,
-          'nearest sitepoint found in cafein',
+          'nearest sitepoint found in cafeins',
           {
             employee_no: sitePoint.created_employee_no,
             uuid: sitePoint.uuid,
             name: sitePoint.name,
             site_group_code: sitePoint.site_group_code,
             cafein_uuid: nearestSitePoint[0].uuid,
+            table: 'sitepoint',
           },
           trx as PrismaClient,
         )
@@ -68,6 +69,7 @@ export const syncSitePoint = async (): Promise<void> => {
           uuid: sitePoint.uuid,
           name: sitePoint.name,
           site_group_code: sitePoint.site_group_code,
+          table: 'sitepoint',
         },
       )
 
@@ -88,6 +90,7 @@ export const syncSitePoint = async (): Promise<void> => {
           uuid: sitePoint.uuid,
           name: sitePoint.name,
           site_group_code: sitePoint.site_group_code,
+          table: 'sitepoint',
         },
       )
 
@@ -124,13 +127,14 @@ export const syncSitePoint = async (): Promise<void> => {
 
       await writeToLog(
         LogLevel.INFO,
-        'sitepoint created in cafein',
+        'sitepoint created in cafeins',
         {
           employee_no: sitePoint.created_employee_no,
           uuid: sitePoint.uuid,
           name: sitePoint.name,
           site_group_code: sitePoint.site_group_code,
           cafein_uuid: sitePoint.uuid,
+          table: 'sitepoint',
         },
         trx as PrismaClient,
       )
