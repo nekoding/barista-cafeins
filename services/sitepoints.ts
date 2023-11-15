@@ -43,7 +43,7 @@ export const syncSitePoint = async (): Promise<void> => {
             name: sitePoint.name,
             site_group_code: sitePoint.site_group_code,
             cafein_uuid: nearestSitePoint[0].uuid,
-            table: 'sitepoint',
+            table: 'site',
           },
           trx as PrismaClient,
         )
@@ -69,7 +69,7 @@ export const syncSitePoint = async (): Promise<void> => {
           uuid: sitePoint.uuid,
           name: sitePoint.name,
           site_group_code: sitePoint.site_group_code,
-          table: 'sitepoint',
+          table: 'site',
         },
       )
 
@@ -90,7 +90,7 @@ export const syncSitePoint = async (): Promise<void> => {
           uuid: sitePoint.uuid,
           name: sitePoint.name,
           site_group_code: sitePoint.site_group_code,
-          table: 'sitepoint',
+          table: 'site',
         },
       )
 
@@ -134,7 +134,7 @@ export const syncSitePoint = async (): Promise<void> => {
           name: sitePoint.name,
           site_group_code: sitePoint.site_group_code,
           cafein_uuid: sitePoint.uuid,
-          table: 'sitepoint',
+          table: 'site',
         },
         trx as PrismaClient,
       )

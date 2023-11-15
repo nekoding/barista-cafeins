@@ -24,7 +24,7 @@ export const syncProjects = async (): Promise<void> => {
           uuid: project.uuid,
           name: project.name,
           code: project.project_group_code,
-          table: 'project',
+          table: 'projects',
         },
       )
 
@@ -78,7 +78,7 @@ export const syncProjects = async (): Promise<void> => {
             uuid: project.uuid,
             name: project.name,
             code: project.project_group_code,
-            table: 'project',
+            table: 'projects',
           },
           trx as PrismaClient,
         )
