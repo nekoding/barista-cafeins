@@ -3,6 +3,7 @@ import { baristaClient } from '../../utils/database'
 
 export const getProjectsUnmigrated = async (
   limit: number = 100,
+  offset: number = 0,
 ): Promise<Project[]> => {
   return await baristaClient.project.findMany({
     where: {
@@ -10,5 +11,6 @@ export const getProjectsUnmigrated = async (
       status: null,
     },
     take: limit,
+    skip: offset,
   })
 }

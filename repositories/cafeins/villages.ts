@@ -1,12 +1,12 @@
 import type { villages } from '../../prisma/cafeins/cafeins-client'
 import { cafeinsClient } from '../../utils/database'
 
-export const findVilagesByCoords = async (
+export const getVilagesByCoords = async (
   lat: number,
   lng: number,
   limit: number = 1,
   offset: number = 0,
-): Promise<villages[] | null> => {
+): Promise<villages[] | []> => {
   return await cafeinsClient.$queryRaw<villages[]>`SELECT 
     v.id,
     v.name,

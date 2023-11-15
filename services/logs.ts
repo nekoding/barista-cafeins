@@ -1,3 +1,4 @@
+import type { PrismaClient } from '../prisma/barista/barista-client'
 import { baristaClient } from '../utils/database'
 
 export enum LogLevel {
@@ -10,8 +11,9 @@ export const writeToLog = async (
   level: LogLevel,
   message: string,
   meta?: object,
+  client: PrismaClient = baristaClient,
 ): Promise<void> => {
-  await baristaClient.log.create({
+  await client.log.create({
     data: {
       level,
       message,
