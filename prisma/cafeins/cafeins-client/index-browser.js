@@ -1,5 +1,4 @@
-
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, '__esModule', { value: true })
 
 const {
   Decimal,
@@ -8,7 +7,6 @@ const {
   Public,
   detectRuntime,
 } = require('./runtime/index-browser')
-
 
 const Prisma = {}
 
@@ -20,34 +18,34 @@ exports.$Enums = {}
  * Query Engine version: aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a
  */
 Prisma.prismaVersion = {
-  client: "5.5.2",
-  engine: "aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a"
+  client: '5.5.2',
+  engine: 'aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a',
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
   throw new Error(`PrismaClientKnownRequestError is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)};
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.PrismaClientUnknownRequestError = () => {
   throw new Error(`PrismaClientUnknownRequestError is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.PrismaClientRustPanicError = () => {
   throw new Error(`PrismaClientRustPanicError is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.PrismaClientInitializationError = () => {
   throw new Error(`PrismaClientInitializationError is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.PrismaClientValidationError = () => {
   throw new Error(`PrismaClientValidationError is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.NotFoundError = () => {
   throw new Error(`NotFoundError is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.Decimal = Decimal
 
 /**
@@ -55,33 +53,33 @@ Prisma.Decimal = Decimal
  */
 Prisma.sql = () => {
   throw new Error(`sqltag is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.empty = () => {
   throw new Error(`empty is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.join = () => {
   throw new Error(`join is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.raw = () => {
   throw new Error(`raw is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.validator = Public.validator
 
 /**
-* Extensions
-*/
+ * Extensions
+ */
 Prisma.getExtensionContext = () => {
   throw new Error(`Extensions.getExtensionContext is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 Prisma.defineExtension = () => {
   throw new Error(`Extensions.defineExtension is unable to be run ${runtimeDescription}.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
+In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`)
+}
 
 /**
  * Shorthand utilities for JSON filtering
@@ -93,7 +91,7 @@ Prisma.AnyNull = objectEnumValues.instances.AnyNull
 Prisma.NullTypes = {
   DbNull: objectEnumValues.classes.DbNull,
   JsonNull: objectEnumValues.classes.JsonNull,
-  AnyNull: objectEnumValues.classes.AnyNull
+  AnyNull: objectEnumValues.classes.AnyNull,
 }
 
 /**
@@ -104,8 +102,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
-  Serializable: 'Serializable'
-});
+  Serializable: 'Serializable',
+})
 
 exports.Prisma.CitiesScalarFieldEnum = {
   id: 'id',
@@ -118,8 +116,8 @@ exports.Prisma.CitiesScalarFieldEnum = {
   area_in_km: 'area_in_km',
   status: 'status',
   code: 'code',
-  province_code: 'province_code'
-};
+  province_code: 'province_code',
+}
 
 exports.Prisma.DistrictsScalarFieldEnum = {
   id: 'id',
@@ -132,8 +130,8 @@ exports.Prisma.DistrictsScalarFieldEnum = {
   area_in_ha: 'area_in_ha',
   area_in_km: 'area_in_km',
   code: 'code',
-  status: 'status'
-};
+  status: 'status',
+}
 
 exports.Prisma.ProvincesScalarFieldEnum = {
   id: 'id',
@@ -146,8 +144,8 @@ exports.Prisma.ProvincesScalarFieldEnum = {
   area_in_km: 'area_in_km',
   status: 'status',
   updated_at: 'updated_at',
-  created_at: 'created_at'
-};
+  created_at: 'created_at',
+}
 
 exports.Prisma.VillagesScalarFieldEnum = {
   id: 'id',
@@ -162,8 +160,8 @@ exports.Prisma.VillagesScalarFieldEnum = {
   status: 'status',
   code: 'code',
   old_village_id: 'old_village_id',
-  zip_code: 'zip_code'
-};
+  zip_code: 'zip_code',
+}
 
 exports.Prisma.Asset_categoriesScalarFieldEnum = {
   id: 'id',
@@ -187,8 +185,8 @@ exports.Prisma.Asset_categoriesScalarFieldEnum = {
   network_rule_uuid: 'network_rule_uuid',
   domain_rule_uuid: 'domain_rule_uuid',
   circuit_type_uuid: 'circuit_type_uuid',
-  terminate_type_uuid: 'terminate_type_uuid'
-};
+  terminate_type_uuid: 'terminate_type_uuid',
+}
 
 exports.Prisma.Asset_category_attachmentsScalarFieldEnum = {
   id: 'id',
@@ -202,8 +200,8 @@ exports.Prisma.Asset_category_attachmentsScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Asset_category_equipment_levelsScalarFieldEnum = {
   id: 'id',
@@ -217,8 +215,8 @@ exports.Prisma.Asset_category_equipment_levelsScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   asset_category_uuid: 'asset_category_uuid',
-  equipment_category_uuid: 'equipment_category_uuid'
-};
+  equipment_category_uuid: 'equipment_category_uuid',
+}
 
 exports.Prisma.Asset_group_attachmentsScalarFieldEnum = {
   id: 'id',
@@ -233,8 +231,8 @@ exports.Prisma.Asset_group_attachmentsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.Asset_groupsScalarFieldEnum = {
   id: 'id',
@@ -249,8 +247,8 @@ exports.Prisma.Asset_groupsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   code: 'code',
   uuid: 'uuid',
-  asset_category_uuid: 'asset_category_uuid'
-};
+  asset_category_uuid: 'asset_category_uuid',
+}
 
 exports.Prisma.AssetsScalarFieldEnum = {
   id: 'id',
@@ -272,8 +270,8 @@ exports.Prisma.AssetsScalarFieldEnum = {
   asset_group_uuid: 'asset_group_uuid',
   site_point_uuid: 'site_point_uuid',
   asset_ownership_uuid: 'asset_ownership_uuid',
-  area_ownership_uuid: 'area_ownership_uuid'
-};
+  area_ownership_uuid: 'area_ownership_uuid',
+}
 
 exports.Prisma.Equipment_categoriesScalarFieldEnum = {
   id: 'id',
@@ -288,8 +286,8 @@ exports.Prisma.Equipment_categoriesScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.EquipmentsScalarFieldEnum = {
   id: 'id',
@@ -304,8 +302,8 @@ exports.Prisma.EquipmentsScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
-  equipment_category_uuid: 'equipment_category_uuid'
-};
+  equipment_category_uuid: 'equipment_category_uuid',
+}
 
 exports.Prisma.Master_asset_group_itemsScalarFieldEnum = {
   id: 'id',
@@ -332,8 +330,8 @@ exports.Prisma.Master_asset_group_itemsScalarFieldEnum = {
   asset_group_uuid: 'asset_group_uuid',
   equipment_uuid: 'equipment_uuid',
   path_uuid: 'path_uuid',
-  port_type_uuid: 'port_type_uuid'
-};
+  port_type_uuid: 'port_type_uuid',
+}
 
 exports.Prisma.Port_categoriesScalarFieldEnum = {
   id: 'id',
@@ -344,8 +342,8 @@ exports.Prisma.Port_categoriesScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Port_typesScalarFieldEnum = {
   id: 'id',
@@ -359,8 +357,8 @@ exports.Prisma.Port_typesScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   port_category_id: 'port_category_id',
   uuid: 'uuid',
-  port_category_uuid: 'port_category_uuid'
-};
+  port_category_uuid: 'port_category_uuid',
+}
 
 exports.Prisma.Asset_recapsScalarFieldEnum = {
   id: 'id',
@@ -382,8 +380,8 @@ exports.Prisma.Asset_recapsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.BudgetsScalarFieldEnum = {
   id: 'id',
@@ -408,8 +406,8 @@ exports.Prisma.BudgetsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.Cable_recapsScalarFieldEnum = {
   id: 'id',
@@ -436,8 +434,8 @@ exports.Prisma.Cable_recapsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.Permit_item_recapsScalarFieldEnum = {
   id: 'id',
@@ -460,8 +458,8 @@ exports.Prisma.Permit_item_recapsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.Recap_mappingsScalarFieldEnum = {
   id: 'id',
@@ -473,8 +471,8 @@ exports.Prisma.Recap_mappingsScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-};
+  deleted_at: 'deleted_at',
+}
 
 exports.Prisma.Route_recapsScalarFieldEnum = {
   id: 'id',
@@ -498,8 +496,8 @@ exports.Prisma.Route_recapsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.Segment_retributionsScalarFieldEnum = {
   id: 'id',
@@ -519,8 +517,8 @@ exports.Prisma.Segment_retributionsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.Slack_support_recapsScalarFieldEnum = {
   id: 'id',
@@ -540,8 +538,8 @@ exports.Prisma.Slack_support_recapsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.Splice_core_recapsScalarFieldEnum = {
   id: 'id',
@@ -563,8 +561,8 @@ exports.Prisma.Splice_core_recapsScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.TimelinesScalarFieldEnum = {
   id: 'id',
@@ -585,8 +583,8 @@ exports.Prisma.TimelinesScalarFieldEnum = {
   deleted_at: 'deleted_at',
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id'
-};
+  deleted_user_id: 'deleted_user_id',
+}
 
 exports.Prisma.Cable_categoriesScalarFieldEnum = {
   id: 'id',
@@ -598,8 +596,8 @@ exports.Prisma.Cable_categoriesScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Cable_group_itemsScalarFieldEnum = {
   id: 'id',
@@ -620,8 +618,8 @@ exports.Prisma.Cable_group_itemsScalarFieldEnum = {
   cable_group_uuid: 'cable_group_uuid',
   component_category_uuid: 'component_category_uuid',
   transaction_status_uuid: 'transaction_status_uuid',
-  path_uuid: 'path_uuid'
-};
+  path_uuid: 'path_uuid',
+}
 
 exports.Prisma.Cable_groupsScalarFieldEnum = {
   id: 'id',
@@ -638,8 +636,8 @@ exports.Prisma.Cable_groupsScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
-  cable_category_uuid: 'cable_category_uuid'
-};
+  cable_category_uuid: 'cable_category_uuid',
+}
 
 exports.Prisma.Cable_historiesScalarFieldEnum = {
   id: 'id',
@@ -653,8 +651,8 @@ exports.Prisma.Cable_historiesScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   cable_uuid: 'cable_uuid',
-  parent_cable_uuid: 'parent_cable_uuid'
-};
+  parent_cable_uuid: 'parent_cable_uuid',
+}
 
 exports.Prisma.Cable_routesScalarFieldEnum = {
   id: 'id',
@@ -668,8 +666,8 @@ exports.Prisma.Cable_routesScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   cable_uuid: 'cable_uuid',
-  route_uuid: 'route_uuid'
-};
+  route_uuid: 'route_uuid',
+}
 
 exports.Prisma.CablesScalarFieldEnum = {
   id: 'id',
@@ -700,8 +698,8 @@ exports.Prisma.CablesScalarFieldEnum = {
   asset_ownership_uuid: 'asset_ownership_uuid',
   area_ownership_uuid: 'area_ownership_uuid',
   placement_type_uuid: 'placement_type_uuid',
-  function_uuid: 'function_uuid'
-};
+  function_uuid: 'function_uuid',
+}
 
 exports.Prisma.ColorsScalarFieldEnum = {
   id: 'id',
@@ -715,8 +713,8 @@ exports.Prisma.ColorsScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Component_categoriesScalarFieldEnum = {
   id: 'id',
@@ -728,8 +726,8 @@ exports.Prisma.Component_categoriesScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.SlacksScalarFieldEnum = {
   id: 'id',
@@ -744,8 +742,8 @@ exports.Prisma.SlacksScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   site_point_uuid: 'site_point_uuid',
-  cable_uuid: 'cable_uuid'
-};
+  cable_uuid: 'cable_uuid',
+}
 
 exports.Prisma.Application_parametersScalarFieldEnum = {
   id: 'id',
@@ -764,8 +762,8 @@ exports.Prisma.Application_parametersScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.AreasScalarFieldEnum = {
   id: 'id',
@@ -779,8 +777,8 @@ exports.Prisma.AreasScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
-  region_uuid: 'region_uuid'
-};
+  region_uuid: 'region_uuid',
+}
 
 exports.Prisma.Cluster_zipcodesScalarFieldEnum = {
   id: 'id',
@@ -797,8 +795,8 @@ exports.Prisma.Cluster_zipcodesScalarFieldEnum = {
   uuid: 'uuid',
   region_uuid: 'region_uuid',
   area_uuid: 'area_uuid',
-  cluster_uuid: 'cluster_uuid'
-};
+  cluster_uuid: 'cluster_uuid',
+}
 
 exports.Prisma.ClustersScalarFieldEnum = {
   id: 'id',
@@ -814,8 +812,8 @@ exports.Prisma.ClustersScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   region_uuid: 'region_uuid',
-  area_uuid: 'area_uuid'
-};
+  area_uuid: 'area_uuid',
+}
 
 exports.Prisma.CompaniesScalarFieldEnum = {
   id: 'id',
@@ -828,8 +826,8 @@ exports.Prisma.CompaniesScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   code: 'code',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Company_coveragesScalarFieldEnum = {
   id: 'id',
@@ -847,8 +845,8 @@ exports.Prisma.Company_coveragesScalarFieldEnum = {
   company_uuid: 'company_uuid',
   region_uuid: 'region_uuid',
   area_uuid: 'area_uuid',
-  cluster_uuid: 'cluster_uuid'
-};
+  cluster_uuid: 'cluster_uuid',
+}
 
 exports.Prisma.EmployeesScalarFieldEnum = {
   id: 'id',
@@ -873,8 +871,8 @@ exports.Prisma.EmployeesScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.MilestonesScalarFieldEnum = {
   id: 'id',
@@ -888,8 +886,8 @@ exports.Prisma.MilestonesScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Object_variablesScalarFieldEnum = {
   id: 'id',
@@ -908,8 +906,8 @@ exports.Prisma.Object_variablesScalarFieldEnum = {
   subject_uuid: 'subject_uuid',
   variable_type_uuid: 'variable_type_uuid',
   variable_uuid: 'variable_uuid',
-  option_uuid: 'option_uuid'
-};
+  option_uuid: 'option_uuid',
+}
 
 exports.Prisma.Option_itemsScalarFieldEnum = {
   id: 'id',
@@ -923,8 +921,8 @@ exports.Prisma.Option_itemsScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
-  option_uuid: 'option_uuid'
-};
+  option_uuid: 'option_uuid',
+}
 
 exports.Prisma.OptionsScalarFieldEnum = {
   id: 'id',
@@ -936,8 +934,8 @@ exports.Prisma.OptionsScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Project_assetsScalarFieldEnum = {
   id: 'id',
@@ -951,8 +949,8 @@ exports.Prisma.Project_assetsScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   project_uuid: 'project_uuid',
-  asset_uuid: 'asset_uuid'
-};
+  asset_uuid: 'asset_uuid',
+}
 
 exports.Prisma.Project_groupsScalarFieldEnum = {
   id: 'id',
@@ -965,8 +963,8 @@ exports.Prisma.Project_groupsScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Project_justificationsScalarFieldEnum = {
   id: 'id',
@@ -981,8 +979,8 @@ exports.Prisma.Project_justificationsScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
-  project_uuid: 'project_uuid'
-};
+  project_uuid: 'project_uuid',
+}
 
 exports.Prisma.Project_milestonesScalarFieldEnum = {
   id: 'id',
@@ -997,8 +995,8 @@ exports.Prisma.Project_milestonesScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   project_uuid: 'project_uuid',
-  milestone_uuid: 'milestone_uuid'
-};
+  milestone_uuid: 'milestone_uuid',
+}
 
 exports.Prisma.Project_sharesScalarFieldEnum = {
   id: 'id',
@@ -1016,8 +1014,8 @@ exports.Prisma.Project_sharesScalarFieldEnum = {
   project_uuid: 'project_uuid',
   milestone_uuid: 'milestone_uuid',
   user_type_uuid: 'user_type_uuid',
-  user_uuid: 'user_uuid'
-};
+  user_uuid: 'user_uuid',
+}
 
 exports.Prisma.ProjectsScalarFieldEnum = {
   id: 'id',
@@ -1049,8 +1047,8 @@ exports.Prisma.ProjectsScalarFieldEnum = {
   project_group_uuid: 'project_group_uuid',
   purpose_uuid: 'purpose_uuid',
   project_owner_uuid: 'project_owner_uuid',
-  milestone_uuid: 'milestone_uuid'
-};
+  milestone_uuid: 'milestone_uuid',
+}
 
 exports.Prisma.Purpose_milestonesScalarFieldEnum = {
   id: 'id',
@@ -1065,8 +1063,8 @@ exports.Prisma.Purpose_milestonesScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   purpose_uuid: 'purpose_uuid',
-  milestone_uuid: 'milestone_uuid'
-};
+  milestone_uuid: 'milestone_uuid',
+}
 
 exports.Prisma.PurposesScalarFieldEnum = {
   id: 'id',
@@ -1079,8 +1077,8 @@ exports.Prisma.PurposesScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.RegionsScalarFieldEnum = {
   id: 'id',
@@ -1092,14 +1090,14 @@ exports.Prisma.RegionsScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.TagsScalarFieldEnum = {
   id: 'id',
   tag: 'tag',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.User_companiesScalarFieldEnum = {
   id: 'id',
@@ -1114,8 +1112,8 @@ exports.Prisma.User_companiesScalarFieldEnum = {
   user_id: 'user_id',
   uuid: 'uuid',
   company_uuid: 'company_uuid',
-  user_uuid: 'user_uuid'
-};
+  user_uuid: 'user_uuid',
+}
 
 exports.Prisma.Variable_valuesScalarFieldEnum = {
   id: 'id',
@@ -1133,8 +1131,8 @@ exports.Prisma.Variable_valuesScalarFieldEnum = {
   uuid: 'uuid',
   subject_uuid: 'subject_uuid',
   variable_uuid: 'variable_uuid',
-  option_item_uuid: 'option_item_uuid'
-};
+  option_item_uuid: 'option_item_uuid',
+}
 
 exports.Prisma.VariablesScalarFieldEnum = {
   id: 'id',
@@ -1151,11 +1149,12 @@ exports.Prisma.VariablesScalarFieldEnum = {
   is_thumbnail: 'is_thumbnail',
   uuid: 'uuid',
   variable_type_uuid: 'variable_type_uuid',
-  option_uuid: 'option_uuid'
-};
+  option_uuid: 'option_uuid',
+}
 
 exports.Prisma.VendorsScalarFieldEnum = {
   id: 'id',
+  vendor_no: 'vendor_no',
   vendor_type_id: 'vendor_type_id',
   name: 'name',
   description: 'description',
@@ -1166,8 +1165,8 @@ exports.Prisma.VendorsScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
-  vendor_type_uuid: 'vendor_type_uuid'
-};
+  vendor_type_uuid: 'vendor_type_uuid',
+}
 
 exports.Prisma.AuditsScalarFieldEnum = {
   id: 'id',
@@ -1184,8 +1183,8 @@ exports.Prisma.AuditsScalarFieldEnum = {
   tags: 'tags',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-};
+  deleted_at: 'deleted_at',
+}
 
 exports.Prisma.Failed_jobsScalarFieldEnum = {
   id: 'id',
@@ -1194,8 +1193,8 @@ exports.Prisma.Failed_jobsScalarFieldEnum = {
   queue: 'queue',
   payload: 'payload',
   exception: 'exception',
-  failed_at: 'failed_at'
-};
+  failed_at: 'failed_at',
+}
 
 exports.Prisma.JobsScalarFieldEnum = {
   id: 'id',
@@ -1204,8 +1203,8 @@ exports.Prisma.JobsScalarFieldEnum = {
   attempts: 'attempts',
   reserved_at: 'reserved_at',
   available_at: 'available_at',
-  created_at: 'created_at'
-};
+  created_at: 'created_at',
+}
 
 exports.Prisma.MenusScalarFieldEnum = {
   id: 'id',
@@ -1224,40 +1223,40 @@ exports.Prisma.MenusScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   deleted_at: 'deleted_at',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.MigrationsScalarFieldEnum = {
   id: 'id',
   migration: 'migration',
-  batch: 'batch'
-};
+  batch: 'batch',
+}
 
 exports.Prisma.Model_has_permissionsScalarFieldEnum = {
   permission_id: 'permission_id',
   model_type: 'model_type',
-  model_id: 'model_id'
-};
+  model_id: 'model_id',
+}
 
 exports.Prisma.Model_has_rolesScalarFieldEnum = {
   role_id: 'role_id',
   model_type: 'model_type',
-  model_id: 'model_id'
-};
+  model_id: 'model_id',
+}
 
 exports.Prisma.Nodejs_migrationsScalarFieldEnum = {
   id: 'id',
   timestamp: 'timestamp',
   name: 'name',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Password_reset_tokensScalarFieldEnum = {
   email: 'email',
   token: 'token',
   created_at: 'created_at',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.PermissionsScalarFieldEnum = {
   id: 'id',
@@ -1268,8 +1267,8 @@ exports.Prisma.PermissionsScalarFieldEnum = {
   sub_module: 'sub_module',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Personal_access_tokensScalarFieldEnum = {
   id: 'id',
@@ -1282,8 +1281,8 @@ exports.Prisma.Personal_access_tokensScalarFieldEnum = {
   expires_at: 'expires_at',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Privilege_group_itemsScalarFieldEnum = {
   id: 'id',
@@ -1301,8 +1300,8 @@ exports.Prisma.Privilege_group_itemsScalarFieldEnum = {
   region_uuid: 'region_uuid',
   area_uuid: 'area_uuid',
   cluster_uuid: 'cluster_uuid',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Privilege_groupsScalarFieldEnum = {
   id: 'id',
@@ -1314,13 +1313,13 @@ exports.Prisma.Privilege_groupsScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Role_has_permissionsScalarFieldEnum = {
   permission_id: 'permission_id',
-  role_id: 'role_id'
-};
+  role_id: 'role_id',
+}
 
 exports.Prisma.RolesScalarFieldEnum = {
   id: 'id',
@@ -1338,16 +1337,16 @@ exports.Prisma.RolesScalarFieldEnum = {
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
   deleted_at: 'deleted_at',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Spatial_ref_sysScalarFieldEnum = {
   srid: 'srid',
   auth_name: 'auth_name',
   auth_srid: 'auth_srid',
   srtext: 'srtext',
-  proj4text: 'proj4text'
-};
+  proj4text: 'proj4text',
+}
 
 exports.Prisma.User_password_historiesScalarFieldEnum = {
   id: 'id',
@@ -1359,8 +1358,8 @@ exports.Prisma.User_password_historiesScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.UsersScalarFieldEnum = {
   id: 'id',
@@ -1390,8 +1389,8 @@ exports.Prisma.UsersScalarFieldEnum = {
   is_vendor_pic: 'is_vendor_pic',
   user_type_uuid: 'user_type_uuid',
   privilege_group_uuid: 'privilege_group_uuid',
-  vendor_uuid: 'vendor_uuid'
-};
+  vendor_uuid: 'vendor_uuid',
+}
 
 exports.Prisma.RoutesScalarFieldEnum = {
   created_at: 'created_at',
@@ -1408,8 +1407,8 @@ exports.Prisma.RoutesScalarFieldEnum = {
   uuid: 'uuid',
   site_category_uuid: 'site_category_uuid',
   site_from_uuid: 'site_from_uuid',
-  site_to_uuid: 'site_to_uuid'
-};
+  site_to_uuid: 'site_to_uuid',
+}
 
 exports.Prisma.Segment_routesScalarFieldEnum = {
   id: 'id',
@@ -1423,8 +1422,8 @@ exports.Prisma.Segment_routesScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   segment_uuid: 'segment_uuid',
-  route_uuid: 'route_uuid'
-};
+  route_uuid: 'route_uuid',
+}
 
 exports.Prisma.SegmentsScalarFieldEnum = {
   id: 'id',
@@ -1439,8 +1438,8 @@ exports.Prisma.SegmentsScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   uuid: 'uuid',
   site_from_uuid: 'site_from_uuid',
-  site_to_uuid: 'site_to_uuid'
-};
+  site_to_uuid: 'site_to_uuid',
+}
 
 exports.Prisma.Site_categoriesScalarFieldEnum = {
   created_at: 'created_at',
@@ -1451,8 +1450,8 @@ exports.Prisma.Site_categoriesScalarFieldEnum = {
   deleted_user_id: 'deleted_user_id',
   id: 'id',
   name: 'name',
-  uuid: 'uuid'
-};
+  uuid: 'uuid',
+}
 
 exports.Prisma.Site_pointsScalarFieldEnum = {
   created_at: 'created_at',
@@ -1468,8 +1467,8 @@ exports.Prisma.Site_pointsScalarFieldEnum = {
   longitude: 'longitude',
   site_category_id: 'site_category_id',
   uuid: 'uuid',
-  site_category_uuid: 'site_category_uuid'
-};
+  site_category_uuid: 'site_category_uuid',
+}
 
 exports.Prisma.LayerScalarFieldEnum = {
   topology_id: 'topology_id',
@@ -1479,43 +1478,42 @@ exports.Prisma.LayerScalarFieldEnum = {
   feature_column: 'feature_column',
   feature_type: 'feature_type',
   level: 'level',
-  child_id: 'child_id'
-};
+  child_id: 'child_id',
+}
 
 exports.Prisma.TopologyScalarFieldEnum = {
   id: 'id',
   name: 'name',
   srid: 'srid',
   precision: 'precision',
-  hasz: 'hasz'
-};
+  hasz: 'hasz',
+}
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
-  desc: 'desc'
-};
+  desc: 'desc',
+}
 
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull
-};
+  JsonNull: Prisma.JsonNull,
+}
 
 exports.Prisma.QueryMode = {
   default: 'default',
-  insensitive: 'insensitive'
-};
+  insensitive: 'insensitive',
+}
 
 exports.Prisma.NullsOrder = {
   first: 'first',
-  last: 'last'
-};
+  last: 'last',
+}
 
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
-};
-
+  AnyNull: Prisma.AnyNull,
+}
 
 exports.Prisma.ModelName = {
   cities: 'cities',
@@ -1601,8 +1599,8 @@ exports.Prisma.ModelName = {
   site_categories: 'site_categories',
   site_points: 'site_points',
   layer: 'layer',
-  topology: 'topology'
-};
+  topology: 'topology',
+}
 
 /**
  * This is a stub Prisma Client that will error at runtime if called.
@@ -1613,24 +1611,29 @@ class PrismaClient {
       get(target, prop) {
         const runtime = detectRuntime()
         const edgeRuntimeName = {
-          'workerd': 'Cloudflare Workers',
-          'deno': 'Deno and Deno Deploy',
-          'netlify': 'Netlify Edge Functions',
+          workerd: 'Cloudflare Workers',
+          deno: 'Deno and Deno Deploy',
+          netlify: 'Netlify Edge Functions',
           'edge-light': 'Vercel Edge Functions',
         }[runtime]
 
         let message = 'PrismaClient is unable to run in '
         if (edgeRuntimeName !== undefined) {
-          message += edgeRuntimeName + '. As an alternative, try Accelerate: https://pris.ly/d/accelerate.'
+          message +=
+            edgeRuntimeName +
+            '. As an alternative, try Accelerate: https://pris.ly/d/accelerate.'
         } else {
-          message += 'this browser environment, or has been bundled for the browser (running in `' + runtime + '`).'
+          message +=
+            'this browser environment, or has been bundled for the browser (running in `' +
+            runtime +
+            '`).'
         }
-        
+
         message += `
 If this is unexpected, please open an issue: https://github.com/prisma/prisma/issues`
 
         throw new Error(message)
-      }
+      },
     })
   }
 }

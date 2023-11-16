@@ -22,8 +22,8 @@ enum MIGRATION_STATUS {
 model Project {
   uuid                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   cafeins_uuid         String?
-  company_code         BigInt
-  vendor_no            BigInt
+  company_code         String
+  vendor_no            String
   name                 String
   project_group_code   String            @unique
   created_at           DateTime          @default(now())

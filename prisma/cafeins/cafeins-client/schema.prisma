@@ -1353,6 +1353,7 @@ model variables {
 
 model vendors {
   id                     BigInt                 @id @default(autoincrement())
+  vendor_no              String?                @db.VarChar(255)
   vendor_type_id         BigInt
   name                   String
   description            String?

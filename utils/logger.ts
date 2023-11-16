@@ -1,6 +1,20 @@
 import { createLogger, format, transports } from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'
 
+const loggerTransports =
+  process.env.NODE_ENV?.toLocaleLowerCase() === 'debug'
+    ? [
+        new transports.Console(),
+        new DailyRotateFile({
+          filename: 'logs/%DATE%.log',
+        }),
+      ]
+    : [
+        new DailyRotateFile({
+          filename: 'logs/%DATE%.log',
+        }),
+      ]
+
 // setup logger
 export const logger = createLogger({
   format: format.combine(
@@ -9,10 +23,5 @@ export const logger = createLogger({
       (info) => `[${info.timestamp}] [${info.level}] ${info.message}`,
     ),
   ),
-  transports: [
-    new transports.Console(),
-    new DailyRotateFile({
-      filename: 'logs/%DATE%.log',
-    }),
-  ],
+  transports: loggerTransports,
 })
