@@ -9,10 +9,12 @@ import { getProjectByUuid } from '../repositories/cafeins/projects'
 import { getSitePointByUuid } from '../repositories/cafeins/sitepoints'
 import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import { baristaClient, cafeinsClient } from '../utils/database'
+import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
 
 export const syncAssets = async (): Promise<void> => {
   try {
+    logger.info('sync assets start')
     const assets = await getAssetsUnmigrated()
     for (const asset of assets) {
       try {
@@ -93,6 +95,8 @@ export const syncAssets = async (): Promise<void> => {
         throw error
       }
     }
+
+    logger.info('sync assets success')
   } catch (error: any) {
     await writeToLog(
       LogLevel.ERROR,

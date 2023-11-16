@@ -12,6 +12,7 @@ import { LogLevel, writeToLog } from './logs'
 
 export const syncSitePoint = async (): Promise<void> => {
   try {
+    logger.info('sync sitepoint start')
     const sitePoints = await getSitePointUnmigrated()
 
     for (const sitePoint of sitePoints) {
@@ -116,6 +117,8 @@ export const syncSitePoint = async (): Promise<void> => {
         throw error
       }
     }
+
+    logger.info('sync sitepoint end')
   } catch (error: any) {
     await writeToLog(
       LogLevel.ERROR,

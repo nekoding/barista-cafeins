@@ -1,4 +1,4 @@
-import type { PrismaClient } from '../prisma/barista/barista-client'
+import type { PrismaClient, Project } from '../prisma/barista/barista-client'
 import type { PrismaClient as CafeinsPrismaClient } from '../prisma/cafeins/cafeins-client'
 import { getProjectsUnmigrated } from '../repositories/barista/projects'
 import { getCompanyByCode } from '../repositories/cafeins/companies'
@@ -6,44 +6,18 @@ import { createProjects } from '../repositories/cafeins/projects'
 import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import { getVendorByVendorNo } from '../repositories/cafeins/vendors'
 import { baristaClient, cafeinsClient } from '../utils/database'
+import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
 
 export const syncProjects = async (): Promise<void> => {
   try {
+    logger.info('sync projects start')
     const projects = await getProjectsUnmigrated()
 
     for (const project of projects) {
       try {
-        // validation created_employee_no and project owner
-        if (project.created_employee_no == null || project.owner_nik == null) {
-          throw new Error('project creator not found cannot migrate data')
-        }
-
-        // validation project creator
-        const projectCreator = await getUserByEmployeeNo(
-          project.created_employee_no,
-        )
-        if (projectCreator == null) {
-          throw new Error('project creator not found cannot migrate data')
-        }
-
-        // validation project owner
-        const projectOwner = await getUserByEmployeeNo(project.owner_nik)
-        if (projectOwner == null) {
-          throw new Error('project owner not found cannot migrate data')
-        }
-
-        // validation company_code
-        const projectCompany = await getCompanyByCode(project.company_code)
-        if (projectCompany == null) {
-          throw new Error('project company not found cannot migrate data')
-        }
-
-        // validation vendor_no
-        const projectVendor = await getVendorByVendorNo(project.vendor_no)
-        if (projectVendor == null) {
-          throw new Error('project vendor not found cannot migrate data')
-        }
+        const [projectCreator, projectOwner, projectCompany, projectVendor] =
+          await prepareData(project)
 
         const projectGroupId = parseInt(
           process.env.PROJECT_PROJECT_GROUP_ID ?? '1',
@@ -105,6 +79,8 @@ export const syncProjects = async (): Promise<void> => {
         throw error
       }
     }
+
+    logger.info('sync projects success')
   } catch (error: any) {
     await writeToLog(
       LogLevel.ERROR,
@@ -114,4 +90,41 @@ export const syncProjects = async (): Promise<void> => {
 
     throw new Error(error.message.replace(/\n/g, ''))
   }
+}
+
+const prepareData = async (project: Project): Promise<any> => {
+  // validation created_employee_no and project owner
+  if (project.created_employee_no == null || project.owner_nik == null) {
+    throw new Error('project creator not found cannot migrate data')
+  }
+
+  const [projectCreator, projectOwner, projectCompany, projectVendor] =
+    await Promise.all([
+      getUserByEmployeeNo(project.created_employee_no),
+      getUserByEmployeeNo(project.owner_nik),
+      getCompanyByCode(project.company_code),
+      getVendorByVendorNo(project.vendor_no),
+    ])
+
+  // validation project creator
+  if (projectCreator == null) {
+    throw new Error('project creator not found cannot migrate data')
+  }
+
+  // validation project owner
+  if (projectOwner == null) {
+    throw new Error('project owner not found cannot migrate data')
+  }
+
+  // validation company_code
+  if (projectCompany == null) {
+    throw new Error('project company not found cannot migrate data')
+  }
+
+  // validation vendor_no
+  if (projectVendor == null) {
+    throw new Error('project vendor not found cannot migrate data')
+  }
+
+  return [projectCreator, projectOwner, projectCompany, projectVendor]
 }
