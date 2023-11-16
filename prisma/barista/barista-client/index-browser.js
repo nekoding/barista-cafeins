@@ -125,7 +125,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
   is_migrated: 'is_migrated',
 }
 
-exports.Prisma.SiteScalarFieldEnum = {
+exports.Prisma.SitePointScalarFieldEnum = {
   uuid: 'uuid',
   cafeins_uuid: 'cafeins_uuid',
   name: 'name',
@@ -183,7 +183,7 @@ exports.MIGRATION_STATUS = exports.$Enums.MIGRATION_STATUS = {
 
 exports.Prisma.ModelName = {
   Project: 'Project',
-  Site: 'Site',
+  SitePoint: 'SitePoint',
   Log: 'Log',
 }
 

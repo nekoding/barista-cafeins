@@ -949,7 +949,7 @@ model company_coverages {
 
 model employees {
   id                      BigInt    @id @default(autoincrement())
-  t_employee_id           BigInt
+  t_employee_id           BigInt    @unique
   employee_name           String    @db.VarChar(255)
   employee_no             String    @db.VarChar(255)
   employee_initial        String    @db.VarChar(255)
@@ -971,6 +971,7 @@ model employees {
   modified_user_id        BigInt    @default(1)
   deleted_user_id         BigInt?
   uuid                    String?   @unique(map: "master_employees_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  users                   users[]
 
   @@schema("master")
 }
@@ -1667,6 +1668,7 @@ model users {
   user_companies            user_companies[]
   user_password_histories   user_password_histories[]
   vendors                   vendors?                  @relation(fields: [vendor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_vendor_id_foreign")
+  employees                 employees?                @relation(fields: [t_employee_id], references: [t_employee_id], onDelete: NoAction, onUpdate: NoAction, map: "users_t_employee_id_foreign")
 
   @@schema("public")
 }

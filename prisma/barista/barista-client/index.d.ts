@@ -19,10 +19,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Project = $Result.DefaultSelection<Prisma.$ProjectPayload>
 /**
- * Model Site
+ * Model SitePoint
  * 
  */
-export type Site = $Result.DefaultSelection<Prisma.$SitePayload>
+export type SitePoint = $Result.DefaultSelection<Prisma.$SitePointPayload>
 /**
  * Model Log
  * 
@@ -179,14 +179,14 @@ export class PrismaClient<
   get project(): Prisma.ProjectDelegate<ExtArgs>;
 
   /**
-   * `prisma.site`: Exposes CRUD operations for the **Site** model.
+   * `prisma.sitePoint`: Exposes CRUD operations for the **SitePoint** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Sites
-    * const sites = await prisma.site.findMany()
+    * // Fetch zero or more SitePoints
+    * const sitePoints = await prisma.sitePoint.findMany()
     * ```
     */
-  get site(): Prisma.SiteDelegate<ExtArgs>;
+  get sitePoint(): Prisma.SitePointDelegate<ExtArgs>;
 
   /**
    * `prisma.log`: Exposes CRUD operations for the **Log** model.
@@ -668,7 +668,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Project: 'Project',
-    Site: 'Site',
+    SitePoint: 'SitePoint',
     Log: 'Log'
   };
 
@@ -686,7 +686,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'project' | 'site' | 'log'
+      modelProps: 'project' | 'sitePoint' | 'log'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -756,69 +756,69 @@ export namespace Prisma {
           }
         }
       }
-      Site: {
-        payload: Prisma.$SitePayload<ExtArgs>
-        fields: Prisma.SiteFieldRefs
+      SitePoint: {
+        payload: Prisma.$SitePointPayload<ExtArgs>
+        fields: Prisma.SitePointFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.SiteFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload> | null
+            args: Prisma.SitePointFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.SiteFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload>
+            args: Prisma.SitePointFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload>
           }
           findFirst: {
-            args: Prisma.SiteFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload> | null
+            args: Prisma.SitePointFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.SiteFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload>
+            args: Prisma.SitePointFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload>
           }
           findMany: {
-            args: Prisma.SiteFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload>[]
+            args: Prisma.SitePointFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload>[]
           }
           create: {
-            args: Prisma.SiteCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload>
+            args: Prisma.SitePointCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload>
           }
           createMany: {
-            args: Prisma.SiteCreateManyArgs<ExtArgs>,
+            args: Prisma.SitePointCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.SiteDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload>
+            args: Prisma.SitePointDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload>
           }
           update: {
-            args: Prisma.SiteUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload>
+            args: Prisma.SitePointUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload>
           }
           deleteMany: {
-            args: Prisma.SiteDeleteManyArgs<ExtArgs>,
+            args: Prisma.SitePointDeleteManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.SiteUpdateManyArgs<ExtArgs>,
+            args: Prisma.SitePointUpdateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.SiteUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SitePayload>
+            args: Prisma.SitePointUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SitePointPayload>
           }
           aggregate: {
-            args: Prisma.SiteAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateSite>
+            args: Prisma.SitePointAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateSitePoint>
           }
           groupBy: {
-            args: Prisma.SiteGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<SiteGroupByOutputType>[]
+            args: Prisma.SitePointGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<SitePointGroupByOutputType>[]
           }
           count: {
-            args: Prisma.SiteCountArgs<ExtArgs>,
-            result: $Utils.Optional<SiteCountAggregateOutputType> | number
+            args: Prisma.SitePointCountArgs<ExtArgs>,
+            result: $Utils.Optional<SitePointCountAggregateOutputType> | number
           }
         }
       }
@@ -1052,15 +1052,11 @@ export namespace Prisma {
   export type ProjectAvgAggregateOutputType = {
     company_code: number | null
     vendor_no: number | null
-    created_employee_no: number | null
-    modified_employee_no: number | null
   }
 
   export type ProjectSumAggregateOutputType = {
     company_code: bigint | null
     vendor_no: bigint | null
-    created_employee_no: bigint | null
-    modified_employee_no: bigint | null
   }
 
   export type ProjectMinAggregateOutputType = {
@@ -1072,8 +1068,8 @@ export namespace Prisma {
     project_group_code: string | null
     created_at: Date | null
     updated_at: Date | null
-    created_employee_no: bigint | null
-    modified_employee_no: bigint | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -1092,8 +1088,8 @@ export namespace Prisma {
     project_group_code: string | null
     created_at: Date | null
     updated_at: Date | null
-    created_employee_no: bigint | null
-    modified_employee_no: bigint | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -1128,15 +1124,11 @@ export namespace Prisma {
   export type ProjectAvgAggregateInputType = {
     company_code?: true
     vendor_no?: true
-    created_employee_no?: true
-    modified_employee_no?: true
   }
 
   export type ProjectSumAggregateInputType = {
     company_code?: true
     vendor_no?: true
-    created_employee_no?: true
-    modified_employee_no?: true
   }
 
   export type ProjectMinAggregateInputType = {
@@ -1295,8 +1287,8 @@ export namespace Prisma {
     project_group_code: string
     created_at: Date
     updated_at: Date
-    created_employee_no: bigint | null
-    modified_employee_no: bigint | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
     description: string | null
     po_number: string | null
     owner_name: string | null
@@ -1378,8 +1370,8 @@ export namespace Prisma {
       project_group_code: string
       created_at: Date
       updated_at: Date
-      created_employee_no: bigint | null
-      modified_employee_no: bigint | null
+      created_employee_no: string | null
+      modified_employee_no: string | null
       description: string | null
       po_number: string | null
       owner_name: string | null
@@ -1789,8 +1781,8 @@ export namespace Prisma {
     readonly project_group_code: FieldRef<"Project", 'String'>
     readonly created_at: FieldRef<"Project", 'DateTime'>
     readonly updated_at: FieldRef<"Project", 'DateTime'>
-    readonly created_employee_no: FieldRef<"Project", 'BigInt'>
-    readonly modified_employee_no: FieldRef<"Project", 'BigInt'>
+    readonly created_employee_no: FieldRef<"Project", 'String'>
+    readonly modified_employee_no: FieldRef<"Project", 'String'>
     readonly description: FieldRef<"Project", 'String'>
     readonly po_number: FieldRef<"Project", 'String'>
     readonly owner_name: FieldRef<"Project", 'String'>
@@ -2086,32 +2078,28 @@ export namespace Prisma {
 
 
   /**
-   * Model Site
+   * Model SitePoint
    */
 
-  export type AggregateSite = {
-    _count: SiteCountAggregateOutputType | null
-    _avg: SiteAvgAggregateOutputType | null
-    _sum: SiteSumAggregateOutputType | null
-    _min: SiteMinAggregateOutputType | null
-    _max: SiteMaxAggregateOutputType | null
+  export type AggregateSitePoint = {
+    _count: SitePointCountAggregateOutputType | null
+    _avg: SitePointAvgAggregateOutputType | null
+    _sum: SitePointSumAggregateOutputType | null
+    _min: SitePointMinAggregateOutputType | null
+    _max: SitePointMaxAggregateOutputType | null
   }
 
-  export type SiteAvgAggregateOutputType = {
+  export type SitePointAvgAggregateOutputType = {
     latitude: number | null
     longitude: number | null
-    created_employee_no: number | null
-    modified_employee_no: number | null
   }
 
-  export type SiteSumAggregateOutputType = {
+  export type SitePointSumAggregateOutputType = {
     latitude: number | null
     longitude: number | null
-    created_employee_no: bigint | null
-    modified_employee_no: bigint | null
   }
 
-  export type SiteMinAggregateOutputType = {
+  export type SitePointMinAggregateOutputType = {
     uuid: string | null
     cafeins_uuid: string | null
     name: string | null
@@ -2120,14 +2108,14 @@ export namespace Prisma {
     longitude: number | null
     created_at: Date | null
     updated_at: Date | null
-    created_employee_no: bigint | null
-    modified_employee_no: bigint | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
     status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean | null
   }
 
-  export type SiteMaxAggregateOutputType = {
+  export type SitePointMaxAggregateOutputType = {
     uuid: string | null
     cafeins_uuid: string | null
     name: string | null
@@ -2136,14 +2124,14 @@ export namespace Prisma {
     longitude: number | null
     created_at: Date | null
     updated_at: Date | null
-    created_employee_no: bigint | null
-    modified_employee_no: bigint | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
     status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean | null
   }
 
-  export type SiteCountAggregateOutputType = {
+  export type SitePointCountAggregateOutputType = {
     uuid: number
     cafeins_uuid: number
     name: number
@@ -2161,21 +2149,17 @@ export namespace Prisma {
   }
 
 
-  export type SiteAvgAggregateInputType = {
+  export type SitePointAvgAggregateInputType = {
     latitude?: true
     longitude?: true
-    created_employee_no?: true
-    modified_employee_no?: true
   }
 
-  export type SiteSumAggregateInputType = {
+  export type SitePointSumAggregateInputType = {
     latitude?: true
     longitude?: true
-    created_employee_no?: true
-    modified_employee_no?: true
   }
 
-  export type SiteMinAggregateInputType = {
+  export type SitePointMinAggregateInputType = {
     uuid?: true
     cafeins_uuid?: true
     name?: true
@@ -2191,7 +2175,7 @@ export namespace Prisma {
     is_migrated?: true
   }
 
-  export type SiteMaxAggregateInputType = {
+  export type SitePointMaxAggregateInputType = {
     uuid?: true
     cafeins_uuid?: true
     name?: true
@@ -2207,7 +2191,7 @@ export namespace Prisma {
     is_migrated?: true
   }
 
-  export type SiteCountAggregateInputType = {
+  export type SitePointCountAggregateInputType = {
     uuid?: true
     cafeins_uuid?: true
     name?: true
@@ -2224,93 +2208,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type SiteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Site to aggregate.
+     * Filter which SitePoint to aggregate.
      */
-    where?: SiteWhereInput
+    where?: SitePointWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Sites to fetch.
+     * Determine the order of SitePoints to fetch.
      */
-    orderBy?: SiteOrderByWithRelationInput | SiteOrderByWithRelationInput[]
+    orderBy?: SitePointOrderByWithRelationInput | SitePointOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: SiteWhereUniqueInput
+    cursor?: SitePointWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Sites from the position of the cursor.
+     * Take `±n` SitePoints from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Sites.
+     * Skip the first `n` SitePoints.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Sites
+     * Count returned SitePoints
     **/
-    _count?: true | SiteCountAggregateInputType
+    _count?: true | SitePointCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: SiteAvgAggregateInputType
+    _avg?: SitePointAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: SiteSumAggregateInputType
+    _sum?: SitePointSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: SiteMinAggregateInputType
+    _min?: SitePointMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: SiteMaxAggregateInputType
+    _max?: SitePointMaxAggregateInputType
   }
 
-  export type GetSiteAggregateType<T extends SiteAggregateArgs> = {
-        [P in keyof T & keyof AggregateSite]: P extends '_count' | 'count'
+  export type GetSitePointAggregateType<T extends SitePointAggregateArgs> = {
+        [P in keyof T & keyof AggregateSitePoint]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateSite[P]>
-      : GetScalarType<T[P], AggregateSite[P]>
+        : GetScalarType<T[P], AggregateSitePoint[P]>
+      : GetScalarType<T[P], AggregateSitePoint[P]>
   }
 
 
 
 
-  export type SiteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SiteWhereInput
-    orderBy?: SiteOrderByWithAggregationInput | SiteOrderByWithAggregationInput[]
-    by: SiteScalarFieldEnum[] | SiteScalarFieldEnum
-    having?: SiteScalarWhereWithAggregatesInput
+  export type SitePointGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SitePointWhereInput
+    orderBy?: SitePointOrderByWithAggregationInput | SitePointOrderByWithAggregationInput[]
+    by: SitePointScalarFieldEnum[] | SitePointScalarFieldEnum
+    having?: SitePointScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: SiteCountAggregateInputType | true
-    _avg?: SiteAvgAggregateInputType
-    _sum?: SiteSumAggregateInputType
-    _min?: SiteMinAggregateInputType
-    _max?: SiteMaxAggregateInputType
+    _count?: SitePointCountAggregateInputType | true
+    _avg?: SitePointAvgAggregateInputType
+    _sum?: SitePointSumAggregateInputType
+    _min?: SitePointMinAggregateInputType
+    _max?: SitePointMaxAggregateInputType
   }
 
-  export type SiteGroupByOutputType = {
+  export type SitePointGroupByOutputType = {
     uuid: string
     cafeins_uuid: string | null
     name: string
@@ -2319,33 +2303,33 @@ export namespace Prisma {
     longitude: number
     created_at: Date
     updated_at: Date
-    created_employee_no: bigint | null
-    modified_employee_no: bigint | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
     status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean
-    _count: SiteCountAggregateOutputType | null
-    _avg: SiteAvgAggregateOutputType | null
-    _sum: SiteSumAggregateOutputType | null
-    _min: SiteMinAggregateOutputType | null
-    _max: SiteMaxAggregateOutputType | null
+    _count: SitePointCountAggregateOutputType | null
+    _avg: SitePointAvgAggregateOutputType | null
+    _sum: SitePointSumAggregateOutputType | null
+    _min: SitePointMinAggregateOutputType | null
+    _max: SitePointMaxAggregateOutputType | null
   }
 
-  type GetSiteGroupByPayload<T extends SiteGroupByArgs> = Prisma.PrismaPromise<
+  type GetSitePointGroupByPayload<T extends SitePointGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SiteGroupByOutputType, T['by']> &
+      PickEnumerable<SitePointGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof SiteGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof SitePointGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], SiteGroupByOutputType[P]>
-            : GetScalarType<T[P], SiteGroupByOutputType[P]>
+              : GetScalarType<T[P], SitePointGroupByOutputType[P]>
+            : GetScalarType<T[P], SitePointGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type SiteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type SitePointSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     uuid?: boolean
     cafeins_uuid?: boolean
     name?: boolean
@@ -2359,9 +2343,9 @@ export namespace Prisma {
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
-  }, ExtArgs["result"]["site"]>
+  }, ExtArgs["result"]["sitePoint"]>
 
-  export type SiteSelectScalar = {
+  export type SitePointSelectScalar = {
     uuid?: boolean
     cafeins_uuid?: boolean
     name?: boolean
@@ -2378,8 +2362,8 @@ export namespace Prisma {
   }
 
 
-  export type $SitePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Site"
+  export type $SitePointPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SitePoint"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
@@ -2390,165 +2374,165 @@ export namespace Prisma {
       longitude: number
       created_at: Date
       updated_at: Date
-      created_employee_no: bigint | null
-      modified_employee_no: bigint | null
+      created_employee_no: string | null
+      modified_employee_no: string | null
       status: $Enums.MIGRATION_STATUS | null
       last_read: Date | null
       is_migrated: boolean
-    }, ExtArgs["result"]["site"]>
+    }, ExtArgs["result"]["sitePoint"]>
     composites: {}
   }
 
 
-  type SiteGetPayload<S extends boolean | null | undefined | SiteDefaultArgs> = $Result.GetResult<Prisma.$SitePayload, S>
+  type SitePointGetPayload<S extends boolean | null | undefined | SitePointDefaultArgs> = $Result.GetResult<Prisma.$SitePointPayload, S>
 
-  type SiteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<SiteFindManyArgs, 'select' | 'include' | 'distinct' > & {
-      select?: SiteCountAggregateInputType | true
+  type SitePointCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SitePointFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: SitePointCountAggregateInputType | true
     }
 
-  export interface SiteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Site'], meta: { name: 'Site' } }
+  export interface SitePointDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SitePoint'], meta: { name: 'SitePoint' } }
     /**
-     * Find zero or one Site that matches the filter.
-     * @param {SiteFindUniqueArgs} args - Arguments to find a Site
+     * Find zero or one SitePoint that matches the filter.
+     * @param {SitePointFindUniqueArgs} args - Arguments to find a SitePoint
      * @example
-     * // Get one Site
-     * const site = await prisma.site.findUnique({
+     * // Get one SitePoint
+     * const sitePoint = await prisma.sitePoint.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends SiteFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, SiteFindUniqueArgs<ExtArgs>>
-    ): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    findUnique<T extends SitePointFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, SitePointFindUniqueArgs<ExtArgs>>
+    ): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Site that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one SitePoint that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {SiteFindUniqueOrThrowArgs} args - Arguments to find a Site
+     * @param {SitePointFindUniqueOrThrowArgs} args - Arguments to find a SitePoint
      * @example
-     * // Get one Site
-     * const site = await prisma.site.findUniqueOrThrow({
+     * // Get one SitePoint
+     * const sitePoint = await prisma.sitePoint.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends SiteFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, SiteFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    findUniqueOrThrow<T extends SitePointFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SitePointFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
-     * Find the first Site that matches the filter.
+     * Find the first SitePoint that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SiteFindFirstArgs} args - Arguments to find a Site
+     * @param {SitePointFindFirstArgs} args - Arguments to find a SitePoint
      * @example
-     * // Get one Site
-     * const site = await prisma.site.findFirst({
+     * // Get one SitePoint
+     * const sitePoint = await prisma.sitePoint.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends SiteFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, SiteFindFirstArgs<ExtArgs>>
-    ): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    findFirst<T extends SitePointFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, SitePointFindFirstArgs<ExtArgs>>
+    ): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
-     * Find the first Site that matches the filter or
+     * Find the first SitePoint that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SiteFindFirstOrThrowArgs} args - Arguments to find a Site
+     * @param {SitePointFindFirstOrThrowArgs} args - Arguments to find a SitePoint
      * @example
-     * // Get one Site
-     * const site = await prisma.site.findFirstOrThrow({
+     * // Get one SitePoint
+     * const sitePoint = await prisma.sitePoint.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends SiteFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, SiteFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    findFirstOrThrow<T extends SitePointFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SitePointFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
-     * Find zero or more Sites that matches the filter.
+     * Find zero or more SitePoints that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SiteFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {SitePointFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Sites
-     * const sites = await prisma.site.findMany()
+     * // Get all SitePoints
+     * const sitePoints = await prisma.sitePoint.findMany()
      * 
-     * // Get first 10 Sites
-     * const sites = await prisma.site.findMany({ take: 10 })
+     * // Get first 10 SitePoints
+     * const sitePoints = await prisma.sitePoint.findMany({ take: 10 })
      * 
      * // Only select the `uuid`
-     * const siteWithUuidOnly = await prisma.site.findMany({ select: { uuid: true } })
+     * const sitePointWithUuidOnly = await prisma.sitePoint.findMany({ select: { uuid: true } })
      * 
     **/
-    findMany<T extends SiteFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SiteFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'findMany'>>
+    findMany<T extends SitePointFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SitePointFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findMany'>>
 
     /**
-     * Create a Site.
-     * @param {SiteCreateArgs} args - Arguments to create a Site.
+     * Create a SitePoint.
+     * @param {SitePointCreateArgs} args - Arguments to create a SitePoint.
      * @example
-     * // Create one Site
-     * const Site = await prisma.site.create({
+     * // Create one SitePoint
+     * const SitePoint = await prisma.sitePoint.create({
      *   data: {
-     *     // ... data to create a Site
+     *     // ... data to create a SitePoint
      *   }
      * })
      * 
     **/
-    create<T extends SiteCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, SiteCreateArgs<ExtArgs>>
-    ): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    create<T extends SitePointCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, SitePointCreateArgs<ExtArgs>>
+    ): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
-     * Create many Sites.
-     *     @param {SiteCreateManyArgs} args - Arguments to create many Sites.
+     * Create many SitePoints.
+     *     @param {SitePointCreateManyArgs} args - Arguments to create many SitePoints.
      *     @example
-     *     // Create many Sites
-     *     const site = await prisma.site.createMany({
+     *     // Create many SitePoints
+     *     const sitePoint = await prisma.sitePoint.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends SiteCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SiteCreateManyArgs<ExtArgs>>
+    createMany<T extends SitePointCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SitePointCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Site.
-     * @param {SiteDeleteArgs} args - Arguments to delete one Site.
+     * Delete a SitePoint.
+     * @param {SitePointDeleteArgs} args - Arguments to delete one SitePoint.
      * @example
-     * // Delete one Site
-     * const Site = await prisma.site.delete({
+     * // Delete one SitePoint
+     * const SitePoint = await prisma.sitePoint.delete({
      *   where: {
-     *     // ... filter to delete one Site
+     *     // ... filter to delete one SitePoint
      *   }
      * })
      * 
     **/
-    delete<T extends SiteDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, SiteDeleteArgs<ExtArgs>>
-    ): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    delete<T extends SitePointDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, SitePointDeleteArgs<ExtArgs>>
+    ): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
-     * Update one Site.
-     * @param {SiteUpdateArgs} args - Arguments to update one Site.
+     * Update one SitePoint.
+     * @param {SitePointUpdateArgs} args - Arguments to update one SitePoint.
      * @example
-     * // Update one Site
-     * const site = await prisma.site.update({
+     * // Update one SitePoint
+     * const sitePoint = await prisma.sitePoint.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2558,34 +2542,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends SiteUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, SiteUpdateArgs<ExtArgs>>
-    ): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    update<T extends SitePointUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, SitePointUpdateArgs<ExtArgs>>
+    ): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
-     * Delete zero or more Sites.
-     * @param {SiteDeleteManyArgs} args - Arguments to filter Sites to delete.
+     * Delete zero or more SitePoints.
+     * @param {SitePointDeleteManyArgs} args - Arguments to filter SitePoints to delete.
      * @example
-     * // Delete a few Sites
-     * const { count } = await prisma.site.deleteMany({
+     * // Delete a few SitePoints
+     * const { count } = await prisma.sitePoint.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends SiteDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SiteDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends SitePointDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SitePointDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Sites.
+     * Update zero or more SitePoints.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SiteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {SitePointUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Sites
-     * const site = await prisma.site.updateMany({
+     * // Update many SitePoints
+     * const sitePoint = await prisma.sitePoint.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2595,59 +2579,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends SiteUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, SiteUpdateManyArgs<ExtArgs>>
+    updateMany<T extends SitePointUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, SitePointUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Site.
-     * @param {SiteUpsertArgs} args - Arguments to update or create a Site.
+     * Create or update one SitePoint.
+     * @param {SitePointUpsertArgs} args - Arguments to update or create a SitePoint.
      * @example
-     * // Update or create a Site
-     * const site = await prisma.site.upsert({
+     * // Update or create a SitePoint
+     * const sitePoint = await prisma.sitePoint.upsert({
      *   create: {
-     *     // ... data to create a Site
+     *     // ... data to create a SitePoint
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Site we want to update
+     *     // ... the filter for the SitePoint we want to update
      *   }
      * })
     **/
-    upsert<T extends SiteUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, SiteUpsertArgs<ExtArgs>>
-    ): Prisma__SiteClient<$Result.GetResult<Prisma.$SitePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    upsert<T extends SitePointUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, SitePointUpsertArgs<ExtArgs>>
+    ): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
-     * Count the number of Sites.
+     * Count the number of SitePoints.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SiteCountArgs} args - Arguments to filter Sites to count.
+     * @param {SitePointCountArgs} args - Arguments to filter SitePoints to count.
      * @example
-     * // Count the number of Sites
-     * const count = await prisma.site.count({
+     * // Count the number of SitePoints
+     * const count = await prisma.sitePoint.count({
      *   where: {
-     *     // ... the filter for the Sites we want to count
+     *     // ... the filter for the SitePoints we want to count
      *   }
      * })
     **/
-    count<T extends SiteCountArgs>(
-      args?: Subset<T, SiteCountArgs>,
+    count<T extends SitePointCountArgs>(
+      args?: Subset<T, SitePointCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], SiteCountAggregateOutputType>
+          : GetScalarType<T['select'], SitePointCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Site.
+     * Allows you to perform aggregations operations on a SitePoint.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SiteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {SitePointAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2667,13 +2651,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends SiteAggregateArgs>(args: Subset<T, SiteAggregateArgs>): Prisma.PrismaPromise<GetSiteAggregateType<T>>
+    aggregate<T extends SitePointAggregateArgs>(args: Subset<T, SitePointAggregateArgs>): Prisma.PrismaPromise<GetSitePointAggregateType<T>>
 
     /**
-     * Group by Site.
+     * Group by SitePoint.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SiteGroupByArgs} args - Group by arguments.
+     * @param {SitePointGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2688,14 +2672,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends SiteGroupByArgs,
+      T extends SitePointGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SiteGroupByArgs['orderBy'] }
-        : { orderBy?: SiteGroupByArgs['orderBy'] },
+        ? { orderBy: SitePointGroupByArgs['orderBy'] }
+        : { orderBy?: SitePointGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2744,20 +2728,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, SiteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSiteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, SitePointGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSitePointGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Site model
+   * Fields of the SitePoint model
    */
-  readonly fields: SiteFieldRefs;
+  readonly fields: SitePointFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Site.
+   * The delegate class that acts as a "Promise-like" for SitePoint.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SiteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__SitePointClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
 
@@ -2786,305 +2770,305 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Site model
+   * Fields of the SitePoint model
    */ 
-  interface SiteFieldRefs {
-    readonly uuid: FieldRef<"Site", 'String'>
-    readonly cafeins_uuid: FieldRef<"Site", 'String'>
-    readonly name: FieldRef<"Site", 'String'>
-    readonly site_group_code: FieldRef<"Site", 'String'>
-    readonly latitude: FieldRef<"Site", 'Float'>
-    readonly longitude: FieldRef<"Site", 'Float'>
-    readonly created_at: FieldRef<"Site", 'DateTime'>
-    readonly updated_at: FieldRef<"Site", 'DateTime'>
-    readonly created_employee_no: FieldRef<"Site", 'BigInt'>
-    readonly modified_employee_no: FieldRef<"Site", 'BigInt'>
-    readonly status: FieldRef<"Site", 'MIGRATION_STATUS'>
-    readonly last_read: FieldRef<"Site", 'DateTime'>
-    readonly is_migrated: FieldRef<"Site", 'Boolean'>
+  interface SitePointFieldRefs {
+    readonly uuid: FieldRef<"SitePoint", 'String'>
+    readonly cafeins_uuid: FieldRef<"SitePoint", 'String'>
+    readonly name: FieldRef<"SitePoint", 'String'>
+    readonly site_group_code: FieldRef<"SitePoint", 'String'>
+    readonly latitude: FieldRef<"SitePoint", 'Float'>
+    readonly longitude: FieldRef<"SitePoint", 'Float'>
+    readonly created_at: FieldRef<"SitePoint", 'DateTime'>
+    readonly updated_at: FieldRef<"SitePoint", 'DateTime'>
+    readonly created_employee_no: FieldRef<"SitePoint", 'String'>
+    readonly modified_employee_no: FieldRef<"SitePoint", 'String'>
+    readonly status: FieldRef<"SitePoint", 'MIGRATION_STATUS'>
+    readonly last_read: FieldRef<"SitePoint", 'DateTime'>
+    readonly is_migrated: FieldRef<"SitePoint", 'Boolean'>
   }
     
 
   // Custom InputTypes
 
   /**
-   * Site findUnique
+   * SitePoint findUnique
    */
-  export type SiteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * Filter, which Site to fetch.
+     * Filter, which SitePoint to fetch.
      */
-    where: SiteWhereUniqueInput
+    where: SitePointWhereUniqueInput
   }
 
 
   /**
-   * Site findUniqueOrThrow
+   * SitePoint findUniqueOrThrow
    */
-  export type SiteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * Filter, which Site to fetch.
+     * Filter, which SitePoint to fetch.
      */
-    where: SiteWhereUniqueInput
+    where: SitePointWhereUniqueInput
   }
 
 
   /**
-   * Site findFirst
+   * SitePoint findFirst
    */
-  export type SiteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * Filter, which Site to fetch.
+     * Filter, which SitePoint to fetch.
      */
-    where?: SiteWhereInput
+    where?: SitePointWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Sites to fetch.
+     * Determine the order of SitePoints to fetch.
      */
-    orderBy?: SiteOrderByWithRelationInput | SiteOrderByWithRelationInput[]
+    orderBy?: SitePointOrderByWithRelationInput | SitePointOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Sites.
+     * Sets the position for searching for SitePoints.
      */
-    cursor?: SiteWhereUniqueInput
+    cursor?: SitePointWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Sites from the position of the cursor.
+     * Take `±n` SitePoints from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Sites.
+     * Skip the first `n` SitePoints.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Sites.
+     * Filter by unique combinations of SitePoints.
      */
-    distinct?: SiteScalarFieldEnum | SiteScalarFieldEnum[]
+    distinct?: SitePointScalarFieldEnum | SitePointScalarFieldEnum[]
   }
 
 
   /**
-   * Site findFirstOrThrow
+   * SitePoint findFirstOrThrow
    */
-  export type SiteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * Filter, which Site to fetch.
+     * Filter, which SitePoint to fetch.
      */
-    where?: SiteWhereInput
+    where?: SitePointWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Sites to fetch.
+     * Determine the order of SitePoints to fetch.
      */
-    orderBy?: SiteOrderByWithRelationInput | SiteOrderByWithRelationInput[]
+    orderBy?: SitePointOrderByWithRelationInput | SitePointOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Sites.
+     * Sets the position for searching for SitePoints.
      */
-    cursor?: SiteWhereUniqueInput
+    cursor?: SitePointWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Sites from the position of the cursor.
+     * Take `±n` SitePoints from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Sites.
+     * Skip the first `n` SitePoints.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Sites.
+     * Filter by unique combinations of SitePoints.
      */
-    distinct?: SiteScalarFieldEnum | SiteScalarFieldEnum[]
+    distinct?: SitePointScalarFieldEnum | SitePointScalarFieldEnum[]
   }
 
 
   /**
-   * Site findMany
+   * SitePoint findMany
    */
-  export type SiteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * Filter, which Sites to fetch.
+     * Filter, which SitePoints to fetch.
      */
-    where?: SiteWhereInput
+    where?: SitePointWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Sites to fetch.
+     * Determine the order of SitePoints to fetch.
      */
-    orderBy?: SiteOrderByWithRelationInput | SiteOrderByWithRelationInput[]
+    orderBy?: SitePointOrderByWithRelationInput | SitePointOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Sites.
+     * Sets the position for listing SitePoints.
      */
-    cursor?: SiteWhereUniqueInput
+    cursor?: SitePointWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Sites from the position of the cursor.
+     * Take `±n` SitePoints from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Sites.
+     * Skip the first `n` SitePoints.
      */
     skip?: number
-    distinct?: SiteScalarFieldEnum | SiteScalarFieldEnum[]
+    distinct?: SitePointScalarFieldEnum | SitePointScalarFieldEnum[]
   }
 
 
   /**
-   * Site create
+   * SitePoint create
    */
-  export type SiteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * The data needed to create a Site.
+     * The data needed to create a SitePoint.
      */
-    data: XOR<SiteCreateInput, SiteUncheckedCreateInput>
+    data: XOR<SitePointCreateInput, SitePointUncheckedCreateInput>
   }
 
 
   /**
-   * Site createMany
+   * SitePoint createMany
    */
-  export type SiteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Sites.
+     * The data used to create many SitePoints.
      */
-    data: SiteCreateManyInput | SiteCreateManyInput[]
+    data: SitePointCreateManyInput | SitePointCreateManyInput[]
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Site update
+   * SitePoint update
    */
-  export type SiteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * The data needed to update a Site.
+     * The data needed to update a SitePoint.
      */
-    data: XOR<SiteUpdateInput, SiteUncheckedUpdateInput>
+    data: XOR<SitePointUpdateInput, SitePointUncheckedUpdateInput>
     /**
-     * Choose, which Site to update.
+     * Choose, which SitePoint to update.
      */
-    where: SiteWhereUniqueInput
+    where: SitePointWhereUniqueInput
   }
 
 
   /**
-   * Site updateMany
+   * SitePoint updateMany
    */
-  export type SiteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Sites.
+     * The data used to update SitePoints.
      */
-    data: XOR<SiteUpdateManyMutationInput, SiteUncheckedUpdateManyInput>
+    data: XOR<SitePointUpdateManyMutationInput, SitePointUncheckedUpdateManyInput>
     /**
-     * Filter which Sites to update
+     * Filter which SitePoints to update
      */
-    where?: SiteWhereInput
+    where?: SitePointWhereInput
   }
 
 
   /**
-   * Site upsert
+   * SitePoint upsert
    */
-  export type SiteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * The filter to search for the Site to update in case it exists.
+     * The filter to search for the SitePoint to update in case it exists.
      */
-    where: SiteWhereUniqueInput
+    where: SitePointWhereUniqueInput
     /**
-     * In case the Site found by the `where` argument doesn't exist, create a new Site with this data.
+     * In case the SitePoint found by the `where` argument doesn't exist, create a new SitePoint with this data.
      */
-    create: XOR<SiteCreateInput, SiteUncheckedCreateInput>
+    create: XOR<SitePointCreateInput, SitePointUncheckedCreateInput>
     /**
-     * In case the Site was found with the provided `where` argument, update it with this data.
+     * In case the SitePoint was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<SiteUpdateInput, SiteUncheckedUpdateInput>
+    update: XOR<SitePointUpdateInput, SitePointUncheckedUpdateInput>
   }
 
 
   /**
-   * Site delete
+   * SitePoint delete
    */
-  export type SiteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
     /**
-     * Filter which Site to delete.
+     * Filter which SitePoint to delete.
      */
-    where: SiteWhereUniqueInput
+    where: SitePointWhereUniqueInput
   }
 
 
   /**
-   * Site deleteMany
+   * SitePoint deleteMany
    */
-  export type SiteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Sites to delete
+     * Filter which SitePoints to delete
      */
-    where?: SiteWhereInput
+    where?: SitePointWhereInput
   }
 
 
   /**
-   * Site without action
+   * SitePoint without action
    */
-  export type SiteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SitePointDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Site
+     * Select specific fields to fetch from the SitePoint
      */
-    select?: SiteSelect<ExtArgs> | null
+    select?: SitePointSelect<ExtArgs> | null
   }
 
 
@@ -4014,7 +3998,7 @@ export namespace Prisma {
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
-  export const SiteScalarFieldEnum: {
+  export const SitePointScalarFieldEnum: {
     uuid: 'uuid',
     cafeins_uuid: 'cafeins_uuid',
     name: 'name',
@@ -4030,7 +4014,7 @@ export namespace Prisma {
     is_migrated: 'is_migrated'
   };
 
-  export type SiteScalarFieldEnum = (typeof SiteScalarFieldEnum)[keyof typeof SiteScalarFieldEnum]
+  export type SitePointScalarFieldEnum = (typeof SitePointScalarFieldEnum)[keyof typeof SitePointScalarFieldEnum]
 
 
   export const LogScalarFieldEnum: {
@@ -4205,8 +4189,8 @@ export namespace Prisma {
     project_group_code?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
     updated_at?: DateTimeFilter<"Project"> | Date | string
-    created_employee_no?: BigIntNullableFilter<"Project"> | bigint | number | null
-    modified_employee_no?: BigIntNullableFilter<"Project"> | bigint | number | null
+    created_employee_no?: StringNullableFilter<"Project"> | string | null
+    modified_employee_no?: StringNullableFilter<"Project"> | string | null
     description?: StringNullableFilter<"Project"> | string | null
     po_number?: StringNullableFilter<"Project"> | string | null
     owner_name?: StringNullableFilter<"Project"> | string | null
@@ -4248,8 +4232,8 @@ export namespace Prisma {
     name?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
     updated_at?: DateTimeFilter<"Project"> | Date | string
-    created_employee_no?: BigIntNullableFilter<"Project"> | bigint | number | null
-    modified_employee_no?: BigIntNullableFilter<"Project"> | bigint | number | null
+    created_employee_no?: StringNullableFilter<"Project"> | string | null
+    modified_employee_no?: StringNullableFilter<"Project"> | string | null
     description?: StringNullableFilter<"Project"> | string | null
     po_number?: StringNullableFilter<"Project"> | string | null
     owner_name?: StringNullableFilter<"Project"> | string | null
@@ -4296,8 +4280,8 @@ export namespace Prisma {
     project_group_code?: StringWithAggregatesFilter<"Project"> | string
     created_at?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-    created_employee_no?: BigIntNullableWithAggregatesFilter<"Project"> | bigint | number | null
-    modified_employee_no?: BigIntNullableWithAggregatesFilter<"Project"> | bigint | number | null
+    created_employee_no?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    modified_employee_no?: StringNullableWithAggregatesFilter<"Project"> | string | null
     description?: StringNullableWithAggregatesFilter<"Project"> | string | null
     po_number?: StringNullableWithAggregatesFilter<"Project"> | string | null
     owner_name?: StringNullableWithAggregatesFilter<"Project"> | string | null
@@ -4307,26 +4291,26 @@ export namespace Prisma {
     is_migrated?: BoolWithAggregatesFilter<"Project"> | boolean
   }
 
-  export type SiteWhereInput = {
-    AND?: SiteWhereInput | SiteWhereInput[]
-    OR?: SiteWhereInput[]
-    NOT?: SiteWhereInput | SiteWhereInput[]
-    uuid?: UuidFilter<"Site"> | string
-    cafeins_uuid?: StringNullableFilter<"Site"> | string | null
-    name?: StringFilter<"Site"> | string
-    site_group_code?: StringFilter<"Site"> | string
-    latitude?: FloatFilter<"Site"> | number
-    longitude?: FloatFilter<"Site"> | number
-    created_at?: DateTimeFilter<"Site"> | Date | string
-    updated_at?: DateTimeFilter<"Site"> | Date | string
-    created_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
-    modified_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
-    status?: EnumMIGRATION_STATUSNullableFilter<"Site"> | $Enums.MIGRATION_STATUS | null
-    last_read?: DateTimeNullableFilter<"Site"> | Date | string | null
-    is_migrated?: BoolFilter<"Site"> | boolean
+  export type SitePointWhereInput = {
+    AND?: SitePointWhereInput | SitePointWhereInput[]
+    OR?: SitePointWhereInput[]
+    NOT?: SitePointWhereInput | SitePointWhereInput[]
+    uuid?: UuidFilter<"SitePoint"> | string
+    cafeins_uuid?: StringNullableFilter<"SitePoint"> | string | null
+    name?: StringFilter<"SitePoint"> | string
+    site_group_code?: StringFilter<"SitePoint"> | string
+    latitude?: FloatFilter<"SitePoint"> | number
+    longitude?: FloatFilter<"SitePoint"> | number
+    created_at?: DateTimeFilter<"SitePoint"> | Date | string
+    updated_at?: DateTimeFilter<"SitePoint"> | Date | string
+    created_employee_no?: StringNullableFilter<"SitePoint"> | string | null
+    modified_employee_no?: StringNullableFilter<"SitePoint"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"SitePoint"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"SitePoint"> | Date | string | null
+    is_migrated?: BoolFilter<"SitePoint"> | boolean
   }
 
-  export type SiteOrderByWithRelationInput = {
+  export type SitePointOrderByWithRelationInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrderInput | SortOrder
     name?: SortOrder
@@ -4342,26 +4326,26 @@ export namespace Prisma {
     is_migrated?: SortOrder
   }
 
-  export type SiteWhereUniqueInput = Prisma.AtLeast<{
+  export type SitePointWhereUniqueInput = Prisma.AtLeast<{
     uuid?: string
     site_group_code?: string
-    AND?: SiteWhereInput | SiteWhereInput[]
-    OR?: SiteWhereInput[]
-    NOT?: SiteWhereInput | SiteWhereInput[]
-    cafeins_uuid?: StringNullableFilter<"Site"> | string | null
-    name?: StringFilter<"Site"> | string
-    latitude?: FloatFilter<"Site"> | number
-    longitude?: FloatFilter<"Site"> | number
-    created_at?: DateTimeFilter<"Site"> | Date | string
-    updated_at?: DateTimeFilter<"Site"> | Date | string
-    created_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
-    modified_employee_no?: BigIntNullableFilter<"Site"> | bigint | number | null
-    status?: EnumMIGRATION_STATUSNullableFilter<"Site"> | $Enums.MIGRATION_STATUS | null
-    last_read?: DateTimeNullableFilter<"Site"> | Date | string | null
-    is_migrated?: BoolFilter<"Site"> | boolean
+    AND?: SitePointWhereInput | SitePointWhereInput[]
+    OR?: SitePointWhereInput[]
+    NOT?: SitePointWhereInput | SitePointWhereInput[]
+    cafeins_uuid?: StringNullableFilter<"SitePoint"> | string | null
+    name?: StringFilter<"SitePoint"> | string
+    latitude?: FloatFilter<"SitePoint"> | number
+    longitude?: FloatFilter<"SitePoint"> | number
+    created_at?: DateTimeFilter<"SitePoint"> | Date | string
+    updated_at?: DateTimeFilter<"SitePoint"> | Date | string
+    created_employee_no?: StringNullableFilter<"SitePoint"> | string | null
+    modified_employee_no?: StringNullableFilter<"SitePoint"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"SitePoint"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"SitePoint"> | Date | string | null
+    is_migrated?: BoolFilter<"SitePoint"> | boolean
   }, "uuid" | "site_group_code">
 
-  export type SiteOrderByWithAggregationInput = {
+  export type SitePointOrderByWithAggregationInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrderInput | SortOrder
     name?: SortOrder
@@ -4375,30 +4359,30 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
-    _count?: SiteCountOrderByAggregateInput
-    _avg?: SiteAvgOrderByAggregateInput
-    _max?: SiteMaxOrderByAggregateInput
-    _min?: SiteMinOrderByAggregateInput
-    _sum?: SiteSumOrderByAggregateInput
+    _count?: SitePointCountOrderByAggregateInput
+    _avg?: SitePointAvgOrderByAggregateInput
+    _max?: SitePointMaxOrderByAggregateInput
+    _min?: SitePointMinOrderByAggregateInput
+    _sum?: SitePointSumOrderByAggregateInput
   }
 
-  export type SiteScalarWhereWithAggregatesInput = {
-    AND?: SiteScalarWhereWithAggregatesInput | SiteScalarWhereWithAggregatesInput[]
-    OR?: SiteScalarWhereWithAggregatesInput[]
-    NOT?: SiteScalarWhereWithAggregatesInput | SiteScalarWhereWithAggregatesInput[]
-    uuid?: UuidWithAggregatesFilter<"Site"> | string
-    cafeins_uuid?: StringNullableWithAggregatesFilter<"Site"> | string | null
-    name?: StringWithAggregatesFilter<"Site"> | string
-    site_group_code?: StringWithAggregatesFilter<"Site"> | string
-    latitude?: FloatWithAggregatesFilter<"Site"> | number
-    longitude?: FloatWithAggregatesFilter<"Site"> | number
-    created_at?: DateTimeWithAggregatesFilter<"Site"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"Site"> | Date | string
-    created_employee_no?: BigIntNullableWithAggregatesFilter<"Site"> | bigint | number | null
-    modified_employee_no?: BigIntNullableWithAggregatesFilter<"Site"> | bigint | number | null
-    status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Site"> | $Enums.MIGRATION_STATUS | null
-    last_read?: DateTimeNullableWithAggregatesFilter<"Site"> | Date | string | null
-    is_migrated?: BoolWithAggregatesFilter<"Site"> | boolean
+  export type SitePointScalarWhereWithAggregatesInput = {
+    AND?: SitePointScalarWhereWithAggregatesInput | SitePointScalarWhereWithAggregatesInput[]
+    OR?: SitePointScalarWhereWithAggregatesInput[]
+    NOT?: SitePointScalarWhereWithAggregatesInput | SitePointScalarWhereWithAggregatesInput[]
+    uuid?: UuidWithAggregatesFilter<"SitePoint"> | string
+    cafeins_uuid?: StringNullableWithAggregatesFilter<"SitePoint"> | string | null
+    name?: StringWithAggregatesFilter<"SitePoint"> | string
+    site_group_code?: StringWithAggregatesFilter<"SitePoint"> | string
+    latitude?: FloatWithAggregatesFilter<"SitePoint"> | number
+    longitude?: FloatWithAggregatesFilter<"SitePoint"> | number
+    created_at?: DateTimeWithAggregatesFilter<"SitePoint"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"SitePoint"> | Date | string
+    created_employee_no?: StringNullableWithAggregatesFilter<"SitePoint"> | string | null
+    modified_employee_no?: StringNullableWithAggregatesFilter<"SitePoint"> | string | null
+    status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"SitePoint"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableWithAggregatesFilter<"SitePoint"> | Date | string | null
+    is_migrated?: BoolWithAggregatesFilter<"SitePoint"> | boolean
   }
 
   export type LogWhereInput = {
@@ -4472,8 +4456,8 @@ export namespace Prisma {
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: bigint | number | null
-    modified_employee_no?: bigint | number | null
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -4492,8 +4476,8 @@ export namespace Prisma {
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: bigint | number | null
-    modified_employee_no?: bigint | number | null
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -4512,8 +4496,8 @@ export namespace Prisma {
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4532,8 +4516,8 @@ export namespace Prisma {
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4552,8 +4536,8 @@ export namespace Prisma {
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: bigint | number | null
-    modified_employee_no?: bigint | number | null
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
     owner_name?: string | null
@@ -4572,8 +4556,8 @@ export namespace Prisma {
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4592,8 +4576,8 @@ export namespace Prisma {
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
     owner_name?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4603,7 +4587,7 @@ export namespace Prisma {
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SiteCreateInput = {
+  export type SitePointCreateInput = {
     uuid?: string
     cafeins_uuid?: string | null
     name: string
@@ -4612,14 +4596,14 @@ export namespace Prisma {
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: bigint | number | null
-    modified_employee_no?: bigint | number | null
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
 
-  export type SiteUncheckedCreateInput = {
+  export type SitePointUncheckedCreateInput = {
     uuid?: string
     cafeins_uuid?: string | null
     name: string
@@ -4628,14 +4612,14 @@ export namespace Prisma {
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: bigint | number | null
-    modified_employee_no?: bigint | number | null
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
 
-  export type SiteUpdateInput = {
+  export type SitePointUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
@@ -4644,14 +4628,14 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SiteUncheckedUpdateInput = {
+  export type SitePointUncheckedUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
@@ -4660,14 +4644,14 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SiteCreateManyInput = {
+  export type SitePointCreateManyInput = {
     uuid?: string
     cafeins_uuid?: string | null
     name: string
@@ -4676,14 +4660,14 @@ export namespace Prisma {
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: bigint | number | null
-    modified_employee_no?: bigint | number | null
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
   }
 
-  export type SiteUpdateManyMutationInput = {
+  export type SitePointUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
@@ -4692,14 +4676,14 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SiteUncheckedUpdateManyInput = {
+  export type SitePointUncheckedUpdateManyInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
@@ -4708,8 +4692,8 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    modified_employee_no?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -4849,17 +4833,6 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type BigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
-  }
-
   export type EnumMIGRATION_STATUSNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.MIGRATION_STATUS | EnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
     in?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
@@ -4911,8 +4884,6 @@ export namespace Prisma {
   export type ProjectAvgOrderByAggregateInput = {
     company_code?: SortOrder
     vendor_no?: SortOrder
-    created_employee_no?: SortOrder
-    modified_employee_no?: SortOrder
   }
 
   export type ProjectMaxOrderByAggregateInput = {
@@ -4958,8 +4929,6 @@ export namespace Prisma {
   export type ProjectSumOrderByAggregateInput = {
     company_code?: SortOrder
     vendor_no?: SortOrder
-    created_employee_no?: SortOrder
-    modified_employee_no?: SortOrder
   }
 
   export type UuidWithAggregatesFilter<$PrismaModel = never> = {
@@ -5043,22 +5012,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
-  }
-
   export type EnumMIGRATION_STATUSNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.MIGRATION_STATUS | EnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
     in?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
@@ -5102,7 +5055,7 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type SiteCountOrderByAggregateInput = {
+  export type SitePointCountOrderByAggregateInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
     name?: SortOrder
@@ -5118,14 +5071,12 @@ export namespace Prisma {
     is_migrated?: SortOrder
   }
 
-  export type SiteAvgOrderByAggregateInput = {
+  export type SitePointAvgOrderByAggregateInput = {
     latitude?: SortOrder
     longitude?: SortOrder
-    created_employee_no?: SortOrder
-    modified_employee_no?: SortOrder
   }
 
-  export type SiteMaxOrderByAggregateInput = {
+  export type SitePointMaxOrderByAggregateInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
     name?: SortOrder
@@ -5141,7 +5092,7 @@ export namespace Prisma {
     is_migrated?: SortOrder
   }
 
-  export type SiteMinOrderByAggregateInput = {
+  export type SitePointMinOrderByAggregateInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
     name?: SortOrder
@@ -5157,11 +5108,9 @@ export namespace Prisma {
     is_migrated?: SortOrder
   }
 
-  export type SiteSumOrderByAggregateInput = {
+  export type SitePointSumOrderByAggregateInput = {
     latitude?: SortOrder
     longitude?: SortOrder
-    created_employee_no?: SortOrder
-    modified_employee_no?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -5275,14 +5224,6 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type NullableBigIntFieldUpdateOperationsInput = {
-    set?: bigint | number | null
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
-  }
-
   export type NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput = {
     set?: $Enums.MIGRATION_STATUS | null
   }
@@ -5362,17 +5303,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
   export type NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel = never> = {
@@ -5509,33 +5439,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedEnumMIGRATION_STATUSNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.MIGRATION_STATUS | EnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
     in?: $Enums.MIGRATION_STATUS[] | ListEnumMIGRATION_STATUSFieldRefInput<$PrismaModel> | null
@@ -5616,9 +5519,9 @@ export namespace Prisma {
      */
     export type ProjectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ProjectDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use SiteDefaultArgs instead
+     * @deprecated Use SitePointDefaultArgs instead
      */
-    export type SiteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SiteDefaultArgs<ExtArgs>
+    export type SitePointArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SitePointDefaultArgs<ExtArgs>
     /**
      * @deprecated Use LogDefaultArgs instead
      */

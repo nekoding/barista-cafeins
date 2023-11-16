@@ -7,6 +7,6 @@ interface BaristaSite {
   geometry: string
   created_at: string
   updated_at: string
-  created_employee_no: number
-  modified_employee_no: number
+  created_employee_no: string
+  modified_employee_no: string
 }

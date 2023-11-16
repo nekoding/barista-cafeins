@@ -4,8 +4,9 @@ import {
   createSitePoint,
   getSitePointsByNearestCoords,
 } from '../repositories/cafeins/sitepoints'
+import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import { getVilagesByCoords } from '../repositories/cafeins/villages'
-import { baristaClient, cafeinsClient } from '../utils/database'
+import { baristaClient } from '../utils/database'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
 
@@ -22,7 +23,7 @@ export const syncSitePoint = async (): Promise<void> => {
     // if found mark data already migrated
     if (nearestSitePoint.length > 0) {
       await baristaClient.$transaction(async (trx) => {
-        await trx.site.update({
+        await trx.sitePoint.update({
           data: {
             cafeins_uuid: nearestSitePoint[0].uuid,
             is_migrated: true,
@@ -54,11 +55,7 @@ export const syncSitePoint = async (): Promise<void> => {
     }
 
     // if sitepoint not found create data to cafeins
-    const user = await cafeinsClient.users.findFirst({
-      where: {
-        t_employee_id: sitePoint.created_employee_no,
-      },
-    })
+    const user = await getUserByEmployeeNo(sitePoint.created_employee_no)
 
     if (user == null) {
       await writeToLog(
@@ -97,8 +94,7 @@ export const syncSitePoint = async (): Promise<void> => {
       throw new Error('sitepoint village not found cannot migrate data')
     }
 
-    // set default siteCategory to id 1
-    const siteCategory = 1
+    const siteCategory = parseInt(process.env.SITE_CATEGORY_ID ?? '1')
     await createSitePoint(
       sitePoint.uuid,
       village[0].id,
@@ -113,7 +109,7 @@ export const syncSitePoint = async (): Promise<void> => {
     )
 
     await baristaClient.$transaction(async (trx) => {
-      await trx.site.update({
+      await trx.sitePoint.update({
         data: {
           cafeins_uuid: nearestSitePoint[0].uuid,
           is_migrated: true,

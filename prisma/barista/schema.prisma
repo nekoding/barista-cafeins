@@ -28,8 +28,8 @@ model Project {
   project_group_code   String            @unique
   created_at           DateTime          @default(now())
   updated_at           DateTime          @updatedAt
-  created_employee_no  BigInt?
-  modified_employee_no BigInt?
+  created_employee_no  String?
+  modified_employee_no String?
   description          String?
   po_number            String?
   owner_name           String?
@@ -41,7 +41,7 @@ model Project {
   @@map("projects")
 }
 
-model Site {
+model SitePoint {
   uuid                 String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   cafeins_uuid         String?
   name                 String
@@ -51,13 +51,13 @@ model Site {
   geometry             Unsupported("geometry")?
   created_at           DateTime                 @default(now())
   updated_at           DateTime                 @updatedAt
-  created_employee_no  BigInt?
-  modified_employee_no BigInt?
+  created_employee_no  String?
+  modified_employee_no String?
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean                  @default(false)
 
-  @@map("site")
+  @@map("site_points")
 }
 
 model Log {
