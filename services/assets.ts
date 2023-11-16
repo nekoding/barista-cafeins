@@ -46,7 +46,7 @@ export const syncAssets = async (): Promise<void> => {
           })
 
           // create data project asset
-          const projectAsset = await trx.project_assets.create({
+          const cafeinProjectAsset = await trx.project_assets.create({
             data: {
               project_id: cafeinSitePoint.id,
               asset_id: cafeinAsset.id,
@@ -76,8 +76,8 @@ export const syncAssets = async (): Promise<void> => {
               'asset created',
               {
                 uuid: asset.uuid,
-                cafeins_uuid: cafeinAsset.uuid,
-                project_asset_uuid: projectAsset.uuid,
+                assets_uuid: cafeinAsset.uuid,
+                project_asset_uuid: cafeinProjectAsset.uuid,
                 table: 'assets',
               },
               baristaTrx as PrismaClient,
