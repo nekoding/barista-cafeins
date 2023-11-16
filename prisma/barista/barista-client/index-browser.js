@@ -151,6 +151,28 @@ exports.Prisma.LogScalarFieldEnum = {
   deleted_at: 'deleted_at',
 }
 
+exports.Prisma.AssetScalarFieldEnum = {
+  uuid: 'uuid',
+  cafeins_uuid: 'cafeins_uuid',
+  unique_id: 'unique_id',
+  name: 'name',
+  description: 'description',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_employee_no: 'created_employee_no',
+  modified_employee_no: 'modified_employee_no',
+  code: 'code',
+  asset_group_code: 'asset_group_code',
+  project_group_code: 'project_group_code',
+  site_group_code: 'site_group_code',
+  asset_category: 'asset_category',
+  asset_ownership: 'asset_ownership',
+  area_ownership: 'area_ownership',
+  status: 'status',
+  last_read: 'last_read',
+  is_migrated: 'is_migrated',
+}
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc',
@@ -185,6 +207,7 @@ exports.Prisma.ModelName = {
   Project: 'Project',
   SitePoint: 'SitePoint',
   Log: 'Log',
+  Asset: 'Asset',
 }
 
 /**

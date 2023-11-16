@@ -28,6 +28,11 @@ export type SitePoint = $Result.DefaultSelection<Prisma.$SitePointPayload>
  * 
  */
 export type Log = $Result.DefaultSelection<Prisma.$LogPayload>
+/**
+ * Model Asset
+ * 
+ */
+export type Asset = $Result.DefaultSelection<Prisma.$AssetPayload>
 
 /**
  * Enums
@@ -197,6 +202,16 @@ export class PrismaClient<
     * ```
     */
   get log(): Prisma.LogDelegate<ExtArgs>;
+
+  /**
+   * `prisma.asset`: Exposes CRUD operations for the **Asset** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Assets
+    * const assets = await prisma.asset.findMany()
+    * ```
+    */
+  get asset(): Prisma.AssetDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -669,7 +684,8 @@ export namespace Prisma {
   export const ModelName: {
     Project: 'Project',
     SitePoint: 'SitePoint',
-    Log: 'Log'
+    Log: 'Log',
+    Asset: 'Asset'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -686,7 +702,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'project' | 'sitePoint' | 'log'
+      modelProps: 'project' | 'sitePoint' | 'log' | 'asset'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -885,6 +901,72 @@ export namespace Prisma {
           count: {
             args: Prisma.LogCountArgs<ExtArgs>,
             result: $Utils.Optional<LogCountAggregateOutputType> | number
+          }
+        }
+      }
+      Asset: {
+        payload: Prisma.$AssetPayload<ExtArgs>
+        fields: Prisma.AssetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AssetFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AssetFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          findFirst: {
+            args: Prisma.AssetFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AssetFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          findMany: {
+            args: Prisma.AssetFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>[]
+          }
+          create: {
+            args: Prisma.AssetCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          createMany: {
+            args: Prisma.AssetCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.AssetDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          update: {
+            args: Prisma.AssetUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          deleteMany: {
+            args: Prisma.AssetDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AssetUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.AssetUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AssetPayload>
+          }
+          aggregate: {
+            args: Prisma.AssetAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateAsset>
+          }
+          groupBy: {
+            args: Prisma.AssetGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<AssetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AssetCountArgs<ExtArgs>,
+            result: $Utils.Optional<AssetCountAggregateOutputType> | number
           }
         }
       }
@@ -3924,6 +4006,1030 @@ export namespace Prisma {
 
 
   /**
+   * Model Asset
+   */
+
+  export type AggregateAsset = {
+    _count: AssetCountAggregateOutputType | null
+    _min: AssetMinAggregateOutputType | null
+    _max: AssetMaxAggregateOutputType | null
+  }
+
+  export type AssetMinAggregateOutputType = {
+    uuid: string | null
+    cafeins_uuid: string | null
+    unique_id: string | null
+    name: string | null
+    description: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    code: string | null
+    asset_group_code: string | null
+    project_group_code: string | null
+    site_group_code: string | null
+    asset_category: string | null
+    asset_ownership: string | null
+    area_ownership: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean | null
+  }
+
+  export type AssetMaxAggregateOutputType = {
+    uuid: string | null
+    cafeins_uuid: string | null
+    unique_id: string | null
+    name: string | null
+    description: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    code: string | null
+    asset_group_code: string | null
+    project_group_code: string | null
+    site_group_code: string | null
+    asset_category: string | null
+    asset_ownership: string | null
+    area_ownership: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean | null
+  }
+
+  export type AssetCountAggregateOutputType = {
+    uuid: number
+    cafeins_uuid: number
+    unique_id: number
+    name: number
+    description: number
+    created_at: number
+    updated_at: number
+    created_employee_no: number
+    modified_employee_no: number
+    code: number
+    asset_group_code: number
+    project_group_code: number
+    site_group_code: number
+    asset_category: number
+    asset_ownership: number
+    area_ownership: number
+    status: number
+    last_read: number
+    is_migrated: number
+    _all: number
+  }
+
+
+  export type AssetMinAggregateInputType = {
+    uuid?: true
+    cafeins_uuid?: true
+    unique_id?: true
+    name?: true
+    description?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    code?: true
+    asset_group_code?: true
+    project_group_code?: true
+    site_group_code?: true
+    asset_category?: true
+    asset_ownership?: true
+    area_ownership?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+  }
+
+  export type AssetMaxAggregateInputType = {
+    uuid?: true
+    cafeins_uuid?: true
+    unique_id?: true
+    name?: true
+    description?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    code?: true
+    asset_group_code?: true
+    project_group_code?: true
+    site_group_code?: true
+    asset_category?: true
+    asset_ownership?: true
+    area_ownership?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+  }
+
+  export type AssetCountAggregateInputType = {
+    uuid?: true
+    cafeins_uuid?: true
+    unique_id?: true
+    name?: true
+    description?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    code?: true
+    asset_group_code?: true
+    project_group_code?: true
+    site_group_code?: true
+    asset_category?: true
+    asset_ownership?: true
+    area_ownership?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+    _all?: true
+  }
+
+  export type AssetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Asset to aggregate.
+     */
+    where?: AssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assets to fetch.
+     */
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Assets
+    **/
+    _count?: true | AssetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AssetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AssetMaxAggregateInputType
+  }
+
+  export type GetAssetAggregateType<T extends AssetAggregateArgs> = {
+        [P in keyof T & keyof AggregateAsset]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAsset[P]>
+      : GetScalarType<T[P], AggregateAsset[P]>
+  }
+
+
+
+
+  export type AssetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetWhereInput
+    orderBy?: AssetOrderByWithAggregationInput | AssetOrderByWithAggregationInput[]
+    by: AssetScalarFieldEnum[] | AssetScalarFieldEnum
+    having?: AssetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AssetCountAggregateInputType | true
+    _min?: AssetMinAggregateInputType
+    _max?: AssetMaxAggregateInputType
+  }
+
+  export type AssetGroupByOutputType = {
+    uuid: string
+    cafeins_uuid: string | null
+    unique_id: string
+    name: string
+    description: string | null
+    created_at: Date
+    updated_at: Date
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    code: string | null
+    asset_group_code: string | null
+    project_group_code: string | null
+    site_group_code: string | null
+    asset_category: string | null
+    asset_ownership: string | null
+    area_ownership: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean
+    _count: AssetCountAggregateOutputType | null
+    _min: AssetMinAggregateOutputType | null
+    _max: AssetMaxAggregateOutputType | null
+  }
+
+  type GetAssetGroupByPayload<T extends AssetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AssetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AssetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AssetGroupByOutputType[P]>
+            : GetScalarType<T[P], AssetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AssetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uuid?: boolean
+    cafeins_uuid?: boolean
+    unique_id?: boolean
+    name?: boolean
+    description?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    created_employee_no?: boolean
+    modified_employee_no?: boolean
+    code?: boolean
+    asset_group_code?: boolean
+    project_group_code?: boolean
+    site_group_code?: boolean
+    asset_category?: boolean
+    asset_ownership?: boolean
+    area_ownership?: boolean
+    status?: boolean
+    last_read?: boolean
+    is_migrated?: boolean
+  }, ExtArgs["result"]["asset"]>
+
+  export type AssetSelectScalar = {
+    uuid?: boolean
+    cafeins_uuid?: boolean
+    unique_id?: boolean
+    name?: boolean
+    description?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    created_employee_no?: boolean
+    modified_employee_no?: boolean
+    code?: boolean
+    asset_group_code?: boolean
+    project_group_code?: boolean
+    site_group_code?: boolean
+    asset_category?: boolean
+    asset_ownership?: boolean
+    area_ownership?: boolean
+    status?: boolean
+    last_read?: boolean
+    is_migrated?: boolean
+  }
+
+
+  export type $AssetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Asset"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      uuid: string
+      cafeins_uuid: string | null
+      unique_id: string
+      name: string
+      description: string | null
+      created_at: Date
+      updated_at: Date
+      created_employee_no: string | null
+      modified_employee_no: string | null
+      code: string | null
+      asset_group_code: string | null
+      project_group_code: string | null
+      site_group_code: string | null
+      asset_category: string | null
+      asset_ownership: string | null
+      area_ownership: string | null
+      status: $Enums.MIGRATION_STATUS | null
+      last_read: Date | null
+      is_migrated: boolean
+    }, ExtArgs["result"]["asset"]>
+    composites: {}
+  }
+
+
+  type AssetGetPayload<S extends boolean | null | undefined | AssetDefaultArgs> = $Result.GetResult<Prisma.$AssetPayload, S>
+
+  type AssetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AssetFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: AssetCountAggregateInputType | true
+    }
+
+  export interface AssetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Asset'], meta: { name: 'Asset' } }
+    /**
+     * Find zero or one Asset that matches the filter.
+     * @param {AssetFindUniqueArgs} args - Arguments to find a Asset
+     * @example
+     * // Get one Asset
+     * const asset = await prisma.asset.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends AssetFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, AssetFindUniqueArgs<ExtArgs>>
+    ): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Asset that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {AssetFindUniqueOrThrowArgs} args - Arguments to find a Asset
+     * @example
+     * // Get one Asset
+     * const asset = await prisma.asset.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends AssetFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, AssetFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Asset that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetFindFirstArgs} args - Arguments to find a Asset
+     * @example
+     * // Get one Asset
+     * const asset = await prisma.asset.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends AssetFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, AssetFindFirstArgs<ExtArgs>>
+    ): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Asset that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetFindFirstOrThrowArgs} args - Arguments to find a Asset
+     * @example
+     * // Get one Asset
+     * const asset = await prisma.asset.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends AssetFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, AssetFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Assets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Assets
+     * const assets = await prisma.asset.findMany()
+     * 
+     * // Get first 10 Assets
+     * const assets = await prisma.asset.findMany({ take: 10 })
+     * 
+     * // Only select the `uuid`
+     * const assetWithUuidOnly = await prisma.asset.findMany({ select: { uuid: true } })
+     * 
+    **/
+    findMany<T extends AssetFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AssetFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Asset.
+     * @param {AssetCreateArgs} args - Arguments to create a Asset.
+     * @example
+     * // Create one Asset
+     * const Asset = await prisma.asset.create({
+     *   data: {
+     *     // ... data to create a Asset
+     *   }
+     * })
+     * 
+    **/
+    create<T extends AssetCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, AssetCreateArgs<ExtArgs>>
+    ): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Assets.
+     *     @param {AssetCreateManyArgs} args - Arguments to create many Assets.
+     *     @example
+     *     // Create many Assets
+     *     const asset = await prisma.asset.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends AssetCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AssetCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Asset.
+     * @param {AssetDeleteArgs} args - Arguments to delete one Asset.
+     * @example
+     * // Delete one Asset
+     * const Asset = await prisma.asset.delete({
+     *   where: {
+     *     // ... filter to delete one Asset
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends AssetDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, AssetDeleteArgs<ExtArgs>>
+    ): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Asset.
+     * @param {AssetUpdateArgs} args - Arguments to update one Asset.
+     * @example
+     * // Update one Asset
+     * const asset = await prisma.asset.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends AssetUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, AssetUpdateArgs<ExtArgs>>
+    ): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Assets.
+     * @param {AssetDeleteManyArgs} args - Arguments to filter Assets to delete.
+     * @example
+     * // Delete a few Assets
+     * const { count } = await prisma.asset.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends AssetDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AssetDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Assets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Assets
+     * const asset = await prisma.asset.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends AssetUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, AssetUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Asset.
+     * @param {AssetUpsertArgs} args - Arguments to update or create a Asset.
+     * @example
+     * // Update or create a Asset
+     * const asset = await prisma.asset.upsert({
+     *   create: {
+     *     // ... data to create a Asset
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Asset we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends AssetUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, AssetUpsertArgs<ExtArgs>>
+    ): Prisma__AssetClient<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Assets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetCountArgs} args - Arguments to filter Assets to count.
+     * @example
+     * // Count the number of Assets
+     * const count = await prisma.asset.count({
+     *   where: {
+     *     // ... the filter for the Assets we want to count
+     *   }
+     * })
+    **/
+    count<T extends AssetCountArgs>(
+      args?: Subset<T, AssetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AssetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Asset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AssetAggregateArgs>(args: Subset<T, AssetAggregateArgs>): Prisma.PrismaPromise<GetAssetAggregateType<T>>
+
+    /**
+     * Group by Asset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AssetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AssetGroupByArgs['orderBy'] }
+        : { orderBy?: AssetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AssetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAssetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Asset model
+   */
+  readonly fields: AssetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Asset.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AssetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Asset model
+   */ 
+  interface AssetFieldRefs {
+    readonly uuid: FieldRef<"Asset", 'String'>
+    readonly cafeins_uuid: FieldRef<"Asset", 'String'>
+    readonly unique_id: FieldRef<"Asset", 'String'>
+    readonly name: FieldRef<"Asset", 'String'>
+    readonly description: FieldRef<"Asset", 'String'>
+    readonly created_at: FieldRef<"Asset", 'DateTime'>
+    readonly updated_at: FieldRef<"Asset", 'DateTime'>
+    readonly created_employee_no: FieldRef<"Asset", 'String'>
+    readonly modified_employee_no: FieldRef<"Asset", 'String'>
+    readonly code: FieldRef<"Asset", 'String'>
+    readonly asset_group_code: FieldRef<"Asset", 'String'>
+    readonly project_group_code: FieldRef<"Asset", 'String'>
+    readonly site_group_code: FieldRef<"Asset", 'String'>
+    readonly asset_category: FieldRef<"Asset", 'String'>
+    readonly asset_ownership: FieldRef<"Asset", 'String'>
+    readonly area_ownership: FieldRef<"Asset", 'String'>
+    readonly status: FieldRef<"Asset", 'MIGRATION_STATUS'>
+    readonly last_read: FieldRef<"Asset", 'DateTime'>
+    readonly is_migrated: FieldRef<"Asset", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Asset findUnique
+   */
+  export type AssetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Filter, which Asset to fetch.
+     */
+    where: AssetWhereUniqueInput
+  }
+
+
+  /**
+   * Asset findUniqueOrThrow
+   */
+  export type AssetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Filter, which Asset to fetch.
+     */
+    where: AssetWhereUniqueInput
+  }
+
+
+  /**
+   * Asset findFirst
+   */
+  export type AssetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Filter, which Asset to fetch.
+     */
+    where?: AssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assets to fetch.
+     */
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Assets.
+     */
+    cursor?: AssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Assets.
+     */
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+
+  /**
+   * Asset findFirstOrThrow
+   */
+  export type AssetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Filter, which Asset to fetch.
+     */
+    where?: AssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assets to fetch.
+     */
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Assets.
+     */
+    cursor?: AssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Assets.
+     */
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+
+  /**
+   * Asset findMany
+   */
+  export type AssetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Filter, which Assets to fetch.
+     */
+    where?: AssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assets to fetch.
+     */
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Assets.
+     */
+    cursor?: AssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assets.
+     */
+    skip?: number
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+
+  /**
+   * Asset create
+   */
+  export type AssetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Asset.
+     */
+    data: XOR<AssetCreateInput, AssetUncheckedCreateInput>
+  }
+
+
+  /**
+   * Asset createMany
+   */
+  export type AssetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Assets.
+     */
+    data: AssetCreateManyInput | AssetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Asset update
+   */
+  export type AssetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Asset.
+     */
+    data: XOR<AssetUpdateInput, AssetUncheckedUpdateInput>
+    /**
+     * Choose, which Asset to update.
+     */
+    where: AssetWhereUniqueInput
+  }
+
+
+  /**
+   * Asset updateMany
+   */
+  export type AssetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Assets.
+     */
+    data: XOR<AssetUpdateManyMutationInput, AssetUncheckedUpdateManyInput>
+    /**
+     * Filter which Assets to update
+     */
+    where?: AssetWhereInput
+  }
+
+
+  /**
+   * Asset upsert
+   */
+  export type AssetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Asset to update in case it exists.
+     */
+    where: AssetWhereUniqueInput
+    /**
+     * In case the Asset found by the `where` argument doesn't exist, create a new Asset with this data.
+     */
+    create: XOR<AssetCreateInput, AssetUncheckedCreateInput>
+    /**
+     * In case the Asset was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AssetUpdateInput, AssetUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Asset delete
+   */
+  export type AssetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Filter which Asset to delete.
+     */
+    where: AssetWhereUniqueInput
+  }
+
+
+  /**
+   * Asset deleteMany
+   */
+  export type AssetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Assets to delete
+     */
+    where?: AssetWhereInput
+  }
+
+
+  /**
+   * Asset without action
+   */
+  export type AssetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -3990,6 +5096,31 @@ export namespace Prisma {
   };
 
   export type LogScalarFieldEnum = (typeof LogScalarFieldEnum)[keyof typeof LogScalarFieldEnum]
+
+
+  export const AssetScalarFieldEnum: {
+    uuid: 'uuid',
+    cafeins_uuid: 'cafeins_uuid',
+    unique_id: 'unique_id',
+    name: 'name',
+    description: 'description',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    created_employee_no: 'created_employee_no',
+    modified_employee_no: 'modified_employee_no',
+    code: 'code',
+    asset_group_code: 'asset_group_code',
+    project_group_code: 'project_group_code',
+    site_group_code: 'site_group_code',
+    asset_category: 'asset_category',
+    asset_ownership: 'asset_ownership',
+    area_ownership: 'area_ownership',
+    status: 'status',
+    last_read: 'last_read',
+    is_migrated: 'is_migrated'
+  };
+
+  export type AssetScalarFieldEnum = (typeof AssetScalarFieldEnum)[keyof typeof AssetScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4393,6 +5524,128 @@ export namespace Prisma {
     deleted_at?: DateTimeNullableWithAggregatesFilter<"Log"> | Date | string | null
   }
 
+  export type AssetWhereInput = {
+    AND?: AssetWhereInput | AssetWhereInput[]
+    OR?: AssetWhereInput[]
+    NOT?: AssetWhereInput | AssetWhereInput[]
+    uuid?: UuidFilter<"Asset"> | string
+    cafeins_uuid?: StringNullableFilter<"Asset"> | string | null
+    unique_id?: StringFilter<"Asset"> | string
+    name?: StringFilter<"Asset"> | string
+    description?: StringNullableFilter<"Asset"> | string | null
+    created_at?: DateTimeFilter<"Asset"> | Date | string
+    updated_at?: DateTimeFilter<"Asset"> | Date | string
+    created_employee_no?: StringNullableFilter<"Asset"> | string | null
+    modified_employee_no?: StringNullableFilter<"Asset"> | string | null
+    code?: StringNullableFilter<"Asset"> | string | null
+    asset_group_code?: StringNullableFilter<"Asset"> | string | null
+    project_group_code?: StringNullableFilter<"Asset"> | string | null
+    site_group_code?: StringNullableFilter<"Asset"> | string | null
+    asset_category?: StringNullableFilter<"Asset"> | string | null
+    asset_ownership?: StringNullableFilter<"Asset"> | string | null
+    area_ownership?: StringNullableFilter<"Asset"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    is_migrated?: BoolFilter<"Asset"> | boolean
+  }
+
+  export type AssetOrderByWithRelationInput = {
+    uuid?: SortOrder
+    cafeins_uuid?: SortOrderInput | SortOrder
+    unique_id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrderInput | SortOrder
+    modified_employee_no?: SortOrderInput | SortOrder
+    code?: SortOrderInput | SortOrder
+    asset_group_code?: SortOrderInput | SortOrder
+    project_group_code?: SortOrderInput | SortOrder
+    site_group_code?: SortOrderInput | SortOrder
+    asset_category?: SortOrderInput | SortOrder
+    asset_ownership?: SortOrderInput | SortOrder
+    area_ownership?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
+    last_read?: SortOrderInput | SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type AssetWhereUniqueInput = Prisma.AtLeast<{
+    uuid?: string
+    unique_id?: string
+    AND?: AssetWhereInput | AssetWhereInput[]
+    OR?: AssetWhereInput[]
+    NOT?: AssetWhereInput | AssetWhereInput[]
+    cafeins_uuid?: StringNullableFilter<"Asset"> | string | null
+    name?: StringFilter<"Asset"> | string
+    description?: StringNullableFilter<"Asset"> | string | null
+    created_at?: DateTimeFilter<"Asset"> | Date | string
+    updated_at?: DateTimeFilter<"Asset"> | Date | string
+    created_employee_no?: StringNullableFilter<"Asset"> | string | null
+    modified_employee_no?: StringNullableFilter<"Asset"> | string | null
+    code?: StringNullableFilter<"Asset"> | string | null
+    asset_group_code?: StringNullableFilter<"Asset"> | string | null
+    project_group_code?: StringNullableFilter<"Asset"> | string | null
+    site_group_code?: StringNullableFilter<"Asset"> | string | null
+    asset_category?: StringNullableFilter<"Asset"> | string | null
+    asset_ownership?: StringNullableFilter<"Asset"> | string | null
+    area_ownership?: StringNullableFilter<"Asset"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    is_migrated?: BoolFilter<"Asset"> | boolean
+  }, "uuid" | "unique_id">
+
+  export type AssetOrderByWithAggregationInput = {
+    uuid?: SortOrder
+    cafeins_uuid?: SortOrderInput | SortOrder
+    unique_id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrderInput | SortOrder
+    modified_employee_no?: SortOrderInput | SortOrder
+    code?: SortOrderInput | SortOrder
+    asset_group_code?: SortOrderInput | SortOrder
+    project_group_code?: SortOrderInput | SortOrder
+    site_group_code?: SortOrderInput | SortOrder
+    asset_category?: SortOrderInput | SortOrder
+    asset_ownership?: SortOrderInput | SortOrder
+    area_ownership?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
+    last_read?: SortOrderInput | SortOrder
+    is_migrated?: SortOrder
+    _count?: AssetCountOrderByAggregateInput
+    _max?: AssetMaxOrderByAggregateInput
+    _min?: AssetMinOrderByAggregateInput
+  }
+
+  export type AssetScalarWhereWithAggregatesInput = {
+    AND?: AssetScalarWhereWithAggregatesInput | AssetScalarWhereWithAggregatesInput[]
+    OR?: AssetScalarWhereWithAggregatesInput[]
+    NOT?: AssetScalarWhereWithAggregatesInput | AssetScalarWhereWithAggregatesInput[]
+    uuid?: UuidWithAggregatesFilter<"Asset"> | string
+    cafeins_uuid?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    unique_id?: StringWithAggregatesFilter<"Asset"> | string
+    name?: StringWithAggregatesFilter<"Asset"> | string
+    description?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"Asset"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Asset"> | Date | string
+    created_employee_no?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    modified_employee_no?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    code?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    asset_group_code?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    project_group_code?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    site_group_code?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    asset_category?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    asset_ownership?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    area_ownership?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableWithAggregatesFilter<"Asset"> | Date | string | null
+    is_migrated?: BoolWithAggregatesFilter<"Asset"> | boolean
+  }
+
   export type ProjectCreateInput = {
     uuid?: string
     cafeins_uuid?: string | null
@@ -4713,6 +5966,160 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AssetCreateInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    code?: string | null
+    asset_group_code?: string | null
+    project_group_code?: string | null
+    site_group_code?: string | null
+    asset_category?: string | null
+    asset_ownership?: string | null
+    area_ownership?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type AssetUncheckedCreateInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    code?: string | null
+    asset_group_code?: string | null
+    project_group_code?: string | null
+    site_group_code?: string | null
+    asset_category?: string | null
+    asset_ownership?: string | null
+    area_ownership?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type AssetUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    project_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_category?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    area_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AssetUncheckedUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    project_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_category?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    area_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AssetCreateManyInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    code?: string | null
+    asset_group_code?: string | null
+    project_group_code?: string | null
+    site_group_code?: string | null
+    asset_category?: string | null
+    asset_ownership?: string | null
+    area_ownership?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type AssetUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    project_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_category?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    area_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AssetUncheckedUpdateManyInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    project_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_category?: NullableStringFieldUpdateOperationsInput | string | null
+    asset_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    area_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -5113,6 +6520,72 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type AssetCountOrderByAggregateInput = {
+    uuid?: SortOrder
+    cafeins_uuid?: SortOrder
+    unique_id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    code?: SortOrder
+    asset_group_code?: SortOrder
+    project_group_code?: SortOrder
+    site_group_code?: SortOrder
+    asset_category?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type AssetMaxOrderByAggregateInput = {
+    uuid?: SortOrder
+    cafeins_uuid?: SortOrder
+    unique_id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    code?: SortOrder
+    asset_group_code?: SortOrder
+    project_group_code?: SortOrder
+    site_group_code?: SortOrder
+    asset_category?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type AssetMinOrderByAggregateInput = {
+    uuid?: SortOrder
+    cafeins_uuid?: SortOrder
+    unique_id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    code?: SortOrder
+    asset_group_code?: SortOrder
+    project_group_code?: SortOrder
+    site_group_code?: SortOrder
+    asset_category?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -5400,6 +6873,10 @@ export namespace Prisma {
      * @deprecated Use LogDefaultArgs instead
      */
     export type LogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LogDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AssetDefaultArgs instead
+     */
+    export type AssetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AssetDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

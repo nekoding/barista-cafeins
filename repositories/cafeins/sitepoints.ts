@@ -39,3 +39,13 @@ export const createSitePoint = async (
     VALUES (${villageId}, ${name}, ${longitude}, ${latitude}, ${geometry}, ${siteCategoryId}, ${userId}, ${userId}, ${createdAt}, ${updatedAt}, ${uuid})`
   })
 }
+
+export const getSitePointByUuid = async (
+  uuid: string,
+): Promise<site_points | null> => {
+  return await cafeinsClient.site_points.findFirst({
+    where: {
+      uuid,
+    },
+  })
+}

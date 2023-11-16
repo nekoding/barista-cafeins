@@ -14,3 +14,17 @@ export const getProjectsUnmigrated = async (
     skip: offset,
   })
 }
+
+export const getMigratedProjectByGroupCode = async (
+  groupCode: string,
+): Promise<Project | null> => {
+  return await baristaClient.project.findFirst({
+    where: {
+      NOT: {
+        cafeins_uuid: null,
+      },
+      is_migrated: true,
+      project_group_code: groupCode,
+    },
+  })
+}

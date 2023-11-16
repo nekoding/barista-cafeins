@@ -71,3 +71,27 @@ model Log {
 
   @@map("logs")
 }
+
+model Asset {
+  uuid                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cafeins_uuid         String?
+  unique_id            String            @unique
+  name                 String
+  description          String?
+  created_at           DateTime          @default(now())
+  updated_at           DateTime          @updatedAt
+  created_employee_no  String?
+  modified_employee_no String?
+  code                 String?
+  asset_group_code     String?
+  project_group_code   String?
+  site_group_code      String?
+  asset_category       String?
+  asset_ownership      String?
+  area_ownership       String?
+  status               MIGRATION_STATUS?
+  last_read            DateTime?
+  is_migrated          Boolean           @default(false)
+
+  @@map("assets")
+}

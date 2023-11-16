@@ -1,4 +1,8 @@
-import type { PrismaClient } from '../../prisma/cafeins/cafeins-client'
+import type {
+  PrismaClient,
+  projects,
+} from '../../prisma/cafeins/cafeins-client'
+import { cafeinsClient } from '../../utils/database'
 
 export const createProjects = async (
   c: PrismaClient,
@@ -62,4 +66,14 @@ export const createProjects = async (
       ${projectUuid}::uuid
     )
   `
+}
+
+export const getProjectByUuid = async (
+  uuid: string,
+): Promise<projects | null> => {
+  return await cafeinsClient.projects.findFirst({
+    where: {
+      uuid,
+    },
+  })
 }
