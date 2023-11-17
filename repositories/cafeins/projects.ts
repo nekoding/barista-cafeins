@@ -18,11 +18,10 @@ export const createProjects = async (
   projectOwnerId: string,
   projectPoNumber: string | null,
   projectUuid: string,
-  projectCompanyCode: string,
+  prefixCode: string,
+  counterCode: number,
   projectTags: string[],
 ): Promise<any> => {
-  const prefixCode = `CAF-${projectCompanyCode}-`
-
   await c.$executeRaw`
     INSERT INTO master.projects (
       company_id,
@@ -55,7 +54,7 @@ export const createProjects = async (
           TO_CHAR(${projectCreatedAt}::timestamp, 'YYYYMM'),
           '-',
           LPAD(
-            (SELECT count(p.id) + 1 from master.projects p WHERE p.code LIKE (SELECT CONCAT('%', TO_CHAR(${projectCreatedAt}::timestamp, 'YYYYMM'), '%')))::text,
+            ${counterCode}::text,
             3,
             '0'
           )
@@ -79,4 +78,18 @@ export const getProjectByUuid = async (
       uuid,
     },
   })
+}
+
+export const getLatestProjectByCode = async (
+  projectCreatedAt: string,
+): Promise<projects | null> => {
+  const result = await cafeinsClient.$queryRaw<projects[] | []>`
+    SELECT * FROM master.projects p WHERE p.code LIKE (SELECT CONCAT('%', TO_CHAR(${projectCreatedAt}::timestamp, 'YYYYMM'), '%')) ORDER BY p.code DESC LIMIT 1 OFFSET 0
+  `
+
+  if (result.length < 1) {
+    return null
+  }
+
+  return result[0]
 }

@@ -2,10 +2,14 @@ import type { PrismaClient, Project } from '../prisma/barista/barista-client'
 import type { PrismaClient as CafeinsPrismaClient } from '../prisma/cafeins/cafeins-client'
 import { getProjectsUnmigrated } from '../repositories/barista/projects'
 import { getCompanyByCode } from '../repositories/cafeins/companies'
-import { createProjects } from '../repositories/cafeins/projects'
+import {
+  createProjects,
+  getLatestProjectByCode,
+} from '../repositories/cafeins/projects'
 import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import { getVendorByVendorNo } from '../repositories/cafeins/vendors'
 import { baristaClient, cafeinsClient } from '../utils/database'
+import { parsingCounterNumber } from '../utils/helpers'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
 
@@ -41,14 +45,28 @@ export const syncProjects = async (): Promise<void> => {
             })
           }
 
+          // parsing counter number
+          let counter = 1
+          const prefixCode = `CAF-${project.company_code}-`
+          const latestProject = await getLatestProjectByCode(
+            project.created_at.toLocaleString(),
+          )
+          if (latestProject?.code !== null) {
+            counter = parsingCounterNumber(
+              latestProject.code,
+              latestProject.code.length - 3,
+              3,
+            )
+          }
+
           // create project
           await createProjects(
             trx as CafeinsPrismaClient,
             projectCompany.id as unknown as string,
             projectVendor.id as unknown as string,
             project.name,
-            String(project.created_at.toLocaleString()),
-            String(project.updated_at.toLocaleString()),
+            project.created_at.toLocaleString(),
+            project.updated_at.toLocaleString(),
             projectCreator.id as unknown as string,
             projectGroupId,
             'incomplete',
@@ -56,10 +74,12 @@ export const syncProjects = async (): Promise<void> => {
             projectOwner.id as unknown as string,
             project.po_number,
             project.uuid,
-            project.company_code,
+            prefixCode,
+            counter,
             defaultTags,
           )
 
+          // mark project as migrated
           await baristaClient.$transaction(async (baristaTrx) => {
             // update project
             await baristaTrx.project.update({
