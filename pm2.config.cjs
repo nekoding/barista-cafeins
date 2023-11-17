@@ -6,7 +6,6 @@ module.exports = {
       args: ['barista:sync', 'project'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
-      max_memory_restart: '100M',
     },
     {
       name: 'sync sitepoints',
@@ -14,7 +13,6 @@ module.exports = {
       args: ['barista:sync', 'sitepoint'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
-      max_memory_restart: '100M',
     },
     {
       name: 'sync assets',
@@ -22,7 +20,6 @@ module.exports = {
       args: ['barista:sync', 'asset'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
-      max_memory_restart: '100M',
     },
   ],
 }

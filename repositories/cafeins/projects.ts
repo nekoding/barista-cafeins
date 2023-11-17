@@ -19,6 +19,7 @@ export const createProjects = async (
   projectPoNumber: string | null,
   projectUuid: string,
   projectCompanyCode: string,
+  projectTags: string[],
 ): Promise<any> => {
   const prefixCode = `CAF-${projectCompanyCode}-`
 
@@ -37,7 +38,8 @@ export const createProjects = async (
       description,
       project_owner_id,
       po_number,
-      uuid
+      uuid,
+      tag
     ) VALUES (
       ${projectCompanyId},
       ${projectVendorId},
@@ -63,7 +65,8 @@ export const createProjects = async (
       ${projectDescription},
       ${projectOwnerId},
       ${projectPoNumber},
-      ${projectUuid}::uuid
+      ${projectUuid}::uuid,
+      ${projectTags.join(',')}
     )
   `
 }

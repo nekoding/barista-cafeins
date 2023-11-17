@@ -19,11 +19,29 @@ export const syncProjects = async (): Promise<void> => {
         const [projectCreator, projectOwner, projectCompany, projectVendor] =
           await prepareData(project)
 
+        // set project group id to "project group migration"
         const projectGroupId = parseInt(
           process.env.PROJECT_PROJECT_GROUP_ID ?? '1',
         )
 
+        // set default tag to = "project migration"
+        const defaultTags = ['project migration']
+
         await cafeinsClient.$transaction(async (trx) => {
+          // first or create project tag
+          for (const tag of defaultTags) {
+            await trx.tags.upsert({
+              where: {
+                tag,
+              },
+              create: {
+                tag,
+              },
+              update: {},
+            })
+          }
+
+          // create project
           await createProjects(
             trx as CafeinsPrismaClient,
             projectCompany.id as unknown as string,
@@ -39,6 +57,7 @@ export const syncProjects = async (): Promise<void> => {
             project.po_number,
             project.uuid,
             project.company_code,
+            defaultTags,
           )
 
           await baristaClient.$transaction(async (baristaTrx) => {
