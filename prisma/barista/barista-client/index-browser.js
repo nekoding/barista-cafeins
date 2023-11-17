@@ -173,6 +173,25 @@ exports.Prisma.AssetScalarFieldEnum = {
   is_migrated: 'is_migrated',
 }
 
+exports.Prisma.RouteScalarFieldEnum = {
+  uuid: 'uuid',
+  cafeins_uuid: 'cafeins_uuid',
+  unique_id: 'unique_id',
+  name: 'name',
+  length: 'length',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_employee_no: 'created_employee_no',
+  modified_employee_no: 'modified_employee_no',
+  site_group_code_from: 'site_group_code_from',
+  site_group_code_to: 'site_group_code_to',
+  route_method: 'route_method',
+  route_ownership: 'route_ownership',
+  status: 'status',
+  last_read: 'last_read',
+  is_migrated: 'is_migrated',
+}
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc',
@@ -208,6 +227,7 @@ exports.Prisma.ModelName = {
   SitePoint: 'SitePoint',
   Log: 'Log',
   Asset: 'Asset',
+  Route: 'Route',
 }
 
 /**
