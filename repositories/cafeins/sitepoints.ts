@@ -24,6 +24,7 @@ export const createSitePoint = async (
   uuid: string,
   villageId: number,
   name: string,
+  code: string,
   latitude: number,
   longitude: number,
   geometry: string,
@@ -35,8 +36,8 @@ export const createSitePoint = async (
   await cafeinsClient.$transaction(async (trx) => {
     // value longitude and latitude is reversed in db cafeins
     await trx.$queryRaw`INSERT INTO "site_point.site_points"
-      (village_id, name, latitude, longitude, geometry, site_category_id, created_user_id, modified_user_id, created_at, updated_at, uuid)
-    VALUES (${villageId}, ${name}, ${longitude}, ${latitude}, ${geometry}, ${siteCategoryId}, ${userId}, ${userId}, ${createdAt}, ${updatedAt}, ${uuid})`
+      (village_id, name, code, latitude, longitude, geometry, site_category_id, created_user_id, modified_user_id, created_at, updated_at, uuid)
+    VALUES (${villageId}, ${name}, ${code}, ${longitude}, ${latitude}, ${geometry}, ${siteCategoryId}, ${userId}, ${userId}, ${createdAt}, ${updatedAt}, ${uuid})`
   })
 }
 

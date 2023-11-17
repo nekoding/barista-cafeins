@@ -5,7 +5,10 @@ import {
   getSitePointsByNearestCoords,
 } from '../repositories/cafeins/sitepoints'
 import { getUserByEmployeeNo } from '../repositories/cafeins/users'
-import { getVilagesByCoords } from '../repositories/cafeins/villages'
+import {
+  generatedCode,
+  getVilagesByCoords,
+} from '../repositories/cafeins/villages'
 import { baristaClient } from '../utils/database'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
@@ -17,7 +20,7 @@ export const syncSitePoint = async (): Promise<void> => {
 
     for (const sitePoint of sitePoints) {
       try {
-        // Find site point nearest coordinate (<=4 meters)
+        // find site point nearest coordinate (<=4 meters)
         const nearestSitePoint = await getSitePointsByNearestCoords(
           sitePoint.latitude,
           sitePoint.longitude,
@@ -55,7 +58,6 @@ export const syncSitePoint = async (): Promise<void> => {
 
         // if sitepoint not found create data to cafeins
         const user = await getUserByEmployeeNo(sitePoint.created_employee_no)
-
         if (user == null) {
           throw new Error('sitepoint owner user not found cannot migrate data')
         }
@@ -64,16 +66,26 @@ export const syncSitePoint = async (): Promise<void> => {
           sitePoint.latitude,
           sitePoint.longitude,
         )
-
-        if (village.length < 1) {
+        if (village.length === 0) {
           throw new Error('sitepoint village not found cannot migrate data')
         }
 
+        // generate code (default using SLA-)
+        const generateCode = await generatedCode(
+          'SLA-',
+          village[0].id.toLocaleString(),
+        )
+        if (generateCode == null) {
+          throw new Error('cannot generate code for sitepoint')
+        }
+
+        // set default site_category = 1 'general'
         const siteCategory = parseInt(process.env.SITE_CATEGORY_ID ?? '1')
         await createSitePoint(
           sitePoint.uuid,
           village[0].id,
-          sitePoint.name,
+          generateCode,
+          generateCode,
           sitePoint.latitude,
           sitePoint.longitude,
           sitePoint.geometry,
@@ -83,6 +95,7 @@ export const syncSitePoint = async (): Promise<void> => {
           sitePoint.updated_at,
         )
 
+        // marking data already migrated
         await baristaClient.$transaction(async (trx) => {
           await trx.sitePoint.update({
             data: {

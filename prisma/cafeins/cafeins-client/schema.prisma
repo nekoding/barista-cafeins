@@ -201,6 +201,7 @@ model assets {
   created_user_id      BigInt?
   modified_user_id     BigInt?
   deleted_user_id      BigInt?
+  code                 String?              @unique
   uuid                 String?              @unique(map: "asset_assets_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   asset_category_uuid  String?              @db.VarChar(255)
   asset_group_uuid     String?              @db.VarChar(255)

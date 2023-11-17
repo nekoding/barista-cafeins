@@ -265,6 +265,7 @@ exports.Prisma.AssetsScalarFieldEnum = {
   created_user_id: 'created_user_id',
   modified_user_id: 'modified_user_id',
   deleted_user_id: 'deleted_user_id',
+  code: 'code',
   uuid: 'uuid',
   asset_category_uuid: 'asset_category_uuid',
   asset_group_uuid: 'asset_group_uuid',
