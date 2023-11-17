@@ -32,8 +32,8 @@ model Project {
   modified_employee_no String?
   description          String?
   po_number            String?
-  owner_name           String?
-  owner_nik            String?
+  owner_name           String
+  owner_nik            String
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean           @default(false)
@@ -82,13 +82,13 @@ model Asset {
   updated_at           DateTime          @updatedAt
   created_employee_no  String?
   modified_employee_no String?
-  code                 String?
-  asset_group_code     String?
-  project_group_code   String?
-  site_group_code      String?
-  asset_category       String?
-  asset_ownership      String?
-  area_ownership       String?
+  code                 String
+  asset_group_code     String
+  project_group_code   String
+  site_group_code      String
+  asset_category       String
+  asset_ownership      String
+  area_ownership       String
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean           @default(false)
@@ -107,13 +107,59 @@ model Route {
   updated_at           DateTime                 @updatedAt
   created_employee_no  String?
   modified_employee_no String?
-  site_group_code_from String?
-  site_group_code_to   String?
-  route_method         String?
-  route_ownership      String?
+  site_group_code_from String
+  site_group_code_to   String
+  route_method         String
+  route_ownership      String
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean                  @default(false)
 
   @@map("routes")
+}
+
+model Cable {
+  uuid                      String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  unique_id                 String            @unique
+  project_group_code        String
+  name                      String
+  description               String?
+  length                    Decimal           @db.Decimal(10, 3)
+  created_at                DateTime          @default(now())
+  updated_at                DateTime          @updatedAt
+  created_employee_no       String?
+  modified_employee_no      String?
+  cable_category            String
+  cable_group               String
+  site_group_code_from      String
+  site_group_code_to        String
+  asset_ownership           String
+  area_ownership            String
+  placement_type            String
+  function                  String
+  route_unique_id_pembentuk String?
+  status                    MIGRATION_STATUS?
+  last_read                 DateTime?
+  is_migrated               Boolean           @default(false)
+
+  @@map("cables")
+}
+
+model Segment {
+  uuid                      String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  unique_id                 String            @unique
+  project_group_code        String
+  name                      String
+  created_at                DateTime          @default(now())
+  updated_at                DateTime          @updatedAt
+  created_employee_no       String?
+  modified_employee_no      String?
+  site_group_code_from      String
+  site_group_code_to        String
+  route_unique_id_pembentuk String?
+  status                    MIGRATION_STATUS?
+  last_read                 DateTime?
+  is_migrated               Boolean           @default(false)
+
+  @@map("segments")
 }

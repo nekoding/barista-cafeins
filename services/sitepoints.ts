@@ -62,6 +62,7 @@ export const syncSitePoint = async (): Promise<void> => {
           throw new Error('sitepoint owner user not found cannot migrate data')
         }
 
+        // get village data from coordinates
         const village = await getVilagesByCoords(
           sitePoint.latitude,
           sitePoint.longitude,

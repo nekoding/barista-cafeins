@@ -192,6 +192,48 @@ exports.Prisma.RouteScalarFieldEnum = {
   is_migrated: 'is_migrated',
 }
 
+exports.Prisma.CableScalarFieldEnum = {
+  uuid: 'uuid',
+  unique_id: 'unique_id',
+  project_group_code: 'project_group_code',
+  name: 'name',
+  description: 'description',
+  length: 'length',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_employee_no: 'created_employee_no',
+  modified_employee_no: 'modified_employee_no',
+  cable_category: 'cable_category',
+  cable_group: 'cable_group',
+  site_group_code_from: 'site_group_code_from',
+  site_group_code_to: 'site_group_code_to',
+  asset_ownership: 'asset_ownership',
+  area_ownership: 'area_ownership',
+  placement_type: 'placement_type',
+  function: 'function',
+  route_unique_id_pembentuk: 'route_unique_id_pembentuk',
+  status: 'status',
+  last_read: 'last_read',
+  is_migrated: 'is_migrated',
+}
+
+exports.Prisma.SegmentScalarFieldEnum = {
+  uuid: 'uuid',
+  unique_id: 'unique_id',
+  project_group_code: 'project_group_code',
+  name: 'name',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_employee_no: 'created_employee_no',
+  modified_employee_no: 'modified_employee_no',
+  site_group_code_from: 'site_group_code_from',
+  site_group_code_to: 'site_group_code_to',
+  route_unique_id_pembentuk: 'route_unique_id_pembentuk',
+  status: 'status',
+  last_read: 'last_read',
+  is_migrated: 'is_migrated',
+}
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc',
@@ -228,6 +270,8 @@ exports.Prisma.ModelName = {
   Log: 'Log',
   Asset: 'Asset',
   Route: 'Route',
+  Cable: 'Cable',
+  Segment: 'Segment',
 }
 
 /**

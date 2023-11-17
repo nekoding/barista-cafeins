@@ -38,6 +38,16 @@ export type Asset = $Result.DefaultSelection<Prisma.$AssetPayload>
  * 
  */
 export type Route = $Result.DefaultSelection<Prisma.$RoutePayload>
+/**
+ * Model Cable
+ * 
+ */
+export type Cable = $Result.DefaultSelection<Prisma.$CablePayload>
+/**
+ * Model Segment
+ * 
+ */
+export type Segment = $Result.DefaultSelection<Prisma.$SegmentPayload>
 
 /**
  * Enums
@@ -227,6 +237,26 @@ export class PrismaClient<
     * ```
     */
   get route(): Prisma.RouteDelegate<ExtArgs>;
+
+  /**
+   * `prisma.cable`: Exposes CRUD operations for the **Cable** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Cables
+    * const cables = await prisma.cable.findMany()
+    * ```
+    */
+  get cable(): Prisma.CableDelegate<ExtArgs>;
+
+  /**
+   * `prisma.segment`: Exposes CRUD operations for the **Segment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Segments
+    * const segments = await prisma.segment.findMany()
+    * ```
+    */
+  get segment(): Prisma.SegmentDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -701,7 +731,9 @@ export namespace Prisma {
     SitePoint: 'SitePoint',
     Log: 'Log',
     Asset: 'Asset',
-    Route: 'Route'
+    Route: 'Route',
+    Cable: 'Cable',
+    Segment: 'Segment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -718,7 +750,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'project' | 'sitePoint' | 'log' | 'asset' | 'route'
+      modelProps: 'project' | 'sitePoint' | 'log' | 'asset' | 'route' | 'cable' | 'segment'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1049,6 +1081,138 @@ export namespace Prisma {
           count: {
             args: Prisma.RouteCountArgs<ExtArgs>,
             result: $Utils.Optional<RouteCountAggregateOutputType> | number
+          }
+        }
+      }
+      Cable: {
+        payload: Prisma.$CablePayload<ExtArgs>
+        fields: Prisma.CableFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CableFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CableFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload>
+          }
+          findFirst: {
+            args: Prisma.CableFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CableFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload>
+          }
+          findMany: {
+            args: Prisma.CableFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload>[]
+          }
+          create: {
+            args: Prisma.CableCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload>
+          }
+          createMany: {
+            args: Prisma.CableCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.CableDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload>
+          }
+          update: {
+            args: Prisma.CableUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload>
+          }
+          deleteMany: {
+            args: Prisma.CableDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CableUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.CableUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CablePayload>
+          }
+          aggregate: {
+            args: Prisma.CableAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateCable>
+          }
+          groupBy: {
+            args: Prisma.CableGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<CableGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CableCountArgs<ExtArgs>,
+            result: $Utils.Optional<CableCountAggregateOutputType> | number
+          }
+        }
+      }
+      Segment: {
+        payload: Prisma.$SegmentPayload<ExtArgs>
+        fields: Prisma.SegmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SegmentFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SegmentFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload>
+          }
+          findFirst: {
+            args: Prisma.SegmentFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SegmentFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload>
+          }
+          findMany: {
+            args: Prisma.SegmentFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload>[]
+          }
+          create: {
+            args: Prisma.SegmentCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload>
+          }
+          createMany: {
+            args: Prisma.SegmentCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.SegmentDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload>
+          }
+          update: {
+            args: Prisma.SegmentUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.SegmentDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SegmentUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.SegmentUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SegmentPayload>
+          }
+          aggregate: {
+            args: Prisma.SegmentAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateSegment>
+          }
+          groupBy: {
+            args: Prisma.SegmentGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<SegmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SegmentCountArgs<ExtArgs>,
+            result: $Utils.Optional<SegmentCountAggregateOutputType> | number
           }
         }
       }
@@ -1419,8 +1583,8 @@ export namespace Prisma {
     modified_employee_no: string | null
     description: string | null
     po_number: string | null
-    owner_name: string | null
-    owner_nik: string | null
+    owner_name: string
+    owner_nik: string
     status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean
@@ -1500,8 +1664,8 @@ export namespace Prisma {
       modified_employee_no: string | null
       description: string | null
       po_number: string | null
-      owner_name: string | null
-      owner_nik: string | null
+      owner_name: string
+      owner_nik: string
       status: $Enums.MIGRATION_STATUS | null
       last_read: Date | null
       is_migrated: boolean
@@ -4314,13 +4478,13 @@ export namespace Prisma {
     updated_at: Date
     created_employee_no: string | null
     modified_employee_no: string | null
-    code: string | null
-    asset_group_code: string | null
-    project_group_code: string | null
-    site_group_code: string | null
-    asset_category: string | null
-    asset_ownership: string | null
-    area_ownership: string | null
+    code: string
+    asset_group_code: string
+    project_group_code: string
+    site_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
     status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean
@@ -4401,13 +4565,13 @@ export namespace Prisma {
       updated_at: Date
       created_employee_no: string | null
       modified_employee_no: string | null
-      code: string | null
-      asset_group_code: string | null
-      project_group_code: string | null
-      site_group_code: string | null
-      asset_category: string | null
-      asset_ownership: string | null
-      area_ownership: string | null
+      code: string
+      asset_group_code: string
+      project_group_code: string
+      site_group_code: string
+      asset_category: string
+      asset_ownership: string
+      area_ownership: string
       status: $Enums.MIGRATION_STATUS | null
       last_read: Date | null
       is_migrated: boolean
@@ -5352,10 +5516,10 @@ export namespace Prisma {
     updated_at: Date
     created_employee_no: string | null
     modified_employee_no: string | null
-    site_group_code_from: string | null
-    site_group_code_to: string | null
-    route_method: string | null
-    route_ownership: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_method: string
+    route_ownership: string
     status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
     is_migrated: boolean
@@ -5432,10 +5596,10 @@ export namespace Prisma {
       updated_at: Date
       created_employee_no: string | null
       modified_employee_no: string | null
-      site_group_code_from: string | null
-      site_group_code_to: string | null
-      route_method: string | null
-      route_ownership: string | null
+      site_group_code_from: string
+      site_group_code_to: string
+      route_method: string
+      route_ownership: string
       status: $Enums.MIGRATION_STATUS | null
       last_read: Date | null
       is_migrated: boolean
@@ -6137,6 +6301,2066 @@ export namespace Prisma {
 
 
   /**
+   * Model Cable
+   */
+
+  export type AggregateCable = {
+    _count: CableCountAggregateOutputType | null
+    _avg: CableAvgAggregateOutputType | null
+    _sum: CableSumAggregateOutputType | null
+    _min: CableMinAggregateOutputType | null
+    _max: CableMaxAggregateOutputType | null
+  }
+
+  export type CableAvgAggregateOutputType = {
+    length: Decimal | null
+  }
+
+  export type CableSumAggregateOutputType = {
+    length: Decimal | null
+  }
+
+  export type CableMinAggregateOutputType = {
+    uuid: string | null
+    unique_id: string | null
+    project_group_code: string | null
+    name: string | null
+    description: string | null
+    length: Decimal | null
+    created_at: Date | null
+    updated_at: Date | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    cable_category: string | null
+    cable_group: string | null
+    site_group_code_from: string | null
+    site_group_code_to: string | null
+    asset_ownership: string | null
+    area_ownership: string | null
+    placement_type: string | null
+    function: string | null
+    route_unique_id_pembentuk: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean | null
+  }
+
+  export type CableMaxAggregateOutputType = {
+    uuid: string | null
+    unique_id: string | null
+    project_group_code: string | null
+    name: string | null
+    description: string | null
+    length: Decimal | null
+    created_at: Date | null
+    updated_at: Date | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    cable_category: string | null
+    cable_group: string | null
+    site_group_code_from: string | null
+    site_group_code_to: string | null
+    asset_ownership: string | null
+    area_ownership: string | null
+    placement_type: string | null
+    function: string | null
+    route_unique_id_pembentuk: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean | null
+  }
+
+  export type CableCountAggregateOutputType = {
+    uuid: number
+    unique_id: number
+    project_group_code: number
+    name: number
+    description: number
+    length: number
+    created_at: number
+    updated_at: number
+    created_employee_no: number
+    modified_employee_no: number
+    cable_category: number
+    cable_group: number
+    site_group_code_from: number
+    site_group_code_to: number
+    asset_ownership: number
+    area_ownership: number
+    placement_type: number
+    function: number
+    route_unique_id_pembentuk: number
+    status: number
+    last_read: number
+    is_migrated: number
+    _all: number
+  }
+
+
+  export type CableAvgAggregateInputType = {
+    length?: true
+  }
+
+  export type CableSumAggregateInputType = {
+    length?: true
+  }
+
+  export type CableMinAggregateInputType = {
+    uuid?: true
+    unique_id?: true
+    project_group_code?: true
+    name?: true
+    description?: true
+    length?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    cable_category?: true
+    cable_group?: true
+    site_group_code_from?: true
+    site_group_code_to?: true
+    asset_ownership?: true
+    area_ownership?: true
+    placement_type?: true
+    function?: true
+    route_unique_id_pembentuk?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+  }
+
+  export type CableMaxAggregateInputType = {
+    uuid?: true
+    unique_id?: true
+    project_group_code?: true
+    name?: true
+    description?: true
+    length?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    cable_category?: true
+    cable_group?: true
+    site_group_code_from?: true
+    site_group_code_to?: true
+    asset_ownership?: true
+    area_ownership?: true
+    placement_type?: true
+    function?: true
+    route_unique_id_pembentuk?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+  }
+
+  export type CableCountAggregateInputType = {
+    uuid?: true
+    unique_id?: true
+    project_group_code?: true
+    name?: true
+    description?: true
+    length?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    cable_category?: true
+    cable_group?: true
+    site_group_code_from?: true
+    site_group_code_to?: true
+    asset_ownership?: true
+    area_ownership?: true
+    placement_type?: true
+    function?: true
+    route_unique_id_pembentuk?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+    _all?: true
+  }
+
+  export type CableAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Cable to aggregate.
+     */
+    where?: CableWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Cables to fetch.
+     */
+    orderBy?: CableOrderByWithRelationInput | CableOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CableWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Cables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Cables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Cables
+    **/
+    _count?: true | CableCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CableAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CableSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CableMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CableMaxAggregateInputType
+  }
+
+  export type GetCableAggregateType<T extends CableAggregateArgs> = {
+        [P in keyof T & keyof AggregateCable]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCable[P]>
+      : GetScalarType<T[P], AggregateCable[P]>
+  }
+
+
+
+
+  export type CableGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CableWhereInput
+    orderBy?: CableOrderByWithAggregationInput | CableOrderByWithAggregationInput[]
+    by: CableScalarFieldEnum[] | CableScalarFieldEnum
+    having?: CableScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CableCountAggregateInputType | true
+    _avg?: CableAvgAggregateInputType
+    _sum?: CableSumAggregateInputType
+    _min?: CableMinAggregateInputType
+    _max?: CableMaxAggregateInputType
+  }
+
+  export type CableGroupByOutputType = {
+    uuid: string
+    unique_id: string
+    project_group_code: string
+    name: string
+    description: string | null
+    length: Decimal
+    created_at: Date
+    updated_at: Date
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_from: string
+    site_group_code_to: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean
+    _count: CableCountAggregateOutputType | null
+    _avg: CableAvgAggregateOutputType | null
+    _sum: CableSumAggregateOutputType | null
+    _min: CableMinAggregateOutputType | null
+    _max: CableMaxAggregateOutputType | null
+  }
+
+  type GetCableGroupByPayload<T extends CableGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CableGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CableGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CableGroupByOutputType[P]>
+            : GetScalarType<T[P], CableGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CableSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uuid?: boolean
+    unique_id?: boolean
+    project_group_code?: boolean
+    name?: boolean
+    description?: boolean
+    length?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    created_employee_no?: boolean
+    modified_employee_no?: boolean
+    cable_category?: boolean
+    cable_group?: boolean
+    site_group_code_from?: boolean
+    site_group_code_to?: boolean
+    asset_ownership?: boolean
+    area_ownership?: boolean
+    placement_type?: boolean
+    function?: boolean
+    route_unique_id_pembentuk?: boolean
+    status?: boolean
+    last_read?: boolean
+    is_migrated?: boolean
+  }, ExtArgs["result"]["cable"]>
+
+  export type CableSelectScalar = {
+    uuid?: boolean
+    unique_id?: boolean
+    project_group_code?: boolean
+    name?: boolean
+    description?: boolean
+    length?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    created_employee_no?: boolean
+    modified_employee_no?: boolean
+    cable_category?: boolean
+    cable_group?: boolean
+    site_group_code_from?: boolean
+    site_group_code_to?: boolean
+    asset_ownership?: boolean
+    area_ownership?: boolean
+    placement_type?: boolean
+    function?: boolean
+    route_unique_id_pembentuk?: boolean
+    status?: boolean
+    last_read?: boolean
+    is_migrated?: boolean
+  }
+
+
+  export type $CablePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Cable"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      uuid: string
+      unique_id: string
+      project_group_code: string
+      name: string
+      description: string | null
+      length: Prisma.Decimal
+      created_at: Date
+      updated_at: Date
+      created_employee_no: string | null
+      modified_employee_no: string | null
+      cable_category: string
+      cable_group: string
+      site_group_code_from: string
+      site_group_code_to: string
+      asset_ownership: string
+      area_ownership: string
+      placement_type: string
+      function: string
+      route_unique_id_pembentuk: string | null
+      status: $Enums.MIGRATION_STATUS | null
+      last_read: Date | null
+      is_migrated: boolean
+    }, ExtArgs["result"]["cable"]>
+    composites: {}
+  }
+
+
+  type CableGetPayload<S extends boolean | null | undefined | CableDefaultArgs> = $Result.GetResult<Prisma.$CablePayload, S>
+
+  type CableCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CableFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: CableCountAggregateInputType | true
+    }
+
+  export interface CableDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Cable'], meta: { name: 'Cable' } }
+    /**
+     * Find zero or one Cable that matches the filter.
+     * @param {CableFindUniqueArgs} args - Arguments to find a Cable
+     * @example
+     * // Get one Cable
+     * const cable = await prisma.cable.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends CableFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, CableFindUniqueArgs<ExtArgs>>
+    ): Prisma__CableClient<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Cable that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {CableFindUniqueOrThrowArgs} args - Arguments to find a Cable
+     * @example
+     * // Get one Cable
+     * const cable = await prisma.cable.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends CableFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, CableFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__CableClient<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Cable that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableFindFirstArgs} args - Arguments to find a Cable
+     * @example
+     * // Get one Cable
+     * const cable = await prisma.cable.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends CableFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, CableFindFirstArgs<ExtArgs>>
+    ): Prisma__CableClient<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Cable that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableFindFirstOrThrowArgs} args - Arguments to find a Cable
+     * @example
+     * // Get one Cable
+     * const cable = await prisma.cable.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends CableFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, CableFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__CableClient<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Cables that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Cables
+     * const cables = await prisma.cable.findMany()
+     * 
+     * // Get first 10 Cables
+     * const cables = await prisma.cable.findMany({ take: 10 })
+     * 
+     * // Only select the `uuid`
+     * const cableWithUuidOnly = await prisma.cable.findMany({ select: { uuid: true } })
+     * 
+    **/
+    findMany<T extends CableFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CableFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Cable.
+     * @param {CableCreateArgs} args - Arguments to create a Cable.
+     * @example
+     * // Create one Cable
+     * const Cable = await prisma.cable.create({
+     *   data: {
+     *     // ... data to create a Cable
+     *   }
+     * })
+     * 
+    **/
+    create<T extends CableCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, CableCreateArgs<ExtArgs>>
+    ): Prisma__CableClient<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Cables.
+     *     @param {CableCreateManyArgs} args - Arguments to create many Cables.
+     *     @example
+     *     // Create many Cables
+     *     const cable = await prisma.cable.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends CableCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CableCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Cable.
+     * @param {CableDeleteArgs} args - Arguments to delete one Cable.
+     * @example
+     * // Delete one Cable
+     * const Cable = await prisma.cable.delete({
+     *   where: {
+     *     // ... filter to delete one Cable
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends CableDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, CableDeleteArgs<ExtArgs>>
+    ): Prisma__CableClient<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Cable.
+     * @param {CableUpdateArgs} args - Arguments to update one Cable.
+     * @example
+     * // Update one Cable
+     * const cable = await prisma.cable.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends CableUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, CableUpdateArgs<ExtArgs>>
+    ): Prisma__CableClient<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Cables.
+     * @param {CableDeleteManyArgs} args - Arguments to filter Cables to delete.
+     * @example
+     * // Delete a few Cables
+     * const { count } = await prisma.cable.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends CableDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CableDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Cables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Cables
+     * const cable = await prisma.cable.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends CableUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, CableUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Cable.
+     * @param {CableUpsertArgs} args - Arguments to update or create a Cable.
+     * @example
+     * // Update or create a Cable
+     * const cable = await prisma.cable.upsert({
+     *   create: {
+     *     // ... data to create a Cable
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Cable we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends CableUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, CableUpsertArgs<ExtArgs>>
+    ): Prisma__CableClient<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Cables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableCountArgs} args - Arguments to filter Cables to count.
+     * @example
+     * // Count the number of Cables
+     * const count = await prisma.cable.count({
+     *   where: {
+     *     // ... the filter for the Cables we want to count
+     *   }
+     * })
+    **/
+    count<T extends CableCountArgs>(
+      args?: Subset<T, CableCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CableCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Cable.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CableAggregateArgs>(args: Subset<T, CableAggregateArgs>): Prisma.PrismaPromise<GetCableAggregateType<T>>
+
+    /**
+     * Group by Cable.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CableGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CableGroupByArgs['orderBy'] }
+        : { orderBy?: CableGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CableGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCableGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Cable model
+   */
+  readonly fields: CableFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Cable.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CableClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Cable model
+   */ 
+  interface CableFieldRefs {
+    readonly uuid: FieldRef<"Cable", 'String'>
+    readonly unique_id: FieldRef<"Cable", 'String'>
+    readonly project_group_code: FieldRef<"Cable", 'String'>
+    readonly name: FieldRef<"Cable", 'String'>
+    readonly description: FieldRef<"Cable", 'String'>
+    readonly length: FieldRef<"Cable", 'Decimal'>
+    readonly created_at: FieldRef<"Cable", 'DateTime'>
+    readonly updated_at: FieldRef<"Cable", 'DateTime'>
+    readonly created_employee_no: FieldRef<"Cable", 'String'>
+    readonly modified_employee_no: FieldRef<"Cable", 'String'>
+    readonly cable_category: FieldRef<"Cable", 'String'>
+    readonly cable_group: FieldRef<"Cable", 'String'>
+    readonly site_group_code_from: FieldRef<"Cable", 'String'>
+    readonly site_group_code_to: FieldRef<"Cable", 'String'>
+    readonly asset_ownership: FieldRef<"Cable", 'String'>
+    readonly area_ownership: FieldRef<"Cable", 'String'>
+    readonly placement_type: FieldRef<"Cable", 'String'>
+    readonly function: FieldRef<"Cable", 'String'>
+    readonly route_unique_id_pembentuk: FieldRef<"Cable", 'String'>
+    readonly status: FieldRef<"Cable", 'MIGRATION_STATUS'>
+    readonly last_read: FieldRef<"Cable", 'DateTime'>
+    readonly is_migrated: FieldRef<"Cable", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Cable findUnique
+   */
+  export type CableFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Filter, which Cable to fetch.
+     */
+    where: CableWhereUniqueInput
+  }
+
+
+  /**
+   * Cable findUniqueOrThrow
+   */
+  export type CableFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Filter, which Cable to fetch.
+     */
+    where: CableWhereUniqueInput
+  }
+
+
+  /**
+   * Cable findFirst
+   */
+  export type CableFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Filter, which Cable to fetch.
+     */
+    where?: CableWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Cables to fetch.
+     */
+    orderBy?: CableOrderByWithRelationInput | CableOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Cables.
+     */
+    cursor?: CableWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Cables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Cables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Cables.
+     */
+    distinct?: CableScalarFieldEnum | CableScalarFieldEnum[]
+  }
+
+
+  /**
+   * Cable findFirstOrThrow
+   */
+  export type CableFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Filter, which Cable to fetch.
+     */
+    where?: CableWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Cables to fetch.
+     */
+    orderBy?: CableOrderByWithRelationInput | CableOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Cables.
+     */
+    cursor?: CableWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Cables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Cables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Cables.
+     */
+    distinct?: CableScalarFieldEnum | CableScalarFieldEnum[]
+  }
+
+
+  /**
+   * Cable findMany
+   */
+  export type CableFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Filter, which Cables to fetch.
+     */
+    where?: CableWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Cables to fetch.
+     */
+    orderBy?: CableOrderByWithRelationInput | CableOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Cables.
+     */
+    cursor?: CableWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Cables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Cables.
+     */
+    skip?: number
+    distinct?: CableScalarFieldEnum | CableScalarFieldEnum[]
+  }
+
+
+  /**
+   * Cable create
+   */
+  export type CableCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Cable.
+     */
+    data: XOR<CableCreateInput, CableUncheckedCreateInput>
+  }
+
+
+  /**
+   * Cable createMany
+   */
+  export type CableCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Cables.
+     */
+    data: CableCreateManyInput | CableCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Cable update
+   */
+  export type CableUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Cable.
+     */
+    data: XOR<CableUpdateInput, CableUncheckedUpdateInput>
+    /**
+     * Choose, which Cable to update.
+     */
+    where: CableWhereUniqueInput
+  }
+
+
+  /**
+   * Cable updateMany
+   */
+  export type CableUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Cables.
+     */
+    data: XOR<CableUpdateManyMutationInput, CableUncheckedUpdateManyInput>
+    /**
+     * Filter which Cables to update
+     */
+    where?: CableWhereInput
+  }
+
+
+  /**
+   * Cable upsert
+   */
+  export type CableUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Cable to update in case it exists.
+     */
+    where: CableWhereUniqueInput
+    /**
+     * In case the Cable found by the `where` argument doesn't exist, create a new Cable with this data.
+     */
+    create: XOR<CableCreateInput, CableUncheckedCreateInput>
+    /**
+     * In case the Cable was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CableUpdateInput, CableUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Cable delete
+   */
+  export type CableDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Filter which Cable to delete.
+     */
+    where: CableWhereUniqueInput
+  }
+
+
+  /**
+   * Cable deleteMany
+   */
+  export type CableDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Cables to delete
+     */
+    where?: CableWhereInput
+  }
+
+
+  /**
+   * Cable without action
+   */
+  export type CableDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model Segment
+   */
+
+  export type AggregateSegment = {
+    _count: SegmentCountAggregateOutputType | null
+    _min: SegmentMinAggregateOutputType | null
+    _max: SegmentMaxAggregateOutputType | null
+  }
+
+  export type SegmentMinAggregateOutputType = {
+    uuid: string | null
+    unique_id: string | null
+    project_group_code: string | null
+    name: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    site_group_code_from: string | null
+    site_group_code_to: string | null
+    route_unique_id_pembentuk: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean | null
+  }
+
+  export type SegmentMaxAggregateOutputType = {
+    uuid: string | null
+    unique_id: string | null
+    project_group_code: string | null
+    name: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    site_group_code_from: string | null
+    site_group_code_to: string | null
+    route_unique_id_pembentuk: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean | null
+  }
+
+  export type SegmentCountAggregateOutputType = {
+    uuid: number
+    unique_id: number
+    project_group_code: number
+    name: number
+    created_at: number
+    updated_at: number
+    created_employee_no: number
+    modified_employee_no: number
+    site_group_code_from: number
+    site_group_code_to: number
+    route_unique_id_pembentuk: number
+    status: number
+    last_read: number
+    is_migrated: number
+    _all: number
+  }
+
+
+  export type SegmentMinAggregateInputType = {
+    uuid?: true
+    unique_id?: true
+    project_group_code?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    site_group_code_from?: true
+    site_group_code_to?: true
+    route_unique_id_pembentuk?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+  }
+
+  export type SegmentMaxAggregateInputType = {
+    uuid?: true
+    unique_id?: true
+    project_group_code?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    site_group_code_from?: true
+    site_group_code_to?: true
+    route_unique_id_pembentuk?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+  }
+
+  export type SegmentCountAggregateInputType = {
+    uuid?: true
+    unique_id?: true
+    project_group_code?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    created_employee_no?: true
+    modified_employee_no?: true
+    site_group_code_from?: true
+    site_group_code_to?: true
+    route_unique_id_pembentuk?: true
+    status?: true
+    last_read?: true
+    is_migrated?: true
+    _all?: true
+  }
+
+  export type SegmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Segment to aggregate.
+     */
+    where?: SegmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Segments to fetch.
+     */
+    orderBy?: SegmentOrderByWithRelationInput | SegmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SegmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Segments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Segments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Segments
+    **/
+    _count?: true | SegmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SegmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SegmentMaxAggregateInputType
+  }
+
+  export type GetSegmentAggregateType<T extends SegmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateSegment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSegment[P]>
+      : GetScalarType<T[P], AggregateSegment[P]>
+  }
+
+
+
+
+  export type SegmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SegmentWhereInput
+    orderBy?: SegmentOrderByWithAggregationInput | SegmentOrderByWithAggregationInput[]
+    by: SegmentScalarFieldEnum[] | SegmentScalarFieldEnum
+    having?: SegmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SegmentCountAggregateInputType | true
+    _min?: SegmentMinAggregateInputType
+    _max?: SegmentMaxAggregateInputType
+  }
+
+  export type SegmentGroupByOutputType = {
+    uuid: string
+    unique_id: string
+    project_group_code: string
+    name: string
+    created_at: Date
+    updated_at: Date
+    created_employee_no: string | null
+    modified_employee_no: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_unique_id_pembentuk: string | null
+    status: $Enums.MIGRATION_STATUS | null
+    last_read: Date | null
+    is_migrated: boolean
+    _count: SegmentCountAggregateOutputType | null
+    _min: SegmentMinAggregateOutputType | null
+    _max: SegmentMaxAggregateOutputType | null
+  }
+
+  type GetSegmentGroupByPayload<T extends SegmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SegmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SegmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SegmentGroupByOutputType[P]>
+            : GetScalarType<T[P], SegmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SegmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    uuid?: boolean
+    unique_id?: boolean
+    project_group_code?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    created_employee_no?: boolean
+    modified_employee_no?: boolean
+    site_group_code_from?: boolean
+    site_group_code_to?: boolean
+    route_unique_id_pembentuk?: boolean
+    status?: boolean
+    last_read?: boolean
+    is_migrated?: boolean
+  }, ExtArgs["result"]["segment"]>
+
+  export type SegmentSelectScalar = {
+    uuid?: boolean
+    unique_id?: boolean
+    project_group_code?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    created_employee_no?: boolean
+    modified_employee_no?: boolean
+    site_group_code_from?: boolean
+    site_group_code_to?: boolean
+    route_unique_id_pembentuk?: boolean
+    status?: boolean
+    last_read?: boolean
+    is_migrated?: boolean
+  }
+
+
+  export type $SegmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Segment"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      uuid: string
+      unique_id: string
+      project_group_code: string
+      name: string
+      created_at: Date
+      updated_at: Date
+      created_employee_no: string | null
+      modified_employee_no: string | null
+      site_group_code_from: string
+      site_group_code_to: string
+      route_unique_id_pembentuk: string | null
+      status: $Enums.MIGRATION_STATUS | null
+      last_read: Date | null
+      is_migrated: boolean
+    }, ExtArgs["result"]["segment"]>
+    composites: {}
+  }
+
+
+  type SegmentGetPayload<S extends boolean | null | undefined | SegmentDefaultArgs> = $Result.GetResult<Prisma.$SegmentPayload, S>
+
+  type SegmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SegmentFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: SegmentCountAggregateInputType | true
+    }
+
+  export interface SegmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Segment'], meta: { name: 'Segment' } }
+    /**
+     * Find zero or one Segment that matches the filter.
+     * @param {SegmentFindUniqueArgs} args - Arguments to find a Segment
+     * @example
+     * // Get one Segment
+     * const segment = await prisma.segment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends SegmentFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, SegmentFindUniqueArgs<ExtArgs>>
+    ): Prisma__SegmentClient<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Segment that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {SegmentFindUniqueOrThrowArgs} args - Arguments to find a Segment
+     * @example
+     * // Get one Segment
+     * const segment = await prisma.segment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends SegmentFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SegmentFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__SegmentClient<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Segment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SegmentFindFirstArgs} args - Arguments to find a Segment
+     * @example
+     * // Get one Segment
+     * const segment = await prisma.segment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends SegmentFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, SegmentFindFirstArgs<ExtArgs>>
+    ): Prisma__SegmentClient<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Segment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SegmentFindFirstOrThrowArgs} args - Arguments to find a Segment
+     * @example
+     * // Get one Segment
+     * const segment = await prisma.segment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends SegmentFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SegmentFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__SegmentClient<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Segments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SegmentFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Segments
+     * const segments = await prisma.segment.findMany()
+     * 
+     * // Get first 10 Segments
+     * const segments = await prisma.segment.findMany({ take: 10 })
+     * 
+     * // Only select the `uuid`
+     * const segmentWithUuidOnly = await prisma.segment.findMany({ select: { uuid: true } })
+     * 
+    **/
+    findMany<T extends SegmentFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SegmentFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Segment.
+     * @param {SegmentCreateArgs} args - Arguments to create a Segment.
+     * @example
+     * // Create one Segment
+     * const Segment = await prisma.segment.create({
+     *   data: {
+     *     // ... data to create a Segment
+     *   }
+     * })
+     * 
+    **/
+    create<T extends SegmentCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, SegmentCreateArgs<ExtArgs>>
+    ): Prisma__SegmentClient<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Segments.
+     *     @param {SegmentCreateManyArgs} args - Arguments to create many Segments.
+     *     @example
+     *     // Create many Segments
+     *     const segment = await prisma.segment.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends SegmentCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SegmentCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Segment.
+     * @param {SegmentDeleteArgs} args - Arguments to delete one Segment.
+     * @example
+     * // Delete one Segment
+     * const Segment = await prisma.segment.delete({
+     *   where: {
+     *     // ... filter to delete one Segment
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends SegmentDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, SegmentDeleteArgs<ExtArgs>>
+    ): Prisma__SegmentClient<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Segment.
+     * @param {SegmentUpdateArgs} args - Arguments to update one Segment.
+     * @example
+     * // Update one Segment
+     * const segment = await prisma.segment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends SegmentUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, SegmentUpdateArgs<ExtArgs>>
+    ): Prisma__SegmentClient<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Segments.
+     * @param {SegmentDeleteManyArgs} args - Arguments to filter Segments to delete.
+     * @example
+     * // Delete a few Segments
+     * const { count } = await prisma.segment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends SegmentDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SegmentDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Segments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SegmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Segments
+     * const segment = await prisma.segment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends SegmentUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, SegmentUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Segment.
+     * @param {SegmentUpsertArgs} args - Arguments to update or create a Segment.
+     * @example
+     * // Update or create a Segment
+     * const segment = await prisma.segment.upsert({
+     *   create: {
+     *     // ... data to create a Segment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Segment we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends SegmentUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, SegmentUpsertArgs<ExtArgs>>
+    ): Prisma__SegmentClient<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Segments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SegmentCountArgs} args - Arguments to filter Segments to count.
+     * @example
+     * // Count the number of Segments
+     * const count = await prisma.segment.count({
+     *   where: {
+     *     // ... the filter for the Segments we want to count
+     *   }
+     * })
+    **/
+    count<T extends SegmentCountArgs>(
+      args?: Subset<T, SegmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SegmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Segment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SegmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SegmentAggregateArgs>(args: Subset<T, SegmentAggregateArgs>): Prisma.PrismaPromise<GetSegmentAggregateType<T>>
+
+    /**
+     * Group by Segment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SegmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SegmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SegmentGroupByArgs['orderBy'] }
+        : { orderBy?: SegmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SegmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSegmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Segment model
+   */
+  readonly fields: SegmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Segment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SegmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Segment model
+   */ 
+  interface SegmentFieldRefs {
+    readonly uuid: FieldRef<"Segment", 'String'>
+    readonly unique_id: FieldRef<"Segment", 'String'>
+    readonly project_group_code: FieldRef<"Segment", 'String'>
+    readonly name: FieldRef<"Segment", 'String'>
+    readonly created_at: FieldRef<"Segment", 'DateTime'>
+    readonly updated_at: FieldRef<"Segment", 'DateTime'>
+    readonly created_employee_no: FieldRef<"Segment", 'String'>
+    readonly modified_employee_no: FieldRef<"Segment", 'String'>
+    readonly site_group_code_from: FieldRef<"Segment", 'String'>
+    readonly site_group_code_to: FieldRef<"Segment", 'String'>
+    readonly route_unique_id_pembentuk: FieldRef<"Segment", 'String'>
+    readonly status: FieldRef<"Segment", 'MIGRATION_STATUS'>
+    readonly last_read: FieldRef<"Segment", 'DateTime'>
+    readonly is_migrated: FieldRef<"Segment", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Segment findUnique
+   */
+  export type SegmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Segment to fetch.
+     */
+    where: SegmentWhereUniqueInput
+  }
+
+
+  /**
+   * Segment findUniqueOrThrow
+   */
+  export type SegmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Segment to fetch.
+     */
+    where: SegmentWhereUniqueInput
+  }
+
+
+  /**
+   * Segment findFirst
+   */
+  export type SegmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Segment to fetch.
+     */
+    where?: SegmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Segments to fetch.
+     */
+    orderBy?: SegmentOrderByWithRelationInput | SegmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Segments.
+     */
+    cursor?: SegmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Segments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Segments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Segments.
+     */
+    distinct?: SegmentScalarFieldEnum | SegmentScalarFieldEnum[]
+  }
+
+
+  /**
+   * Segment findFirstOrThrow
+   */
+  export type SegmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Segment to fetch.
+     */
+    where?: SegmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Segments to fetch.
+     */
+    orderBy?: SegmentOrderByWithRelationInput | SegmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Segments.
+     */
+    cursor?: SegmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Segments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Segments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Segments.
+     */
+    distinct?: SegmentScalarFieldEnum | SegmentScalarFieldEnum[]
+  }
+
+
+  /**
+   * Segment findMany
+   */
+  export type SegmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Filter, which Segments to fetch.
+     */
+    where?: SegmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Segments to fetch.
+     */
+    orderBy?: SegmentOrderByWithRelationInput | SegmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Segments.
+     */
+    cursor?: SegmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Segments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Segments.
+     */
+    skip?: number
+    distinct?: SegmentScalarFieldEnum | SegmentScalarFieldEnum[]
+  }
+
+
+  /**
+   * Segment create
+   */
+  export type SegmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Segment.
+     */
+    data: XOR<SegmentCreateInput, SegmentUncheckedCreateInput>
+  }
+
+
+  /**
+   * Segment createMany
+   */
+  export type SegmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Segments.
+     */
+    data: SegmentCreateManyInput | SegmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Segment update
+   */
+  export type SegmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Segment.
+     */
+    data: XOR<SegmentUpdateInput, SegmentUncheckedUpdateInput>
+    /**
+     * Choose, which Segment to update.
+     */
+    where: SegmentWhereUniqueInput
+  }
+
+
+  /**
+   * Segment updateMany
+   */
+  export type SegmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Segments.
+     */
+    data: XOR<SegmentUpdateManyMutationInput, SegmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Segments to update
+     */
+    where?: SegmentWhereInput
+  }
+
+
+  /**
+   * Segment upsert
+   */
+  export type SegmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Segment to update in case it exists.
+     */
+    where: SegmentWhereUniqueInput
+    /**
+     * In case the Segment found by the `where` argument doesn't exist, create a new Segment with this data.
+     */
+    create: XOR<SegmentCreateInput, SegmentUncheckedCreateInput>
+    /**
+     * In case the Segment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SegmentUpdateInput, SegmentUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Segment delete
+   */
+  export type SegmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Filter which Segment to delete.
+     */
+    where: SegmentWhereUniqueInput
+  }
+
+
+  /**
+   * Segment deleteMany
+   */
+  export type SegmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Segments to delete
+     */
+    where?: SegmentWhereInput
+  }
+
+
+  /**
+   * Segment without action
+   */
+  export type SegmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -6250,6 +8474,54 @@ export namespace Prisma {
   };
 
   export type RouteScalarFieldEnum = (typeof RouteScalarFieldEnum)[keyof typeof RouteScalarFieldEnum]
+
+
+  export const CableScalarFieldEnum: {
+    uuid: 'uuid',
+    unique_id: 'unique_id',
+    project_group_code: 'project_group_code',
+    name: 'name',
+    description: 'description',
+    length: 'length',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    created_employee_no: 'created_employee_no',
+    modified_employee_no: 'modified_employee_no',
+    cable_category: 'cable_category',
+    cable_group: 'cable_group',
+    site_group_code_from: 'site_group_code_from',
+    site_group_code_to: 'site_group_code_to',
+    asset_ownership: 'asset_ownership',
+    area_ownership: 'area_ownership',
+    placement_type: 'placement_type',
+    function: 'function',
+    route_unique_id_pembentuk: 'route_unique_id_pembentuk',
+    status: 'status',
+    last_read: 'last_read',
+    is_migrated: 'is_migrated'
+  };
+
+  export type CableScalarFieldEnum = (typeof CableScalarFieldEnum)[keyof typeof CableScalarFieldEnum]
+
+
+  export const SegmentScalarFieldEnum: {
+    uuid: 'uuid',
+    unique_id: 'unique_id',
+    project_group_code: 'project_group_code',
+    name: 'name',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    created_employee_no: 'created_employee_no',
+    modified_employee_no: 'modified_employee_no',
+    site_group_code_from: 'site_group_code_from',
+    site_group_code_to: 'site_group_code_to',
+    route_unique_id_pembentuk: 'route_unique_id_pembentuk',
+    status: 'status',
+    last_read: 'last_read',
+    is_migrated: 'is_migrated'
+  };
+
+  export type SegmentScalarFieldEnum = (typeof SegmentScalarFieldEnum)[keyof typeof SegmentScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6415,8 +8687,8 @@ export namespace Prisma {
     modified_employee_no?: StringNullableFilter<"Project"> | string | null
     description?: StringNullableFilter<"Project"> | string | null
     po_number?: StringNullableFilter<"Project"> | string | null
-    owner_name?: StringNullableFilter<"Project"> | string | null
-    owner_nik?: StringNullableFilter<"Project"> | string | null
+    owner_name?: StringFilter<"Project"> | string
+    owner_nik?: StringFilter<"Project"> | string
     status?: EnumMIGRATION_STATUSNullableFilter<"Project"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Project"> | Date | string | null
     is_migrated?: BoolFilter<"Project"> | boolean
@@ -6435,8 +8707,8 @@ export namespace Prisma {
     modified_employee_no?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     po_number?: SortOrderInput | SortOrder
-    owner_name?: SortOrderInput | SortOrder
-    owner_nik?: SortOrderInput | SortOrder
+    owner_name?: SortOrder
+    owner_nik?: SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
@@ -6458,8 +8730,8 @@ export namespace Prisma {
     modified_employee_no?: StringNullableFilter<"Project"> | string | null
     description?: StringNullableFilter<"Project"> | string | null
     po_number?: StringNullableFilter<"Project"> | string | null
-    owner_name?: StringNullableFilter<"Project"> | string | null
-    owner_nik?: StringNullableFilter<"Project"> | string | null
+    owner_name?: StringFilter<"Project"> | string
+    owner_nik?: StringFilter<"Project"> | string
     status?: EnumMIGRATION_STATUSNullableFilter<"Project"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Project"> | Date | string | null
     is_migrated?: BoolFilter<"Project"> | boolean
@@ -6478,8 +8750,8 @@ export namespace Prisma {
     modified_employee_no?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     po_number?: SortOrderInput | SortOrder
-    owner_name?: SortOrderInput | SortOrder
-    owner_nik?: SortOrderInput | SortOrder
+    owner_name?: SortOrder
+    owner_nik?: SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
@@ -6504,8 +8776,8 @@ export namespace Prisma {
     modified_employee_no?: StringNullableWithAggregatesFilter<"Project"> | string | null
     description?: StringNullableWithAggregatesFilter<"Project"> | string | null
     po_number?: StringNullableWithAggregatesFilter<"Project"> | string | null
-    owner_name?: StringNullableWithAggregatesFilter<"Project"> | string | null
-    owner_nik?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    owner_name?: StringWithAggregatesFilter<"Project"> | string
+    owner_nik?: StringWithAggregatesFilter<"Project"> | string
     status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Project"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
     is_migrated?: BoolWithAggregatesFilter<"Project"> | boolean
@@ -6680,13 +8952,13 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Asset"> | Date | string
     created_employee_no?: StringNullableFilter<"Asset"> | string | null
     modified_employee_no?: StringNullableFilter<"Asset"> | string | null
-    code?: StringNullableFilter<"Asset"> | string | null
-    asset_group_code?: StringNullableFilter<"Asset"> | string | null
-    project_group_code?: StringNullableFilter<"Asset"> | string | null
-    site_group_code?: StringNullableFilter<"Asset"> | string | null
-    asset_category?: StringNullableFilter<"Asset"> | string | null
-    asset_ownership?: StringNullableFilter<"Asset"> | string | null
-    area_ownership?: StringNullableFilter<"Asset"> | string | null
+    code?: StringFilter<"Asset"> | string
+    asset_group_code?: StringFilter<"Asset"> | string
+    project_group_code?: StringFilter<"Asset"> | string
+    site_group_code?: StringFilter<"Asset"> | string
+    asset_category?: StringFilter<"Asset"> | string
+    asset_ownership?: StringFilter<"Asset"> | string
+    area_ownership?: StringFilter<"Asset"> | string
     status?: EnumMIGRATION_STATUSNullableFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Asset"> | Date | string | null
     is_migrated?: BoolFilter<"Asset"> | boolean
@@ -6702,13 +8974,13 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrderInput | SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
-    code?: SortOrderInput | SortOrder
-    asset_group_code?: SortOrderInput | SortOrder
-    project_group_code?: SortOrderInput | SortOrder
-    site_group_code?: SortOrderInput | SortOrder
-    asset_category?: SortOrderInput | SortOrder
-    asset_ownership?: SortOrderInput | SortOrder
-    area_ownership?: SortOrderInput | SortOrder
+    code?: SortOrder
+    asset_group_code?: SortOrder
+    project_group_code?: SortOrder
+    site_group_code?: SortOrder
+    asset_category?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
@@ -6727,13 +8999,13 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Asset"> | Date | string
     created_employee_no?: StringNullableFilter<"Asset"> | string | null
     modified_employee_no?: StringNullableFilter<"Asset"> | string | null
-    code?: StringNullableFilter<"Asset"> | string | null
-    asset_group_code?: StringNullableFilter<"Asset"> | string | null
-    project_group_code?: StringNullableFilter<"Asset"> | string | null
-    site_group_code?: StringNullableFilter<"Asset"> | string | null
-    asset_category?: StringNullableFilter<"Asset"> | string | null
-    asset_ownership?: StringNullableFilter<"Asset"> | string | null
-    area_ownership?: StringNullableFilter<"Asset"> | string | null
+    code?: StringFilter<"Asset"> | string
+    asset_group_code?: StringFilter<"Asset"> | string
+    project_group_code?: StringFilter<"Asset"> | string
+    site_group_code?: StringFilter<"Asset"> | string
+    asset_category?: StringFilter<"Asset"> | string
+    asset_ownership?: StringFilter<"Asset"> | string
+    area_ownership?: StringFilter<"Asset"> | string
     status?: EnumMIGRATION_STATUSNullableFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Asset"> | Date | string | null
     is_migrated?: BoolFilter<"Asset"> | boolean
@@ -6749,13 +9021,13 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrderInput | SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
-    code?: SortOrderInput | SortOrder
-    asset_group_code?: SortOrderInput | SortOrder
-    project_group_code?: SortOrderInput | SortOrder
-    site_group_code?: SortOrderInput | SortOrder
-    asset_category?: SortOrderInput | SortOrder
-    asset_ownership?: SortOrderInput | SortOrder
-    area_ownership?: SortOrderInput | SortOrder
+    code?: SortOrder
+    asset_group_code?: SortOrder
+    project_group_code?: SortOrder
+    site_group_code?: SortOrder
+    asset_category?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
@@ -6777,13 +9049,13 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"Asset"> | Date | string
     created_employee_no?: StringNullableWithAggregatesFilter<"Asset"> | string | null
     modified_employee_no?: StringNullableWithAggregatesFilter<"Asset"> | string | null
-    code?: StringNullableWithAggregatesFilter<"Asset"> | string | null
-    asset_group_code?: StringNullableWithAggregatesFilter<"Asset"> | string | null
-    project_group_code?: StringNullableWithAggregatesFilter<"Asset"> | string | null
-    site_group_code?: StringNullableWithAggregatesFilter<"Asset"> | string | null
-    asset_category?: StringNullableWithAggregatesFilter<"Asset"> | string | null
-    asset_ownership?: StringNullableWithAggregatesFilter<"Asset"> | string | null
-    area_ownership?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    code?: StringWithAggregatesFilter<"Asset"> | string
+    asset_group_code?: StringWithAggregatesFilter<"Asset"> | string
+    project_group_code?: StringWithAggregatesFilter<"Asset"> | string
+    site_group_code?: StringWithAggregatesFilter<"Asset"> | string
+    asset_category?: StringWithAggregatesFilter<"Asset"> | string
+    asset_ownership?: StringWithAggregatesFilter<"Asset"> | string
+    area_ownership?: StringWithAggregatesFilter<"Asset"> | string
     status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableWithAggregatesFilter<"Asset"> | Date | string | null
     is_migrated?: BoolWithAggregatesFilter<"Asset"> | boolean
@@ -6802,10 +9074,10 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Route"> | Date | string
     created_employee_no?: StringNullableFilter<"Route"> | string | null
     modified_employee_no?: StringNullableFilter<"Route"> | string | null
-    site_group_code_from?: StringNullableFilter<"Route"> | string | null
-    site_group_code_to?: StringNullableFilter<"Route"> | string | null
-    route_method?: StringNullableFilter<"Route"> | string | null
-    route_ownership?: StringNullableFilter<"Route"> | string | null
+    site_group_code_from?: StringFilter<"Route"> | string
+    site_group_code_to?: StringFilter<"Route"> | string
+    route_method?: StringFilter<"Route"> | string
+    route_ownership?: StringFilter<"Route"> | string
     status?: EnumMIGRATION_STATUSNullableFilter<"Route"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Route"> | Date | string | null
     is_migrated?: BoolFilter<"Route"> | boolean
@@ -6821,10 +9093,10 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrderInput | SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
-    site_group_code_from?: SortOrderInput | SortOrder
-    site_group_code_to?: SortOrderInput | SortOrder
-    route_method?: SortOrderInput | SortOrder
-    route_ownership?: SortOrderInput | SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    route_method?: SortOrder
+    route_ownership?: SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
@@ -6843,10 +9115,10 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Route"> | Date | string
     created_employee_no?: StringNullableFilter<"Route"> | string | null
     modified_employee_no?: StringNullableFilter<"Route"> | string | null
-    site_group_code_from?: StringNullableFilter<"Route"> | string | null
-    site_group_code_to?: StringNullableFilter<"Route"> | string | null
-    route_method?: StringNullableFilter<"Route"> | string | null
-    route_ownership?: StringNullableFilter<"Route"> | string | null
+    site_group_code_from?: StringFilter<"Route"> | string
+    site_group_code_to?: StringFilter<"Route"> | string
+    route_method?: StringFilter<"Route"> | string
+    route_ownership?: StringFilter<"Route"> | string
     status?: EnumMIGRATION_STATUSNullableFilter<"Route"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Route"> | Date | string | null
     is_migrated?: BoolFilter<"Route"> | boolean
@@ -6862,10 +9134,10 @@ export namespace Prisma {
     updated_at?: SortOrder
     created_employee_no?: SortOrderInput | SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
-    site_group_code_from?: SortOrderInput | SortOrder
-    site_group_code_to?: SortOrderInput | SortOrder
-    route_method?: SortOrderInput | SortOrder
-    route_ownership?: SortOrderInput | SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    route_method?: SortOrder
+    route_ownership?: SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
@@ -6889,13 +9161,249 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"Route"> | Date | string
     created_employee_no?: StringNullableWithAggregatesFilter<"Route"> | string | null
     modified_employee_no?: StringNullableWithAggregatesFilter<"Route"> | string | null
-    site_group_code_from?: StringNullableWithAggregatesFilter<"Route"> | string | null
-    site_group_code_to?: StringNullableWithAggregatesFilter<"Route"> | string | null
-    route_method?: StringNullableWithAggregatesFilter<"Route"> | string | null
-    route_ownership?: StringNullableWithAggregatesFilter<"Route"> | string | null
+    site_group_code_from?: StringWithAggregatesFilter<"Route"> | string
+    site_group_code_to?: StringWithAggregatesFilter<"Route"> | string
+    route_method?: StringWithAggregatesFilter<"Route"> | string
+    route_ownership?: StringWithAggregatesFilter<"Route"> | string
     status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Route"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableWithAggregatesFilter<"Route"> | Date | string | null
     is_migrated?: BoolWithAggregatesFilter<"Route"> | boolean
+  }
+
+  export type CableWhereInput = {
+    AND?: CableWhereInput | CableWhereInput[]
+    OR?: CableWhereInput[]
+    NOT?: CableWhereInput | CableWhereInput[]
+    uuid?: UuidFilter<"Cable"> | string
+    unique_id?: StringFilter<"Cable"> | string
+    project_group_code?: StringFilter<"Cable"> | string
+    name?: StringFilter<"Cable"> | string
+    description?: StringNullableFilter<"Cable"> | string | null
+    length?: DecimalFilter<"Cable"> | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFilter<"Cable"> | Date | string
+    updated_at?: DateTimeFilter<"Cable"> | Date | string
+    created_employee_no?: StringNullableFilter<"Cable"> | string | null
+    modified_employee_no?: StringNullableFilter<"Cable"> | string | null
+    cable_category?: StringFilter<"Cable"> | string
+    cable_group?: StringFilter<"Cable"> | string
+    site_group_code_from?: StringFilter<"Cable"> | string
+    site_group_code_to?: StringFilter<"Cable"> | string
+    asset_ownership?: StringFilter<"Cable"> | string
+    area_ownership?: StringFilter<"Cable"> | string
+    placement_type?: StringFilter<"Cable"> | string
+    function?: StringFilter<"Cable"> | string
+    route_unique_id_pembentuk?: StringNullableFilter<"Cable"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Cable"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Cable"> | Date | string | null
+    is_migrated?: BoolFilter<"Cable"> | boolean
+  }
+
+  export type CableOrderByWithRelationInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    length?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrderInput | SortOrder
+    modified_employee_no?: SortOrderInput | SortOrder
+    cable_category?: SortOrder
+    cable_group?: SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
+    placement_type?: SortOrder
+    function?: SortOrder
+    route_unique_id_pembentuk?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
+    last_read?: SortOrderInput | SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type CableWhereUniqueInput = Prisma.AtLeast<{
+    uuid?: string
+    unique_id?: string
+    AND?: CableWhereInput | CableWhereInput[]
+    OR?: CableWhereInput[]
+    NOT?: CableWhereInput | CableWhereInput[]
+    project_group_code?: StringFilter<"Cable"> | string
+    name?: StringFilter<"Cable"> | string
+    description?: StringNullableFilter<"Cable"> | string | null
+    length?: DecimalFilter<"Cable"> | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFilter<"Cable"> | Date | string
+    updated_at?: DateTimeFilter<"Cable"> | Date | string
+    created_employee_no?: StringNullableFilter<"Cable"> | string | null
+    modified_employee_no?: StringNullableFilter<"Cable"> | string | null
+    cable_category?: StringFilter<"Cable"> | string
+    cable_group?: StringFilter<"Cable"> | string
+    site_group_code_from?: StringFilter<"Cable"> | string
+    site_group_code_to?: StringFilter<"Cable"> | string
+    asset_ownership?: StringFilter<"Cable"> | string
+    area_ownership?: StringFilter<"Cable"> | string
+    placement_type?: StringFilter<"Cable"> | string
+    function?: StringFilter<"Cable"> | string
+    route_unique_id_pembentuk?: StringNullableFilter<"Cable"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Cable"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Cable"> | Date | string | null
+    is_migrated?: BoolFilter<"Cable"> | boolean
+  }, "uuid" | "unique_id">
+
+  export type CableOrderByWithAggregationInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    length?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrderInput | SortOrder
+    modified_employee_no?: SortOrderInput | SortOrder
+    cable_category?: SortOrder
+    cable_group?: SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
+    placement_type?: SortOrder
+    function?: SortOrder
+    route_unique_id_pembentuk?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
+    last_read?: SortOrderInput | SortOrder
+    is_migrated?: SortOrder
+    _count?: CableCountOrderByAggregateInput
+    _avg?: CableAvgOrderByAggregateInput
+    _max?: CableMaxOrderByAggregateInput
+    _min?: CableMinOrderByAggregateInput
+    _sum?: CableSumOrderByAggregateInput
+  }
+
+  export type CableScalarWhereWithAggregatesInput = {
+    AND?: CableScalarWhereWithAggregatesInput | CableScalarWhereWithAggregatesInput[]
+    OR?: CableScalarWhereWithAggregatesInput[]
+    NOT?: CableScalarWhereWithAggregatesInput | CableScalarWhereWithAggregatesInput[]
+    uuid?: UuidWithAggregatesFilter<"Cable"> | string
+    unique_id?: StringWithAggregatesFilter<"Cable"> | string
+    project_group_code?: StringWithAggregatesFilter<"Cable"> | string
+    name?: StringWithAggregatesFilter<"Cable"> | string
+    description?: StringNullableWithAggregatesFilter<"Cable"> | string | null
+    length?: DecimalWithAggregatesFilter<"Cable"> | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeWithAggregatesFilter<"Cable"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Cable"> | Date | string
+    created_employee_no?: StringNullableWithAggregatesFilter<"Cable"> | string | null
+    modified_employee_no?: StringNullableWithAggregatesFilter<"Cable"> | string | null
+    cable_category?: StringWithAggregatesFilter<"Cable"> | string
+    cable_group?: StringWithAggregatesFilter<"Cable"> | string
+    site_group_code_from?: StringWithAggregatesFilter<"Cable"> | string
+    site_group_code_to?: StringWithAggregatesFilter<"Cable"> | string
+    asset_ownership?: StringWithAggregatesFilter<"Cable"> | string
+    area_ownership?: StringWithAggregatesFilter<"Cable"> | string
+    placement_type?: StringWithAggregatesFilter<"Cable"> | string
+    function?: StringWithAggregatesFilter<"Cable"> | string
+    route_unique_id_pembentuk?: StringNullableWithAggregatesFilter<"Cable"> | string | null
+    status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Cable"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableWithAggregatesFilter<"Cable"> | Date | string | null
+    is_migrated?: BoolWithAggregatesFilter<"Cable"> | boolean
+  }
+
+  export type SegmentWhereInput = {
+    AND?: SegmentWhereInput | SegmentWhereInput[]
+    OR?: SegmentWhereInput[]
+    NOT?: SegmentWhereInput | SegmentWhereInput[]
+    uuid?: UuidFilter<"Segment"> | string
+    unique_id?: StringFilter<"Segment"> | string
+    project_group_code?: StringFilter<"Segment"> | string
+    name?: StringFilter<"Segment"> | string
+    created_at?: DateTimeFilter<"Segment"> | Date | string
+    updated_at?: DateTimeFilter<"Segment"> | Date | string
+    created_employee_no?: StringNullableFilter<"Segment"> | string | null
+    modified_employee_no?: StringNullableFilter<"Segment"> | string | null
+    site_group_code_from?: StringFilter<"Segment"> | string
+    site_group_code_to?: StringFilter<"Segment"> | string
+    route_unique_id_pembentuk?: StringNullableFilter<"Segment"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Segment"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Segment"> | Date | string | null
+    is_migrated?: BoolFilter<"Segment"> | boolean
+  }
+
+  export type SegmentOrderByWithRelationInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrderInput | SortOrder
+    modified_employee_no?: SortOrderInput | SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    route_unique_id_pembentuk?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
+    last_read?: SortOrderInput | SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type SegmentWhereUniqueInput = Prisma.AtLeast<{
+    uuid?: string
+    unique_id?: string
+    AND?: SegmentWhereInput | SegmentWhereInput[]
+    OR?: SegmentWhereInput[]
+    NOT?: SegmentWhereInput | SegmentWhereInput[]
+    project_group_code?: StringFilter<"Segment"> | string
+    name?: StringFilter<"Segment"> | string
+    created_at?: DateTimeFilter<"Segment"> | Date | string
+    updated_at?: DateTimeFilter<"Segment"> | Date | string
+    created_employee_no?: StringNullableFilter<"Segment"> | string | null
+    modified_employee_no?: StringNullableFilter<"Segment"> | string | null
+    site_group_code_from?: StringFilter<"Segment"> | string
+    site_group_code_to?: StringFilter<"Segment"> | string
+    route_unique_id_pembentuk?: StringNullableFilter<"Segment"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Segment"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Segment"> | Date | string | null
+    is_migrated?: BoolFilter<"Segment"> | boolean
+  }, "uuid" | "unique_id">
+
+  export type SegmentOrderByWithAggregationInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrderInput | SortOrder
+    modified_employee_no?: SortOrderInput | SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    route_unique_id_pembentuk?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
+    last_read?: SortOrderInput | SortOrder
+    is_migrated?: SortOrder
+    _count?: SegmentCountOrderByAggregateInput
+    _max?: SegmentMaxOrderByAggregateInput
+    _min?: SegmentMinOrderByAggregateInput
+  }
+
+  export type SegmentScalarWhereWithAggregatesInput = {
+    AND?: SegmentScalarWhereWithAggregatesInput | SegmentScalarWhereWithAggregatesInput[]
+    OR?: SegmentScalarWhereWithAggregatesInput[]
+    NOT?: SegmentScalarWhereWithAggregatesInput | SegmentScalarWhereWithAggregatesInput[]
+    uuid?: UuidWithAggregatesFilter<"Segment"> | string
+    unique_id?: StringWithAggregatesFilter<"Segment"> | string
+    project_group_code?: StringWithAggregatesFilter<"Segment"> | string
+    name?: StringWithAggregatesFilter<"Segment"> | string
+    created_at?: DateTimeWithAggregatesFilter<"Segment"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Segment"> | Date | string
+    created_employee_no?: StringNullableWithAggregatesFilter<"Segment"> | string | null
+    modified_employee_no?: StringNullableWithAggregatesFilter<"Segment"> | string | null
+    site_group_code_from?: StringWithAggregatesFilter<"Segment"> | string
+    site_group_code_to?: StringWithAggregatesFilter<"Segment"> | string
+    route_unique_id_pembentuk?: StringNullableWithAggregatesFilter<"Segment"> | string | null
+    status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"Segment"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableWithAggregatesFilter<"Segment"> | Date | string | null
+    is_migrated?: BoolWithAggregatesFilter<"Segment"> | boolean
   }
 
   export type ProjectCreateInput = {
@@ -6911,8 +9419,8 @@ export namespace Prisma {
     modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
-    owner_name?: string | null
-    owner_nik?: string | null
+    owner_name: string
+    owner_nik: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -6931,8 +9439,8 @@ export namespace Prisma {
     modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
-    owner_name?: string | null
-    owner_nik?: string | null
+    owner_name: string
+    owner_nik: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -6951,8 +9459,8 @@ export namespace Prisma {
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_name?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -6971,8 +9479,8 @@ export namespace Prisma {
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_name?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -6991,8 +9499,8 @@ export namespace Prisma {
     modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
-    owner_name?: string | null
-    owner_nik?: string | null
+    owner_name: string
+    owner_nik: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -7011,8 +9519,8 @@ export namespace Prisma {
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_name?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7031,8 +9539,8 @@ export namespace Prisma {
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_name?: NullableStringFieldUpdateOperationsInput | string | null
-    owner_nik?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7230,13 +9738,13 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: string | null
     modified_employee_no?: string | null
-    code?: string | null
-    asset_group_code?: string | null
-    project_group_code?: string | null
-    site_group_code?: string | null
-    asset_category?: string | null
-    asset_ownership?: string | null
-    area_ownership?: string | null
+    code: string
+    asset_group_code: string
+    project_group_code: string
+    site_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -7252,13 +9760,13 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: string | null
     modified_employee_no?: string | null
-    code?: string | null
-    asset_group_code?: string | null
-    project_group_code?: string | null
-    site_group_code?: string | null
-    asset_category?: string | null
-    asset_ownership?: string | null
-    area_ownership?: string | null
+    code: string
+    asset_group_code: string
+    project_group_code: string
+    site_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -7274,13 +9782,13 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    code?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    project_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_category?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_ownership?: NullableStringFieldUpdateOperationsInput | string | null
-    area_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7296,13 +9804,13 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    code?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    project_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_category?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_ownership?: NullableStringFieldUpdateOperationsInput | string | null
-    area_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7318,13 +9826,13 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: string | null
     modified_employee_no?: string | null
-    code?: string | null
-    asset_group_code?: string | null
-    project_group_code?: string | null
-    site_group_code?: string | null
-    asset_category?: string | null
-    asset_ownership?: string | null
-    area_ownership?: string | null
+    code: string
+    asset_group_code: string
+    project_group_code: string
+    site_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -7340,13 +9848,13 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    code?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    project_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_category?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_ownership?: NullableStringFieldUpdateOperationsInput | string | null
-    area_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7362,13 +9870,13 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    code?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    project_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_category?: NullableStringFieldUpdateOperationsInput | string | null
-    asset_ownership?: NullableStringFieldUpdateOperationsInput | string | null
-    area_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7384,10 +9892,10 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: string | null
     modified_employee_no?: string | null
-    site_group_code_from?: string | null
-    site_group_code_to?: string | null
-    route_method?: string | null
-    route_ownership?: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_method: string
+    route_ownership: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -7403,10 +9911,10 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: string | null
     modified_employee_no?: string | null
-    site_group_code_from?: string | null
-    site_group_code_to?: string | null
-    route_method?: string | null
-    route_ownership?: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_method: string
+    route_ownership: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -7422,10 +9930,10 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_from?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_to?: NullableStringFieldUpdateOperationsInput | string | null
-    route_method?: NullableStringFieldUpdateOperationsInput | string | null
-    route_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7441,10 +9949,10 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_from?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_to?: NullableStringFieldUpdateOperationsInput | string | null
-    route_method?: NullableStringFieldUpdateOperationsInput | string | null
-    route_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7460,10 +9968,10 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no?: string | null
     modified_employee_no?: string | null
-    site_group_code_from?: string | null
-    site_group_code_to?: string | null
-    route_method?: string | null
-    route_ownership?: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_method: string
+    route_ownership: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -7479,10 +9987,10 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_from?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_to?: NullableStringFieldUpdateOperationsInput | string | null
-    route_method?: NullableStringFieldUpdateOperationsInput | string | null
-    route_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -7498,10 +10006,304 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_from?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_to?: NullableStringFieldUpdateOperationsInput | string | null
-    route_method?: NullableStringFieldUpdateOperationsInput | string | null
-    route_ownership?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableCreateInput = {
+    uuid?: string
+    unique_id: string
+    project_group_code: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_from: string
+    site_group_code_to: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableUncheckedCreateInput = {
+    uuid?: string
+    unique_id: string
+    project_group_code: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_from: string
+    site_group_code_to: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableUncheckedUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableCreateManyInput = {
+    uuid?: string
+    unique_id: string
+    project_group_code: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_from: string
+    site_group_code_to: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableUncheckedUpdateManyInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentCreateInput = {
+    uuid?: string
+    unique_id: string
+    project_group_code: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentUncheckedCreateInput = {
+    uuid?: string
+    unique_id: string
+    project_group_code: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentUncheckedUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentCreateManyInput = {
+    uuid?: string
+    unique_id: string
+    project_group_code: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no?: string | null
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentUncheckedUpdateManyInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
@@ -8063,6 +10865,167 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type CableCountOrderByAggregateInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    length?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    cable_category?: SortOrder
+    cable_group?: SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
+    placement_type?: SortOrder
+    function?: SortOrder
+    route_unique_id_pembentuk?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type CableAvgOrderByAggregateInput = {
+    length?: SortOrder
+  }
+
+  export type CableMaxOrderByAggregateInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    length?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    cable_category?: SortOrder
+    cable_group?: SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
+    placement_type?: SortOrder
+    function?: SortOrder
+    route_unique_id_pembentuk?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type CableMinOrderByAggregateInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    length?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    cable_category?: SortOrder
+    cable_group?: SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    asset_ownership?: SortOrder
+    area_ownership?: SortOrder
+    placement_type?: SortOrder
+    function?: SortOrder
+    route_unique_id_pembentuk?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type CableSumOrderByAggregateInput = {
+    length?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type SegmentCountOrderByAggregateInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    route_unique_id_pembentuk?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type SegmentMaxOrderByAggregateInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    route_unique_id_pembentuk?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
+  export type SegmentMinOrderByAggregateInput = {
+    uuid?: SortOrder
+    unique_id?: SortOrder
+    project_group_code?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    created_employee_no?: SortOrder
+    modified_employee_no?: SortOrder
+    site_group_code_from?: SortOrder
+    site_group_code_to?: SortOrder
+    route_unique_id_pembentuk?: SortOrder
+    status?: SortOrder
+    last_read?: SortOrder
+    is_migrated?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -8097,6 +11060,14 @@ export namespace Prisma {
 
   export type NullableDecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
@@ -8368,6 +11339,33 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
 
 
   /**
@@ -8393,6 +11391,14 @@ export namespace Prisma {
      * @deprecated Use RouteDefaultArgs instead
      */
     export type RouteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RouteDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use CableDefaultArgs instead
+     */
+    export type CableArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CableDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SegmentDefaultArgs instead
+     */
+    export type SegmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SegmentDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
