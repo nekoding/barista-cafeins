@@ -194,6 +194,7 @@ exports.Prisma.RouteScalarFieldEnum = {
 
 exports.Prisma.CableScalarFieldEnum = {
   uuid: 'uuid',
+  cafeins_uuid: 'cafeins_uuid',
   unique_id: 'unique_id',
   project_group_code: 'project_group_code',
   name: 'name',
@@ -219,6 +220,7 @@ exports.Prisma.CableScalarFieldEnum = {
 
 exports.Prisma.SegmentScalarFieldEnum = {
   uuid: 'uuid',
+  cafeins_uuid: 'cafeins_uuid',
   unique_id: 'unique_id',
   project_group_code: 'project_group_code',
   name: 'name',

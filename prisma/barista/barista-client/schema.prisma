@@ -120,6 +120,7 @@ model Route {
 
 model Cable {
   uuid                      String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cafeins_uuid              String?
   unique_id                 String            @unique
   project_group_code        String
   name                      String
@@ -147,6 +148,7 @@ model Cable {
 
 model Segment {
   uuid                      String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cafeins_uuid              String?
   unique_id                 String            @unique
   project_group_code        String
   name                      String

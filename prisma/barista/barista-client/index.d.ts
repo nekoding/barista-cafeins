@@ -6322,6 +6322,7 @@ export namespace Prisma {
 
   export type CableMinAggregateOutputType = {
     uuid: string | null
+    cafeins_uuid: string | null
     unique_id: string | null
     project_group_code: string | null
     name: string | null
@@ -6347,6 +6348,7 @@ export namespace Prisma {
 
   export type CableMaxAggregateOutputType = {
     uuid: string | null
+    cafeins_uuid: string | null
     unique_id: string | null
     project_group_code: string | null
     name: string | null
@@ -6372,6 +6374,7 @@ export namespace Prisma {
 
   export type CableCountAggregateOutputType = {
     uuid: number
+    cafeins_uuid: number
     unique_id: number
     project_group_code: number
     name: number
@@ -6407,6 +6410,7 @@ export namespace Prisma {
 
   export type CableMinAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     unique_id?: true
     project_group_code?: true
     name?: true
@@ -6432,6 +6436,7 @@ export namespace Prisma {
 
   export type CableMaxAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     unique_id?: true
     project_group_code?: true
     name?: true
@@ -6457,6 +6462,7 @@ export namespace Prisma {
 
   export type CableCountAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     unique_id?: true
     project_group_code?: true
     name?: true
@@ -6569,6 +6575,7 @@ export namespace Prisma {
 
   export type CableGroupByOutputType = {
     uuid: string
+    cafeins_uuid: string | null
     unique_id: string
     project_group_code: string
     name: string
@@ -6613,6 +6620,7 @@ export namespace Prisma {
 
   export type CableSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     uuid?: boolean
+    cafeins_uuid?: boolean
     unique_id?: boolean
     project_group_code?: boolean
     name?: boolean
@@ -6638,6 +6646,7 @@ export namespace Prisma {
 
   export type CableSelectScalar = {
     uuid?: boolean
+    cafeins_uuid?: boolean
     unique_id?: boolean
     project_group_code?: boolean
     name?: boolean
@@ -6667,6 +6676,7 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
+      cafeins_uuid: string | null
       unique_id: string
       project_group_code: string
       name: string
@@ -7083,6 +7093,7 @@ export namespace Prisma {
    */ 
   interface CableFieldRefs {
     readonly uuid: FieldRef<"Cable", 'String'>
+    readonly cafeins_uuid: FieldRef<"Cable", 'String'>
     readonly unique_id: FieldRef<"Cable", 'String'>
     readonly project_group_code: FieldRef<"Cable", 'String'>
     readonly name: FieldRef<"Cable", 'String'>
@@ -7403,6 +7414,7 @@ export namespace Prisma {
 
   export type SegmentMinAggregateOutputType = {
     uuid: string | null
+    cafeins_uuid: string | null
     unique_id: string | null
     project_group_code: string | null
     name: string | null
@@ -7420,6 +7432,7 @@ export namespace Prisma {
 
   export type SegmentMaxAggregateOutputType = {
     uuid: string | null
+    cafeins_uuid: string | null
     unique_id: string | null
     project_group_code: string | null
     name: string | null
@@ -7437,6 +7450,7 @@ export namespace Prisma {
 
   export type SegmentCountAggregateOutputType = {
     uuid: number
+    cafeins_uuid: number
     unique_id: number
     project_group_code: number
     name: number
@@ -7456,6 +7470,7 @@ export namespace Prisma {
 
   export type SegmentMinAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     unique_id?: true
     project_group_code?: true
     name?: true
@@ -7473,6 +7488,7 @@ export namespace Prisma {
 
   export type SegmentMaxAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     unique_id?: true
     project_group_code?: true
     name?: true
@@ -7490,6 +7506,7 @@ export namespace Prisma {
 
   export type SegmentCountAggregateInputType = {
     uuid?: true
+    cafeins_uuid?: true
     unique_id?: true
     project_group_code?: true
     name?: true
@@ -7580,6 +7597,7 @@ export namespace Prisma {
 
   export type SegmentGroupByOutputType = {
     uuid: string
+    cafeins_uuid: string | null
     unique_id: string
     project_group_code: string
     name: string
@@ -7614,6 +7632,7 @@ export namespace Prisma {
 
   export type SegmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     uuid?: boolean
+    cafeins_uuid?: boolean
     unique_id?: boolean
     project_group_code?: boolean
     name?: boolean
@@ -7631,6 +7650,7 @@ export namespace Prisma {
 
   export type SegmentSelectScalar = {
     uuid?: boolean
+    cafeins_uuid?: boolean
     unique_id?: boolean
     project_group_code?: boolean
     name?: boolean
@@ -7652,6 +7672,7 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
+      cafeins_uuid: string | null
       unique_id: string
       project_group_code: string
       name: string
@@ -8060,6 +8081,7 @@ export namespace Prisma {
    */ 
   interface SegmentFieldRefs {
     readonly uuid: FieldRef<"Segment", 'String'>
+    readonly cafeins_uuid: FieldRef<"Segment", 'String'>
     readonly unique_id: FieldRef<"Segment", 'String'>
     readonly project_group_code: FieldRef<"Segment", 'String'>
     readonly name: FieldRef<"Segment", 'String'>
@@ -8478,6 +8500,7 @@ export namespace Prisma {
 
   export const CableScalarFieldEnum: {
     uuid: 'uuid',
+    cafeins_uuid: 'cafeins_uuid',
     unique_id: 'unique_id',
     project_group_code: 'project_group_code',
     name: 'name',
@@ -8506,6 +8529,7 @@ export namespace Prisma {
 
   export const SegmentScalarFieldEnum: {
     uuid: 'uuid',
+    cafeins_uuid: 'cafeins_uuid',
     unique_id: 'unique_id',
     project_group_code: 'project_group_code',
     name: 'name',
@@ -9175,6 +9199,7 @@ export namespace Prisma {
     OR?: CableWhereInput[]
     NOT?: CableWhereInput | CableWhereInput[]
     uuid?: UuidFilter<"Cable"> | string
+    cafeins_uuid?: StringNullableFilter<"Cable"> | string | null
     unique_id?: StringFilter<"Cable"> | string
     project_group_code?: StringFilter<"Cable"> | string
     name?: StringFilter<"Cable"> | string
@@ -9200,6 +9225,7 @@ export namespace Prisma {
 
   export type CableOrderByWithRelationInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrderInput | SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -9229,6 +9255,7 @@ export namespace Prisma {
     AND?: CableWhereInput | CableWhereInput[]
     OR?: CableWhereInput[]
     NOT?: CableWhereInput | CableWhereInput[]
+    cafeins_uuid?: StringNullableFilter<"Cable"> | string | null
     project_group_code?: StringFilter<"Cable"> | string
     name?: StringFilter<"Cable"> | string
     description?: StringNullableFilter<"Cable"> | string | null
@@ -9253,6 +9280,7 @@ export namespace Prisma {
 
   export type CableOrderByWithAggregationInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrderInput | SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -9286,6 +9314,7 @@ export namespace Prisma {
     OR?: CableScalarWhereWithAggregatesInput[]
     NOT?: CableScalarWhereWithAggregatesInput | CableScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Cable"> | string
+    cafeins_uuid?: StringNullableWithAggregatesFilter<"Cable"> | string | null
     unique_id?: StringWithAggregatesFilter<"Cable"> | string
     project_group_code?: StringWithAggregatesFilter<"Cable"> | string
     name?: StringWithAggregatesFilter<"Cable"> | string
@@ -9314,6 +9343,7 @@ export namespace Prisma {
     OR?: SegmentWhereInput[]
     NOT?: SegmentWhereInput | SegmentWhereInput[]
     uuid?: UuidFilter<"Segment"> | string
+    cafeins_uuid?: StringNullableFilter<"Segment"> | string | null
     unique_id?: StringFilter<"Segment"> | string
     project_group_code?: StringFilter<"Segment"> | string
     name?: StringFilter<"Segment"> | string
@@ -9331,6 +9361,7 @@ export namespace Prisma {
 
   export type SegmentOrderByWithRelationInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrderInput | SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -9352,6 +9383,7 @@ export namespace Prisma {
     AND?: SegmentWhereInput | SegmentWhereInput[]
     OR?: SegmentWhereInput[]
     NOT?: SegmentWhereInput | SegmentWhereInput[]
+    cafeins_uuid?: StringNullableFilter<"Segment"> | string | null
     project_group_code?: StringFilter<"Segment"> | string
     name?: StringFilter<"Segment"> | string
     created_at?: DateTimeFilter<"Segment"> | Date | string
@@ -9368,6 +9400,7 @@ export namespace Prisma {
 
   export type SegmentOrderByWithAggregationInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrderInput | SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -9391,6 +9424,7 @@ export namespace Prisma {
     OR?: SegmentScalarWhereWithAggregatesInput[]
     NOT?: SegmentScalarWhereWithAggregatesInput | SegmentScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Segment"> | string
+    cafeins_uuid?: StringNullableWithAggregatesFilter<"Segment"> | string | null
     unique_id?: StringWithAggregatesFilter<"Segment"> | string
     project_group_code?: StringWithAggregatesFilter<"Segment"> | string
     name?: StringWithAggregatesFilter<"Segment"> | string
@@ -10017,6 +10051,7 @@ export namespace Prisma {
 
   export type CableCreateInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     unique_id: string
     project_group_code: string
     name: string
@@ -10042,6 +10077,7 @@ export namespace Prisma {
 
   export type CableUncheckedCreateInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     unique_id: string
     project_group_code: string
     name: string
@@ -10067,6 +10103,7 @@ export namespace Prisma {
 
   export type CableUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10092,6 +10129,7 @@ export namespace Prisma {
 
   export type CableUncheckedUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10117,6 +10155,7 @@ export namespace Prisma {
 
   export type CableCreateManyInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     unique_id: string
     project_group_code: string
     name: string
@@ -10142,6 +10181,7 @@ export namespace Prisma {
 
   export type CableUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10167,6 +10207,7 @@ export namespace Prisma {
 
   export type CableUncheckedUpdateManyInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10192,6 +10233,7 @@ export namespace Prisma {
 
   export type SegmentCreateInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     unique_id: string
     project_group_code: string
     name: string
@@ -10209,6 +10251,7 @@ export namespace Prisma {
 
   export type SegmentUncheckedCreateInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     unique_id: string
     project_group_code: string
     name: string
@@ -10226,6 +10269,7 @@ export namespace Prisma {
 
   export type SegmentUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10243,6 +10287,7 @@ export namespace Prisma {
 
   export type SegmentUncheckedUpdateInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10260,6 +10305,7 @@ export namespace Prisma {
 
   export type SegmentCreateManyInput = {
     uuid?: string
+    cafeins_uuid?: string | null
     unique_id: string
     project_group_code: string
     name: string
@@ -10277,6 +10323,7 @@ export namespace Prisma {
 
   export type SegmentUpdateManyMutationInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10294,6 +10341,7 @@ export namespace Prisma {
 
   export type SegmentUncheckedUpdateManyInput = {
     uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
     project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10878,6 +10926,7 @@ export namespace Prisma {
 
   export type CableCountOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -10907,6 +10956,7 @@ export namespace Prisma {
 
   export type CableMaxOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -10932,6 +10982,7 @@ export namespace Prisma {
 
   export type CableMinOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -10977,6 +11028,7 @@ export namespace Prisma {
 
   export type SegmentCountOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -10994,6 +11046,7 @@ export namespace Prisma {
 
   export type SegmentMaxOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
@@ -11011,6 +11064,7 @@ export namespace Prisma {
 
   export type SegmentMinOrderByAggregateInput = {
     uuid?: SortOrder
+    cafeins_uuid?: SortOrder
     unique_id?: SortOrder
     project_group_code?: SortOrder
     name?: SortOrder
