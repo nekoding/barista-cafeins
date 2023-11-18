@@ -70,7 +70,7 @@ export const createProjects = async (
   `
 }
 
-export const getProjectByUuid = async (
+export const findProjectByUuid = async (
   uuid: string,
 ): Promise<projects | null> => {
   return await cafeinsClient.projects.findFirst({

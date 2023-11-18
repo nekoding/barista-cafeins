@@ -1360,6 +1360,73 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type ProjectCountOutputType
+   */
+
+  export type ProjectCountOutputType = {
+    assets: number
+  }
+
+  export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    assets?: boolean | ProjectCountOutputTypeCountAssetsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectCountOutputType
+     */
+    select?: ProjectCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetWhereInput
+  }
+
+
+
+  /**
+   * Count Type SitePointCountOutputType
+   */
+
+  export type SitePointCountOutputType = {
+    assets: number
+  }
+
+  export type SitePointCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    assets?: boolean | SitePointCountOutputTypeCountAssetsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * SitePointCountOutputType without action
+   */
+  export type SitePointCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SitePointCountOutputType
+     */
+    select?: SitePointCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * SitePointCountOutputType without action
+   */
+  export type SitePointCountOutputTypeCountAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssetWhereInput
+  }
+
+
 
   /**
    * Models
@@ -1625,6 +1692,8 @@ export namespace Prisma {
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
+    assets?: boolean | Project$assetsArgs<ExtArgs>
+    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type ProjectSelectScalar = {
@@ -1647,10 +1716,17 @@ export namespace Prisma {
     is_migrated?: boolean
   }
 
+  export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    assets?: boolean | Project$assetsArgs<ExtArgs>
+    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
 
   export type $ProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Project"
-    objects: {}
+    objects: {
+      assets: Prisma.$AssetPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
       cafeins_uuid: string | null
@@ -2034,6 +2110,7 @@ export namespace Prisma {
   export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    assets<T extends Project$assetsArgs<ExtArgs> = {}>(args?: Subset<T, Project$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2094,6 +2171,10 @@ export namespace Prisma {
      */
     select?: ProjectSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter, which Project to fetch.
      */
     where: ProjectWhereUniqueInput
@@ -2109,6 +2190,10 @@ export namespace Prisma {
      */
     select?: ProjectSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter, which Project to fetch.
      */
     where: ProjectWhereUniqueInput
@@ -2123,6 +2208,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Project
      */
     select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
     /**
      * Filter, which Project to fetch.
      */
@@ -2169,6 +2258,10 @@ export namespace Prisma {
      */
     select?: ProjectSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter, which Project to fetch.
      */
     where?: ProjectWhereInput
@@ -2214,6 +2307,10 @@ export namespace Prisma {
      */
     select?: ProjectSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter, which Projects to fetch.
      */
     where?: ProjectWhereInput
@@ -2254,6 +2351,10 @@ export namespace Prisma {
      */
     select?: ProjectSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * The data needed to create a Project.
      */
     data: XOR<ProjectCreateInput, ProjectUncheckedCreateInput>
@@ -2280,6 +2381,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Project
      */
     select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
     /**
      * The data needed to update a Project.
      */
@@ -2315,6 +2420,10 @@ export namespace Prisma {
      */
     select?: ProjectSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * The filter to search for the Project to update in case it exists.
      */
     where: ProjectWhereUniqueInput
@@ -2338,6 +2447,10 @@ export namespace Prisma {
      */
     select?: ProjectSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter which Project to delete.
      */
     where: ProjectWhereUniqueInput
@@ -2356,6 +2469,27 @@ export namespace Prisma {
 
 
   /**
+   * Project.assets
+   */
+  export type Project$assetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
+    where?: AssetWhereInput
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    cursor?: AssetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+
+  /**
    * Project without action
    */
   export type ProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2363,6 +2497,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Project
      */
     select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ProjectInclude<ExtArgs> | null
   }
 
 
@@ -2641,6 +2779,8 @@ export namespace Prisma {
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
+    assets?: boolean | SitePoint$assetsArgs<ExtArgs>
+    _count?: boolean | SitePointCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sitePoint"]>
 
   export type SitePointSelectScalar = {
@@ -2660,10 +2800,17 @@ export namespace Prisma {
     is_migrated?: boolean
   }
 
+  export type SitePointInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    assets?: boolean | SitePoint$assetsArgs<ExtArgs>
+    _count?: boolean | SitePointCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
 
   export type $SitePointPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SitePoint"
-    objects: {}
+    objects: {
+      assets: Prisma.$AssetPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
       cafeins_uuid: string | null
@@ -3044,6 +3191,7 @@ export namespace Prisma {
   export interface Prisma__SitePointClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    assets<T extends SitePoint$assetsArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3101,6 +3249,10 @@ export namespace Prisma {
      */
     select?: SitePointSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
+    /**
      * Filter, which SitePoint to fetch.
      */
     where: SitePointWhereUniqueInput
@@ -3116,6 +3268,10 @@ export namespace Prisma {
      */
     select?: SitePointSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
+    /**
      * Filter, which SitePoint to fetch.
      */
     where: SitePointWhereUniqueInput
@@ -3130,6 +3286,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the SitePoint
      */
     select?: SitePointSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
     /**
      * Filter, which SitePoint to fetch.
      */
@@ -3176,6 +3336,10 @@ export namespace Prisma {
      */
     select?: SitePointSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
+    /**
      * Filter, which SitePoint to fetch.
      */
     where?: SitePointWhereInput
@@ -3221,6 +3385,10 @@ export namespace Prisma {
      */
     select?: SitePointSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
+    /**
      * Filter, which SitePoints to fetch.
      */
     where?: SitePointWhereInput
@@ -3261,6 +3429,10 @@ export namespace Prisma {
      */
     select?: SitePointSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
+    /**
      * The data needed to create a SitePoint.
      */
     data: XOR<SitePointCreateInput, SitePointUncheckedCreateInput>
@@ -3287,6 +3459,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the SitePoint
      */
     select?: SitePointSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
     /**
      * The data needed to update a SitePoint.
      */
@@ -3322,6 +3498,10 @@ export namespace Prisma {
      */
     select?: SitePointSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
+    /**
      * The filter to search for the SitePoint to update in case it exists.
      */
     where: SitePointWhereUniqueInput
@@ -3345,6 +3525,10 @@ export namespace Prisma {
      */
     select?: SitePointSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
+    /**
      * Filter which SitePoint to delete.
      */
     where: SitePointWhereUniqueInput
@@ -3363,6 +3547,27 @@ export namespace Prisma {
 
 
   /**
+   * SitePoint.assets
+   */
+  export type SitePoint$assetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Asset
+     */
+    select?: AssetSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
+    where?: AssetWhereInput
+    orderBy?: AssetOrderByWithRelationInput | AssetOrderByWithRelationInput[]
+    cursor?: AssetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+
+  /**
    * SitePoint without action
    */
   export type SitePointDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3370,6 +3575,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the SitePoint
      */
     select?: SitePointSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SitePointInclude<ExtArgs> | null
   }
 
 
@@ -4538,6 +4747,8 @@ export namespace Prisma {
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    sitepoint?: boolean | SitePointDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["asset"]>
 
   export type AssetSelectScalar = {
@@ -4562,10 +4773,18 @@ export namespace Prisma {
     is_migrated?: boolean
   }
 
+  export type AssetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    sitepoint?: boolean | SitePointDefaultArgs<ExtArgs>
+  }
+
 
   export type $AssetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Asset"
-    objects: {}
+    objects: {
+      project: Prisma.$ProjectPayload<ExtArgs>
+      sitepoint: Prisma.$SitePointPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
       cafeins_uuid: string | null
@@ -4951,6 +5170,9 @@ export namespace Prisma {
   export interface Prisma__AssetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    sitepoint<T extends SitePointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SitePointDefaultArgs<ExtArgs>>): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5013,6 +5235,10 @@ export namespace Prisma {
      */
     select?: AssetSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
      * Filter, which Asset to fetch.
      */
     where: AssetWhereUniqueInput
@@ -5028,6 +5254,10 @@ export namespace Prisma {
      */
     select?: AssetSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
      * Filter, which Asset to fetch.
      */
     where: AssetWhereUniqueInput
@@ -5042,6 +5272,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Asset
      */
     select?: AssetSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
     /**
      * Filter, which Asset to fetch.
      */
@@ -5088,6 +5322,10 @@ export namespace Prisma {
      */
     select?: AssetSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
      * Filter, which Asset to fetch.
      */
     where?: AssetWhereInput
@@ -5133,6 +5371,10 @@ export namespace Prisma {
      */
     select?: AssetSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
      * Filter, which Assets to fetch.
      */
     where?: AssetWhereInput
@@ -5173,6 +5415,10 @@ export namespace Prisma {
      */
     select?: AssetSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
      * The data needed to create a Asset.
      */
     data: XOR<AssetCreateInput, AssetUncheckedCreateInput>
@@ -5199,6 +5445,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Asset
      */
     select?: AssetSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
     /**
      * The data needed to update a Asset.
      */
@@ -5234,6 +5484,10 @@ export namespace Prisma {
      */
     select?: AssetSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
+    /**
      * The filter to search for the Asset to update in case it exists.
      */
     where: AssetWhereUniqueInput
@@ -5256,6 +5510,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Asset
      */
     select?: AssetSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
     /**
      * Filter which Asset to delete.
      */
@@ -5282,6 +5540,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Asset
      */
     select?: AssetSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AssetInclude<ExtArgs> | null
   }
 
 
@@ -8728,6 +8990,7 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Project"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Project"> | Date | string | null
     is_migrated?: BoolFilter<"Project"> | boolean
+    assets?: AssetListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -8748,6 +9011,7 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
+    assets?: AssetOrderByRelationAggregateInput
   }
 
   export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -8771,6 +9035,7 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Project"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Project"> | Date | string | null
     is_migrated?: BoolFilter<"Project"> | boolean
+    assets?: AssetListRelationFilter
   }, "uuid" | "project_group_code">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -8837,6 +9102,7 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"SitePoint"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"SitePoint"> | Date | string | null
     is_migrated?: BoolFilter<"SitePoint"> | boolean
+    assets?: AssetListRelationFilter
   }
 
   export type SitePointOrderByWithRelationInput = {
@@ -8854,6 +9120,7 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
+    assets?: AssetOrderByRelationAggregateInput
   }
 
   export type SitePointWhereUniqueInput = Prisma.AtLeast<{
@@ -8874,6 +9141,7 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"SitePoint"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"SitePoint"> | Date | string | null
     is_migrated?: BoolFilter<"SitePoint"> | boolean
+    assets?: AssetListRelationFilter
   }, "uuid" | "site_group_code">
 
   export type SitePointOrderByWithAggregationInput = {
@@ -9003,6 +9271,8 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Asset"> | Date | string | null
     is_migrated?: BoolFilter<"Asset"> | boolean
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
+    sitepoint?: XOR<SitePointRelationFilter, SitePointWhereInput>
   }
 
   export type AssetOrderByWithRelationInput = {
@@ -9025,6 +9295,8 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
+    project?: ProjectOrderByWithRelationInput
+    sitepoint?: SitePointOrderByWithRelationInput
   }
 
   export type AssetWhereUniqueInput = Prisma.AtLeast<{
@@ -9050,6 +9322,8 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Asset"> | Date | string | null
     is_migrated?: BoolFilter<"Asset"> | boolean
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
+    sitepoint?: XOR<SitePointRelationFilter, SitePointWhereInput>
   }, "uuid" | "unique_id">
 
   export type AssetOrderByWithAggregationInput = {
@@ -9475,6 +9749,7 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -9495,6 +9770,7 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -9515,6 +9791,7 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -9535,6 +9812,7 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -9612,6 +9890,7 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutSitepointInput
   }
 
   export type SitePointUncheckedCreateInput = {
@@ -9629,6 +9908,7 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
   }
 
   export type SitePointUpdateInput = {
@@ -9646,6 +9926,7 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutSitepointNestedInput
   }
 
   export type SitePointUncheckedUpdateInput = {
@@ -9663,6 +9944,7 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
   }
 
   export type SitePointCreateManyInput = {
@@ -9798,14 +10080,14 @@ export namespace Prisma {
     modified_employee_no?: string | null
     code: string
     asset_group_code: string
-    project_group_code: string
-    site_group_code: string
     asset_category: string
     asset_ownership: string
     area_ownership: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    project: ProjectCreateNestedOneWithoutAssetsInput
+    sitepoint: SitePointCreateNestedOneWithoutAssetsInput
   }
 
   export type AssetUncheckedCreateInput = {
@@ -9842,14 +10124,14 @@ export namespace Prisma {
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     asset_group_code?: StringFieldUpdateOperationsInput | string
-    project_group_code?: StringFieldUpdateOperationsInput | string
-    site_group_code?: StringFieldUpdateOperationsInput | string
     asset_category?: StringFieldUpdateOperationsInput | string
     asset_ownership?: StringFieldUpdateOperationsInput | string
     area_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    project?: ProjectUpdateOneRequiredWithoutAssetsNestedInput
+    sitepoint?: SitePointUpdateOneRequiredWithoutAssetsNestedInput
   }
 
   export type AssetUncheckedUpdateInput = {
@@ -9908,8 +10190,6 @@ export namespace Prisma {
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     asset_group_code?: StringFieldUpdateOperationsInput | string
-    project_group_code?: StringFieldUpdateOperationsInput | string
-    site_group_code?: StringFieldUpdateOperationsInput | string
     asset_category?: StringFieldUpdateOperationsInput | string
     asset_ownership?: StringFieldUpdateOperationsInput | string
     area_ownership?: StringFieldUpdateOperationsInput | string
@@ -10469,9 +10749,19 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type AssetListRelationFilter = {
+    every?: AssetWhereInput
+    some?: AssetWhereInput
+    none?: AssetWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type AssetOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ProjectCountOrderByAggregateInput = {
@@ -10809,6 +11099,16 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type ProjectRelationFilter = {
+    is?: ProjectWhereInput
+    isNot?: ProjectWhereInput
+  }
+
+  export type SitePointRelationFilter = {
+    is?: SitePointWhereInput
+    isNot?: SitePointWhereInput
+  }
+
   export type AssetCountOrderByAggregateInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
@@ -11134,6 +11434,20 @@ export namespace Prisma {
     is_migrated?: SortOrder
   }
 
+  export type AssetCreateNestedManyWithoutProjectInput = {
+    create?: XOR<AssetCreateWithoutProjectInput, AssetUncheckedCreateWithoutProjectInput> | AssetCreateWithoutProjectInput[] | AssetUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutProjectInput | AssetCreateOrConnectWithoutProjectInput[]
+    createMany?: AssetCreateManyProjectInputEnvelope
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
+  export type AssetUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<AssetCreateWithoutProjectInput, AssetUncheckedCreateWithoutProjectInput> | AssetCreateWithoutProjectInput[] | AssetUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutProjectInput | AssetCreateOrConnectWithoutProjectInput[]
+    createMany?: AssetCreateManyProjectInputEnvelope
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -11158,12 +11472,110 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type AssetUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<AssetCreateWithoutProjectInput, AssetUncheckedCreateWithoutProjectInput> | AssetCreateWithoutProjectInput[] | AssetUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutProjectInput | AssetCreateOrConnectWithoutProjectInput[]
+    upsert?: AssetUpsertWithWhereUniqueWithoutProjectInput | AssetUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: AssetCreateManyProjectInputEnvelope
+    set?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    disconnect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    delete?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    update?: AssetUpdateWithWhereUniqueWithoutProjectInput | AssetUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: AssetUpdateManyWithWhereWithoutProjectInput | AssetUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
+  }
+
+  export type AssetUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<AssetCreateWithoutProjectInput, AssetUncheckedCreateWithoutProjectInput> | AssetCreateWithoutProjectInput[] | AssetUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutProjectInput | AssetCreateOrConnectWithoutProjectInput[]
+    upsert?: AssetUpsertWithWhereUniqueWithoutProjectInput | AssetUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: AssetCreateManyProjectInputEnvelope
+    set?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    disconnect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    delete?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    update?: AssetUpdateWithWhereUniqueWithoutProjectInput | AssetUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: AssetUpdateManyWithWhereWithoutProjectInput | AssetUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
+  }
+
+  export type AssetCreateNestedManyWithoutSitepointInput = {
+    create?: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput> | AssetCreateWithoutSitepointInput[] | AssetUncheckedCreateWithoutSitepointInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutSitepointInput | AssetCreateOrConnectWithoutSitepointInput[]
+    createMany?: AssetCreateManySitepointInputEnvelope
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
+  export type AssetUncheckedCreateNestedManyWithoutSitepointInput = {
+    create?: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput> | AssetCreateWithoutSitepointInput[] | AssetUncheckedCreateWithoutSitepointInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutSitepointInput | AssetCreateOrConnectWithoutSitepointInput[]
+    createMany?: AssetCreateManySitepointInputEnvelope
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type AssetUpdateManyWithoutSitepointNestedInput = {
+    create?: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput> | AssetCreateWithoutSitepointInput[] | AssetUncheckedCreateWithoutSitepointInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutSitepointInput | AssetCreateOrConnectWithoutSitepointInput[]
+    upsert?: AssetUpsertWithWhereUniqueWithoutSitepointInput | AssetUpsertWithWhereUniqueWithoutSitepointInput[]
+    createMany?: AssetCreateManySitepointInputEnvelope
+    set?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    disconnect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    delete?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    update?: AssetUpdateWithWhereUniqueWithoutSitepointInput | AssetUpdateWithWhereUniqueWithoutSitepointInput[]
+    updateMany?: AssetUpdateManyWithWhereWithoutSitepointInput | AssetUpdateManyWithWhereWithoutSitepointInput[]
+    deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
+  }
+
+  export type AssetUncheckedUpdateManyWithoutSitepointNestedInput = {
+    create?: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput> | AssetCreateWithoutSitepointInput[] | AssetUncheckedCreateWithoutSitepointInput[]
+    connectOrCreate?: AssetCreateOrConnectWithoutSitepointInput | AssetCreateOrConnectWithoutSitepointInput[]
+    upsert?: AssetUpsertWithWhereUniqueWithoutSitepointInput | AssetUpsertWithWhereUniqueWithoutSitepointInput[]
+    createMany?: AssetCreateManySitepointInputEnvelope
+    set?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    disconnect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    delete?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+    update?: AssetUpdateWithWhereUniqueWithoutSitepointInput | AssetUpdateWithWhereUniqueWithoutSitepointInput[]
+    updateMany?: AssetUpdateManyWithWhereWithoutSitepointInput | AssetUpdateManyWithWhereWithoutSitepointInput[]
+    deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
+  }
+
+  export type ProjectCreateNestedOneWithoutAssetsInput = {
+    create?: XOR<ProjectCreateWithoutAssetsInput, ProjectUncheckedCreateWithoutAssetsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutAssetsInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type SitePointCreateNestedOneWithoutAssetsInput = {
+    create?: XOR<SitePointCreateWithoutAssetsInput, SitePointUncheckedCreateWithoutAssetsInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutAssetsInput
+    connect?: SitePointWhereUniqueInput
+  }
+
+  export type ProjectUpdateOneRequiredWithoutAssetsNestedInput = {
+    create?: XOR<ProjectCreateWithoutAssetsInput, ProjectUncheckedCreateWithoutAssetsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutAssetsInput
+    upsert?: ProjectUpsertWithoutAssetsInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutAssetsInput, ProjectUpdateWithoutAssetsInput>, ProjectUncheckedUpdateWithoutAssetsInput>
+  }
+
+  export type SitePointUpdateOneRequiredWithoutAssetsNestedInput = {
+    create?: XOR<SitePointCreateWithoutAssetsInput, SitePointUncheckedCreateWithoutAssetsInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutAssetsInput
+    upsert?: SitePointUpsertWithoutAssetsInput
+    connect?: SitePointWhereUniqueInput
+    update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutAssetsInput, SitePointUpdateWithoutAssetsInput>, SitePointUncheckedUpdateWithoutAssetsInput>
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
@@ -11499,11 +11911,528 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
+  export type AssetCreateWithoutProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    code: string
+    asset_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint: SitePointCreateNestedOneWithoutAssetsInput
+  }
+
+  export type AssetUncheckedCreateWithoutProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    code: string
+    asset_group_code: string
+    site_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type AssetCreateOrConnectWithoutProjectInput = {
+    where: AssetWhereUniqueInput
+    create: XOR<AssetCreateWithoutProjectInput, AssetUncheckedCreateWithoutProjectInput>
+  }
+
+  export type AssetCreateManyProjectInputEnvelope = {
+    data: AssetCreateManyProjectInput | AssetCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AssetUpsertWithWhereUniqueWithoutProjectInput = {
+    where: AssetWhereUniqueInput
+    update: XOR<AssetUpdateWithoutProjectInput, AssetUncheckedUpdateWithoutProjectInput>
+    create: XOR<AssetCreateWithoutProjectInput, AssetUncheckedCreateWithoutProjectInput>
+  }
+
+  export type AssetUpdateWithWhereUniqueWithoutProjectInput = {
+    where: AssetWhereUniqueInput
+    data: XOR<AssetUpdateWithoutProjectInput, AssetUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type AssetUpdateManyWithWhereWithoutProjectInput = {
+    where: AssetScalarWhereInput
+    data: XOR<AssetUpdateManyMutationInput, AssetUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type AssetScalarWhereInput = {
+    AND?: AssetScalarWhereInput | AssetScalarWhereInput[]
+    OR?: AssetScalarWhereInput[]
+    NOT?: AssetScalarWhereInput | AssetScalarWhereInput[]
+    uuid?: UuidFilter<"Asset"> | string
+    cafeins_uuid?: UuidNullableFilter<"Asset"> | string | null
+    unique_id?: StringFilter<"Asset"> | string
+    name?: StringFilter<"Asset"> | string
+    description?: StringNullableFilter<"Asset"> | string | null
+    created_at?: DateTimeFilter<"Asset"> | Date | string
+    updated_at?: DateTimeFilter<"Asset"> | Date | string
+    created_employee_no?: StringFilter<"Asset"> | string
+    modified_employee_no?: StringNullableFilter<"Asset"> | string | null
+    code?: StringFilter<"Asset"> | string
+    asset_group_code?: StringFilter<"Asset"> | string
+    project_group_code?: StringFilter<"Asset"> | string
+    site_group_code?: StringFilter<"Asset"> | string
+    asset_category?: StringFilter<"Asset"> | string
+    asset_ownership?: StringFilter<"Asset"> | string
+    area_ownership?: StringFilter<"Asset"> | string
+    status?: EnumMIGRATION_STATUSNullableFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Asset"> | Date | string | null
+    is_migrated?: BoolFilter<"Asset"> | boolean
+  }
+
+  export type AssetCreateWithoutSitepointInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    code: string
+    asset_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    project: ProjectCreateNestedOneWithoutAssetsInput
+  }
+
+  export type AssetUncheckedCreateWithoutSitepointInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    code: string
+    asset_group_code: string
+    project_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type AssetCreateOrConnectWithoutSitepointInput = {
+    where: AssetWhereUniqueInput
+    create: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput>
+  }
+
+  export type AssetCreateManySitepointInputEnvelope = {
+    data: AssetCreateManySitepointInput | AssetCreateManySitepointInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AssetUpsertWithWhereUniqueWithoutSitepointInput = {
+    where: AssetWhereUniqueInput
+    update: XOR<AssetUpdateWithoutSitepointInput, AssetUncheckedUpdateWithoutSitepointInput>
+    create: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput>
+  }
+
+  export type AssetUpdateWithWhereUniqueWithoutSitepointInput = {
+    where: AssetWhereUniqueInput
+    data: XOR<AssetUpdateWithoutSitepointInput, AssetUncheckedUpdateWithoutSitepointInput>
+  }
+
+  export type AssetUpdateManyWithWhereWithoutSitepointInput = {
+    where: AssetScalarWhereInput
+    data: XOR<AssetUpdateManyMutationInput, AssetUncheckedUpdateManyWithoutSitepointInput>
+  }
+
+  export type ProjectCreateWithoutAssetsInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    company_code: string
+    vendor_no: string
+    name: string
+    project_group_code: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    description?: string | null
+    po_number?: string | null
+    owner_name: string
+    owner_nik: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type ProjectUncheckedCreateWithoutAssetsInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    company_code: string
+    vendor_no: string
+    name: string
+    project_group_code: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    description?: string | null
+    po_number?: string | null
+    owner_name: string
+    owner_nik: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type ProjectCreateOrConnectWithoutAssetsInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutAssetsInput, ProjectUncheckedCreateWithoutAssetsInput>
+  }
+
+  export type SitePointCreateWithoutAssetsInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SitePointUncheckedCreateWithoutAssetsInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SitePointCreateOrConnectWithoutAssetsInput = {
+    where: SitePointWhereUniqueInput
+    create: XOR<SitePointCreateWithoutAssetsInput, SitePointUncheckedCreateWithoutAssetsInput>
+  }
+
+  export type ProjectUpsertWithoutAssetsInput = {
+    update: XOR<ProjectUpdateWithoutAssetsInput, ProjectUncheckedUpdateWithoutAssetsInput>
+    create: XOR<ProjectCreateWithoutAssetsInput, ProjectUncheckedCreateWithoutAssetsInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutAssetsInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutAssetsInput, ProjectUncheckedUpdateWithoutAssetsInput>
+  }
+
+  export type ProjectUpdateWithoutAssetsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: StringFieldUpdateOperationsInput | string
+    vendor_no?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ProjectUncheckedUpdateWithoutAssetsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: StringFieldUpdateOperationsInput | string
+    vendor_no?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SitePointUpsertWithoutAssetsInput = {
+    update: XOR<SitePointUpdateWithoutAssetsInput, SitePointUncheckedUpdateWithoutAssetsInput>
+    create: XOR<SitePointCreateWithoutAssetsInput, SitePointUncheckedCreateWithoutAssetsInput>
+    where?: SitePointWhereInput
+  }
+
+  export type SitePointUpdateToOneWithWhereWithoutAssetsInput = {
+    where?: SitePointWhereInput
+    data: XOR<SitePointUpdateWithoutAssetsInput, SitePointUncheckedUpdateWithoutAssetsInput>
+  }
+
+  export type SitePointUpdateWithoutAssetsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SitePointUncheckedUpdateWithoutAssetsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AssetCreateManyProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    code: string
+    asset_group_code: string
+    site_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type AssetUpdateWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint?: SitePointUpdateOneRequiredWithoutAssetsNestedInput
+  }
+
+  export type AssetUncheckedUpdateWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AssetUncheckedUpdateManyWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AssetCreateManySitepointInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    code: string
+    asset_group_code: string
+    project_group_code: string
+    asset_category: string
+    asset_ownership: string
+    area_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type AssetUpdateWithoutSitepointInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    project?: ProjectUpdateOneRequiredWithoutAssetsNestedInput
+  }
+
+  export type AssetUncheckedUpdateWithoutSitepointInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AssetUncheckedUpdateManyWithoutSitepointInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    asset_group_code?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    asset_category?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
 
 
   /**
    * Aliases for legacy arg types
    */
+    /**
+     * @deprecated Use ProjectCountOutputTypeDefaultArgs instead
+     */
+    export type ProjectCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ProjectCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SitePointCountOutputTypeDefaultArgs instead
+     */
+    export type SitePointCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SitePointCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ProjectDefaultArgs instead
      */

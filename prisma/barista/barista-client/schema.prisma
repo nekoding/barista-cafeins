@@ -37,6 +37,7 @@ model Project {
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean           @default(false)
+  assets               Asset[]
 
   @@map("projects")
 }
@@ -57,6 +58,7 @@ model SitePoint {
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean                  @default(false)
+  assets               Asset[]
 
   @@map("site_points")
 }
@@ -93,6 +95,9 @@ model Asset {
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean           @default(false)
+
+  project   Project   @relation(fields: [project_group_code], references: [project_group_code])
+  sitepoint SitePoint @relation(fields: [site_group_code], references: [site_group_code])
 
   @@map("assets")
 }
