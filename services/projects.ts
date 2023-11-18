@@ -169,7 +169,7 @@ export const syncProjects = async (): Promise<void> => {
 
           await trx.audits.create({
             data: {
-              user_type: '',
+              user_type: `App\\Models\\User`,
               user_id: createdUser.id,
               event: AuditEvent.CREATED,
               auditable_type: `Modules\\Master\\Entities\\Project`,
