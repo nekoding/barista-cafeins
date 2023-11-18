@@ -150,6 +150,7 @@ export const syncProjects = async (): Promise<void> => {
                   ? parseInt(process.env.PROJECT_PROJECT_GROUP_ID)
                   : null,
               status: 'incomplete',
+              latest_step: '0',
               project_owner_id: projectOwner.id,
               po_number: project.po_number,
               tag: defaultTags.join(','),
