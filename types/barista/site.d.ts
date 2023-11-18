@@ -1,6 +1,7 @@
 interface BaristaSite {
   uuid: string
   name: string
+  company_code: string
   site_group_code: string
   latitude: number
   longitude: number

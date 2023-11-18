@@ -1579,7 +1579,7 @@ export namespace Prisma {
     project_group_code: string
     created_at: Date
     updated_at: Date
-    created_employee_no: string | null
+    created_employee_no: string
     modified_employee_no: string | null
     description: string | null
     po_number: string | null
@@ -1660,7 +1660,7 @@ export namespace Prisma {
       project_group_code: string
       created_at: Date
       updated_at: Date
-      created_employee_no: string | null
+      created_employee_no: string
       modified_employee_no: string | null
       description: string | null
       po_number: string | null
@@ -2393,6 +2393,7 @@ export namespace Prisma {
     uuid: string | null
     cafeins_uuid: string | null
     name: string | null
+    company_code: string | null
     site_group_code: string | null
     latitude: number | null
     longitude: number | null
@@ -2409,6 +2410,7 @@ export namespace Prisma {
     uuid: string | null
     cafeins_uuid: string | null
     name: string | null
+    company_code: string | null
     site_group_code: string | null
     latitude: number | null
     longitude: number | null
@@ -2425,6 +2427,7 @@ export namespace Prisma {
     uuid: number
     cafeins_uuid: number
     name: number
+    company_code: number
     site_group_code: number
     latitude: number
     longitude: number
@@ -2453,6 +2456,7 @@ export namespace Prisma {
     uuid?: true
     cafeins_uuid?: true
     name?: true
+    company_code?: true
     site_group_code?: true
     latitude?: true
     longitude?: true
@@ -2469,6 +2473,7 @@ export namespace Prisma {
     uuid?: true
     cafeins_uuid?: true
     name?: true
+    company_code?: true
     site_group_code?: true
     latitude?: true
     longitude?: true
@@ -2485,6 +2490,7 @@ export namespace Prisma {
     uuid?: true
     cafeins_uuid?: true
     name?: true
+    company_code?: true
     site_group_code?: true
     latitude?: true
     longitude?: true
@@ -2588,12 +2594,13 @@ export namespace Prisma {
     uuid: string
     cafeins_uuid: string | null
     name: string
+    company_code: string
     site_group_code: string
     latitude: number
     longitude: number
     created_at: Date
     updated_at: Date
-    created_employee_no: string | null
+    created_employee_no: string
     modified_employee_no: string | null
     status: $Enums.MIGRATION_STATUS | null
     last_read: Date | null
@@ -2623,6 +2630,7 @@ export namespace Prisma {
     uuid?: boolean
     cafeins_uuid?: boolean
     name?: boolean
+    company_code?: boolean
     site_group_code?: boolean
     latitude?: boolean
     longitude?: boolean
@@ -2639,6 +2647,7 @@ export namespace Prisma {
     uuid?: boolean
     cafeins_uuid?: boolean
     name?: boolean
+    company_code?: boolean
     site_group_code?: boolean
     latitude?: boolean
     longitude?: boolean
@@ -2659,12 +2668,13 @@ export namespace Prisma {
       uuid: string
       cafeins_uuid: string | null
       name: string
+      company_code: string
       site_group_code: string
       latitude: number
       longitude: number
       created_at: Date
       updated_at: Date
-      created_employee_no: string | null
+      created_employee_no: string
       modified_employee_no: string | null
       status: $Enums.MIGRATION_STATUS | null
       last_read: Date | null
@@ -3066,6 +3076,7 @@ export namespace Prisma {
     readonly uuid: FieldRef<"SitePoint", 'String'>
     readonly cafeins_uuid: FieldRef<"SitePoint", 'String'>
     readonly name: FieldRef<"SitePoint", 'String'>
+    readonly company_code: FieldRef<"SitePoint", 'String'>
     readonly site_group_code: FieldRef<"SitePoint", 'String'>
     readonly latitude: FieldRef<"SitePoint", 'Float'>
     readonly longitude: FieldRef<"SitePoint", 'Float'>
@@ -4476,7 +4487,7 @@ export namespace Prisma {
     description: string | null
     created_at: Date
     updated_at: Date
-    created_employee_no: string | null
+    created_employee_no: string
     modified_employee_no: string | null
     code: string
     asset_group_code: string
@@ -4563,7 +4574,7 @@ export namespace Prisma {
       description: string | null
       created_at: Date
       updated_at: Date
-      created_employee_no: string | null
+      created_employee_no: string
       modified_employee_no: string | null
       code: string
       asset_group_code: string
@@ -5514,7 +5525,7 @@ export namespace Prisma {
     length: Decimal | null
     created_at: Date
     updated_at: Date
-    created_employee_no: string | null
+    created_employee_no: string
     modified_employee_no: string | null
     site_group_code_from: string
     site_group_code_to: string
@@ -5594,7 +5605,7 @@ export namespace Prisma {
       length: Prisma.Decimal | null
       created_at: Date
       updated_at: Date
-      created_employee_no: string | null
+      created_employee_no: string
       modified_employee_no: string | null
       site_group_code_from: string
       site_group_code_to: string
@@ -6583,7 +6594,7 @@ export namespace Prisma {
     length: Decimal
     created_at: Date
     updated_at: Date
-    created_employee_no: string | null
+    created_employee_no: string
     modified_employee_no: string | null
     cable_category: string
     cable_group: string
@@ -6684,7 +6695,7 @@ export namespace Prisma {
       length: Prisma.Decimal
       created_at: Date
       updated_at: Date
-      created_employee_no: string | null
+      created_employee_no: string
       modified_employee_no: string | null
       cable_category: string
       cable_group: string
@@ -7603,7 +7614,7 @@ export namespace Prisma {
     name: string
     created_at: Date
     updated_at: Date
-    created_employee_no: string | null
+    created_employee_no: string
     modified_employee_no: string | null
     site_group_code_from: string
     site_group_code_to: string
@@ -7678,7 +7689,7 @@ export namespace Prisma {
       name: string
       created_at: Date
       updated_at: Date
-      created_employee_no: string | null
+      created_employee_no: string
       modified_employee_no: string | null
       site_group_code_from: string
       site_group_code_to: string
@@ -8423,6 +8434,7 @@ export namespace Prisma {
     uuid: 'uuid',
     cafeins_uuid: 'cafeins_uuid',
     name: 'name',
+    company_code: 'company_code',
     site_group_code: 'site_group_code',
     latitude: 'latitude',
     longitude: 'longitude',
@@ -8700,14 +8712,14 @@ export namespace Prisma {
     OR?: ProjectWhereInput[]
     NOT?: ProjectWhereInput | ProjectWhereInput[]
     uuid?: UuidFilter<"Project"> | string
-    cafeins_uuid?: StringNullableFilter<"Project"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Project"> | string | null
     company_code?: StringFilter<"Project"> | string
     vendor_no?: StringFilter<"Project"> | string
     name?: StringFilter<"Project"> | string
     project_group_code?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
     updated_at?: DateTimeFilter<"Project"> | Date | string
-    created_employee_no?: StringNullableFilter<"Project"> | string | null
+    created_employee_no?: StringFilter<"Project"> | string
     modified_employee_no?: StringNullableFilter<"Project"> | string | null
     description?: StringNullableFilter<"Project"> | string | null
     po_number?: StringNullableFilter<"Project"> | string | null
@@ -8727,7 +8739,7 @@ export namespace Prisma {
     project_group_code?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     po_number?: SortOrderInput | SortOrder
@@ -8744,13 +8756,13 @@ export namespace Prisma {
     AND?: ProjectWhereInput | ProjectWhereInput[]
     OR?: ProjectWhereInput[]
     NOT?: ProjectWhereInput | ProjectWhereInput[]
-    cafeins_uuid?: StringNullableFilter<"Project"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Project"> | string | null
     company_code?: StringFilter<"Project"> | string
     vendor_no?: StringFilter<"Project"> | string
     name?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
     updated_at?: DateTimeFilter<"Project"> | Date | string
-    created_employee_no?: StringNullableFilter<"Project"> | string | null
+    created_employee_no?: StringFilter<"Project"> | string
     modified_employee_no?: StringNullableFilter<"Project"> | string | null
     description?: StringNullableFilter<"Project"> | string | null
     po_number?: StringNullableFilter<"Project"> | string | null
@@ -8770,7 +8782,7 @@ export namespace Prisma {
     project_group_code?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     po_number?: SortOrderInput | SortOrder
@@ -8789,14 +8801,14 @@ export namespace Prisma {
     OR?: ProjectScalarWhereWithAggregatesInput[]
     NOT?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Project"> | string
-    cafeins_uuid?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    cafeins_uuid?: UuidNullableWithAggregatesFilter<"Project"> | string | null
     company_code?: StringWithAggregatesFilter<"Project"> | string
     vendor_no?: StringWithAggregatesFilter<"Project"> | string
     name?: StringWithAggregatesFilter<"Project"> | string
     project_group_code?: StringWithAggregatesFilter<"Project"> | string
     created_at?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-    created_employee_no?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    created_employee_no?: StringWithAggregatesFilter<"Project"> | string
     modified_employee_no?: StringNullableWithAggregatesFilter<"Project"> | string | null
     description?: StringNullableWithAggregatesFilter<"Project"> | string | null
     po_number?: StringNullableWithAggregatesFilter<"Project"> | string | null
@@ -8812,14 +8824,15 @@ export namespace Prisma {
     OR?: SitePointWhereInput[]
     NOT?: SitePointWhereInput | SitePointWhereInput[]
     uuid?: UuidFilter<"SitePoint"> | string
-    cafeins_uuid?: StringNullableFilter<"SitePoint"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"SitePoint"> | string | null
     name?: StringFilter<"SitePoint"> | string
+    company_code?: StringFilter<"SitePoint"> | string
     site_group_code?: StringFilter<"SitePoint"> | string
     latitude?: FloatFilter<"SitePoint"> | number
     longitude?: FloatFilter<"SitePoint"> | number
     created_at?: DateTimeFilter<"SitePoint"> | Date | string
     updated_at?: DateTimeFilter<"SitePoint"> | Date | string
-    created_employee_no?: StringNullableFilter<"SitePoint"> | string | null
+    created_employee_no?: StringFilter<"SitePoint"> | string
     modified_employee_no?: StringNullableFilter<"SitePoint"> | string | null
     status?: EnumMIGRATION_STATUSNullableFilter<"SitePoint"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"SitePoint"> | Date | string | null
@@ -8830,12 +8843,13 @@ export namespace Prisma {
     uuid?: SortOrder
     cafeins_uuid?: SortOrderInput | SortOrder
     name?: SortOrder
+    company_code?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
@@ -8848,13 +8862,14 @@ export namespace Prisma {
     AND?: SitePointWhereInput | SitePointWhereInput[]
     OR?: SitePointWhereInput[]
     NOT?: SitePointWhereInput | SitePointWhereInput[]
-    cafeins_uuid?: StringNullableFilter<"SitePoint"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"SitePoint"> | string | null
     name?: StringFilter<"SitePoint"> | string
+    company_code?: StringFilter<"SitePoint"> | string
     latitude?: FloatFilter<"SitePoint"> | number
     longitude?: FloatFilter<"SitePoint"> | number
     created_at?: DateTimeFilter<"SitePoint"> | Date | string
     updated_at?: DateTimeFilter<"SitePoint"> | Date | string
-    created_employee_no?: StringNullableFilter<"SitePoint"> | string | null
+    created_employee_no?: StringFilter<"SitePoint"> | string
     modified_employee_no?: StringNullableFilter<"SitePoint"> | string | null
     status?: EnumMIGRATION_STATUSNullableFilter<"SitePoint"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"SitePoint"> | Date | string | null
@@ -8865,12 +8880,13 @@ export namespace Prisma {
     uuid?: SortOrder
     cafeins_uuid?: SortOrderInput | SortOrder
     name?: SortOrder
+    company_code?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
@@ -8887,14 +8903,15 @@ export namespace Prisma {
     OR?: SitePointScalarWhereWithAggregatesInput[]
     NOT?: SitePointScalarWhereWithAggregatesInput | SitePointScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"SitePoint"> | string
-    cafeins_uuid?: StringNullableWithAggregatesFilter<"SitePoint"> | string | null
+    cafeins_uuid?: UuidNullableWithAggregatesFilter<"SitePoint"> | string | null
     name?: StringWithAggregatesFilter<"SitePoint"> | string
+    company_code?: StringWithAggregatesFilter<"SitePoint"> | string
     site_group_code?: StringWithAggregatesFilter<"SitePoint"> | string
     latitude?: FloatWithAggregatesFilter<"SitePoint"> | number
     longitude?: FloatWithAggregatesFilter<"SitePoint"> | number
     created_at?: DateTimeWithAggregatesFilter<"SitePoint"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"SitePoint"> | Date | string
-    created_employee_no?: StringNullableWithAggregatesFilter<"SitePoint"> | string | null
+    created_employee_no?: StringWithAggregatesFilter<"SitePoint"> | string
     modified_employee_no?: StringNullableWithAggregatesFilter<"SitePoint"> | string | null
     status?: EnumMIGRATION_STATUSNullableWithAggregatesFilter<"SitePoint"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableWithAggregatesFilter<"SitePoint"> | Date | string | null
@@ -8968,13 +8985,13 @@ export namespace Prisma {
     OR?: AssetWhereInput[]
     NOT?: AssetWhereInput | AssetWhereInput[]
     uuid?: UuidFilter<"Asset"> | string
-    cafeins_uuid?: StringNullableFilter<"Asset"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Asset"> | string | null
     unique_id?: StringFilter<"Asset"> | string
     name?: StringFilter<"Asset"> | string
     description?: StringNullableFilter<"Asset"> | string | null
     created_at?: DateTimeFilter<"Asset"> | Date | string
     updated_at?: DateTimeFilter<"Asset"> | Date | string
-    created_employee_no?: StringNullableFilter<"Asset"> | string | null
+    created_employee_no?: StringFilter<"Asset"> | string
     modified_employee_no?: StringNullableFilter<"Asset"> | string | null
     code?: StringFilter<"Asset"> | string
     asset_group_code?: StringFilter<"Asset"> | string
@@ -8996,7 +9013,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     code?: SortOrder
     asset_group_code?: SortOrder
@@ -9016,12 +9033,12 @@ export namespace Prisma {
     AND?: AssetWhereInput | AssetWhereInput[]
     OR?: AssetWhereInput[]
     NOT?: AssetWhereInput | AssetWhereInput[]
-    cafeins_uuid?: StringNullableFilter<"Asset"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Asset"> | string | null
     name?: StringFilter<"Asset"> | string
     description?: StringNullableFilter<"Asset"> | string | null
     created_at?: DateTimeFilter<"Asset"> | Date | string
     updated_at?: DateTimeFilter<"Asset"> | Date | string
-    created_employee_no?: StringNullableFilter<"Asset"> | string | null
+    created_employee_no?: StringFilter<"Asset"> | string
     modified_employee_no?: StringNullableFilter<"Asset"> | string | null
     code?: StringFilter<"Asset"> | string
     asset_group_code?: StringFilter<"Asset"> | string
@@ -9043,7 +9060,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     code?: SortOrder
     asset_group_code?: SortOrder
@@ -9065,13 +9082,13 @@ export namespace Prisma {
     OR?: AssetScalarWhereWithAggregatesInput[]
     NOT?: AssetScalarWhereWithAggregatesInput | AssetScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Asset"> | string
-    cafeins_uuid?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    cafeins_uuid?: UuidNullableWithAggregatesFilter<"Asset"> | string | null
     unique_id?: StringWithAggregatesFilter<"Asset"> | string
     name?: StringWithAggregatesFilter<"Asset"> | string
     description?: StringNullableWithAggregatesFilter<"Asset"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Asset"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Asset"> | Date | string
-    created_employee_no?: StringNullableWithAggregatesFilter<"Asset"> | string | null
+    created_employee_no?: StringWithAggregatesFilter<"Asset"> | string
     modified_employee_no?: StringNullableWithAggregatesFilter<"Asset"> | string | null
     code?: StringWithAggregatesFilter<"Asset"> | string
     asset_group_code?: StringWithAggregatesFilter<"Asset"> | string
@@ -9090,13 +9107,13 @@ export namespace Prisma {
     OR?: RouteWhereInput[]
     NOT?: RouteWhereInput | RouteWhereInput[]
     uuid?: UuidFilter<"Route"> | string
-    cafeins_uuid?: StringNullableFilter<"Route"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Route"> | string | null
     unique_id?: StringFilter<"Route"> | string
     name?: StringFilter<"Route"> | string
     length?: DecimalNullableFilter<"Route"> | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFilter<"Route"> | Date | string
     updated_at?: DateTimeFilter<"Route"> | Date | string
-    created_employee_no?: StringNullableFilter<"Route"> | string | null
+    created_employee_no?: StringFilter<"Route"> | string
     modified_employee_no?: StringNullableFilter<"Route"> | string | null
     site_group_code_from?: StringFilter<"Route"> | string
     site_group_code_to?: StringFilter<"Route"> | string
@@ -9115,7 +9132,7 @@ export namespace Prisma {
     length?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     site_group_code_from?: SortOrder
     site_group_code_to?: SortOrder
@@ -9132,12 +9149,12 @@ export namespace Prisma {
     AND?: RouteWhereInput | RouteWhereInput[]
     OR?: RouteWhereInput[]
     NOT?: RouteWhereInput | RouteWhereInput[]
-    cafeins_uuid?: StringNullableFilter<"Route"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Route"> | string | null
     name?: StringFilter<"Route"> | string
     length?: DecimalNullableFilter<"Route"> | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFilter<"Route"> | Date | string
     updated_at?: DateTimeFilter<"Route"> | Date | string
-    created_employee_no?: StringNullableFilter<"Route"> | string | null
+    created_employee_no?: StringFilter<"Route"> | string
     modified_employee_no?: StringNullableFilter<"Route"> | string | null
     site_group_code_from?: StringFilter<"Route"> | string
     site_group_code_to?: StringFilter<"Route"> | string
@@ -9156,7 +9173,7 @@ export namespace Prisma {
     length?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     site_group_code_from?: SortOrder
     site_group_code_to?: SortOrder
@@ -9177,13 +9194,13 @@ export namespace Prisma {
     OR?: RouteScalarWhereWithAggregatesInput[]
     NOT?: RouteScalarWhereWithAggregatesInput | RouteScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Route"> | string
-    cafeins_uuid?: StringNullableWithAggregatesFilter<"Route"> | string | null
+    cafeins_uuid?: UuidNullableWithAggregatesFilter<"Route"> | string | null
     unique_id?: StringWithAggregatesFilter<"Route"> | string
     name?: StringWithAggregatesFilter<"Route"> | string
     length?: DecimalNullableWithAggregatesFilter<"Route"> | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeWithAggregatesFilter<"Route"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Route"> | Date | string
-    created_employee_no?: StringNullableWithAggregatesFilter<"Route"> | string | null
+    created_employee_no?: StringWithAggregatesFilter<"Route"> | string
     modified_employee_no?: StringNullableWithAggregatesFilter<"Route"> | string | null
     site_group_code_from?: StringWithAggregatesFilter<"Route"> | string
     site_group_code_to?: StringWithAggregatesFilter<"Route"> | string
@@ -9199,7 +9216,7 @@ export namespace Prisma {
     OR?: CableWhereInput[]
     NOT?: CableWhereInput | CableWhereInput[]
     uuid?: UuidFilter<"Cable"> | string
-    cafeins_uuid?: StringNullableFilter<"Cable"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Cable"> | string | null
     unique_id?: StringFilter<"Cable"> | string
     project_group_code?: StringFilter<"Cable"> | string
     name?: StringFilter<"Cable"> | string
@@ -9207,7 +9224,7 @@ export namespace Prisma {
     length?: DecimalFilter<"Cable"> | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeFilter<"Cable"> | Date | string
     updated_at?: DateTimeFilter<"Cable"> | Date | string
-    created_employee_no?: StringNullableFilter<"Cable"> | string | null
+    created_employee_no?: StringFilter<"Cable"> | string
     modified_employee_no?: StringNullableFilter<"Cable"> | string | null
     cable_category?: StringFilter<"Cable"> | string
     cable_group?: StringFilter<"Cable"> | string
@@ -9233,7 +9250,7 @@ export namespace Prisma {
     length?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     cable_category?: SortOrder
     cable_group?: SortOrder
@@ -9255,14 +9272,14 @@ export namespace Prisma {
     AND?: CableWhereInput | CableWhereInput[]
     OR?: CableWhereInput[]
     NOT?: CableWhereInput | CableWhereInput[]
-    cafeins_uuid?: StringNullableFilter<"Cable"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Cable"> | string | null
     project_group_code?: StringFilter<"Cable"> | string
     name?: StringFilter<"Cable"> | string
     description?: StringNullableFilter<"Cable"> | string | null
     length?: DecimalFilter<"Cable"> | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeFilter<"Cable"> | Date | string
     updated_at?: DateTimeFilter<"Cable"> | Date | string
-    created_employee_no?: StringNullableFilter<"Cable"> | string | null
+    created_employee_no?: StringFilter<"Cable"> | string
     modified_employee_no?: StringNullableFilter<"Cable"> | string | null
     cable_category?: StringFilter<"Cable"> | string
     cable_group?: StringFilter<"Cable"> | string
@@ -9288,7 +9305,7 @@ export namespace Prisma {
     length?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     cable_category?: SortOrder
     cable_group?: SortOrder
@@ -9314,7 +9331,7 @@ export namespace Prisma {
     OR?: CableScalarWhereWithAggregatesInput[]
     NOT?: CableScalarWhereWithAggregatesInput | CableScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Cable"> | string
-    cafeins_uuid?: StringNullableWithAggregatesFilter<"Cable"> | string | null
+    cafeins_uuid?: UuidNullableWithAggregatesFilter<"Cable"> | string | null
     unique_id?: StringWithAggregatesFilter<"Cable"> | string
     project_group_code?: StringWithAggregatesFilter<"Cable"> | string
     name?: StringWithAggregatesFilter<"Cable"> | string
@@ -9322,7 +9339,7 @@ export namespace Prisma {
     length?: DecimalWithAggregatesFilter<"Cable"> | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeWithAggregatesFilter<"Cable"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Cable"> | Date | string
-    created_employee_no?: StringNullableWithAggregatesFilter<"Cable"> | string | null
+    created_employee_no?: StringWithAggregatesFilter<"Cable"> | string
     modified_employee_no?: StringNullableWithAggregatesFilter<"Cable"> | string | null
     cable_category?: StringWithAggregatesFilter<"Cable"> | string
     cable_group?: StringWithAggregatesFilter<"Cable"> | string
@@ -9343,13 +9360,13 @@ export namespace Prisma {
     OR?: SegmentWhereInput[]
     NOT?: SegmentWhereInput | SegmentWhereInput[]
     uuid?: UuidFilter<"Segment"> | string
-    cafeins_uuid?: StringNullableFilter<"Segment"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Segment"> | string | null
     unique_id?: StringFilter<"Segment"> | string
     project_group_code?: StringFilter<"Segment"> | string
     name?: StringFilter<"Segment"> | string
     created_at?: DateTimeFilter<"Segment"> | Date | string
     updated_at?: DateTimeFilter<"Segment"> | Date | string
-    created_employee_no?: StringNullableFilter<"Segment"> | string | null
+    created_employee_no?: StringFilter<"Segment"> | string
     modified_employee_no?: StringNullableFilter<"Segment"> | string | null
     site_group_code_from?: StringFilter<"Segment"> | string
     site_group_code_to?: StringFilter<"Segment"> | string
@@ -9367,7 +9384,7 @@ export namespace Prisma {
     name?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     site_group_code_from?: SortOrder
     site_group_code_to?: SortOrder
@@ -9383,12 +9400,12 @@ export namespace Prisma {
     AND?: SegmentWhereInput | SegmentWhereInput[]
     OR?: SegmentWhereInput[]
     NOT?: SegmentWhereInput | SegmentWhereInput[]
-    cafeins_uuid?: StringNullableFilter<"Segment"> | string | null
+    cafeins_uuid?: UuidNullableFilter<"Segment"> | string | null
     project_group_code?: StringFilter<"Segment"> | string
     name?: StringFilter<"Segment"> | string
     created_at?: DateTimeFilter<"Segment"> | Date | string
     updated_at?: DateTimeFilter<"Segment"> | Date | string
-    created_employee_no?: StringNullableFilter<"Segment"> | string | null
+    created_employee_no?: StringFilter<"Segment"> | string
     modified_employee_no?: StringNullableFilter<"Segment"> | string | null
     site_group_code_from?: StringFilter<"Segment"> | string
     site_group_code_to?: StringFilter<"Segment"> | string
@@ -9406,7 +9423,7 @@ export namespace Prisma {
     name?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    created_employee_no?: SortOrderInput | SortOrder
+    created_employee_no?: SortOrder
     modified_employee_no?: SortOrderInput | SortOrder
     site_group_code_from?: SortOrder
     site_group_code_to?: SortOrder
@@ -9424,13 +9441,13 @@ export namespace Prisma {
     OR?: SegmentScalarWhereWithAggregatesInput[]
     NOT?: SegmentScalarWhereWithAggregatesInput | SegmentScalarWhereWithAggregatesInput[]
     uuid?: UuidWithAggregatesFilter<"Segment"> | string
-    cafeins_uuid?: StringNullableWithAggregatesFilter<"Segment"> | string | null
+    cafeins_uuid?: UuidNullableWithAggregatesFilter<"Segment"> | string | null
     unique_id?: StringWithAggregatesFilter<"Segment"> | string
     project_group_code?: StringWithAggregatesFilter<"Segment"> | string
     name?: StringWithAggregatesFilter<"Segment"> | string
     created_at?: DateTimeWithAggregatesFilter<"Segment"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Segment"> | Date | string
-    created_employee_no?: StringNullableWithAggregatesFilter<"Segment"> | string | null
+    created_employee_no?: StringWithAggregatesFilter<"Segment"> | string
     modified_employee_no?: StringNullableWithAggregatesFilter<"Segment"> | string | null
     site_group_code_from?: StringWithAggregatesFilter<"Segment"> | string
     site_group_code_to?: StringWithAggregatesFilter<"Segment"> | string
@@ -9449,7 +9466,7 @@ export namespace Prisma {
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
@@ -9469,7 +9486,7 @@ export namespace Prisma {
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
@@ -9489,7 +9506,7 @@ export namespace Prisma {
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9509,7 +9526,7 @@ export namespace Prisma {
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9529,7 +9546,7 @@ export namespace Prisma {
     project_group_code: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     description?: string | null
     po_number?: string | null
@@ -9549,7 +9566,7 @@ export namespace Prisma {
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9569,7 +9586,7 @@ export namespace Prisma {
     project_group_code?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9584,12 +9601,13 @@ export namespace Prisma {
     uuid?: string
     cafeins_uuid?: string | null
     name: string
+    company_code: string
     site_group_code: string
     latitude: number
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
@@ -9600,12 +9618,13 @@ export namespace Prisma {
     uuid?: string
     cafeins_uuid?: string | null
     name: string
+    company_code: string
     site_group_code: string
     latitude: number
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
@@ -9616,12 +9635,13 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
     site_group_code?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9632,12 +9652,13 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
     site_group_code?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9648,12 +9669,13 @@ export namespace Prisma {
     uuid?: string
     cafeins_uuid?: string | null
     name: string
+    company_code: string
     site_group_code: string
     latitude: number
     longitude: number
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
@@ -9664,12 +9686,13 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
     site_group_code?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9680,12 +9703,13 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
     site_group_code?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9770,7 +9794,7 @@ export namespace Prisma {
     description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     code: string
     asset_group_code: string
@@ -9792,7 +9816,7 @@ export namespace Prisma {
     description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     code: string
     asset_group_code: string
@@ -9814,7 +9838,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     asset_group_code?: StringFieldUpdateOperationsInput | string
@@ -9836,7 +9860,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     asset_group_code?: StringFieldUpdateOperationsInput | string
@@ -9858,7 +9882,7 @@ export namespace Prisma {
     description?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     code: string
     asset_group_code: string
@@ -9880,7 +9904,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     asset_group_code?: StringFieldUpdateOperationsInput | string
@@ -9902,7 +9926,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     code?: StringFieldUpdateOperationsInput | string
     asset_group_code?: StringFieldUpdateOperationsInput | string
@@ -9924,7 +9948,7 @@ export namespace Prisma {
     length?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     site_group_code_from: string
     site_group_code_to: string
@@ -9943,7 +9967,7 @@ export namespace Prisma {
     length?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     site_group_code_from: string
     site_group_code_to: string
@@ -9962,7 +9986,7 @@ export namespace Prisma {
     length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     site_group_code_to?: StringFieldUpdateOperationsInput | string
@@ -9981,7 +10005,7 @@ export namespace Prisma {
     length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     site_group_code_to?: StringFieldUpdateOperationsInput | string
@@ -10000,7 +10024,7 @@ export namespace Prisma {
     length?: Decimal | DecimalJsLike | number | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     site_group_code_from: string
     site_group_code_to: string
@@ -10019,7 +10043,7 @@ export namespace Prisma {
     length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     site_group_code_to?: StringFieldUpdateOperationsInput | string
@@ -10038,7 +10062,7 @@ export namespace Prisma {
     length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     site_group_code_to?: StringFieldUpdateOperationsInput | string
@@ -10059,7 +10083,7 @@ export namespace Prisma {
     length: Decimal | DecimalJsLike | number | string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     cable_category: string
     cable_group: string
@@ -10085,7 +10109,7 @@ export namespace Prisma {
     length: Decimal | DecimalJsLike | number | string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     cable_category: string
     cable_group: string
@@ -10111,7 +10135,7 @@ export namespace Prisma {
     length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     cable_category?: StringFieldUpdateOperationsInput | string
     cable_group?: StringFieldUpdateOperationsInput | string
@@ -10137,7 +10161,7 @@ export namespace Prisma {
     length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     cable_category?: StringFieldUpdateOperationsInput | string
     cable_group?: StringFieldUpdateOperationsInput | string
@@ -10163,7 +10187,7 @@ export namespace Prisma {
     length: Decimal | DecimalJsLike | number | string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     cable_category: string
     cable_group: string
@@ -10189,7 +10213,7 @@ export namespace Prisma {
     length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     cable_category?: StringFieldUpdateOperationsInput | string
     cable_group?: StringFieldUpdateOperationsInput | string
@@ -10215,7 +10239,7 @@ export namespace Prisma {
     length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     cable_category?: StringFieldUpdateOperationsInput | string
     cable_group?: StringFieldUpdateOperationsInput | string
@@ -10239,7 +10263,7 @@ export namespace Prisma {
     name: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     site_group_code_from: string
     site_group_code_to: string
@@ -10257,7 +10281,7 @@ export namespace Prisma {
     name: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     site_group_code_from: string
     site_group_code_to: string
@@ -10275,7 +10299,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     site_group_code_to?: StringFieldUpdateOperationsInput | string
@@ -10293,7 +10317,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     site_group_code_to?: StringFieldUpdateOperationsInput | string
@@ -10311,7 +10335,7 @@ export namespace Prisma {
     name: string
     created_at?: Date | string
     updated_at?: Date | string
-    created_employee_no?: string | null
+    created_employee_no: string
     modified_employee_no?: string | null
     site_group_code_from: string
     site_group_code_to: string
@@ -10329,7 +10353,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     site_group_code_to?: StringFieldUpdateOperationsInput | string
@@ -10347,7 +10371,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    created_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     site_group_code_to?: StringFieldUpdateOperationsInput | string
@@ -10369,7 +10393,7 @@ export namespace Prisma {
     not?: NestedUuidFilter<$PrismaModel> | string
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
+  export type UuidNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -10377,11 +10401,8 @@ export namespace Prisma {
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -10408,6 +10429,21 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type EnumMIGRATION_STATUSNullableFilter<$PrismaModel = never> = {
@@ -10513,7 +10549,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+  export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -10521,11 +10557,8 @@ export namespace Prisma {
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
@@ -10561,6 +10594,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumMIGRATION_STATUSNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10610,6 +10661,7 @@ export namespace Prisma {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
     name?: SortOrder
+    company_code?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
@@ -10631,6 +10683,7 @@ export namespace Prisma {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
     name?: SortOrder
+    company_code?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
@@ -10647,6 +10700,7 @@ export namespace Prisma {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
     name?: SortOrder
+    company_code?: SortOrder
     site_group_code?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
@@ -11139,7 +11193,7 @@ export namespace Prisma {
     not?: NestedUuidFilter<$PrismaModel> | string
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
+  export type NestedUuidNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -11147,10 +11201,7 @@ export namespace Prisma {
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    not?: NestedUuidNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -11176,6 +11227,20 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedEnumMIGRATION_STATUSNullableFilter<$PrismaModel = never> = {
@@ -11226,7 +11291,7 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedUuidNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -11234,10 +11299,7 @@ export namespace Prisma {
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
     gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    not?: NestedUuidNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
@@ -11283,6 +11345,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumMIGRATION_STATUSNullableWithAggregatesFilter<$PrismaModel = never> = {

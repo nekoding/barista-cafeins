@@ -1,113 +1,200 @@
-import type { PrismaClient, Project } from '../prisma/barista/barista-client'
-import type { PrismaClient as CafeinsPrismaClient } from '../prisma/cafeins/cafeins-client'
+import moment from 'moment'
+import type { Project } from '../prisma/barista/barista-client'
+import type {
+  companies,
+  users,
+  vendors,
+} from '../prisma/cafeins/cafeins-client'
 import { getProjectsUnmigrated } from '../repositories/barista/projects'
 import { getCompanyByCode } from '../repositories/cafeins/companies'
-import {
-  createProjects,
-  getLatestProjectByCode,
-} from '../repositories/cafeins/projects'
 import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import { getVendorByVendorNo } from '../repositories/cafeins/vendors'
 import { baristaClient, cafeinsClient } from '../utils/database'
-import { parsingCounterNumber } from '../utils/helpers'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
+import { AuditEvent } from '../types/cafeins/audit'
+
+const getCreatedUserByEmployeeNo = getUserByEmployeeNo
+
+const getModifiedUserByEmployeeNo = getUserByEmployeeNo
+
+const getProjectOwnerByEmployeeNo = getUserByEmployeeNo
+
+const getProjectCompanyByCode = getCompanyByCode
+
+const getProjectVendorByVendorNo = getVendorByVendorNo
+
+const generateCounterNumberByCreatedTime = async (
+  project: Project,
+): Promise<string> => {
+  const prefixIdentifier = `CAF-${project.company_code}`
+  const timeIdentitfier = moment(project.created_at).format('YYYYMM')
+  const lastProject = await cafeinsClient.projects.findFirst({
+    where: {
+      code: {
+        contains: timeIdentitfier,
+      },
+    },
+    orderBy: {
+      code: 'desc',
+    },
+  })
+
+  let counterSequence = 1
+  if (lastProject?.code != null) {
+    const lastCounterSequence = lastProject.code.substring(
+      lastProject.code.length - 3,
+    )
+    counterSequence = parseInt(lastCounterSequence) + 1
+  }
+
+  const finalCode = `${prefixIdentifier}-${timeIdentitfier}-${String(
+    counterSequence,
+  ).padStart(3, '0')}`
+  return finalCode
+}
+
+type ValidatedData = [users, users, users, companies, vendors, string]
+const validateData = async (project: Project): Promise<ValidatedData> => {
+  const [
+    createdUser,
+    modifiedUser,
+    projectOwner,
+    projectCompany,
+    projectVendor,
+    projectCode,
+  ] = await Promise.all([
+    getCreatedUserByEmployeeNo(project.created_employee_no),
+    getModifiedUserByEmployeeNo(
+      project.modified_employee_no ?? project.created_employee_no,
+    ),
+    getProjectOwnerByEmployeeNo(project.owner_nik),
+    getProjectCompanyByCode(project.company_code),
+    getProjectVendorByVendorNo(project.vendor_no),
+    generateCounterNumberByCreatedTime(project),
+  ])
+
+  if (createdUser == null) {
+    throw new Error('project created user not found in database')
+  }
+
+  if (modifiedUser == null) {
+    throw new Error('project modified user not found in database')
+  }
+
+  if (projectOwner == null) {
+    throw new Error('project owner user not found in database')
+  }
+
+  if (projectCompany == null) {
+    throw new Error('project company not found in database')
+  }
+
+  if (projectVendor == null) {
+    throw new Error('project vendor not found in database')
+  }
+
+  return [
+    createdUser,
+    modifiedUser,
+    projectOwner,
+    projectCompany,
+    projectVendor,
+    projectCode,
+  ]
+}
 
 export const syncProjects = async (): Promise<void> => {
   try {
     logger.info('sync projects start')
     const projects = await getProjectsUnmigrated()
+    const defaultTags = ['project migration']
+    for (const tag of defaultTags) {
+      await cafeinsClient.tags.upsert({
+        update: {},
+        create: {
+          tag,
+        },
+        where: {
+          tag,
+        },
+      })
+    }
 
     for (const project of projects) {
       try {
-        const [projectCreator, projectOwner, projectCompany, projectVendor] =
-          await prepareData(project)
-
-        // set project group id to "project group migration"
-        const projectGroupId = parseInt(
-          process.env.PROJECT_PROJECT_GROUP_ID ?? '1',
-        )
-
-        // set default tag to = "project migration"
-        const defaultTags = ['project migration']
+        const [
+          createdUser,
+          modifiedUser,
+          projectOwner,
+          projectCompany,
+          projectVendor,
+          projectCode,
+        ] = await validateData(project)
 
         await cafeinsClient.$transaction(async (trx) => {
-          // first or create project tag
-          for (const tag of defaultTags) {
-            await trx.tags.upsert({
-              where: {
-                tag,
-              },
-              create: {
-                tag,
-              },
-              update: {},
-            })
-          }
-
-          // parsing counter number
-          let counter = 1
-          const prefixCode = `CAF-${project.company_code}-`
-          const latestProject = await getLatestProjectByCode(
-            project.created_at.toLocaleString(),
-          )
-          if (latestProject?.code !== null) {
-            counter = parsingCounterNumber(
-              latestProject.code,
-              latestProject.code.length - 3,
-              3,
-            )
-          }
-
-          // create project
-          await createProjects(
-            trx as CafeinsPrismaClient,
-            projectCompany.id as unknown as string,
-            projectVendor.id as unknown as string,
-            project.name,
-            project.created_at.toLocaleString(),
-            project.updated_at.toLocaleString(),
-            projectCreator.id as unknown as string,
-            projectGroupId,
-            'incomplete',
-            project.description,
-            projectOwner.id as unknown as string,
-            project.po_number,
-            project.uuid,
-            prefixCode,
-            counter,
-            defaultTags,
-          )
-
-          // mark project as migrated
-          await baristaClient.$transaction(async (baristaTrx) => {
-            // update project
-            await baristaTrx.project.update({
-              data: {
-                is_migrated: true,
-                last_read: new Date(),
-                status: 'CREATED',
-                cafeins_uuid: project.uuid,
-              },
-              where: {
-                uuid: project.uuid,
-              },
-            })
-
-            // write to log
-            await writeToLog(
-              LogLevel.INFO,
-              'project created in cafeins',
-              {
-                employee_no: project.created_employee_no,
-                uuid: project.uuid,
-                name: project.name,
-                code: project.project_group_code,
-                table: 'projects',
-              },
-              baristaTrx as PrismaClient,
-            )
+          const projectCreated = await trx.projects.create({
+            data: {
+              uuid: project.uuid,
+              name: project.name,
+              code: projectCode,
+              company_id: projectCompany.id,
+              vendor_id: projectVendor.id,
+              created_at: project.created_at,
+              updated_at: project.updated_at,
+              created_user_id: createdUser.id,
+              modified_user_id: modifiedUser.id,
+              description: project.description,
+              project_group_id:
+                process.env.PROJECT_PROJECT_GROUP_ID != null
+                  ? parseInt(process.env.PROJECT_PROJECT_GROUP_ID)
+                  : null,
+              status: 'incomplete',
+              project_owner_id: projectOwner.id,
+              po_number: project.po_number,
+              tag: defaultTags.join(','),
+            },
           })
+
+          const serialized = JSON.stringify({
+            ...projectCreated,
+            id: projectCreated.id.toString(),
+            created_user_id: projectCreated.created_user_id?.toString(),
+            modified_user_id: projectCreated.modified_user_id?.toString(),
+            company_id: projectCreated.company_id.toString(),
+            vendor_id: projectCreated.vendor_id?.toString(),
+            project_owner_id: projectCreated.project_owner_id?.toString(),
+            project_group_id: projectCreated.project_group_id?.toString(),
+          })
+
+          await trx.audits.create({
+            data: {
+              user_type: '',
+              user_id: createdUser.id,
+              event: AuditEvent.CREATED,
+              auditable_type: `Modules\\Master\\Entities\\Project`,
+              auditable_id: projectCreated.id,
+              old_values: '[]',
+              new_values: serialized,
+              user_agent: 'Barista',
+              created_at: new Date(),
+              updated_at: new Date(),
+            },
+          })
+
+          await baristaClient.project.update({
+            where: {
+              uuid: project.uuid,
+            },
+            data: {
+              status: 'CREATED',
+              is_migrated: true,
+              last_read: new Date(),
+              cafeins_uuid: project.uuid,
+            },
+          })
+
+          logger.info(`sync project ${project.uuid} success`)
         })
       } catch (error: any) {
         error.ctx = {
@@ -119,7 +206,7 @@ export const syncProjects = async (): Promise<void> => {
       }
     }
 
-    logger.info('sync projects success')
+    logger.info('sync projects finish')
   } catch (error: any) {
     await writeToLog(
       LogLevel.ERROR,
@@ -129,41 +216,4 @@ export const syncProjects = async (): Promise<void> => {
 
     throw new Error(error.message.replace(/\n/g, ''))
   }
-}
-
-const prepareData = async (project: Project): Promise<any> => {
-  // validation created_employee_no and project owner
-  if (project.created_employee_no == null || project.owner_nik == null) {
-    throw new Error('project creator not found cannot migrate data')
-  }
-
-  const [projectCreator, projectOwner, projectCompany, projectVendor] =
-    await Promise.all([
-      getUserByEmployeeNo(project.created_employee_no),
-      getUserByEmployeeNo(project.owner_nik),
-      getCompanyByCode(project.company_code),
-      getVendorByVendorNo(project.vendor_no),
-    ])
-
-  // validation project creator
-  if (projectCreator == null) {
-    throw new Error('project creator not found cannot migrate data')
-  }
-
-  // validation project owner
-  if (projectOwner == null) {
-    throw new Error('project owner not found cannot migrate data')
-  }
-
-  // validation company_code
-  if (projectCompany == null) {
-    throw new Error('project company not found cannot migrate data')
-  }
-
-  // validation vendor_no
-  if (projectVendor == null) {
-    throw new Error('project vendor not found cannot migrate data')
-  }
-
-  return [projectCreator, projectOwner, projectCompany, projectVendor]
 }

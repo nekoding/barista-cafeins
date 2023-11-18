@@ -21,14 +21,14 @@ enum MIGRATION_STATUS {
 // Model
 model Project {
   uuid                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  cafeins_uuid         String?
+  cafeins_uuid         String?           @db.Uuid
   company_code         String
   vendor_no            String
   name                 String
   project_group_code   String            @unique
   created_at           DateTime          @default(now())
   updated_at           DateTime          @updatedAt
-  created_employee_no  String?
+  created_employee_no  String
   modified_employee_no String?
   description          String?
   po_number            String?
@@ -43,15 +43,16 @@ model Project {
 
 model SitePoint {
   uuid                 String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  cafeins_uuid         String?
+  cafeins_uuid         String?                  @db.Uuid
   name                 String
+  company_code         String
   site_group_code      String                   @unique
   latitude             Float
   longitude            Float
   geometry             Unsupported("geometry")?
   created_at           DateTime                 @default(now())
   updated_at           DateTime                 @updatedAt
-  created_employee_no  String?
+  created_employee_no  String
   modified_employee_no String?
   status               MIGRATION_STATUS?
   last_read            DateTime?
@@ -74,13 +75,13 @@ model Log {
 
 model Asset {
   uuid                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  cafeins_uuid         String?
+  cafeins_uuid         String?           @db.Uuid
   unique_id            String            @unique
   name                 String
   description          String?
   created_at           DateTime          @default(now())
   updated_at           DateTime          @updatedAt
-  created_employee_no  String?
+  created_employee_no  String
   modified_employee_no String?
   code                 String
   asset_group_code     String
@@ -98,14 +99,14 @@ model Asset {
 
 model Route {
   uuid                 String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  cafeins_uuid         String?
+  cafeins_uuid         String?                  @db.Uuid
   unique_id            String                   @unique
   name                 String
   geometry             Unsupported("geometry")?
   length               Decimal?                 @db.Decimal(10, 3)
   created_at           DateTime                 @default(now())
   updated_at           DateTime                 @updatedAt
-  created_employee_no  String?
+  created_employee_no  String
   modified_employee_no String?
   site_group_code_from String
   site_group_code_to   String
@@ -120,7 +121,7 @@ model Route {
 
 model Cable {
   uuid                      String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  cafeins_uuid              String?
+  cafeins_uuid              String?           @db.Uuid
   unique_id                 String            @unique
   project_group_code        String
   name                      String
@@ -128,7 +129,7 @@ model Cable {
   length                    Decimal           @db.Decimal(10, 3)
   created_at                DateTime          @default(now())
   updated_at                DateTime          @updatedAt
-  created_employee_no       String?
+  created_employee_no       String
   modified_employee_no      String?
   cable_category            String
   cable_group               String
@@ -148,13 +149,13 @@ model Cable {
 
 model Segment {
   uuid                      String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  cafeins_uuid              String?
+  cafeins_uuid              String?           @db.Uuid
   unique_id                 String            @unique
   project_group_code        String
   name                      String
   created_at                DateTime          @default(now())
   updated_at                DateTime          @updatedAt
-  created_employee_no       String?
+  created_employee_no       String
   modified_employee_no      String?
   site_group_code_from      String
   site_group_code_to        String

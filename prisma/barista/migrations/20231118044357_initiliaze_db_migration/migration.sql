@@ -7,7 +7,7 @@ CREATE TYPE "MIGRATION_STATUS" AS ENUM ('CREATED', 'UPDATED');
 -- CreateTable
 CREATE TABLE "projects" (
     "uuid" UUID NOT NULL DEFAULT gen_random_uuid(),
-    "cafeins_uuid" TEXT,
+    "cafeins_uuid" UUID,
     "company_code" TEXT NOT NULL,
     "vendor_no" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -30,8 +30,9 @@ CREATE TABLE "projects" (
 -- CreateTable
 CREATE TABLE "site_points" (
     "uuid" UUID NOT NULL DEFAULT gen_random_uuid(),
-    "cafeins_uuid" TEXT,
+    "cafeins_uuid" UUID,
     "name" TEXT NOT NULL,
+    "company_code" TEXT NOT NULL,
     "site_group_code" TEXT NOT NULL,
     "latitude" DOUBLE PRECISION NOT NULL,
     "longitude" DOUBLE PRECISION NOT NULL,
@@ -63,7 +64,7 @@ CREATE TABLE "logs" (
 -- CreateTable
 CREATE TABLE "assets" (
     "uuid" UUID NOT NULL DEFAULT gen_random_uuid(),
-    "cafeins_uuid" TEXT,
+    "cafeins_uuid" UUID,
     "unique_id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
@@ -88,7 +89,7 @@ CREATE TABLE "assets" (
 -- CreateTable
 CREATE TABLE "routes" (
     "uuid" UUID NOT NULL DEFAULT gen_random_uuid(),
-    "cafeins_uuid" TEXT,
+    "cafeins_uuid" UUID,
     "unique_id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "geometry" geometry,
@@ -111,6 +112,7 @@ CREATE TABLE "routes" (
 -- CreateTable
 CREATE TABLE "cables" (
     "uuid" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "cafeins_uuid" UUID,
     "unique_id" TEXT NOT NULL,
     "project_group_code" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -139,6 +141,7 @@ CREATE TABLE "cables" (
 -- CreateTable
 CREATE TABLE "segments" (
     "uuid" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "cafeins_uuid" UUID,
     "unique_id" TEXT NOT NULL,
     "project_group_code" TEXT NOT NULL,
     "name" TEXT NOT NULL,

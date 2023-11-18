@@ -129,6 +129,7 @@ exports.Prisma.SitePointScalarFieldEnum = {
   uuid: 'uuid',
   cafeins_uuid: 'cafeins_uuid',
   name: 'name',
+  company_code: 'company_code',
   site_group_code: 'site_group_code',
   latitude: 'latitude',
   longitude: 'longitude',
