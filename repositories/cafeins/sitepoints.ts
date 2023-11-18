@@ -1,4 +1,8 @@
-import type { site_points } from '../../prisma/cafeins/cafeins-client'
+import type {
+  PrismaClient,
+  site_points,
+} from '../../prisma/cafeins/cafeins-client'
+import type { CafeinsSitePoint } from '../../types/cafeins/sitepoint'
 import { cafeinsClient } from '../../utils/database'
 
 export const getSitePointsByNearestCoords = async (
@@ -21,32 +25,60 @@ export const getSitePointsByNearestCoords = async (
 }
 
 export const createSitePoint = async (
+  prismaClient: PrismaClient,
   uuid: string,
-  villageId: number,
+  villageId: number | string,
+  siteCategoryId: number | string,
   name: string,
   code: string,
   latitude: number,
   longitude: number,
   geometry: string,
-  siteCategoryId: number,
-  userId: string,
-  createdAt: string,
-  updatedAt: string,
-): Promise<void> => {
-  await cafeinsClient.$transaction(async (trx) => {
-    // value longitude and latitude is reversed in db cafeins
-    await trx.$queryRaw`INSERT INTO "site_point.site_points"
-      (village_id, name, code, latitude, longitude, geometry, site_category_id, created_user_id, modified_user_id, created_at, updated_at, uuid)
-    VALUES (${villageId}, ${name}, ${code}, ${longitude}, ${latitude}, ${geometry}, ${siteCategoryId}, ${userId}, ${userId}, ${createdAt}, ${updatedAt}, ${uuid})`
-  })
+  createdUserId: number | string,
+  modifiedUserId: number | string,
+  createdAt: Date | string,
+  updatedAt: Date | string,
+): Promise<number> => {
+  // value longitude and latitude is reversed in db cafeins
+  return await prismaClient.$executeRaw`INSERT INTO site_point.site_points(
+      uuid,
+      village_id,
+      site_category_id,
+      name, 
+      code, 
+      latitude, 
+      longitude, 
+      geometry, 
+      created_user_id, 
+      modified_user_id, 
+      created_at, 
+      updated_at, 
+  ) VALUES (
+    ${uuid}, 
+    ${villageId}, 
+    ${siteCategoryId},
+    ${name}, 
+    ${code}, 
+    ${longitude}, 
+    ${latitude}, 
+    ${geometry}, 
+    ${createdUserId}, 
+    ${modifiedUserId}, 
+    ${createdAt}, 
+    ${updatedAt}, 
+  )`
 }
 
-export const getSitePointByUuid = async (
+export const findSitePointByUuid = async (
   uuid: string,
-): Promise<site_points | null> => {
-  return await cafeinsClient.site_points.findFirst({
-    where: {
-      uuid,
-    },
-  })
+): Promise<CafeinsSitePoint | null> => {
+  const result = await cafeinsClient.$queryRaw<
+    CafeinsSitePoint[]
+  >`SELECT * FROM site_point.site_points sp WHERE sp.uuid = ${uuid} LIMIT 1 OFFSET 0`
+
+  if (result.length < 1) {
+    return null
+  }
+
+  return result[0]
 }

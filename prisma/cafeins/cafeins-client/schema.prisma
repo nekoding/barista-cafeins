@@ -24,6 +24,8 @@ model cities {
   status        String?                  @db.VarChar
   code          String?                  @db.VarChar(20)
   province_code String?                  @db.VarChar(20)
+  city_code     String?                  @db.VarChar
+  type          String?                  @db.VarChar
 
   @@schema("administrative_area")
 }
@@ -41,6 +43,7 @@ model districts {
   geometry   Unsupported("geometry")?
   code       String?                  @db.VarChar(20)
   status     String?                  @db.VarChar
+  code_area  String?                  @db.VarChar
 
   @@schema("administrative_area")
 }
@@ -77,6 +80,7 @@ model villages {
   code           String?                  @db.VarChar(20)
   old_village_id Int?
   zip_code       String?                  @db.VarChar
+  code_area      String?                  @db.VarChar
 
   @@schema("administrative_area")
 }
@@ -106,23 +110,6 @@ model asset_categories {
   terminate_type_uuid             String?                           @db.VarChar(255)
   application_parameters          application_parameters?           @relation(fields: [terminate_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "asset_categories_terminate_type_id_foreign")
   asset_category_equipment_levels asset_category_equipment_levels[]
-
-  @@schema("asset")
-}
-
-model asset_category_attachments {
-  id                BigInt    @id @default(autoincrement())
-  asset_category_id BigInt
-  filename          String
-  file_url          String
-  description       String?
-  created_at        DateTime? @db.Timestamp(0)
-  updated_at        DateTime? @db.Timestamp(0)
-  deleted_at        DateTime? @db.Timestamp(0)
-  created_user_id   BigInt?
-  modified_user_id  BigInt?
-  deleted_user_id   BigInt?
-  uuid              String?   @unique(map: "asset_asset_category_attachments_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
   @@schema("asset")
 }
@@ -1761,6 +1748,7 @@ model site_points {
   longitude                            Float
   site_category_id                     BigInt
   geometry                             Unsupported("geometry")?
+  code                                 String?                  @db.VarChar
   uuid                                 String?                  @unique(map: "site_point_site_points_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   site_category_uuid                   String?                  @db.VarChar(255)
   cables_cables_site_fromTosite_points cables[]                 @relation("cables_site_fromTosite_points")

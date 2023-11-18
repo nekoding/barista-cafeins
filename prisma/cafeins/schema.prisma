@@ -24,6 +24,8 @@ model cities {
   status        String?                  @db.VarChar
   code          String?                  @db.VarChar(20)
   province_code String?                  @db.VarChar(20)
+  city_code     String?                  @db.VarChar
+  type          String?                  @db.VarChar
 
   @@schema("administrative_area")
 }
@@ -41,6 +43,7 @@ model districts {
   geometry   Unsupported("geometry")?
   code       String?                  @db.VarChar(20)
   status     String?                  @db.VarChar
+  code_area  String?                  @db.VarChar
 
   @@schema("administrative_area")
 }
@@ -77,6 +80,7 @@ model villages {
   code           String?                  @db.VarChar(20)
   old_village_id Int?
   zip_code       String?                  @db.VarChar
+  code_area      String?                  @db.VarChar
 
   @@schema("administrative_area")
 }
@@ -1744,6 +1748,7 @@ model site_points {
   longitude                            Float
   site_category_id                     BigInt
   geometry                             Unsupported("geometry")?
+  code                                 String?                  @db.VarChar
   uuid                                 String?                  @unique(map: "site_point_site_points_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   site_category_uuid                   String?                  @db.VarChar(255)
   cables_cables_site_fromTosite_points cables[]                 @relation("cables_site_fromTosite_points")

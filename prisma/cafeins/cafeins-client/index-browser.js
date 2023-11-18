@@ -117,6 +117,8 @@ exports.Prisma.CitiesScalarFieldEnum = {
   status: 'status',
   code: 'code',
   province_code: 'province_code',
+  city_code: 'city_code',
+  type: 'type',
 }
 
 exports.Prisma.DistrictsScalarFieldEnum = {
@@ -131,6 +133,7 @@ exports.Prisma.DistrictsScalarFieldEnum = {
   area_in_km: 'area_in_km',
   code: 'code',
   status: 'status',
+  code_area: 'code_area',
 }
 
 exports.Prisma.ProvincesScalarFieldEnum = {
@@ -161,6 +164,7 @@ exports.Prisma.VillagesScalarFieldEnum = {
   code: 'code',
   old_village_id: 'old_village_id',
   zip_code: 'zip_code',
+  code_area: 'code_area',
 }
 
 exports.Prisma.Asset_categoriesScalarFieldEnum = {
@@ -186,21 +190,6 @@ exports.Prisma.Asset_categoriesScalarFieldEnum = {
   domain_rule_uuid: 'domain_rule_uuid',
   circuit_type_uuid: 'circuit_type_uuid',
   terminate_type_uuid: 'terminate_type_uuid',
-}
-
-exports.Prisma.Asset_category_attachmentsScalarFieldEnum = {
-  id: 'id',
-  asset_category_id: 'asset_category_id',
-  filename: 'filename',
-  file_url: 'file_url',
-  description: 'description',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at',
-  created_user_id: 'created_user_id',
-  modified_user_id: 'modified_user_id',
-  deleted_user_id: 'deleted_user_id',
-  uuid: 'uuid',
 }
 
 exports.Prisma.Asset_category_equipment_levelsScalarFieldEnum = {
@@ -1467,6 +1456,7 @@ exports.Prisma.Site_pointsScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   site_category_id: 'site_category_id',
+  code: 'code',
   uuid: 'uuid',
   site_category_uuid: 'site_category_uuid',
 }
@@ -1522,7 +1512,6 @@ exports.Prisma.ModelName = {
   provinces: 'provinces',
   villages: 'villages',
   asset_categories: 'asset_categories',
-  asset_category_attachments: 'asset_category_attachments',
   asset_category_equipment_levels: 'asset_category_equipment_levels',
   asset_group_attachments: 'asset_group_attachments',
   asset_groups: 'asset_groups',

@@ -1,17 +1,97 @@
-import type { PrismaClient } from '../prisma/barista/barista-client'
+import type { SitePoint } from '../prisma/barista/barista-client'
+import type { PrismaClient, users } from '../prisma/cafeins/cafeins-client'
 import { getSitePointUnmigrated } from '../repositories/barista/sitepoints'
 import {
   createSitePoint,
+  findSitePointByUuid,
   getSitePointsByNearestCoords,
 } from '../repositories/cafeins/sitepoints'
 import { getUserByEmployeeNo } from '../repositories/cafeins/users'
-import {
-  generatedCode,
-  getVilagesByCoords,
-} from '../repositories/cafeins/villages'
-import { baristaClient } from '../utils/database'
+import { getVilagesByCoords } from '../repositories/cafeins/villages'
+import { AuditEvent } from '../types/cafeins/audit'
+import type { BaristaVillage } from '../types/cafeins/villages'
+import { baristaClient, cafeinsClient } from '../utils/database'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
+
+const getCreatedUserByEmployeeNo = getUserByEmployeeNo
+
+const getModifiedUserByEmployeeNo = getUserByEmployeeNo
+
+// Example: SLA-JKX-KBYKDN-001
+const generateCounterNumber = async (
+  sitePoint: SitePoint | BaristaSitePoint,
+  village: BaristaVillage,
+): Promise<string> => {
+  const prefixIdentifier = `S${sitePoint.company_code}`
+  const cityIdentifier = village.city_code_area
+  const districtIdentifier = village.district_code_area
+  const villageIdentitfier = village.village_code_area
+
+  const identifier = `${prefixIdentifier}-${cityIdentifier}-${districtIdentifier}${villageIdentitfier}`
+  const lastSitePoint = await cafeinsClient.site_points.findFirst({
+    where: {
+      name: {
+        contains: identifier,
+      },
+    },
+    orderBy: {
+      name: 'desc',
+    },
+  })
+
+  let counterSequence = 1
+  if (lastSitePoint?.name != null) {
+    const lastCounterSequence = lastSitePoint.name.substring(
+      lastSitePoint.name.length - 3,
+    )
+    counterSequence = parseInt(lastCounterSequence) + 1
+  }
+
+  const finalCode = `${identifier}-${String(counterSequence).padStart(3, '0')}`
+  return finalCode
+}
+
+const updateSitePoint = async (uuid: string, data: object): Promise<void> => {
+  await baristaClient.sitePoint.update({
+    data,
+    where: {
+      uuid,
+    },
+  })
+}
+
+type ValidatedData = [BaristaVillage, users, users, string]
+const validateData = async (
+  sitePoint: SitePoint | BaristaSitePoint,
+): Promise<ValidatedData> => {
+  const [village, createdUser, modifiedUser] = await Promise.all([
+    getVilagesByCoords(sitePoint.latitude, sitePoint.longitude),
+    getCreatedUserByEmployeeNo(sitePoint.created_employee_no),
+    getModifiedUserByEmployeeNo(
+      sitePoint.modified_employee_no ?? sitePoint.created_employee_no,
+    ),
+  ])
+
+  if (
+    village?.village_code_area == null ||
+    village?.city_code_area == null ||
+    village?.district_code_area == null
+  ) {
+    throw new Error('village not found')
+  }
+
+  if (createdUser == null) {
+    throw new Error('created user not found')
+  }
+
+  if (modifiedUser == null) {
+    throw new Error('modified user not found')
+  }
+
+  const sitePointCode = await generateCounterNumber(sitePoint, village)
+  return [village, createdUser, modifiedUser, sitePointCode]
+}
 
 export const syncSitePoint = async (): Promise<void> => {
   try {
@@ -25,103 +105,89 @@ export const syncSitePoint = async (): Promise<void> => {
           sitePoint.latitude,
           sitePoint.longitude,
         )
-
         // if found mark data already migrated
         if (nearestSitePoint.length > 0) {
-          await baristaClient.$transaction(async (trx) => {
-            await trx.sitePoint.update({
-              data: {
-                cafeins_uuid: nearestSitePoint[0].uuid,
-                is_migrated: true,
-                last_read: new Date(),
-                status: 'UPDATED',
-              },
-              where: {
-                uuid: sitePoint.uuid,
-              },
-            })
-
-            await writeToLog(
-              LogLevel.INFO,
-              'nearest sitepoint found in cafeins',
-              {
-                uuid: sitePoint.uuid,
-                table: 'site_points',
-              },
-              trx as PrismaClient,
-            )
+          await updateSitePoint(sitePoint.uuid, {
+            cafeins_uuid: sitePoint.uuid,
+            is_migrated: true,
+            last_read: new Date(),
+            status: 'UPDATED',
           })
 
-          logger.info('sitepoint updated')
+          logger.info('sitepoint updated in cafeins', {
+            uuid: sitePoint.uuid,
+            table: 'site_points',
+          })
+
           continue
         }
 
-        // if sitepoint not found create data to cafeins
-        const user = await getUserByEmployeeNo(sitePoint.created_employee_no)
-        if (user == null) {
-          throw new Error('sitepoint owner user not found cannot migrate data')
-        }
+        const [village, createdUser, modifiedUser, sitePointCode] =
+          await validateData(sitePoint)
 
-        // get village data from coordinates
-        const village = await getVilagesByCoords(
-          sitePoint.latitude,
-          sitePoint.longitude,
-        )
-        if (village.length === 0) {
-          throw new Error('sitepoint village not found cannot migrate data')
-        }
+        await cafeinsClient.$transaction(async (trx) => {
+          // create sitepoint
+          await createSitePoint(
+            trx as PrismaClient,
+            sitePoint.uuid,
+            village.village_id,
+            process.env.SITEPOINT_CATEGORY_ID ?? 1,
+            sitePointCode,
+            sitePointCode,
+            sitePoint.latitude,
+            sitePoint.longitude,
+            sitePoint.geometry,
+            createdUser.id as unknown as string,
+            modifiedUser.id as unknown as string,
+            sitePoint.created_at,
+            sitePoint.updated_at,
+          )
 
-        // generate code (default using SLA-)
-        const generateCode = await generatedCode(
-          'SLA-',
-          village[0].id.toLocaleString(),
-        )
-        if (generateCode == null) {
-          throw new Error('cannot generate code for sitepoint')
-        }
+          // get last inserted data
+          const lastInsertedSitePoint = await findSitePointByUuid(
+            sitePoint.uuid,
+          )
 
-        // set default site_category = 1 'general'
-        const siteCategory = parseInt(process.env.SITE_CATEGORY_ID ?? '1')
-        await createSitePoint(
-          sitePoint.uuid,
-          village[0].id,
-          generateCode,
-          generateCode,
-          sitePoint.latitude,
-          sitePoint.longitude,
-          sitePoint.geometry,
-          siteCategory,
-          user.id as unknown as string,
-          sitePoint.created_at,
-          sitePoint.updated_at,
-        )
+          if (lastInsertedSitePoint == null) {
+            throw new Error('sitepoint failed inserted to database cafeins')
+          }
 
-        // marking data already migrated
-        await baristaClient.$transaction(async (trx) => {
-          await trx.sitePoint.update({
+          const serialized = JSON.stringify(lastInsertedSitePoint)
+
+          // create audit data
+          await trx.audits.create({
             data: {
-              cafeins_uuid: nearestSitePoint[0].uuid,
-              is_migrated: true,
-              last_read: new Date(),
-              status: 'CREATED',
-            },
-            where: {
-              uuid: sitePoint.uuid,
+              user_type: `App\\Models\\User`,
+              user_id: createdUser.id,
+              event: AuditEvent.CREATED,
+              auditable_type: `Modules\\SitePoint\\Entities\\SitePoint`,
+              auditable_id: lastInsertedSitePoint.id,
+              old_values: '[]',
+              new_values: serialized,
+              user_agent: 'Barista',
+              created_at: new Date(),
+              updated_at: new Date(),
             },
           })
 
-          await writeToLog(
-            LogLevel.INFO,
-            'sitepoint created in cafeins',
-            {
+          // mark data created
+          await baristaClient.sitePoint.update({
+            where: {
               uuid: sitePoint.uuid,
-              table: 'site_points',
             },
-            trx as PrismaClient,
-          )
-        })
+            data: {
+              status: 'CREATED',
+              last_read: new Date(),
+              is_migrated: true,
+              cafeins_uuid: sitePoint.uuid,
+            },
+          })
 
-        logger.info('sitepoint created')
+          logger.info('sitepoint created in cafeins', {
+            uuid: sitePoint.uuid,
+            table: 'site_points',
+          })
+        })
       } catch (error: any) {
         error.ctx = {
           uuid: sitePoint.uuid,
@@ -132,7 +198,7 @@ export const syncSitePoint = async (): Promise<void> => {
       }
     }
 
-    logger.info('sync sitepoint end')
+    logger.info('sync sitepoint finish')
   } catch (error: any) {
     await writeToLog(
       LogLevel.ERROR,
