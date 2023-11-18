@@ -145,6 +145,7 @@ export const syncSitePoint = async (): Promise<void> => {
 
           // get last inserted data
           const lastInsertedSitePoint = await findSitePointByUuid(
+            trx as PrismaClient,
             sitePoint.uuid,
           )
 
@@ -152,7 +153,16 @@ export const syncSitePoint = async (): Promise<void> => {
             throw new Error('sitepoint failed inserted to database cafeins')
           }
 
-          const serialized = JSON.stringify(lastInsertedSitePoint)
+          const serialized = JSON.stringify({
+            ...lastInsertedSitePoint,
+            id: lastInsertedSitePoint.id.toString(),
+            village_id: lastInsertedSitePoint.village_id.toString(),
+            site_category_id: lastInsertedSitePoint.site_category_id.toString(),
+            created_user_id: lastInsertedSitePoint.created_user_id?.toString(),
+            modified_user_id:
+              lastInsertedSitePoint.modified_user_id?.toString(),
+            deleted_user_id: lastInsertedSitePoint.deleted_user_id?.toString(),
+          })
 
           // create audit data
           await trx.audits.create({
@@ -181,11 +191,6 @@ export const syncSitePoint = async (): Promise<void> => {
               is_migrated: true,
               cafeins_uuid: sitePoint.uuid,
             },
-          })
-
-          logger.info('sitepoint created in cafeins', {
-            uuid: sitePoint.uuid,
-            table: 'site_points',
           })
         })
       } catch (error: any) {

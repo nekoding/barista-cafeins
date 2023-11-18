@@ -10,4 +10,7 @@ interface BaristaSitePoint {
   updated_at: string
   created_employee_no: string
   modified_employee_no: string
+  status?: string
+  last_read?: Date | string
+  is_migrated?: boolean
 }

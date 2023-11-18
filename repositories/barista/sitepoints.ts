@@ -4,10 +4,11 @@ import { baristaClient } from '../../utils/database'
 export const getSitePointUnmigrated = async (
   limit: number = 100,
   offset: number = 0,
-): Promise<BaristaSite[] | []> => {
+): Promise<BaristaSitePoint[] | []> => {
   return await baristaClient.$queryRaw`SELECT 
     uuid,
     name,
+    company_code,
     site_group_code,
     latitude,
     longitude,
@@ -15,7 +16,10 @@ export const getSitePointUnmigrated = async (
     created_at,
     updated_at,
     created_employee_no,
-    modified_employee_no
+    modified_employee_no,
+    status,
+    last_read,
+    is_migrated
   FROM site_points WHERE is_migrated = false AND status IS NULL LIMIT ${limit} OFFSET ${offset}`
 }
 
