@@ -1400,10 +1400,14 @@ export namespace Prisma {
 
   export type SitePointCountOutputType = {
     assets: number
+    RouteFrom: number
+    RouteTo: number
   }
 
   export type SitePointCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assets?: boolean | SitePointCountOutputTypeCountAssetsArgs
+    RouteFrom?: boolean | SitePointCountOutputTypeCountRouteFromArgs
+    RouteTo?: boolean | SitePointCountOutputTypeCountRouteToArgs
   }
 
   // Custom InputTypes
@@ -1424,6 +1428,22 @@ export namespace Prisma {
    */
   export type SitePointCountOutputTypeCountAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AssetWhereInput
+  }
+
+
+  /**
+   * SitePointCountOutputType without action
+   */
+  export type SitePointCountOutputTypeCountRouteFromArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RouteWhereInput
+  }
+
+
+  /**
+   * SitePointCountOutputType without action
+   */
+  export type SitePointCountOutputTypeCountRouteToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RouteWhereInput
   }
 
 
@@ -2780,6 +2800,8 @@ export namespace Prisma {
     last_read?: boolean
     is_migrated?: boolean
     assets?: boolean | SitePoint$assetsArgs<ExtArgs>
+    RouteFrom?: boolean | SitePoint$RouteFromArgs<ExtArgs>
+    RouteTo?: boolean | SitePoint$RouteToArgs<ExtArgs>
     _count?: boolean | SitePointCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sitePoint"]>
 
@@ -2802,6 +2824,8 @@ export namespace Prisma {
 
   export type SitePointInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assets?: boolean | SitePoint$assetsArgs<ExtArgs>
+    RouteFrom?: boolean | SitePoint$RouteFromArgs<ExtArgs>
+    RouteTo?: boolean | SitePoint$RouteToArgs<ExtArgs>
     _count?: boolean | SitePointCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2810,6 +2834,8 @@ export namespace Prisma {
     name: "SitePoint"
     objects: {
       assets: Prisma.$AssetPayload<ExtArgs>[]
+      RouteFrom: Prisma.$RoutePayload<ExtArgs>[]
+      RouteTo: Prisma.$RoutePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
@@ -3193,6 +3219,10 @@ export namespace Prisma {
 
     assets<T extends SitePoint$assetsArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    RouteFrom<T extends SitePoint$RouteFromArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$RouteFromArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoutePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    RouteTo<T extends SitePoint$RouteToArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$RouteToArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoutePayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3564,6 +3594,48 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AssetScalarFieldEnum | AssetScalarFieldEnum[]
+  }
+
+
+  /**
+   * SitePoint.RouteFrom
+   */
+  export type SitePoint$RouteFromArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Route
+     */
+    select?: RouteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
+    where?: RouteWhereInput
+    orderBy?: RouteOrderByWithRelationInput | RouteOrderByWithRelationInput[]
+    cursor?: RouteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RouteScalarFieldEnum | RouteScalarFieldEnum[]
+  }
+
+
+  /**
+   * SitePoint.RouteTo
+   */
+  export type SitePoint$RouteToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Route
+     */
+    select?: RouteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
+    where?: RouteWhereInput
+    orderBy?: RouteOrderByWithRelationInput | RouteOrderByWithRelationInput[]
+    cursor?: RouteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RouteScalarFieldEnum | RouteScalarFieldEnum[]
   }
 
 
@@ -5834,6 +5906,8 @@ export namespace Prisma {
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
+    sitepoint_from?: boolean | SitePointDefaultArgs<ExtArgs>
+    sitepoint_to?: boolean | SitePointDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["route"]>
 
   export type RouteSelectScalar = {
@@ -5855,10 +5929,18 @@ export namespace Prisma {
     is_migrated?: boolean
   }
 
+  export type RouteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sitepoint_from?: boolean | SitePointDefaultArgs<ExtArgs>
+    sitepoint_to?: boolean | SitePointDefaultArgs<ExtArgs>
+  }
+
 
   export type $RoutePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Route"
-    objects: {}
+    objects: {
+      sitepoint_from: Prisma.$SitePointPayload<ExtArgs>
+      sitepoint_to: Prisma.$SitePointPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
       cafeins_uuid: string | null
@@ -6241,6 +6323,9 @@ export namespace Prisma {
   export interface Prisma__RouteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    sitepoint_from<T extends SitePointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SitePointDefaultArgs<ExtArgs>>): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    sitepoint_to<T extends SitePointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SitePointDefaultArgs<ExtArgs>>): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6300,6 +6385,10 @@ export namespace Prisma {
      */
     select?: RouteSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
+    /**
      * Filter, which Route to fetch.
      */
     where: RouteWhereUniqueInput
@@ -6315,6 +6404,10 @@ export namespace Prisma {
      */
     select?: RouteSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
+    /**
      * Filter, which Route to fetch.
      */
     where: RouteWhereUniqueInput
@@ -6329,6 +6422,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Route
      */
     select?: RouteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
     /**
      * Filter, which Route to fetch.
      */
@@ -6375,6 +6472,10 @@ export namespace Prisma {
      */
     select?: RouteSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
+    /**
      * Filter, which Route to fetch.
      */
     where?: RouteWhereInput
@@ -6420,6 +6521,10 @@ export namespace Prisma {
      */
     select?: RouteSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
+    /**
      * Filter, which Routes to fetch.
      */
     where?: RouteWhereInput
@@ -6460,6 +6565,10 @@ export namespace Prisma {
      */
     select?: RouteSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
+    /**
      * The data needed to create a Route.
      */
     data: XOR<RouteCreateInput, RouteUncheckedCreateInput>
@@ -6486,6 +6595,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Route
      */
     select?: RouteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
     /**
      * The data needed to update a Route.
      */
@@ -6521,6 +6634,10 @@ export namespace Prisma {
      */
     select?: RouteSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
+    /**
      * The filter to search for the Route to update in case it exists.
      */
     where: RouteWhereUniqueInput
@@ -6543,6 +6660,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Route
      */
     select?: RouteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
     /**
      * Filter which Route to delete.
      */
@@ -6569,6 +6690,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Route
      */
     select?: RouteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RouteInclude<ExtArgs> | null
   }
 
 
@@ -9103,6 +9228,8 @@ export namespace Prisma {
     last_read?: DateTimeNullableFilter<"SitePoint"> | Date | string | null
     is_migrated?: BoolFilter<"SitePoint"> | boolean
     assets?: AssetListRelationFilter
+    RouteFrom?: RouteListRelationFilter
+    RouteTo?: RouteListRelationFilter
   }
 
   export type SitePointOrderByWithRelationInput = {
@@ -9121,6 +9248,8 @@ export namespace Prisma {
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
     assets?: AssetOrderByRelationAggregateInput
+    RouteFrom?: RouteOrderByRelationAggregateInput
+    RouteTo?: RouteOrderByRelationAggregateInput
   }
 
   export type SitePointWhereUniqueInput = Prisma.AtLeast<{
@@ -9142,6 +9271,8 @@ export namespace Prisma {
     last_read?: DateTimeNullableFilter<"SitePoint"> | Date | string | null
     is_migrated?: BoolFilter<"SitePoint"> | boolean
     assets?: AssetListRelationFilter
+    RouteFrom?: RouteListRelationFilter
+    RouteTo?: RouteListRelationFilter
   }, "uuid" | "site_group_code">
 
   export type SitePointOrderByWithAggregationInput = {
@@ -9396,6 +9527,8 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Route"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Route"> | Date | string | null
     is_migrated?: BoolFilter<"Route"> | boolean
+    sitepoint_from?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    sitepoint_to?: XOR<SitePointRelationFilter, SitePointWhereInput>
   }
 
   export type RouteOrderByWithRelationInput = {
@@ -9415,6 +9548,8 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
+    sitepoint_from?: SitePointOrderByWithRelationInput
+    sitepoint_to?: SitePointOrderByWithRelationInput
   }
 
   export type RouteWhereUniqueInput = Prisma.AtLeast<{
@@ -9437,6 +9572,8 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Route"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Route"> | Date | string | null
     is_migrated?: BoolFilter<"Route"> | boolean
+    sitepoint_from?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    sitepoint_to?: XOR<SitePointRelationFilter, SitePointWhereInput>
   }, "uuid" | "unique_id">
 
   export type RouteOrderByWithAggregationInput = {
@@ -9891,6 +10028,8 @@ export namespace Prisma {
     last_read?: Date | string | null
     is_migrated?: boolean
     assets?: AssetCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointUncheckedCreateInput = {
@@ -9909,6 +10048,8 @@ export namespace Prisma {
     last_read?: Date | string | null
     is_migrated?: boolean
     assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointUpdateInput = {
@@ -9927,6 +10068,8 @@ export namespace Prisma {
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     assets?: AssetUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointUncheckedUpdateInput = {
@@ -9945,6 +10088,8 @@ export namespace Prisma {
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointCreateManyInput = {
@@ -10230,13 +10375,13 @@ export namespace Prisma {
     updated_at?: Date | string
     created_employee_no: string
     modified_employee_no?: string | null
-    site_group_code_from: string
-    site_group_code_to: string
     route_method: string
     route_ownership: string
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    sitepoint_from: SitePointCreateNestedOneWithoutRouteFromInput
+    sitepoint_to: SitePointCreateNestedOneWithoutRouteToInput
   }
 
   export type RouteUncheckedCreateInput = {
@@ -10268,13 +10413,13 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_from?: StringFieldUpdateOperationsInput | string
-    site_group_code_to?: StringFieldUpdateOperationsInput | string
     route_method?: StringFieldUpdateOperationsInput | string
     route_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_from?: SitePointUpdateOneRequiredWithoutRouteFromNestedInput
+    sitepoint_to?: SitePointUpdateOneRequiredWithoutRouteToNestedInput
   }
 
   export type RouteUncheckedUpdateInput = {
@@ -10325,8 +10470,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_from?: StringFieldUpdateOperationsInput | string
-    site_group_code_to?: StringFieldUpdateOperationsInput | string
     route_method?: StringFieldUpdateOperationsInput | string
     route_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
@@ -10947,6 +11090,16 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type RouteListRelationFilter = {
+    every?: RouteWhereInput
+    some?: RouteWhereInput
+    none?: RouteWhereInput
+  }
+
+  export type RouteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type SitePointCountOrderByAggregateInput = {
     uuid?: SortOrder
     cafeins_uuid?: SortOrder
@@ -11507,11 +11660,39 @@ export namespace Prisma {
     connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
   }
 
+  export type RouteCreateNestedManyWithoutSitepoint_fromInput = {
+    create?: XOR<RouteCreateWithoutSitepoint_fromInput, RouteUncheckedCreateWithoutSitepoint_fromInput> | RouteCreateWithoutSitepoint_fromInput[] | RouteUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_fromInput | RouteCreateOrConnectWithoutSitepoint_fromInput[]
+    createMany?: RouteCreateManySitepoint_fromInputEnvelope
+    connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+  }
+
+  export type RouteCreateNestedManyWithoutSitepoint_toInput = {
+    create?: XOR<RouteCreateWithoutSitepoint_toInput, RouteUncheckedCreateWithoutSitepoint_toInput> | RouteCreateWithoutSitepoint_toInput[] | RouteUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_toInput | RouteCreateOrConnectWithoutSitepoint_toInput[]
+    createMany?: RouteCreateManySitepoint_toInputEnvelope
+    connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+  }
+
   export type AssetUncheckedCreateNestedManyWithoutSitepointInput = {
     create?: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput> | AssetCreateWithoutSitepointInput[] | AssetUncheckedCreateWithoutSitepointInput[]
     connectOrCreate?: AssetCreateOrConnectWithoutSitepointInput | AssetCreateOrConnectWithoutSitepointInput[]
     createMany?: AssetCreateManySitepointInputEnvelope
     connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
+  export type RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput = {
+    create?: XOR<RouteCreateWithoutSitepoint_fromInput, RouteUncheckedCreateWithoutSitepoint_fromInput> | RouteCreateWithoutSitepoint_fromInput[] | RouteUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_fromInput | RouteCreateOrConnectWithoutSitepoint_fromInput[]
+    createMany?: RouteCreateManySitepoint_fromInputEnvelope
+    connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+  }
+
+  export type RouteUncheckedCreateNestedManyWithoutSitepoint_toInput = {
+    create?: XOR<RouteCreateWithoutSitepoint_toInput, RouteUncheckedCreateWithoutSitepoint_toInput> | RouteCreateWithoutSitepoint_toInput[] | RouteUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_toInput | RouteCreateOrConnectWithoutSitepoint_toInput[]
+    createMany?: RouteCreateManySitepoint_toInputEnvelope
+    connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -11536,6 +11717,34 @@ export namespace Prisma {
     deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
   }
 
+  export type RouteUpdateManyWithoutSitepoint_fromNestedInput = {
+    create?: XOR<RouteCreateWithoutSitepoint_fromInput, RouteUncheckedCreateWithoutSitepoint_fromInput> | RouteCreateWithoutSitepoint_fromInput[] | RouteUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_fromInput | RouteCreateOrConnectWithoutSitepoint_fromInput[]
+    upsert?: RouteUpsertWithWhereUniqueWithoutSitepoint_fromInput | RouteUpsertWithWhereUniqueWithoutSitepoint_fromInput[]
+    createMany?: RouteCreateManySitepoint_fromInputEnvelope
+    set?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    disconnect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    delete?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    update?: RouteUpdateWithWhereUniqueWithoutSitepoint_fromInput | RouteUpdateWithWhereUniqueWithoutSitepoint_fromInput[]
+    updateMany?: RouteUpdateManyWithWhereWithoutSitepoint_fromInput | RouteUpdateManyWithWhereWithoutSitepoint_fromInput[]
+    deleteMany?: RouteScalarWhereInput | RouteScalarWhereInput[]
+  }
+
+  export type RouteUpdateManyWithoutSitepoint_toNestedInput = {
+    create?: XOR<RouteCreateWithoutSitepoint_toInput, RouteUncheckedCreateWithoutSitepoint_toInput> | RouteCreateWithoutSitepoint_toInput[] | RouteUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_toInput | RouteCreateOrConnectWithoutSitepoint_toInput[]
+    upsert?: RouteUpsertWithWhereUniqueWithoutSitepoint_toInput | RouteUpsertWithWhereUniqueWithoutSitepoint_toInput[]
+    createMany?: RouteCreateManySitepoint_toInputEnvelope
+    set?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    disconnect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    delete?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    update?: RouteUpdateWithWhereUniqueWithoutSitepoint_toInput | RouteUpdateWithWhereUniqueWithoutSitepoint_toInput[]
+    updateMany?: RouteUpdateManyWithWhereWithoutSitepoint_toInput | RouteUpdateManyWithWhereWithoutSitepoint_toInput[]
+    deleteMany?: RouteScalarWhereInput | RouteScalarWhereInput[]
+  }
+
   export type AssetUncheckedUpdateManyWithoutSitepointNestedInput = {
     create?: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput> | AssetCreateWithoutSitepointInput[] | AssetUncheckedCreateWithoutSitepointInput[]
     connectOrCreate?: AssetCreateOrConnectWithoutSitepointInput | AssetCreateOrConnectWithoutSitepointInput[]
@@ -11548,6 +11757,34 @@ export namespace Prisma {
     update?: AssetUpdateWithWhereUniqueWithoutSitepointInput | AssetUpdateWithWhereUniqueWithoutSitepointInput[]
     updateMany?: AssetUpdateManyWithWhereWithoutSitepointInput | AssetUpdateManyWithWhereWithoutSitepointInput[]
     deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
+  }
+
+  export type RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput = {
+    create?: XOR<RouteCreateWithoutSitepoint_fromInput, RouteUncheckedCreateWithoutSitepoint_fromInput> | RouteCreateWithoutSitepoint_fromInput[] | RouteUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_fromInput | RouteCreateOrConnectWithoutSitepoint_fromInput[]
+    upsert?: RouteUpsertWithWhereUniqueWithoutSitepoint_fromInput | RouteUpsertWithWhereUniqueWithoutSitepoint_fromInput[]
+    createMany?: RouteCreateManySitepoint_fromInputEnvelope
+    set?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    disconnect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    delete?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    update?: RouteUpdateWithWhereUniqueWithoutSitepoint_fromInput | RouteUpdateWithWhereUniqueWithoutSitepoint_fromInput[]
+    updateMany?: RouteUpdateManyWithWhereWithoutSitepoint_fromInput | RouteUpdateManyWithWhereWithoutSitepoint_fromInput[]
+    deleteMany?: RouteScalarWhereInput | RouteScalarWhereInput[]
+  }
+
+  export type RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput = {
+    create?: XOR<RouteCreateWithoutSitepoint_toInput, RouteUncheckedCreateWithoutSitepoint_toInput> | RouteCreateWithoutSitepoint_toInput[] | RouteUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_toInput | RouteCreateOrConnectWithoutSitepoint_toInput[]
+    upsert?: RouteUpsertWithWhereUniqueWithoutSitepoint_toInput | RouteUpsertWithWhereUniqueWithoutSitepoint_toInput[]
+    createMany?: RouteCreateManySitepoint_toInputEnvelope
+    set?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    disconnect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    delete?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+    update?: RouteUpdateWithWhereUniqueWithoutSitepoint_toInput | RouteUpdateWithWhereUniqueWithoutSitepoint_toInput[]
+    updateMany?: RouteUpdateManyWithWhereWithoutSitepoint_toInput | RouteUpdateManyWithWhereWithoutSitepoint_toInput[]
+    deleteMany?: RouteScalarWhereInput | RouteScalarWhereInput[]
   }
 
   export type ProjectCreateNestedOneWithoutAssetsInput = {
@@ -11578,12 +11815,40 @@ export namespace Prisma {
     update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutAssetsInput, SitePointUpdateWithoutAssetsInput>, SitePointUncheckedUpdateWithoutAssetsInput>
   }
 
+  export type SitePointCreateNestedOneWithoutRouteFromInput = {
+    create?: XOR<SitePointCreateWithoutRouteFromInput, SitePointUncheckedCreateWithoutRouteFromInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutRouteFromInput
+    connect?: SitePointWhereUniqueInput
+  }
+
+  export type SitePointCreateNestedOneWithoutRouteToInput = {
+    create?: XOR<SitePointCreateWithoutRouteToInput, SitePointUncheckedCreateWithoutRouteToInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutRouteToInput
+    connect?: SitePointWhereUniqueInput
+  }
+
   export type NullableDecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string | null
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type SitePointUpdateOneRequiredWithoutRouteFromNestedInput = {
+    create?: XOR<SitePointCreateWithoutRouteFromInput, SitePointUncheckedCreateWithoutRouteFromInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutRouteFromInput
+    upsert?: SitePointUpsertWithoutRouteFromInput
+    connect?: SitePointWhereUniqueInput
+    update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutRouteFromInput, SitePointUpdateWithoutRouteFromInput>, SitePointUncheckedUpdateWithoutRouteFromInput>
+  }
+
+  export type SitePointUpdateOneRequiredWithoutRouteToNestedInput = {
+    create?: XOR<SitePointCreateWithoutRouteToInput, SitePointUncheckedCreateWithoutRouteToInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutRouteToInput
+    upsert?: SitePointUpsertWithoutRouteToInput
+    connect?: SitePointWhereUniqueInput
+    update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutRouteToInput, SitePointUpdateWithoutRouteToInput>, SitePointUncheckedUpdateWithoutRouteToInput>
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -12056,6 +12321,98 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RouteCreateWithoutSitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    length?: Decimal | DecimalJsLike | number | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    route_method: string
+    route_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint_to: SitePointCreateNestedOneWithoutRouteToInput
+  }
+
+  export type RouteUncheckedCreateWithoutSitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    length?: Decimal | DecimalJsLike | number | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_to: string
+    route_method: string
+    route_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type RouteCreateOrConnectWithoutSitepoint_fromInput = {
+    where: RouteWhereUniqueInput
+    create: XOR<RouteCreateWithoutSitepoint_fromInput, RouteUncheckedCreateWithoutSitepoint_fromInput>
+  }
+
+  export type RouteCreateManySitepoint_fromInputEnvelope = {
+    data: RouteCreateManySitepoint_fromInput | RouteCreateManySitepoint_fromInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RouteCreateWithoutSitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    length?: Decimal | DecimalJsLike | number | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    route_method: string
+    route_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint_from: SitePointCreateNestedOneWithoutRouteFromInput
+  }
+
+  export type RouteUncheckedCreateWithoutSitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    length?: Decimal | DecimalJsLike | number | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    route_method: string
+    route_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type RouteCreateOrConnectWithoutSitepoint_toInput = {
+    where: RouteWhereUniqueInput
+    create: XOR<RouteCreateWithoutSitepoint_toInput, RouteUncheckedCreateWithoutSitepoint_toInput>
+  }
+
+  export type RouteCreateManySitepoint_toInputEnvelope = {
+    data: RouteCreateManySitepoint_toInput | RouteCreateManySitepoint_toInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AssetUpsertWithWhereUniqueWithoutSitepointInput = {
     where: AssetWhereUniqueInput
     update: XOR<AssetUpdateWithoutSitepointInput, AssetUncheckedUpdateWithoutSitepointInput>
@@ -12070,6 +12427,60 @@ export namespace Prisma {
   export type AssetUpdateManyWithWhereWithoutSitepointInput = {
     where: AssetScalarWhereInput
     data: XOR<AssetUpdateManyMutationInput, AssetUncheckedUpdateManyWithoutSitepointInput>
+  }
+
+  export type RouteUpsertWithWhereUniqueWithoutSitepoint_fromInput = {
+    where: RouteWhereUniqueInput
+    update: XOR<RouteUpdateWithoutSitepoint_fromInput, RouteUncheckedUpdateWithoutSitepoint_fromInput>
+    create: XOR<RouteCreateWithoutSitepoint_fromInput, RouteUncheckedCreateWithoutSitepoint_fromInput>
+  }
+
+  export type RouteUpdateWithWhereUniqueWithoutSitepoint_fromInput = {
+    where: RouteWhereUniqueInput
+    data: XOR<RouteUpdateWithoutSitepoint_fromInput, RouteUncheckedUpdateWithoutSitepoint_fromInput>
+  }
+
+  export type RouteUpdateManyWithWhereWithoutSitepoint_fromInput = {
+    where: RouteScalarWhereInput
+    data: XOR<RouteUpdateManyMutationInput, RouteUncheckedUpdateManyWithoutSitepoint_fromInput>
+  }
+
+  export type RouteScalarWhereInput = {
+    AND?: RouteScalarWhereInput | RouteScalarWhereInput[]
+    OR?: RouteScalarWhereInput[]
+    NOT?: RouteScalarWhereInput | RouteScalarWhereInput[]
+    uuid?: UuidFilter<"Route"> | string
+    cafeins_uuid?: UuidNullableFilter<"Route"> | string | null
+    unique_id?: StringFilter<"Route"> | string
+    name?: StringFilter<"Route"> | string
+    length?: DecimalNullableFilter<"Route"> | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFilter<"Route"> | Date | string
+    updated_at?: DateTimeFilter<"Route"> | Date | string
+    created_employee_no?: StringFilter<"Route"> | string
+    modified_employee_no?: StringNullableFilter<"Route"> | string | null
+    site_group_code_from?: StringFilter<"Route"> | string
+    site_group_code_to?: StringFilter<"Route"> | string
+    route_method?: StringFilter<"Route"> | string
+    route_ownership?: StringFilter<"Route"> | string
+    status?: EnumMIGRATION_STATUSNullableFilter<"Route"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Route"> | Date | string | null
+    is_migrated?: BoolFilter<"Route"> | boolean
+  }
+
+  export type RouteUpsertWithWhereUniqueWithoutSitepoint_toInput = {
+    where: RouteWhereUniqueInput
+    update: XOR<RouteUpdateWithoutSitepoint_toInput, RouteUncheckedUpdateWithoutSitepoint_toInput>
+    create: XOR<RouteCreateWithoutSitepoint_toInput, RouteUncheckedCreateWithoutSitepoint_toInput>
+  }
+
+  export type RouteUpdateWithWhereUniqueWithoutSitepoint_toInput = {
+    where: RouteWhereUniqueInput
+    data: XOR<RouteUpdateWithoutSitepoint_toInput, RouteUncheckedUpdateWithoutSitepoint_toInput>
+  }
+
+  export type RouteUpdateManyWithWhereWithoutSitepoint_toInput = {
+    where: RouteScalarWhereInput
+    data: XOR<RouteUpdateManyMutationInput, RouteUncheckedUpdateManyWithoutSitepoint_toInput>
   }
 
   export type ProjectCreateWithoutAssetsInput = {
@@ -12132,6 +12543,8 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointUncheckedCreateWithoutAssetsInput = {
@@ -12149,6 +12562,8 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointCreateOrConnectWithoutAssetsInput = {
@@ -12233,6 +12648,8 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointUncheckedUpdateWithoutAssetsInput = {
@@ -12250,6 +12667,192 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointCreateWithoutRouteFromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutSitepointInput
+    RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
+  }
+
+  export type SitePointUncheckedCreateWithoutRouteFromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
+    RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
+  }
+
+  export type SitePointCreateOrConnectWithoutRouteFromInput = {
+    where: SitePointWhereUniqueInput
+    create: XOR<SitePointCreateWithoutRouteFromInput, SitePointUncheckedCreateWithoutRouteFromInput>
+  }
+
+  export type SitePointCreateWithoutRouteToInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
+  }
+
+  export type SitePointUncheckedCreateWithoutRouteToInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
+  }
+
+  export type SitePointCreateOrConnectWithoutRouteToInput = {
+    where: SitePointWhereUniqueInput
+    create: XOR<SitePointCreateWithoutRouteToInput, SitePointUncheckedCreateWithoutRouteToInput>
+  }
+
+  export type SitePointUpsertWithoutRouteFromInput = {
+    update: XOR<SitePointUpdateWithoutRouteFromInput, SitePointUncheckedUpdateWithoutRouteFromInput>
+    create: XOR<SitePointCreateWithoutRouteFromInput, SitePointUncheckedCreateWithoutRouteFromInput>
+    where?: SitePointWhereInput
+  }
+
+  export type SitePointUpdateToOneWithWhereWithoutRouteFromInput = {
+    where?: SitePointWhereInput
+    data: XOR<SitePointUpdateWithoutRouteFromInput, SitePointUncheckedUpdateWithoutRouteFromInput>
+  }
+
+  export type SitePointUpdateWithoutRouteFromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutSitepointNestedInput
+    RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointUncheckedUpdateWithoutRouteFromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
+    RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointUpsertWithoutRouteToInput = {
+    update: XOR<SitePointUpdateWithoutRouteToInput, SitePointUncheckedUpdateWithoutRouteToInput>
+    create: XOR<SitePointCreateWithoutRouteToInput, SitePointUncheckedCreateWithoutRouteToInput>
+    where?: SitePointWhereInput
+  }
+
+  export type SitePointUpdateToOneWithWhereWithoutRouteToInput = {
+    where?: SitePointWhereInput
+    data: XOR<SitePointUpdateWithoutRouteToInput, SitePointUncheckedUpdateWithoutRouteToInput>
+  }
+
+  export type SitePointUpdateWithoutRouteToInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
+  }
+
+  export type SitePointUncheckedUpdateWithoutRouteToInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
   }
 
   export type AssetCreateManyProjectInput = {
@@ -12357,6 +12960,42 @@ export namespace Prisma {
     is_migrated?: boolean
   }
 
+  export type RouteCreateManySitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    length?: Decimal | DecimalJsLike | number | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_to: string
+    route_method: string
+    route_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type RouteCreateManySitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    length?: Decimal | DecimalJsLike | number | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    route_method: string
+    route_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
   export type AssetUpdateWithoutSitepointInput = {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12415,6 +13054,114 @@ export namespace Prisma {
     asset_category?: StringFieldUpdateOperationsInput | string
     asset_ownership?: StringFieldUpdateOperationsInput | string
     area_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RouteUpdateWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_to?: SitePointUpdateOneRequiredWithoutRouteToNestedInput
+  }
+
+  export type RouteUncheckedUpdateWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RouteUncheckedUpdateManyWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RouteUpdateWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_from?: SitePointUpdateOneRequiredWithoutRouteFromNestedInput
+  }
+
+  export type RouteUncheckedUpdateWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RouteUncheckedUpdateManyWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    length?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    route_method?: StringFieldUpdateOperationsInput | string
+    route_ownership?: StringFieldUpdateOperationsInput | string
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean

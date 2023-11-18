@@ -1394,6 +1394,7 @@ exports.Prisma.RoutesScalarFieldEnum = {
   name: 'name',
   site_from: 'site_from',
   site_to: 'site_to',
+  length: 'length',
   uuid: 'uuid',
   site_category_uuid: 'site_category_uuid',
   site_from_uuid: 'site_from_uuid',

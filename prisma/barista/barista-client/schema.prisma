@@ -59,6 +59,8 @@ model SitePoint {
   last_read            DateTime?
   is_migrated          Boolean                  @default(false)
   assets               Asset[]
+  RouteFrom            Route[]                  @relation("sitepoint_from")
+  RouteTo              Route[]                  @relation("sitepoint_to")
 
   @@map("site_points")
 }
@@ -120,6 +122,8 @@ model Route {
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean                  @default(false)
+  sitepoint_from       SitePoint                @relation(fields: [site_group_code_from], references: [site_group_code], name: "sitepoint_from")
+  sitepoint_to         SitePoint                @relation(fields: [site_group_code_to], references: [site_group_code], name: "sitepoint_to")
 
   @@map("routes")
 }

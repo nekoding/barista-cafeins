@@ -1675,6 +1675,9 @@ model routes {
   site_from          BigInt?
   site_to            BigInt?
   geometry           Unsupported("geometry")?
+  length             Decimal?                 @db.Decimal(10, 3)
+  route_method_id    BigInt?
+  route_ownership_id BigInt?
   uuid               String?                  @unique(map: "site_point_routes_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   site_category_uuid String?                  @db.VarChar(255)
   site_from_uuid     String?                  @db.VarChar(255)
