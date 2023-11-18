@@ -2,6 +2,7 @@ import moment from 'moment'
 import type { Project } from '../prisma/barista/barista-client'
 import type {
   companies,
+  projects,
   users,
   vendors,
 } from '../prisma/cafeins/cafeins-client'
@@ -104,6 +105,19 @@ const validateData = async (project: Project): Promise<ValidatedData> => {
   ]
 }
 
+const serializedProjectData = (project: projects): string => {
+  return JSON.stringify({
+    ...project,
+    id: project.id.toString(),
+    created_user_id: project.created_user_id?.toString(),
+    modified_user_id: project.modified_user_id?.toString(),
+    company_id: project.company_id.toString(),
+    vendor_id: project.vendor_id?.toString(),
+    project_owner_id: project.project_owner_id?.toString(),
+    project_group_id: project.project_group_id?.toString(),
+  })
+}
+
 export const syncProjects = async (): Promise<void> => {
   try {
     logger.info('sync projects start')
@@ -157,16 +171,7 @@ export const syncProjects = async (): Promise<void> => {
             },
           })
 
-          const serialized = JSON.stringify({
-            ...projectCreated,
-            id: projectCreated.id.toString(),
-            created_user_id: projectCreated.created_user_id?.toString(),
-            modified_user_id: projectCreated.modified_user_id?.toString(),
-            company_id: projectCreated.company_id.toString(),
-            vendor_id: projectCreated.vendor_id?.toString(),
-            project_owner_id: projectCreated.project_owner_id?.toString(),
-            project_group_id: projectCreated.project_group_id?.toString(),
-          })
+          const serialized = serializedProjectData(projectCreated)
 
           await trx.audits.create({
             data: {

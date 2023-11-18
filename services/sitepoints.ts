@@ -9,6 +9,7 @@ import {
 import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import { getVilagesByCoords } from '../repositories/cafeins/villages'
 import { AuditEvent } from '../types/cafeins/audit'
+import type { CafeinsSitePoint } from '../types/cafeins/sitepoint'
 import type { BaristaVillage } from '../types/cafeins/villages'
 import { baristaClient, cafeinsClient } from '../utils/database'
 import { logger } from '../utils/logger'
@@ -17,6 +18,18 @@ import { LogLevel, writeToLog } from './logs'
 const getCreatedUserByEmployeeNo = getUserByEmployeeNo
 
 const getModifiedUserByEmployeeNo = getUserByEmployeeNo
+
+const serializedSitePointData = (sitePoint: CafeinsSitePoint): string => {
+  return JSON.stringify({
+    ...sitePoint,
+    id: sitePoint.id.toString(),
+    village_id: sitePoint.village_id.toString(),
+    site_category_id: sitePoint.site_category_id.toString(),
+    created_user_id: sitePoint.created_user_id?.toString(),
+    modified_user_id: sitePoint.modified_user_id?.toString(),
+    deleted_user_id: sitePoint.deleted_user_id?.toString(),
+  })
+}
 
 // Example: SLA-JKX-KBYKDN-001
 const generateCounterNumber = async (
@@ -153,16 +166,7 @@ export const syncSitePoint = async (): Promise<void> => {
             throw new Error('sitepoint failed inserted to database cafeins')
           }
 
-          const serialized = JSON.stringify({
-            ...lastInsertedSitePoint,
-            id: lastInsertedSitePoint.id.toString(),
-            village_id: lastInsertedSitePoint.village_id.toString(),
-            site_category_id: lastInsertedSitePoint.site_category_id.toString(),
-            created_user_id: lastInsertedSitePoint.created_user_id?.toString(),
-            modified_user_id:
-              lastInsertedSitePoint.modified_user_id?.toString(),
-            deleted_user_id: lastInsertedSitePoint.deleted_user_id?.toString(),
-          })
+          const serialized = serializedSitePointData(lastInsertedSitePoint)
 
           // create audit data
           await trx.audits.create({

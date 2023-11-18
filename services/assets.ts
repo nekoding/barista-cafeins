@@ -217,7 +217,7 @@ export const syncAssets = async (): Promise<void> => {
 
       await cafeinsClient.$transaction(async (trx) => {
         // create asset
-        const cafeinAsset = await trx.assets.create({
+        const createdAsset = await trx.assets.create({
           data: {
             uuid: asset.uuid,
             asset_category_id: assetCategory.id,
@@ -236,14 +236,14 @@ export const syncAssets = async (): Promise<void> => {
         })
 
         // create log asset
-        const serializedAsset = serializeAssetData(cafeinAsset)
+        const serializedAsset = serializeAssetData(createdAsset)
         await trx.audits.create({
           data: {
             user_type: `App\\Models\\User`,
             user_id: createdUser.id,
             event: AuditEvent.CREATED,
             auditable_type: `Modules\\Asset\\Entities\\Asset`,
-            auditable_id: cafeinAsset.id,
+            auditable_id: createdAsset.id,
             old_values: '[]',
             new_values: serializedAsset,
             user_agent: 'Barista',
@@ -253,10 +253,10 @@ export const syncAssets = async (): Promise<void> => {
         })
 
         // attach asset to project asset
-        const cafeinProjectAsset = await trx.project_assets.create({
+        const projectAssetCreated = await trx.project_assets.create({
           data: {
             project_id: project.id,
-            asset_id: cafeinAsset.id,
+            asset_id: createdAsset.id,
             created_at: new Date(),
             updated_at: new Date(),
             created_user_id: createdUser.id,
@@ -266,14 +266,14 @@ export const syncAssets = async (): Promise<void> => {
 
         // create log project asset
         const serializedProjectAsset =
-          serializeProjectAssetData(cafeinProjectAsset)
+          serializeProjectAssetData(projectAssetCreated)
         await trx.audits.create({
           data: {
             user_type: `App\\Models\\User`,
             user_id: createdUser.id,
             event: AuditEvent.CREATED,
             auditable_type: `Modules\\Master\\Entities\\ProjectAsset`,
-            auditable_id: cafeinAsset.id,
+            auditable_id: projectAssetCreated.id,
             old_values: '[]',
             new_values: serializedProjectAsset,
             user_agent: 'Barista',
