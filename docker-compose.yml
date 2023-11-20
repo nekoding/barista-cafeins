@@ -1,0 +1,22 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: barista-migrator
+    environment:
+      - NODE_ENV=DEBUG
+      - DATABASE_BARISTA_URL="postgresql://sail:password@localhost:5432/barista?schema=public"
+      - DATABASE_CAFEINS_URL="postgresql://sail:password@localhost:5432/postgres?schema=public"
+      - SITEPOINT_CATEGORY_ID=1
+      - PROJECT_PROJECT_GROUP_ID=1
+      - SITE_CATEGORY_ID=1
+    volumes:
+      - ./logs:/usr/src/app/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 500M
+        reservations:
+          cpus: '0.25'
+          memory: 200M
