@@ -1366,10 +1366,14 @@ export namespace Prisma {
 
   export type ProjectCountOutputType = {
     assets: number
+    Cable: number
+    Segment: number
   }
 
   export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assets?: boolean | ProjectCountOutputTypeCountAssetsArgs
+    Cable?: boolean | ProjectCountOutputTypeCountCableArgs
+    Segment?: boolean | ProjectCountOutputTypeCountSegmentArgs
   }
 
   // Custom InputTypes
@@ -1393,6 +1397,22 @@ export namespace Prisma {
   }
 
 
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountCableArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CableWhereInput
+  }
+
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountSegmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SegmentWhereInput
+  }
+
+
 
   /**
    * Count Type SitePointCountOutputType
@@ -1402,12 +1422,20 @@ export namespace Prisma {
     assets: number
     RouteFrom: number
     RouteTo: number
+    CableFrom: number
+    CableTo: number
+    SegmentFrom: number
+    SegmentTo: number
   }
 
   export type SitePointCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assets?: boolean | SitePointCountOutputTypeCountAssetsArgs
     RouteFrom?: boolean | SitePointCountOutputTypeCountRouteFromArgs
     RouteTo?: boolean | SitePointCountOutputTypeCountRouteToArgs
+    CableFrom?: boolean | SitePointCountOutputTypeCountCableFromArgs
+    CableTo?: boolean | SitePointCountOutputTypeCountCableToArgs
+    SegmentFrom?: boolean | SitePointCountOutputTypeCountSegmentFromArgs
+    SegmentTo?: boolean | SitePointCountOutputTypeCountSegmentToArgs
   }
 
   // Custom InputTypes
@@ -1444,6 +1472,38 @@ export namespace Prisma {
    */
   export type SitePointCountOutputTypeCountRouteToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RouteWhereInput
+  }
+
+
+  /**
+   * SitePointCountOutputType without action
+   */
+  export type SitePointCountOutputTypeCountCableFromArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CableWhereInput
+  }
+
+
+  /**
+   * SitePointCountOutputType without action
+   */
+  export type SitePointCountOutputTypeCountCableToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CableWhereInput
+  }
+
+
+  /**
+   * SitePointCountOutputType without action
+   */
+  export type SitePointCountOutputTypeCountSegmentFromArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SegmentWhereInput
+  }
+
+
+  /**
+   * SitePointCountOutputType without action
+   */
+  export type SitePointCountOutputTypeCountSegmentToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SegmentWhereInput
   }
 
 
@@ -1713,6 +1773,8 @@ export namespace Prisma {
     last_read?: boolean
     is_migrated?: boolean
     assets?: boolean | Project$assetsArgs<ExtArgs>
+    Cable?: boolean | Project$CableArgs<ExtArgs>
+    Segment?: boolean | Project$SegmentArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -1738,6 +1800,8 @@ export namespace Prisma {
 
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assets?: boolean | Project$assetsArgs<ExtArgs>
+    Cable?: boolean | Project$CableArgs<ExtArgs>
+    Segment?: boolean | Project$SegmentArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1746,6 +1810,8 @@ export namespace Prisma {
     name: "Project"
     objects: {
       assets: Prisma.$AssetPayload<ExtArgs>[]
+      Cable: Prisma.$CablePayload<ExtArgs>[]
+      Segment: Prisma.$SegmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
@@ -2132,6 +2198,10 @@ export namespace Prisma {
 
     assets<T extends Project$assetsArgs<ExtArgs> = {}>(args?: Subset<T, Project$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    Cable<T extends Project$CableArgs<ExtArgs> = {}>(args?: Subset<T, Project$CableArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    Segment<T extends Project$SegmentArgs<ExtArgs> = {}>(args?: Subset<T, Project$SegmentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2510,6 +2580,48 @@ export namespace Prisma {
 
 
   /**
+   * Project.Cable
+   */
+  export type Project$CableArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    where?: CableWhereInput
+    orderBy?: CableOrderByWithRelationInput | CableOrderByWithRelationInput[]
+    cursor?: CableWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CableScalarFieldEnum | CableScalarFieldEnum[]
+  }
+
+
+  /**
+   * Project.Segment
+   */
+  export type Project$SegmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    where?: SegmentWhereInput
+    orderBy?: SegmentOrderByWithRelationInput | SegmentOrderByWithRelationInput[]
+    cursor?: SegmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SegmentScalarFieldEnum | SegmentScalarFieldEnum[]
+  }
+
+
+  /**
    * Project without action
    */
   export type ProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2802,6 +2914,10 @@ export namespace Prisma {
     assets?: boolean | SitePoint$assetsArgs<ExtArgs>
     RouteFrom?: boolean | SitePoint$RouteFromArgs<ExtArgs>
     RouteTo?: boolean | SitePoint$RouteToArgs<ExtArgs>
+    CableFrom?: boolean | SitePoint$CableFromArgs<ExtArgs>
+    CableTo?: boolean | SitePoint$CableToArgs<ExtArgs>
+    SegmentFrom?: boolean | SitePoint$SegmentFromArgs<ExtArgs>
+    SegmentTo?: boolean | SitePoint$SegmentToArgs<ExtArgs>
     _count?: boolean | SitePointCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sitePoint"]>
 
@@ -2826,6 +2942,10 @@ export namespace Prisma {
     assets?: boolean | SitePoint$assetsArgs<ExtArgs>
     RouteFrom?: boolean | SitePoint$RouteFromArgs<ExtArgs>
     RouteTo?: boolean | SitePoint$RouteToArgs<ExtArgs>
+    CableFrom?: boolean | SitePoint$CableFromArgs<ExtArgs>
+    CableTo?: boolean | SitePoint$CableToArgs<ExtArgs>
+    SegmentFrom?: boolean | SitePoint$SegmentFromArgs<ExtArgs>
+    SegmentTo?: boolean | SitePoint$SegmentToArgs<ExtArgs>
     _count?: boolean | SitePointCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2836,6 +2956,10 @@ export namespace Prisma {
       assets: Prisma.$AssetPayload<ExtArgs>[]
       RouteFrom: Prisma.$RoutePayload<ExtArgs>[]
       RouteTo: Prisma.$RoutePayload<ExtArgs>[]
+      CableFrom: Prisma.$CablePayload<ExtArgs>[]
+      CableTo: Prisma.$CablePayload<ExtArgs>[]
+      SegmentFrom: Prisma.$SegmentPayload<ExtArgs>[]
+      SegmentTo: Prisma.$SegmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
@@ -3222,6 +3346,14 @@ export namespace Prisma {
     RouteFrom<T extends SitePoint$RouteFromArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$RouteFromArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoutePayload<ExtArgs>, T, 'findMany'> | Null>;
 
     RouteTo<T extends SitePoint$RouteToArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$RouteToArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoutePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    CableFrom<T extends SitePoint$CableFromArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$CableFromArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    CableTo<T extends SitePoint$CableToArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$CableToArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CablePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    SegmentFrom<T extends SitePoint$SegmentFromArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$SegmentFromArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    SegmentTo<T extends SitePoint$SegmentToArgs<ExtArgs> = {}>(args?: Subset<T, SitePoint$SegmentToArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SegmentPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3636,6 +3768,90 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RouteScalarFieldEnum | RouteScalarFieldEnum[]
+  }
+
+
+  /**
+   * SitePoint.CableFrom
+   */
+  export type SitePoint$CableFromArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    where?: CableWhereInput
+    orderBy?: CableOrderByWithRelationInput | CableOrderByWithRelationInput[]
+    cursor?: CableWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CableScalarFieldEnum | CableScalarFieldEnum[]
+  }
+
+
+  /**
+   * SitePoint.CableTo
+   */
+  export type SitePoint$CableToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cable
+     */
+    select?: CableSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    where?: CableWhereInput
+    orderBy?: CableOrderByWithRelationInput | CableOrderByWithRelationInput[]
+    cursor?: CableWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CableScalarFieldEnum | CableScalarFieldEnum[]
+  }
+
+
+  /**
+   * SitePoint.SegmentFrom
+   */
+  export type SitePoint$SegmentFromArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    where?: SegmentWhereInput
+    orderBy?: SegmentOrderByWithRelationInput | SegmentOrderByWithRelationInput[]
+    cursor?: SegmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SegmentScalarFieldEnum | SegmentScalarFieldEnum[]
+  }
+
+
+  /**
+   * SitePoint.SegmentTo
+   */
+  export type SitePoint$SegmentToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Segment
+     */
+    select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    where?: SegmentWhereInput
+    orderBy?: SegmentOrderByWithRelationInput | SegmentOrderByWithRelationInput[]
+    cursor?: SegmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SegmentScalarFieldEnum | SegmentScalarFieldEnum[]
   }
 
 
@@ -7040,6 +7256,9 @@ export namespace Prisma {
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
+    sitepoint_from?: boolean | SitePointDefaultArgs<ExtArgs>
+    sitepoint_to?: boolean | SitePointDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cable"]>
 
   export type CableSelectScalar = {
@@ -7068,10 +7287,20 @@ export namespace Prisma {
     is_migrated?: boolean
   }
 
+  export type CableInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sitepoint_from?: boolean | SitePointDefaultArgs<ExtArgs>
+    sitepoint_to?: boolean | SitePointDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+
 
   export type $CablePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Cable"
-    objects: {}
+    objects: {
+      sitepoint_from: Prisma.$SitePointPayload<ExtArgs>
+      sitepoint_to: Prisma.$SitePointPayload<ExtArgs>
+      project: Prisma.$ProjectPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
       cafeins_uuid: string | null
@@ -7461,6 +7690,11 @@ export namespace Prisma {
   export interface Prisma__CableClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    sitepoint_from<T extends SitePointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SitePointDefaultArgs<ExtArgs>>): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    sitepoint_to<T extends SitePointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SitePointDefaultArgs<ExtArgs>>): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7527,6 +7761,10 @@ export namespace Prisma {
      */
     select?: CableSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    /**
      * Filter, which Cable to fetch.
      */
     where: CableWhereUniqueInput
@@ -7542,6 +7780,10 @@ export namespace Prisma {
      */
     select?: CableSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    /**
      * Filter, which Cable to fetch.
      */
     where: CableWhereUniqueInput
@@ -7556,6 +7798,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Cable
      */
     select?: CableSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
     /**
      * Filter, which Cable to fetch.
      */
@@ -7602,6 +7848,10 @@ export namespace Prisma {
      */
     select?: CableSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    /**
      * Filter, which Cable to fetch.
      */
     where?: CableWhereInput
@@ -7647,6 +7897,10 @@ export namespace Prisma {
      */
     select?: CableSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    /**
      * Filter, which Cables to fetch.
      */
     where?: CableWhereInput
@@ -7687,6 +7941,10 @@ export namespace Prisma {
      */
     select?: CableSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    /**
      * The data needed to create a Cable.
      */
     data: XOR<CableCreateInput, CableUncheckedCreateInput>
@@ -7713,6 +7971,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Cable
      */
     select?: CableSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
     /**
      * The data needed to update a Cable.
      */
@@ -7748,6 +8010,10 @@ export namespace Prisma {
      */
     select?: CableSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
+    /**
      * The filter to search for the Cable to update in case it exists.
      */
     where: CableWhereUniqueInput
@@ -7770,6 +8036,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Cable
      */
     select?: CableSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
     /**
      * Filter which Cable to delete.
      */
@@ -7796,6 +8066,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Cable
      */
     select?: CableSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CableInclude<ExtArgs> | null
   }
 
 
@@ -8044,6 +8318,9 @@ export namespace Prisma {
     status?: boolean
     last_read?: boolean
     is_migrated?: boolean
+    sitepoint_from?: boolean | SitePointDefaultArgs<ExtArgs>
+    sitepoint_to?: boolean | SitePointDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["segment"]>
 
   export type SegmentSelectScalar = {
@@ -8064,10 +8341,20 @@ export namespace Prisma {
     is_migrated?: boolean
   }
 
+  export type SegmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sitepoint_from?: boolean | SitePointDefaultArgs<ExtArgs>
+    sitepoint_to?: boolean | SitePointDefaultArgs<ExtArgs>
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+
 
   export type $SegmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Segment"
-    objects: {}
+    objects: {
+      sitepoint_from: Prisma.$SitePointPayload<ExtArgs>
+      sitepoint_to: Prisma.$SitePointPayload<ExtArgs>
+      project: Prisma.$ProjectPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       uuid: string
       cafeins_uuid: string | null
@@ -8449,6 +8736,11 @@ export namespace Prisma {
   export interface Prisma__SegmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    sitepoint_from<T extends SitePointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SitePointDefaultArgs<ExtArgs>>): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    sitepoint_to<T extends SitePointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SitePointDefaultArgs<ExtArgs>>): Prisma__SitePointClient<$Result.GetResult<Prisma.$SitePointPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8507,6 +8799,10 @@ export namespace Prisma {
      */
     select?: SegmentSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    /**
      * Filter, which Segment to fetch.
      */
     where: SegmentWhereUniqueInput
@@ -8522,6 +8818,10 @@ export namespace Prisma {
      */
     select?: SegmentSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    /**
      * Filter, which Segment to fetch.
      */
     where: SegmentWhereUniqueInput
@@ -8536,6 +8836,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Segment
      */
     select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
     /**
      * Filter, which Segment to fetch.
      */
@@ -8582,6 +8886,10 @@ export namespace Prisma {
      */
     select?: SegmentSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    /**
      * Filter, which Segment to fetch.
      */
     where?: SegmentWhereInput
@@ -8627,6 +8935,10 @@ export namespace Prisma {
      */
     select?: SegmentSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    /**
      * Filter, which Segments to fetch.
      */
     where?: SegmentWhereInput
@@ -8667,6 +8979,10 @@ export namespace Prisma {
      */
     select?: SegmentSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    /**
      * The data needed to create a Segment.
      */
     data: XOR<SegmentCreateInput, SegmentUncheckedCreateInput>
@@ -8693,6 +9009,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Segment
      */
     select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
     /**
      * The data needed to update a Segment.
      */
@@ -8728,6 +9048,10 @@ export namespace Prisma {
      */
     select?: SegmentSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
+    /**
      * The filter to search for the Segment to update in case it exists.
      */
     where: SegmentWhereUniqueInput
@@ -8750,6 +9074,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Segment
      */
     select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
     /**
      * Filter which Segment to delete.
      */
@@ -8776,6 +9104,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the Segment
      */
     select?: SegmentSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SegmentInclude<ExtArgs> | null
   }
 
 
@@ -9116,6 +9448,8 @@ export namespace Prisma {
     last_read?: DateTimeNullableFilter<"Project"> | Date | string | null
     is_migrated?: BoolFilter<"Project"> | boolean
     assets?: AssetListRelationFilter
+    Cable?: CableListRelationFilter
+    Segment?: SegmentListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -9137,6 +9471,8 @@ export namespace Prisma {
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
     assets?: AssetOrderByRelationAggregateInput
+    Cable?: CableOrderByRelationAggregateInput
+    Segment?: SegmentOrderByRelationAggregateInput
   }
 
   export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -9161,6 +9497,8 @@ export namespace Prisma {
     last_read?: DateTimeNullableFilter<"Project"> | Date | string | null
     is_migrated?: BoolFilter<"Project"> | boolean
     assets?: AssetListRelationFilter
+    Cable?: CableListRelationFilter
+    Segment?: SegmentListRelationFilter
   }, "uuid" | "project_group_code">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -9230,6 +9568,10 @@ export namespace Prisma {
     assets?: AssetListRelationFilter
     RouteFrom?: RouteListRelationFilter
     RouteTo?: RouteListRelationFilter
+    CableFrom?: CableListRelationFilter
+    CableTo?: CableListRelationFilter
+    SegmentFrom?: SegmentListRelationFilter
+    SegmentTo?: SegmentListRelationFilter
   }
 
   export type SitePointOrderByWithRelationInput = {
@@ -9250,6 +9592,10 @@ export namespace Prisma {
     assets?: AssetOrderByRelationAggregateInput
     RouteFrom?: RouteOrderByRelationAggregateInput
     RouteTo?: RouteOrderByRelationAggregateInput
+    CableFrom?: CableOrderByRelationAggregateInput
+    CableTo?: CableOrderByRelationAggregateInput
+    SegmentFrom?: SegmentOrderByRelationAggregateInput
+    SegmentTo?: SegmentOrderByRelationAggregateInput
   }
 
   export type SitePointWhereUniqueInput = Prisma.AtLeast<{
@@ -9273,6 +9619,10 @@ export namespace Prisma {
     assets?: AssetListRelationFilter
     RouteFrom?: RouteListRelationFilter
     RouteTo?: RouteListRelationFilter
+    CableFrom?: CableListRelationFilter
+    CableTo?: CableListRelationFilter
+    SegmentFrom?: SegmentListRelationFilter
+    SegmentTo?: SegmentListRelationFilter
   }, "uuid" | "site_group_code">
 
   export type SitePointOrderByWithAggregationInput = {
@@ -9649,6 +9999,9 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Cable"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Cable"> | Date | string | null
     is_migrated?: BoolFilter<"Cable"> | boolean
+    sitepoint_from?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    sitepoint_to?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
   }
 
   export type CableOrderByWithRelationInput = {
@@ -9675,6 +10028,9 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
+    sitepoint_from?: SitePointOrderByWithRelationInput
+    sitepoint_to?: SitePointOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
   }
 
   export type CableWhereUniqueInput = Prisma.AtLeast<{
@@ -9704,6 +10060,9 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Cable"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Cable"> | Date | string | null
     is_migrated?: BoolFilter<"Cable"> | boolean
+    sitepoint_from?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    sitepoint_to?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
   }, "uuid" | "unique_id">
 
   export type CableOrderByWithAggregationInput = {
@@ -9785,6 +10144,9 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Segment"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Segment"> | Date | string | null
     is_migrated?: BoolFilter<"Segment"> | boolean
+    sitepoint_from?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    sitepoint_to?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
   }
 
   export type SegmentOrderByWithRelationInput = {
@@ -9803,6 +10165,9 @@ export namespace Prisma {
     status?: SortOrderInput | SortOrder
     last_read?: SortOrderInput | SortOrder
     is_migrated?: SortOrder
+    sitepoint_from?: SitePointOrderByWithRelationInput
+    sitepoint_to?: SitePointOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
   }
 
   export type SegmentWhereUniqueInput = Prisma.AtLeast<{
@@ -9824,6 +10189,9 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Segment"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Segment"> | Date | string | null
     is_migrated?: BoolFilter<"Segment"> | boolean
+    sitepoint_from?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    sitepoint_to?: XOR<SitePointRelationFilter, SitePointWhereInput>
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
   }, "uuid" | "unique_id">
 
   export type SegmentOrderByWithAggregationInput = {
@@ -9887,6 +10255,8 @@ export namespace Prisma {
     last_read?: Date | string | null
     is_migrated?: boolean
     assets?: AssetCreateNestedManyWithoutProjectInput
+    Cable?: CableCreateNestedManyWithoutProjectInput
+    Segment?: SegmentCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -9908,6 +10278,8 @@ export namespace Prisma {
     last_read?: Date | string | null
     is_migrated?: boolean
     assets?: AssetUncheckedCreateNestedManyWithoutProjectInput
+    Cable?: CableUncheckedCreateNestedManyWithoutProjectInput
+    Segment?: SegmentUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -9929,6 +10301,8 @@ export namespace Prisma {
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     assets?: AssetUpdateManyWithoutProjectNestedInput
+    Cable?: CableUpdateManyWithoutProjectNestedInput
+    Segment?: SegmentUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -9950,6 +10324,8 @@ export namespace Prisma {
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     assets?: AssetUncheckedUpdateManyWithoutProjectNestedInput
+    Cable?: CableUncheckedUpdateManyWithoutProjectNestedInput
+    Segment?: SegmentUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -10030,6 +10406,10 @@ export namespace Prisma {
     assets?: AssetCreateNestedManyWithoutSitepointInput
     RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
     RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointUncheckedCreateInput = {
@@ -10050,6 +10430,10 @@ export namespace Prisma {
     assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
     RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
     RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableUncheckedCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentUncheckedCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointUpdateInput = {
@@ -10070,6 +10454,10 @@ export namespace Prisma {
     assets?: AssetUpdateManyWithoutSitepointNestedInput
     RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
     RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointUncheckedUpdateInput = {
@@ -10090,6 +10478,10 @@ export namespace Prisma {
     assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
     RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
     RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUncheckedUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointCreateManyInput = {
@@ -10500,7 +10892,6 @@ export namespace Prisma {
     uuid?: string
     cafeins_uuid?: string | null
     unique_id: string
-    project_group_code: string
     name: string
     description?: string | null
     length: Decimal | DecimalJsLike | number | string
@@ -10510,8 +10901,6 @@ export namespace Prisma {
     modified_employee_no?: string | null
     cable_category: string
     cable_group: string
-    site_group_code_from: string
-    site_group_code_to: string
     asset_ownership: string
     area_ownership: string
     placement_type: string
@@ -10520,6 +10909,9 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    sitepoint_from: SitePointCreateNestedOneWithoutCableFromInput
+    sitepoint_to: SitePointCreateNestedOneWithoutCableToInput
+    project: ProjectCreateNestedOneWithoutCableInput
   }
 
   export type CableUncheckedCreateInput = {
@@ -10552,7 +10944,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
-    project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -10562,8 +10953,6 @@ export namespace Prisma {
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     cable_category?: StringFieldUpdateOperationsInput | string
     cable_group?: StringFieldUpdateOperationsInput | string
-    site_group_code_from?: StringFieldUpdateOperationsInput | string
-    site_group_code_to?: StringFieldUpdateOperationsInput | string
     asset_ownership?: StringFieldUpdateOperationsInput | string
     area_ownership?: StringFieldUpdateOperationsInput | string
     placement_type?: StringFieldUpdateOperationsInput | string
@@ -10572,6 +10961,9 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_from?: SitePointUpdateOneRequiredWithoutCableFromNestedInput
+    sitepoint_to?: SitePointUpdateOneRequiredWithoutCableToNestedInput
+    project?: ProjectUpdateOneRequiredWithoutCableNestedInput
   }
 
   export type CableUncheckedUpdateInput = {
@@ -10630,7 +11022,6 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
-    project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -10640,8 +11031,6 @@ export namespace Prisma {
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
     cable_category?: StringFieldUpdateOperationsInput | string
     cable_group?: StringFieldUpdateOperationsInput | string
-    site_group_code_from?: StringFieldUpdateOperationsInput | string
-    site_group_code_to?: StringFieldUpdateOperationsInput | string
     asset_ownership?: StringFieldUpdateOperationsInput | string
     area_ownership?: StringFieldUpdateOperationsInput | string
     placement_type?: StringFieldUpdateOperationsInput | string
@@ -10682,18 +11071,18 @@ export namespace Prisma {
     uuid?: string
     cafeins_uuid?: string | null
     unique_id: string
-    project_group_code: string
     name: string
     created_at?: Date | string
     updated_at?: Date | string
     created_employee_no: string
     modified_employee_no?: string | null
-    site_group_code_from: string
-    site_group_code_to: string
     route_unique_id_pembentuk?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    sitepoint_from: SitePointCreateNestedOneWithoutSegmentFromInput
+    sitepoint_to: SitePointCreateNestedOneWithoutSegmentToInput
+    project: ProjectCreateNestedOneWithoutSegmentInput
   }
 
   export type SegmentUncheckedCreateInput = {
@@ -10718,18 +11107,18 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
-    project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_from?: StringFieldUpdateOperationsInput | string
-    site_group_code_to?: StringFieldUpdateOperationsInput | string
     route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_from?: SitePointUpdateOneRequiredWithoutSegmentFromNestedInput
+    sitepoint_to?: SitePointUpdateOneRequiredWithoutSegmentToNestedInput
+    project?: ProjectUpdateOneRequiredWithoutSegmentNestedInput
   }
 
   export type SegmentUncheckedUpdateInput = {
@@ -10772,14 +11161,11 @@ export namespace Prisma {
     uuid?: StringFieldUpdateOperationsInput | string
     cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
     unique_id?: StringFieldUpdateOperationsInput | string
-    project_group_code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_employee_no?: StringFieldUpdateOperationsInput | string
     modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
-    site_group_code_from?: StringFieldUpdateOperationsInput | string
-    site_group_code_to?: StringFieldUpdateOperationsInput | string
     route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10898,12 +11284,32 @@ export namespace Prisma {
     none?: AssetWhereInput
   }
 
+  export type CableListRelationFilter = {
+    every?: CableWhereInput
+    some?: CableWhereInput
+    none?: CableWhereInput
+  }
+
+  export type SegmentListRelationFilter = {
+    every?: SegmentWhereInput
+    some?: SegmentWhereInput
+    none?: SegmentWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type AssetOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CableOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SegmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11594,11 +12000,39 @@ export namespace Prisma {
     connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
   }
 
+  export type CableCreateNestedManyWithoutProjectInput = {
+    create?: XOR<CableCreateWithoutProjectInput, CableUncheckedCreateWithoutProjectInput> | CableCreateWithoutProjectInput[] | CableUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutProjectInput | CableCreateOrConnectWithoutProjectInput[]
+    createMany?: CableCreateManyProjectInputEnvelope
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+  }
+
+  export type SegmentCreateNestedManyWithoutProjectInput = {
+    create?: XOR<SegmentCreateWithoutProjectInput, SegmentUncheckedCreateWithoutProjectInput> | SegmentCreateWithoutProjectInput[] | SegmentUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutProjectInput | SegmentCreateOrConnectWithoutProjectInput[]
+    createMany?: SegmentCreateManyProjectInputEnvelope
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+  }
+
   export type AssetUncheckedCreateNestedManyWithoutProjectInput = {
     create?: XOR<AssetCreateWithoutProjectInput, AssetUncheckedCreateWithoutProjectInput> | AssetCreateWithoutProjectInput[] | AssetUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: AssetCreateOrConnectWithoutProjectInput | AssetCreateOrConnectWithoutProjectInput[]
     createMany?: AssetCreateManyProjectInputEnvelope
     connect?: AssetWhereUniqueInput | AssetWhereUniqueInput[]
+  }
+
+  export type CableUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<CableCreateWithoutProjectInput, CableUncheckedCreateWithoutProjectInput> | CableCreateWithoutProjectInput[] | CableUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutProjectInput | CableCreateOrConnectWithoutProjectInput[]
+    createMany?: CableCreateManyProjectInputEnvelope
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+  }
+
+  export type SegmentUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<SegmentCreateWithoutProjectInput, SegmentUncheckedCreateWithoutProjectInput> | SegmentCreateWithoutProjectInput[] | SegmentUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutProjectInput | SegmentCreateOrConnectWithoutProjectInput[]
+    createMany?: SegmentCreateManyProjectInputEnvelope
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11639,6 +12073,34 @@ export namespace Prisma {
     deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
   }
 
+  export type CableUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<CableCreateWithoutProjectInput, CableUncheckedCreateWithoutProjectInput> | CableCreateWithoutProjectInput[] | CableUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutProjectInput | CableCreateOrConnectWithoutProjectInput[]
+    upsert?: CableUpsertWithWhereUniqueWithoutProjectInput | CableUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: CableCreateManyProjectInputEnvelope
+    set?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    disconnect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    delete?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    update?: CableUpdateWithWhereUniqueWithoutProjectInput | CableUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: CableUpdateManyWithWhereWithoutProjectInput | CableUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: CableScalarWhereInput | CableScalarWhereInput[]
+  }
+
+  export type SegmentUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<SegmentCreateWithoutProjectInput, SegmentUncheckedCreateWithoutProjectInput> | SegmentCreateWithoutProjectInput[] | SegmentUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutProjectInput | SegmentCreateOrConnectWithoutProjectInput[]
+    upsert?: SegmentUpsertWithWhereUniqueWithoutProjectInput | SegmentUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: SegmentCreateManyProjectInputEnvelope
+    set?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    disconnect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    delete?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    update?: SegmentUpdateWithWhereUniqueWithoutProjectInput | SegmentUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: SegmentUpdateManyWithWhereWithoutProjectInput | SegmentUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: SegmentScalarWhereInput | SegmentScalarWhereInput[]
+  }
+
   export type AssetUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<AssetCreateWithoutProjectInput, AssetUncheckedCreateWithoutProjectInput> | AssetCreateWithoutProjectInput[] | AssetUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: AssetCreateOrConnectWithoutProjectInput | AssetCreateOrConnectWithoutProjectInput[]
@@ -11651,6 +12113,34 @@ export namespace Prisma {
     update?: AssetUpdateWithWhereUniqueWithoutProjectInput | AssetUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: AssetUpdateManyWithWhereWithoutProjectInput | AssetUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: AssetScalarWhereInput | AssetScalarWhereInput[]
+  }
+
+  export type CableUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<CableCreateWithoutProjectInput, CableUncheckedCreateWithoutProjectInput> | CableCreateWithoutProjectInput[] | CableUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutProjectInput | CableCreateOrConnectWithoutProjectInput[]
+    upsert?: CableUpsertWithWhereUniqueWithoutProjectInput | CableUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: CableCreateManyProjectInputEnvelope
+    set?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    disconnect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    delete?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    update?: CableUpdateWithWhereUniqueWithoutProjectInput | CableUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: CableUpdateManyWithWhereWithoutProjectInput | CableUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: CableScalarWhereInput | CableScalarWhereInput[]
+  }
+
+  export type SegmentUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<SegmentCreateWithoutProjectInput, SegmentUncheckedCreateWithoutProjectInput> | SegmentCreateWithoutProjectInput[] | SegmentUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutProjectInput | SegmentCreateOrConnectWithoutProjectInput[]
+    upsert?: SegmentUpsertWithWhereUniqueWithoutProjectInput | SegmentUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: SegmentCreateManyProjectInputEnvelope
+    set?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    disconnect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    delete?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    update?: SegmentUpdateWithWhereUniqueWithoutProjectInput | SegmentUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: SegmentUpdateManyWithWhereWithoutProjectInput | SegmentUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: SegmentScalarWhereInput | SegmentScalarWhereInput[]
   }
 
   export type AssetCreateNestedManyWithoutSitepointInput = {
@@ -11674,6 +12164,34 @@ export namespace Prisma {
     connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
   }
 
+  export type CableCreateNestedManyWithoutSitepoint_fromInput = {
+    create?: XOR<CableCreateWithoutSitepoint_fromInput, CableUncheckedCreateWithoutSitepoint_fromInput> | CableCreateWithoutSitepoint_fromInput[] | CableUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutSitepoint_fromInput | CableCreateOrConnectWithoutSitepoint_fromInput[]
+    createMany?: CableCreateManySitepoint_fromInputEnvelope
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+  }
+
+  export type CableCreateNestedManyWithoutSitepoint_toInput = {
+    create?: XOR<CableCreateWithoutSitepoint_toInput, CableUncheckedCreateWithoutSitepoint_toInput> | CableCreateWithoutSitepoint_toInput[] | CableUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutSitepoint_toInput | CableCreateOrConnectWithoutSitepoint_toInput[]
+    createMany?: CableCreateManySitepoint_toInputEnvelope
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+  }
+
+  export type SegmentCreateNestedManyWithoutSitepoint_fromInput = {
+    create?: XOR<SegmentCreateWithoutSitepoint_fromInput, SegmentUncheckedCreateWithoutSitepoint_fromInput> | SegmentCreateWithoutSitepoint_fromInput[] | SegmentUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutSitepoint_fromInput | SegmentCreateOrConnectWithoutSitepoint_fromInput[]
+    createMany?: SegmentCreateManySitepoint_fromInputEnvelope
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+  }
+
+  export type SegmentCreateNestedManyWithoutSitepoint_toInput = {
+    create?: XOR<SegmentCreateWithoutSitepoint_toInput, SegmentUncheckedCreateWithoutSitepoint_toInput> | SegmentCreateWithoutSitepoint_toInput[] | SegmentUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutSitepoint_toInput | SegmentCreateOrConnectWithoutSitepoint_toInput[]
+    createMany?: SegmentCreateManySitepoint_toInputEnvelope
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+  }
+
   export type AssetUncheckedCreateNestedManyWithoutSitepointInput = {
     create?: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput> | AssetCreateWithoutSitepointInput[] | AssetUncheckedCreateWithoutSitepointInput[]
     connectOrCreate?: AssetCreateOrConnectWithoutSitepointInput | AssetCreateOrConnectWithoutSitepointInput[]
@@ -11693,6 +12211,34 @@ export namespace Prisma {
     connectOrCreate?: RouteCreateOrConnectWithoutSitepoint_toInput | RouteCreateOrConnectWithoutSitepoint_toInput[]
     createMany?: RouteCreateManySitepoint_toInputEnvelope
     connect?: RouteWhereUniqueInput | RouteWhereUniqueInput[]
+  }
+
+  export type CableUncheckedCreateNestedManyWithoutSitepoint_fromInput = {
+    create?: XOR<CableCreateWithoutSitepoint_fromInput, CableUncheckedCreateWithoutSitepoint_fromInput> | CableCreateWithoutSitepoint_fromInput[] | CableUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutSitepoint_fromInput | CableCreateOrConnectWithoutSitepoint_fromInput[]
+    createMany?: CableCreateManySitepoint_fromInputEnvelope
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+  }
+
+  export type CableUncheckedCreateNestedManyWithoutSitepoint_toInput = {
+    create?: XOR<CableCreateWithoutSitepoint_toInput, CableUncheckedCreateWithoutSitepoint_toInput> | CableCreateWithoutSitepoint_toInput[] | CableUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutSitepoint_toInput | CableCreateOrConnectWithoutSitepoint_toInput[]
+    createMany?: CableCreateManySitepoint_toInputEnvelope
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+  }
+
+  export type SegmentUncheckedCreateNestedManyWithoutSitepoint_fromInput = {
+    create?: XOR<SegmentCreateWithoutSitepoint_fromInput, SegmentUncheckedCreateWithoutSitepoint_fromInput> | SegmentCreateWithoutSitepoint_fromInput[] | SegmentUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutSitepoint_fromInput | SegmentCreateOrConnectWithoutSitepoint_fromInput[]
+    createMany?: SegmentCreateManySitepoint_fromInputEnvelope
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+  }
+
+  export type SegmentUncheckedCreateNestedManyWithoutSitepoint_toInput = {
+    create?: XOR<SegmentCreateWithoutSitepoint_toInput, SegmentUncheckedCreateWithoutSitepoint_toInput> | SegmentCreateWithoutSitepoint_toInput[] | SegmentUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutSitepoint_toInput | SegmentCreateOrConnectWithoutSitepoint_toInput[]
+    createMany?: SegmentCreateManySitepoint_toInputEnvelope
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -11745,6 +12291,62 @@ export namespace Prisma {
     deleteMany?: RouteScalarWhereInput | RouteScalarWhereInput[]
   }
 
+  export type CableUpdateManyWithoutSitepoint_fromNestedInput = {
+    create?: XOR<CableCreateWithoutSitepoint_fromInput, CableUncheckedCreateWithoutSitepoint_fromInput> | CableCreateWithoutSitepoint_fromInput[] | CableUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutSitepoint_fromInput | CableCreateOrConnectWithoutSitepoint_fromInput[]
+    upsert?: CableUpsertWithWhereUniqueWithoutSitepoint_fromInput | CableUpsertWithWhereUniqueWithoutSitepoint_fromInput[]
+    createMany?: CableCreateManySitepoint_fromInputEnvelope
+    set?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    disconnect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    delete?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    update?: CableUpdateWithWhereUniqueWithoutSitepoint_fromInput | CableUpdateWithWhereUniqueWithoutSitepoint_fromInput[]
+    updateMany?: CableUpdateManyWithWhereWithoutSitepoint_fromInput | CableUpdateManyWithWhereWithoutSitepoint_fromInput[]
+    deleteMany?: CableScalarWhereInput | CableScalarWhereInput[]
+  }
+
+  export type CableUpdateManyWithoutSitepoint_toNestedInput = {
+    create?: XOR<CableCreateWithoutSitepoint_toInput, CableUncheckedCreateWithoutSitepoint_toInput> | CableCreateWithoutSitepoint_toInput[] | CableUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutSitepoint_toInput | CableCreateOrConnectWithoutSitepoint_toInput[]
+    upsert?: CableUpsertWithWhereUniqueWithoutSitepoint_toInput | CableUpsertWithWhereUniqueWithoutSitepoint_toInput[]
+    createMany?: CableCreateManySitepoint_toInputEnvelope
+    set?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    disconnect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    delete?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    update?: CableUpdateWithWhereUniqueWithoutSitepoint_toInput | CableUpdateWithWhereUniqueWithoutSitepoint_toInput[]
+    updateMany?: CableUpdateManyWithWhereWithoutSitepoint_toInput | CableUpdateManyWithWhereWithoutSitepoint_toInput[]
+    deleteMany?: CableScalarWhereInput | CableScalarWhereInput[]
+  }
+
+  export type SegmentUpdateManyWithoutSitepoint_fromNestedInput = {
+    create?: XOR<SegmentCreateWithoutSitepoint_fromInput, SegmentUncheckedCreateWithoutSitepoint_fromInput> | SegmentCreateWithoutSitepoint_fromInput[] | SegmentUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutSitepoint_fromInput | SegmentCreateOrConnectWithoutSitepoint_fromInput[]
+    upsert?: SegmentUpsertWithWhereUniqueWithoutSitepoint_fromInput | SegmentUpsertWithWhereUniqueWithoutSitepoint_fromInput[]
+    createMany?: SegmentCreateManySitepoint_fromInputEnvelope
+    set?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    disconnect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    delete?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    update?: SegmentUpdateWithWhereUniqueWithoutSitepoint_fromInput | SegmentUpdateWithWhereUniqueWithoutSitepoint_fromInput[]
+    updateMany?: SegmentUpdateManyWithWhereWithoutSitepoint_fromInput | SegmentUpdateManyWithWhereWithoutSitepoint_fromInput[]
+    deleteMany?: SegmentScalarWhereInput | SegmentScalarWhereInput[]
+  }
+
+  export type SegmentUpdateManyWithoutSitepoint_toNestedInput = {
+    create?: XOR<SegmentCreateWithoutSitepoint_toInput, SegmentUncheckedCreateWithoutSitepoint_toInput> | SegmentCreateWithoutSitepoint_toInput[] | SegmentUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutSitepoint_toInput | SegmentCreateOrConnectWithoutSitepoint_toInput[]
+    upsert?: SegmentUpsertWithWhereUniqueWithoutSitepoint_toInput | SegmentUpsertWithWhereUniqueWithoutSitepoint_toInput[]
+    createMany?: SegmentCreateManySitepoint_toInputEnvelope
+    set?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    disconnect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    delete?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    update?: SegmentUpdateWithWhereUniqueWithoutSitepoint_toInput | SegmentUpdateWithWhereUniqueWithoutSitepoint_toInput[]
+    updateMany?: SegmentUpdateManyWithWhereWithoutSitepoint_toInput | SegmentUpdateManyWithWhereWithoutSitepoint_toInput[]
+    deleteMany?: SegmentScalarWhereInput | SegmentScalarWhereInput[]
+  }
+
   export type AssetUncheckedUpdateManyWithoutSitepointNestedInput = {
     create?: XOR<AssetCreateWithoutSitepointInput, AssetUncheckedCreateWithoutSitepointInput> | AssetCreateWithoutSitepointInput[] | AssetUncheckedCreateWithoutSitepointInput[]
     connectOrCreate?: AssetCreateOrConnectWithoutSitepointInput | AssetCreateOrConnectWithoutSitepointInput[]
@@ -11785,6 +12387,62 @@ export namespace Prisma {
     update?: RouteUpdateWithWhereUniqueWithoutSitepoint_toInput | RouteUpdateWithWhereUniqueWithoutSitepoint_toInput[]
     updateMany?: RouteUpdateManyWithWhereWithoutSitepoint_toInput | RouteUpdateManyWithWhereWithoutSitepoint_toInput[]
     deleteMany?: RouteScalarWhereInput | RouteScalarWhereInput[]
+  }
+
+  export type CableUncheckedUpdateManyWithoutSitepoint_fromNestedInput = {
+    create?: XOR<CableCreateWithoutSitepoint_fromInput, CableUncheckedCreateWithoutSitepoint_fromInput> | CableCreateWithoutSitepoint_fromInput[] | CableUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutSitepoint_fromInput | CableCreateOrConnectWithoutSitepoint_fromInput[]
+    upsert?: CableUpsertWithWhereUniqueWithoutSitepoint_fromInput | CableUpsertWithWhereUniqueWithoutSitepoint_fromInput[]
+    createMany?: CableCreateManySitepoint_fromInputEnvelope
+    set?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    disconnect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    delete?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    update?: CableUpdateWithWhereUniqueWithoutSitepoint_fromInput | CableUpdateWithWhereUniqueWithoutSitepoint_fromInput[]
+    updateMany?: CableUpdateManyWithWhereWithoutSitepoint_fromInput | CableUpdateManyWithWhereWithoutSitepoint_fromInput[]
+    deleteMany?: CableScalarWhereInput | CableScalarWhereInput[]
+  }
+
+  export type CableUncheckedUpdateManyWithoutSitepoint_toNestedInput = {
+    create?: XOR<CableCreateWithoutSitepoint_toInput, CableUncheckedCreateWithoutSitepoint_toInput> | CableCreateWithoutSitepoint_toInput[] | CableUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: CableCreateOrConnectWithoutSitepoint_toInput | CableCreateOrConnectWithoutSitepoint_toInput[]
+    upsert?: CableUpsertWithWhereUniqueWithoutSitepoint_toInput | CableUpsertWithWhereUniqueWithoutSitepoint_toInput[]
+    createMany?: CableCreateManySitepoint_toInputEnvelope
+    set?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    disconnect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    delete?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    connect?: CableWhereUniqueInput | CableWhereUniqueInput[]
+    update?: CableUpdateWithWhereUniqueWithoutSitepoint_toInput | CableUpdateWithWhereUniqueWithoutSitepoint_toInput[]
+    updateMany?: CableUpdateManyWithWhereWithoutSitepoint_toInput | CableUpdateManyWithWhereWithoutSitepoint_toInput[]
+    deleteMany?: CableScalarWhereInput | CableScalarWhereInput[]
+  }
+
+  export type SegmentUncheckedUpdateManyWithoutSitepoint_fromNestedInput = {
+    create?: XOR<SegmentCreateWithoutSitepoint_fromInput, SegmentUncheckedCreateWithoutSitepoint_fromInput> | SegmentCreateWithoutSitepoint_fromInput[] | SegmentUncheckedCreateWithoutSitepoint_fromInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutSitepoint_fromInput | SegmentCreateOrConnectWithoutSitepoint_fromInput[]
+    upsert?: SegmentUpsertWithWhereUniqueWithoutSitepoint_fromInput | SegmentUpsertWithWhereUniqueWithoutSitepoint_fromInput[]
+    createMany?: SegmentCreateManySitepoint_fromInputEnvelope
+    set?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    disconnect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    delete?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    update?: SegmentUpdateWithWhereUniqueWithoutSitepoint_fromInput | SegmentUpdateWithWhereUniqueWithoutSitepoint_fromInput[]
+    updateMany?: SegmentUpdateManyWithWhereWithoutSitepoint_fromInput | SegmentUpdateManyWithWhereWithoutSitepoint_fromInput[]
+    deleteMany?: SegmentScalarWhereInput | SegmentScalarWhereInput[]
+  }
+
+  export type SegmentUncheckedUpdateManyWithoutSitepoint_toNestedInput = {
+    create?: XOR<SegmentCreateWithoutSitepoint_toInput, SegmentUncheckedCreateWithoutSitepoint_toInput> | SegmentCreateWithoutSitepoint_toInput[] | SegmentUncheckedCreateWithoutSitepoint_toInput[]
+    connectOrCreate?: SegmentCreateOrConnectWithoutSitepoint_toInput | SegmentCreateOrConnectWithoutSitepoint_toInput[]
+    upsert?: SegmentUpsertWithWhereUniqueWithoutSitepoint_toInput | SegmentUpsertWithWhereUniqueWithoutSitepoint_toInput[]
+    createMany?: SegmentCreateManySitepoint_toInputEnvelope
+    set?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    disconnect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    delete?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    connect?: SegmentWhereUniqueInput | SegmentWhereUniqueInput[]
+    update?: SegmentUpdateWithWhereUniqueWithoutSitepoint_toInput | SegmentUpdateWithWhereUniqueWithoutSitepoint_toInput[]
+    updateMany?: SegmentUpdateManyWithWhereWithoutSitepoint_toInput | SegmentUpdateManyWithWhereWithoutSitepoint_toInput[]
+    deleteMany?: SegmentScalarWhereInput | SegmentScalarWhereInput[]
   }
 
   export type ProjectCreateNestedOneWithoutAssetsInput = {
@@ -11851,12 +12509,96 @@ export namespace Prisma {
     update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutRouteToInput, SitePointUpdateWithoutRouteToInput>, SitePointUncheckedUpdateWithoutRouteToInput>
   }
 
+  export type SitePointCreateNestedOneWithoutCableFromInput = {
+    create?: XOR<SitePointCreateWithoutCableFromInput, SitePointUncheckedCreateWithoutCableFromInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutCableFromInput
+    connect?: SitePointWhereUniqueInput
+  }
+
+  export type SitePointCreateNestedOneWithoutCableToInput = {
+    create?: XOR<SitePointCreateWithoutCableToInput, SitePointUncheckedCreateWithoutCableToInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutCableToInput
+    connect?: SitePointWhereUniqueInput
+  }
+
+  export type ProjectCreateNestedOneWithoutCableInput = {
+    create?: XOR<ProjectCreateWithoutCableInput, ProjectUncheckedCreateWithoutCableInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutCableInput
+    connect?: ProjectWhereUniqueInput
+  }
+
   export type DecimalFieldUpdateOperationsInput = {
     set?: Decimal | DecimalJsLike | number | string
     increment?: Decimal | DecimalJsLike | number | string
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type SitePointUpdateOneRequiredWithoutCableFromNestedInput = {
+    create?: XOR<SitePointCreateWithoutCableFromInput, SitePointUncheckedCreateWithoutCableFromInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutCableFromInput
+    upsert?: SitePointUpsertWithoutCableFromInput
+    connect?: SitePointWhereUniqueInput
+    update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutCableFromInput, SitePointUpdateWithoutCableFromInput>, SitePointUncheckedUpdateWithoutCableFromInput>
+  }
+
+  export type SitePointUpdateOneRequiredWithoutCableToNestedInput = {
+    create?: XOR<SitePointCreateWithoutCableToInput, SitePointUncheckedCreateWithoutCableToInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutCableToInput
+    upsert?: SitePointUpsertWithoutCableToInput
+    connect?: SitePointWhereUniqueInput
+    update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutCableToInput, SitePointUpdateWithoutCableToInput>, SitePointUncheckedUpdateWithoutCableToInput>
+  }
+
+  export type ProjectUpdateOneRequiredWithoutCableNestedInput = {
+    create?: XOR<ProjectCreateWithoutCableInput, ProjectUncheckedCreateWithoutCableInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutCableInput
+    upsert?: ProjectUpsertWithoutCableInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutCableInput, ProjectUpdateWithoutCableInput>, ProjectUncheckedUpdateWithoutCableInput>
+  }
+
+  export type SitePointCreateNestedOneWithoutSegmentFromInput = {
+    create?: XOR<SitePointCreateWithoutSegmentFromInput, SitePointUncheckedCreateWithoutSegmentFromInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutSegmentFromInput
+    connect?: SitePointWhereUniqueInput
+  }
+
+  export type SitePointCreateNestedOneWithoutSegmentToInput = {
+    create?: XOR<SitePointCreateWithoutSegmentToInput, SitePointUncheckedCreateWithoutSegmentToInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutSegmentToInput
+    connect?: SitePointWhereUniqueInput
+  }
+
+  export type ProjectCreateNestedOneWithoutSegmentInput = {
+    create?: XOR<ProjectCreateWithoutSegmentInput, ProjectUncheckedCreateWithoutSegmentInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutSegmentInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type SitePointUpdateOneRequiredWithoutSegmentFromNestedInput = {
+    create?: XOR<SitePointCreateWithoutSegmentFromInput, SitePointUncheckedCreateWithoutSegmentFromInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutSegmentFromInput
+    upsert?: SitePointUpsertWithoutSegmentFromInput
+    connect?: SitePointWhereUniqueInput
+    update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutSegmentFromInput, SitePointUpdateWithoutSegmentFromInput>, SitePointUncheckedUpdateWithoutSegmentFromInput>
+  }
+
+  export type SitePointUpdateOneRequiredWithoutSegmentToNestedInput = {
+    create?: XOR<SitePointCreateWithoutSegmentToInput, SitePointUncheckedCreateWithoutSegmentToInput>
+    connectOrCreate?: SitePointCreateOrConnectWithoutSegmentToInput
+    upsert?: SitePointUpsertWithoutSegmentToInput
+    connect?: SitePointWhereUniqueInput
+    update?: XOR<XOR<SitePointUpdateToOneWithWhereWithoutSegmentToInput, SitePointUpdateWithoutSegmentToInput>, SitePointUncheckedUpdateWithoutSegmentToInput>
+  }
+
+  export type ProjectUpdateOneRequiredWithoutSegmentNestedInput = {
+    create?: XOR<ProjectCreateWithoutSegmentInput, ProjectUncheckedCreateWithoutSegmentInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutSegmentInput
+    upsert?: ProjectUpsertWithoutSegmentInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutSegmentInput, ProjectUpdateWithoutSegmentInput>, ProjectUncheckedUpdateWithoutSegmentInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -12228,6 +12970,110 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CableCreateWithoutProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint_from: SitePointCreateNestedOneWithoutCableFromInput
+    sitepoint_to: SitePointCreateNestedOneWithoutCableToInput
+  }
+
+  export type CableUncheckedCreateWithoutProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_from: string
+    site_group_code_to: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableCreateOrConnectWithoutProjectInput = {
+    where: CableWhereUniqueInput
+    create: XOR<CableCreateWithoutProjectInput, CableUncheckedCreateWithoutProjectInput>
+  }
+
+  export type CableCreateManyProjectInputEnvelope = {
+    data: CableCreateManyProjectInput | CableCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SegmentCreateWithoutProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint_from: SitePointCreateNestedOneWithoutSegmentFromInput
+    sitepoint_to: SitePointCreateNestedOneWithoutSegmentToInput
+  }
+
+  export type SegmentUncheckedCreateWithoutProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentCreateOrConnectWithoutProjectInput = {
+    where: SegmentWhereUniqueInput
+    create: XOR<SegmentCreateWithoutProjectInput, SegmentUncheckedCreateWithoutProjectInput>
+  }
+
+  export type SegmentCreateManyProjectInputEnvelope = {
+    data: SegmentCreateManyProjectInput | SegmentCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AssetUpsertWithWhereUniqueWithoutProjectInput = {
     where: AssetWhereUniqueInput
     update: XOR<AssetUpdateWithoutProjectInput, AssetUncheckedUpdateWithoutProjectInput>
@@ -12267,6 +13113,88 @@ export namespace Prisma {
     status?: EnumMIGRATION_STATUSNullableFilter<"Asset"> | $Enums.MIGRATION_STATUS | null
     last_read?: DateTimeNullableFilter<"Asset"> | Date | string | null
     is_migrated?: BoolFilter<"Asset"> | boolean
+  }
+
+  export type CableUpsertWithWhereUniqueWithoutProjectInput = {
+    where: CableWhereUniqueInput
+    update: XOR<CableUpdateWithoutProjectInput, CableUncheckedUpdateWithoutProjectInput>
+    create: XOR<CableCreateWithoutProjectInput, CableUncheckedCreateWithoutProjectInput>
+  }
+
+  export type CableUpdateWithWhereUniqueWithoutProjectInput = {
+    where: CableWhereUniqueInput
+    data: XOR<CableUpdateWithoutProjectInput, CableUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type CableUpdateManyWithWhereWithoutProjectInput = {
+    where: CableScalarWhereInput
+    data: XOR<CableUpdateManyMutationInput, CableUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type CableScalarWhereInput = {
+    AND?: CableScalarWhereInput | CableScalarWhereInput[]
+    OR?: CableScalarWhereInput[]
+    NOT?: CableScalarWhereInput | CableScalarWhereInput[]
+    uuid?: UuidFilter<"Cable"> | string
+    cafeins_uuid?: UuidNullableFilter<"Cable"> | string | null
+    unique_id?: StringFilter<"Cable"> | string
+    project_group_code?: StringFilter<"Cable"> | string
+    name?: StringFilter<"Cable"> | string
+    description?: StringNullableFilter<"Cable"> | string | null
+    length?: DecimalFilter<"Cable"> | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFilter<"Cable"> | Date | string
+    updated_at?: DateTimeFilter<"Cable"> | Date | string
+    created_employee_no?: StringFilter<"Cable"> | string
+    modified_employee_no?: StringNullableFilter<"Cable"> | string | null
+    cable_category?: StringFilter<"Cable"> | string
+    cable_group?: StringFilter<"Cable"> | string
+    site_group_code_from?: StringFilter<"Cable"> | string
+    site_group_code_to?: StringFilter<"Cable"> | string
+    asset_ownership?: StringFilter<"Cable"> | string
+    area_ownership?: StringFilter<"Cable"> | string
+    placement_type?: StringFilter<"Cable"> | string
+    function?: StringFilter<"Cable"> | string
+    route_unique_id_pembentuk?: StringNullableFilter<"Cable"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Cable"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Cable"> | Date | string | null
+    is_migrated?: BoolFilter<"Cable"> | boolean
+  }
+
+  export type SegmentUpsertWithWhereUniqueWithoutProjectInput = {
+    where: SegmentWhereUniqueInput
+    update: XOR<SegmentUpdateWithoutProjectInput, SegmentUncheckedUpdateWithoutProjectInput>
+    create: XOR<SegmentCreateWithoutProjectInput, SegmentUncheckedCreateWithoutProjectInput>
+  }
+
+  export type SegmentUpdateWithWhereUniqueWithoutProjectInput = {
+    where: SegmentWhereUniqueInput
+    data: XOR<SegmentUpdateWithoutProjectInput, SegmentUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type SegmentUpdateManyWithWhereWithoutProjectInput = {
+    where: SegmentScalarWhereInput
+    data: XOR<SegmentUpdateManyMutationInput, SegmentUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type SegmentScalarWhereInput = {
+    AND?: SegmentScalarWhereInput | SegmentScalarWhereInput[]
+    OR?: SegmentScalarWhereInput[]
+    NOT?: SegmentScalarWhereInput | SegmentScalarWhereInput[]
+    uuid?: UuidFilter<"Segment"> | string
+    cafeins_uuid?: UuidNullableFilter<"Segment"> | string | null
+    unique_id?: StringFilter<"Segment"> | string
+    project_group_code?: StringFilter<"Segment"> | string
+    name?: StringFilter<"Segment"> | string
+    created_at?: DateTimeFilter<"Segment"> | Date | string
+    updated_at?: DateTimeFilter<"Segment"> | Date | string
+    created_employee_no?: StringFilter<"Segment"> | string
+    modified_employee_no?: StringNullableFilter<"Segment"> | string | null
+    site_group_code_from?: StringFilter<"Segment"> | string
+    site_group_code_to?: StringFilter<"Segment"> | string
+    route_unique_id_pembentuk?: StringNullableFilter<"Segment"> | string | null
+    status?: EnumMIGRATION_STATUSNullableFilter<"Segment"> | $Enums.MIGRATION_STATUS | null
+    last_read?: DateTimeNullableFilter<"Segment"> | Date | string | null
+    is_migrated?: BoolFilter<"Segment"> | boolean
   }
 
   export type AssetCreateWithoutSitepointInput = {
@@ -12413,6 +13341,214 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CableCreateWithoutSitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint_to: SitePointCreateNestedOneWithoutCableToInput
+    project: ProjectCreateNestedOneWithoutCableInput
+  }
+
+  export type CableUncheckedCreateWithoutSitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    project_group_code: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_to: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableCreateOrConnectWithoutSitepoint_fromInput = {
+    where: CableWhereUniqueInput
+    create: XOR<CableCreateWithoutSitepoint_fromInput, CableUncheckedCreateWithoutSitepoint_fromInput>
+  }
+
+  export type CableCreateManySitepoint_fromInputEnvelope = {
+    data: CableCreateManySitepoint_fromInput | CableCreateManySitepoint_fromInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CableCreateWithoutSitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint_from: SitePointCreateNestedOneWithoutCableFromInput
+    project: ProjectCreateNestedOneWithoutCableInput
+  }
+
+  export type CableUncheckedCreateWithoutSitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    project_group_code: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_from: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableCreateOrConnectWithoutSitepoint_toInput = {
+    where: CableWhereUniqueInput
+    create: XOR<CableCreateWithoutSitepoint_toInput, CableUncheckedCreateWithoutSitepoint_toInput>
+  }
+
+  export type CableCreateManySitepoint_toInputEnvelope = {
+    data: CableCreateManySitepoint_toInput | CableCreateManySitepoint_toInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SegmentCreateWithoutSitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint_to: SitePointCreateNestedOneWithoutSegmentToInput
+    project: ProjectCreateNestedOneWithoutSegmentInput
+  }
+
+  export type SegmentUncheckedCreateWithoutSitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    project_group_code: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_to: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentCreateOrConnectWithoutSitepoint_fromInput = {
+    where: SegmentWhereUniqueInput
+    create: XOR<SegmentCreateWithoutSitepoint_fromInput, SegmentUncheckedCreateWithoutSitepoint_fromInput>
+  }
+
+  export type SegmentCreateManySitepoint_fromInputEnvelope = {
+    data: SegmentCreateManySitepoint_fromInput | SegmentCreateManySitepoint_fromInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SegmentCreateWithoutSitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    sitepoint_from: SitePointCreateNestedOneWithoutSegmentFromInput
+    project: ProjectCreateNestedOneWithoutSegmentInput
+  }
+
+  export type SegmentUncheckedCreateWithoutSitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    project_group_code: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentCreateOrConnectWithoutSitepoint_toInput = {
+    where: SegmentWhereUniqueInput
+    create: XOR<SegmentCreateWithoutSitepoint_toInput, SegmentUncheckedCreateWithoutSitepoint_toInput>
+  }
+
+  export type SegmentCreateManySitepoint_toInputEnvelope = {
+    data: SegmentCreateManySitepoint_toInput | SegmentCreateManySitepoint_toInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AssetUpsertWithWhereUniqueWithoutSitepointInput = {
     where: AssetWhereUniqueInput
     update: XOR<AssetUpdateWithoutSitepointInput, AssetUncheckedUpdateWithoutSitepointInput>
@@ -12483,6 +13619,70 @@ export namespace Prisma {
     data: XOR<RouteUpdateManyMutationInput, RouteUncheckedUpdateManyWithoutSitepoint_toInput>
   }
 
+  export type CableUpsertWithWhereUniqueWithoutSitepoint_fromInput = {
+    where: CableWhereUniqueInput
+    update: XOR<CableUpdateWithoutSitepoint_fromInput, CableUncheckedUpdateWithoutSitepoint_fromInput>
+    create: XOR<CableCreateWithoutSitepoint_fromInput, CableUncheckedCreateWithoutSitepoint_fromInput>
+  }
+
+  export type CableUpdateWithWhereUniqueWithoutSitepoint_fromInput = {
+    where: CableWhereUniqueInput
+    data: XOR<CableUpdateWithoutSitepoint_fromInput, CableUncheckedUpdateWithoutSitepoint_fromInput>
+  }
+
+  export type CableUpdateManyWithWhereWithoutSitepoint_fromInput = {
+    where: CableScalarWhereInput
+    data: XOR<CableUpdateManyMutationInput, CableUncheckedUpdateManyWithoutSitepoint_fromInput>
+  }
+
+  export type CableUpsertWithWhereUniqueWithoutSitepoint_toInput = {
+    where: CableWhereUniqueInput
+    update: XOR<CableUpdateWithoutSitepoint_toInput, CableUncheckedUpdateWithoutSitepoint_toInput>
+    create: XOR<CableCreateWithoutSitepoint_toInput, CableUncheckedCreateWithoutSitepoint_toInput>
+  }
+
+  export type CableUpdateWithWhereUniqueWithoutSitepoint_toInput = {
+    where: CableWhereUniqueInput
+    data: XOR<CableUpdateWithoutSitepoint_toInput, CableUncheckedUpdateWithoutSitepoint_toInput>
+  }
+
+  export type CableUpdateManyWithWhereWithoutSitepoint_toInput = {
+    where: CableScalarWhereInput
+    data: XOR<CableUpdateManyMutationInput, CableUncheckedUpdateManyWithoutSitepoint_toInput>
+  }
+
+  export type SegmentUpsertWithWhereUniqueWithoutSitepoint_fromInput = {
+    where: SegmentWhereUniqueInput
+    update: XOR<SegmentUpdateWithoutSitepoint_fromInput, SegmentUncheckedUpdateWithoutSitepoint_fromInput>
+    create: XOR<SegmentCreateWithoutSitepoint_fromInput, SegmentUncheckedCreateWithoutSitepoint_fromInput>
+  }
+
+  export type SegmentUpdateWithWhereUniqueWithoutSitepoint_fromInput = {
+    where: SegmentWhereUniqueInput
+    data: XOR<SegmentUpdateWithoutSitepoint_fromInput, SegmentUncheckedUpdateWithoutSitepoint_fromInput>
+  }
+
+  export type SegmentUpdateManyWithWhereWithoutSitepoint_fromInput = {
+    where: SegmentScalarWhereInput
+    data: XOR<SegmentUpdateManyMutationInput, SegmentUncheckedUpdateManyWithoutSitepoint_fromInput>
+  }
+
+  export type SegmentUpsertWithWhereUniqueWithoutSitepoint_toInput = {
+    where: SegmentWhereUniqueInput
+    update: XOR<SegmentUpdateWithoutSitepoint_toInput, SegmentUncheckedUpdateWithoutSitepoint_toInput>
+    create: XOR<SegmentCreateWithoutSitepoint_toInput, SegmentUncheckedCreateWithoutSitepoint_toInput>
+  }
+
+  export type SegmentUpdateWithWhereUniqueWithoutSitepoint_toInput = {
+    where: SegmentWhereUniqueInput
+    data: XOR<SegmentUpdateWithoutSitepoint_toInput, SegmentUncheckedUpdateWithoutSitepoint_toInput>
+  }
+
+  export type SegmentUpdateManyWithWhereWithoutSitepoint_toInput = {
+    where: SegmentScalarWhereInput
+    data: XOR<SegmentUpdateManyMutationInput, SegmentUncheckedUpdateManyWithoutSitepoint_toInput>
+  }
+
   export type ProjectCreateWithoutAssetsInput = {
     uuid?: string
     cafeins_uuid?: string | null
@@ -12501,6 +13701,8 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    Cable?: CableCreateNestedManyWithoutProjectInput
+    Segment?: SegmentCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutAssetsInput = {
@@ -12521,6 +13723,8 @@ export namespace Prisma {
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
+    Cable?: CableUncheckedCreateNestedManyWithoutProjectInput
+    Segment?: SegmentUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutAssetsInput = {
@@ -12545,6 +13749,10 @@ export namespace Prisma {
     is_migrated?: boolean
     RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
     RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointUncheckedCreateWithoutAssetsInput = {
@@ -12564,6 +13772,10 @@ export namespace Prisma {
     is_migrated?: boolean
     RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
     RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableUncheckedCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentUncheckedCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointCreateOrConnectWithoutAssetsInput = {
@@ -12600,6 +13812,8 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    Cable?: CableUpdateManyWithoutProjectNestedInput
+    Segment?: SegmentUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutAssetsInput = {
@@ -12620,6 +13834,8 @@ export namespace Prisma {
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    Cable?: CableUncheckedUpdateManyWithoutProjectNestedInput
+    Segment?: SegmentUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type SitePointUpsertWithoutAssetsInput = {
@@ -12650,6 +13866,10 @@ export namespace Prisma {
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
     RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointUncheckedUpdateWithoutAssetsInput = {
@@ -12669,6 +13889,10 @@ export namespace Prisma {
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
     RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUncheckedUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointCreateWithoutRouteFromInput = {
@@ -12688,6 +13912,10 @@ export namespace Prisma {
     is_migrated?: boolean
     assets?: AssetCreateNestedManyWithoutSitepointInput
     RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointUncheckedCreateWithoutRouteFromInput = {
@@ -12707,6 +13935,10 @@ export namespace Prisma {
     is_migrated?: boolean
     assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
     RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableUncheckedCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentUncheckedCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointCreateOrConnectWithoutRouteFromInput = {
@@ -12731,6 +13963,10 @@ export namespace Prisma {
     is_migrated?: boolean
     assets?: AssetCreateNestedManyWithoutSitepointInput
     RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
+    CableFrom?: CableCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointUncheckedCreateWithoutRouteToInput = {
@@ -12750,6 +13986,10 @@ export namespace Prisma {
     is_migrated?: boolean
     assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
     RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    CableFrom?: CableUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableUncheckedCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentUncheckedCreateNestedManyWithoutSitepoint_toInput
   }
 
   export type SitePointCreateOrConnectWithoutRouteToInput = {
@@ -12785,6 +14025,10 @@ export namespace Prisma {
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     assets?: AssetUpdateManyWithoutSitepointNestedInput
     RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointUncheckedUpdateWithoutRouteFromInput = {
@@ -12804,6 +14048,10 @@ export namespace Prisma {
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
     RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUncheckedUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointUpsertWithoutRouteToInput = {
@@ -12834,6 +14082,10 @@ export namespace Prisma {
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     assets?: AssetUpdateManyWithoutSitepointNestedInput
     RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
+    CableFrom?: CableUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUpdateManyWithoutSitepoint_toNestedInput
   }
 
   export type SitePointUncheckedUpdateWithoutRouteToInput = {
@@ -12853,6 +14105,650 @@ export namespace Prisma {
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
     assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
     RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    CableFrom?: CableUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUncheckedUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointCreateWithoutCableFromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
+    CableTo?: CableCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentCreateNestedManyWithoutSitepoint_toInput
+  }
+
+  export type SitePointUncheckedCreateWithoutCableFromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
+    CableTo?: CableUncheckedCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentUncheckedCreateNestedManyWithoutSitepoint_toInput
+  }
+
+  export type SitePointCreateOrConnectWithoutCableFromInput = {
+    where: SitePointWhereUniqueInput
+    create: XOR<SitePointCreateWithoutCableFromInput, SitePointUncheckedCreateWithoutCableFromInput>
+  }
+
+  export type SitePointCreateWithoutCableToInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableCreateNestedManyWithoutSitepoint_fromInput
+    SegmentFrom?: SegmentCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentCreateNestedManyWithoutSitepoint_toInput
+  }
+
+  export type SitePointUncheckedCreateWithoutCableToInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    SegmentFrom?: SegmentUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    SegmentTo?: SegmentUncheckedCreateNestedManyWithoutSitepoint_toInput
+  }
+
+  export type SitePointCreateOrConnectWithoutCableToInput = {
+    where: SitePointWhereUniqueInput
+    create: XOR<SitePointCreateWithoutCableToInput, SitePointUncheckedCreateWithoutCableToInput>
+  }
+
+  export type ProjectCreateWithoutCableInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    company_code: string
+    vendor_no: string
+    name: string
+    project_group_code: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    description?: string | null
+    po_number?: string | null
+    owner_name: string
+    owner_nik: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutProjectInput
+    Segment?: SegmentCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutCableInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    company_code: string
+    vendor_no: string
+    name: string
+    project_group_code: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    description?: string | null
+    po_number?: string | null
+    owner_name: string
+    owner_nik: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutProjectInput
+    Segment?: SegmentUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutCableInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutCableInput, ProjectUncheckedCreateWithoutCableInput>
+  }
+
+  export type SitePointUpsertWithoutCableFromInput = {
+    update: XOR<SitePointUpdateWithoutCableFromInput, SitePointUncheckedUpdateWithoutCableFromInput>
+    create: XOR<SitePointCreateWithoutCableFromInput, SitePointUncheckedCreateWithoutCableFromInput>
+    where?: SitePointWhereInput
+  }
+
+  export type SitePointUpdateToOneWithWhereWithoutCableFromInput = {
+    where?: SitePointWhereInput
+    data: XOR<SitePointUpdateWithoutCableFromInput, SitePointUncheckedUpdateWithoutCableFromInput>
+  }
+
+  export type SitePointUpdateWithoutCableFromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
+    CableTo?: CableUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointUncheckedUpdateWithoutCableFromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    CableTo?: CableUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUncheckedUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointUpsertWithoutCableToInput = {
+    update: XOR<SitePointUpdateWithoutCableToInput, SitePointUncheckedUpdateWithoutCableToInput>
+    create: XOR<SitePointCreateWithoutCableToInput, SitePointUncheckedCreateWithoutCableToInput>
+    where?: SitePointWhereInput
+  }
+
+  export type SitePointUpdateToOneWithWhereWithoutCableToInput = {
+    where?: SitePointWhereInput
+    data: XOR<SitePointUpdateWithoutCableToInput, SitePointUncheckedUpdateWithoutCableToInput>
+  }
+
+  export type SitePointUpdateWithoutCableToInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentFrom?: SegmentUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointUncheckedUpdateWithoutCableToInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentFrom?: SegmentUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    SegmentTo?: SegmentUncheckedUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type ProjectUpsertWithoutCableInput = {
+    update: XOR<ProjectUpdateWithoutCableInput, ProjectUncheckedUpdateWithoutCableInput>
+    create: XOR<ProjectCreateWithoutCableInput, ProjectUncheckedCreateWithoutCableInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutCableInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutCableInput, ProjectUncheckedUpdateWithoutCableInput>
+  }
+
+  export type ProjectUpdateWithoutCableInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: StringFieldUpdateOperationsInput | string
+    vendor_no?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutProjectNestedInput
+    Segment?: SegmentUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutCableInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: StringFieldUpdateOperationsInput | string
+    vendor_no?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutProjectNestedInput
+    Segment?: SegmentUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type SitePointCreateWithoutSegmentFromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableCreateNestedManyWithoutSitepoint_toInput
+    SegmentTo?: SegmentCreateNestedManyWithoutSitepoint_toInput
+  }
+
+  export type SitePointUncheckedCreateWithoutSegmentFromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableUncheckedCreateNestedManyWithoutSitepoint_toInput
+    SegmentTo?: SegmentUncheckedCreateNestedManyWithoutSitepoint_toInput
+  }
+
+  export type SitePointCreateOrConnectWithoutSegmentFromInput = {
+    where: SitePointWhereUniqueInput
+    create: XOR<SitePointCreateWithoutSegmentFromInput, SitePointUncheckedCreateWithoutSegmentFromInput>
+  }
+
+  export type SitePointCreateWithoutSegmentToInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentCreateNestedManyWithoutSitepoint_fromInput
+  }
+
+  export type SitePointUncheckedCreateWithoutSegmentToInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    name: string
+    company_code: string
+    site_group_code: string
+    latitude: number
+    longitude: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutSitepointInput
+    RouteFrom?: RouteUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    RouteTo?: RouteUncheckedCreateNestedManyWithoutSitepoint_toInput
+    CableFrom?: CableUncheckedCreateNestedManyWithoutSitepoint_fromInput
+    CableTo?: CableUncheckedCreateNestedManyWithoutSitepoint_toInput
+    SegmentFrom?: SegmentUncheckedCreateNestedManyWithoutSitepoint_fromInput
+  }
+
+  export type SitePointCreateOrConnectWithoutSegmentToInput = {
+    where: SitePointWhereUniqueInput
+    create: XOR<SitePointCreateWithoutSegmentToInput, SitePointUncheckedCreateWithoutSegmentToInput>
+  }
+
+  export type ProjectCreateWithoutSegmentInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    company_code: string
+    vendor_no: string
+    name: string
+    project_group_code: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    description?: string | null
+    po_number?: string | null
+    owner_name: string
+    owner_nik: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetCreateNestedManyWithoutProjectInput
+    Cable?: CableCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutSegmentInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    company_code: string
+    vendor_no: string
+    name: string
+    project_group_code: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    description?: string | null
+    po_number?: string | null
+    owner_name: string
+    owner_nik: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+    assets?: AssetUncheckedCreateNestedManyWithoutProjectInput
+    Cable?: CableUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutSegmentInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutSegmentInput, ProjectUncheckedCreateWithoutSegmentInput>
+  }
+
+  export type SitePointUpsertWithoutSegmentFromInput = {
+    update: XOR<SitePointUpdateWithoutSegmentFromInput, SitePointUncheckedUpdateWithoutSegmentFromInput>
+    create: XOR<SitePointCreateWithoutSegmentFromInput, SitePointUncheckedCreateWithoutSegmentFromInput>
+    where?: SitePointWhereInput
+  }
+
+  export type SitePointUpdateToOneWithWhereWithoutSegmentFromInput = {
+    where?: SitePointWhereInput
+    data: XOR<SitePointUpdateWithoutSegmentFromInput, SitePointUncheckedUpdateWithoutSegmentFromInput>
+  }
+
+  export type SitePointUpdateWithoutSegmentFromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUpdateManyWithoutSitepoint_toNestedInput
+    SegmentTo?: SegmentUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointUncheckedUpdateWithoutSegmentFromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    SegmentTo?: SegmentUncheckedUpdateManyWithoutSitepoint_toNestedInput
+  }
+
+  export type SitePointUpsertWithoutSegmentToInput = {
+    update: XOR<SitePointUpdateWithoutSegmentToInput, SitePointUncheckedUpdateWithoutSegmentToInput>
+    create: XOR<SitePointCreateWithoutSegmentToInput, SitePointUncheckedCreateWithoutSegmentToInput>
+    where?: SitePointWhereInput
+  }
+
+  export type SitePointUpdateToOneWithWhereWithoutSegmentToInput = {
+    where?: SitePointWhereInput
+    data: XOR<SitePointUpdateWithoutSegmentToInput, SitePointUncheckedUpdateWithoutSegmentToInput>
+  }
+
+  export type SitePointUpdateWithoutSegmentToInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUpdateManyWithoutSitepoint_fromNestedInput
+  }
+
+  export type SitePointUncheckedUpdateWithoutSegmentToInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    company_code?: StringFieldUpdateOperationsInput | string
+    site_group_code?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutSitepointNestedInput
+    RouteFrom?: RouteUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    RouteTo?: RouteUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    CableFrom?: CableUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+    CableTo?: CableUncheckedUpdateManyWithoutSitepoint_toNestedInput
+    SegmentFrom?: SegmentUncheckedUpdateManyWithoutSitepoint_fromNestedInput
+  }
+
+  export type ProjectUpsertWithoutSegmentInput = {
+    update: XOR<ProjectUpdateWithoutSegmentInput, ProjectUncheckedUpdateWithoutSegmentInput>
+    create: XOR<ProjectCreateWithoutSegmentInput, ProjectUncheckedCreateWithoutSegmentInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutSegmentInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutSegmentInput, ProjectUncheckedUpdateWithoutSegmentInput>
+  }
+
+  export type ProjectUpdateWithoutSegmentInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: StringFieldUpdateOperationsInput | string
+    vendor_no?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUpdateManyWithoutProjectNestedInput
+    Cable?: CableUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutSegmentInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    company_code?: StringFieldUpdateOperationsInput | string
+    vendor_no?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    po_number?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_name?: StringFieldUpdateOperationsInput | string
+    owner_nik?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    assets?: AssetUncheckedUpdateManyWithoutProjectNestedInput
+    Cable?: CableUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type AssetCreateManyProjectInput = {
@@ -12871,6 +14767,48 @@ export namespace Prisma {
     asset_category: string
     asset_ownership: string
     area_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableCreateManyProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_from: string
+    site_group_code_to: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentCreateManyProjectInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    site_group_code_to: string
+    route_unique_id_pembentuk?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -12939,6 +14877,132 @@ export namespace Prisma {
     is_migrated?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type CableUpdateWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_from?: SitePointUpdateOneRequiredWithoutCableFromNestedInput
+    sitepoint_to?: SitePointUpdateOneRequiredWithoutCableToNestedInput
+  }
+
+  export type CableUncheckedUpdateWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableUncheckedUpdateManyWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentUpdateWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_from?: SitePointUpdateOneRequiredWithoutSegmentFromNestedInput
+    sitepoint_to?: SitePointUpdateOneRequiredWithoutSegmentToNestedInput
+  }
+
+  export type SegmentUncheckedUpdateWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentUncheckedUpdateManyWithoutProjectInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type AssetCreateManySitepointInput = {
     uuid?: string
     cafeins_uuid?: string | null
@@ -12991,6 +15055,90 @@ export namespace Prisma {
     site_group_code_from: string
     route_method: string
     route_ownership: string
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableCreateManySitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    project_group_code: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_to: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type CableCreateManySitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    project_group_code: string
+    name: string
+    description?: string | null
+    length: Decimal | DecimalJsLike | number | string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    cable_category: string
+    cable_group: string
+    site_group_code_from: string
+    asset_ownership: string
+    area_ownership: string
+    placement_type: string
+    function: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentCreateManySitepoint_fromInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    project_group_code: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_to: string
+    route_unique_id_pembentuk?: string | null
+    status?: $Enums.MIGRATION_STATUS | null
+    last_read?: Date | string | null
+    is_migrated?: boolean
+  }
+
+  export type SegmentCreateManySitepoint_toInput = {
+    uuid?: string
+    cafeins_uuid?: string | null
+    unique_id: string
+    project_group_code: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    created_employee_no: string
+    modified_employee_no?: string | null
+    site_group_code_from: string
+    route_unique_id_pembentuk?: string | null
     status?: $Enums.MIGRATION_STATUS | null
     last_read?: Date | string | null
     is_migrated?: boolean
@@ -13162,6 +15310,258 @@ export namespace Prisma {
     site_group_code_from?: StringFieldUpdateOperationsInput | string
     route_method?: StringFieldUpdateOperationsInput | string
     route_ownership?: StringFieldUpdateOperationsInput | string
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableUpdateWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_to?: SitePointUpdateOneRequiredWithoutCableToNestedInput
+    project?: ProjectUpdateOneRequiredWithoutCableNestedInput
+  }
+
+  export type CableUncheckedUpdateWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableUncheckedUpdateManyWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableUpdateWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_from?: SitePointUpdateOneRequiredWithoutCableFromNestedInput
+    project?: ProjectUpdateOneRequiredWithoutCableNestedInput
+  }
+
+  export type CableUncheckedUpdateWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CableUncheckedUpdateManyWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    length?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    cable_category?: StringFieldUpdateOperationsInput | string
+    cable_group?: StringFieldUpdateOperationsInput | string
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    asset_ownership?: StringFieldUpdateOperationsInput | string
+    area_ownership?: StringFieldUpdateOperationsInput | string
+    placement_type?: StringFieldUpdateOperationsInput | string
+    function?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentUpdateWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_to?: SitePointUpdateOneRequiredWithoutSegmentToNestedInput
+    project?: ProjectUpdateOneRequiredWithoutSegmentNestedInput
+  }
+
+  export type SegmentUncheckedUpdateWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentUncheckedUpdateManyWithoutSitepoint_fromInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_to?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentUpdateWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+    sitepoint_from?: SitePointUpdateOneRequiredWithoutSegmentFromNestedInput
+    project?: ProjectUpdateOneRequiredWithoutSegmentNestedInput
+  }
+
+  export type SegmentUncheckedUpdateWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
+    last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_migrated?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SegmentUncheckedUpdateManyWithoutSitepoint_toInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    cafeins_uuid?: NullableStringFieldUpdateOperationsInput | string | null
+    unique_id?: StringFieldUpdateOperationsInput | string
+    project_group_code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_employee_no?: StringFieldUpdateOperationsInput | string
+    modified_employee_no?: NullableStringFieldUpdateOperationsInput | string | null
+    site_group_code_from?: StringFieldUpdateOperationsInput | string
+    route_unique_id_pembentuk?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableEnumMIGRATION_STATUSFieldUpdateOperationsInput | $Enums.MIGRATION_STATUS | null
     last_read?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_migrated?: BoolFieldUpdateOperationsInput | boolean

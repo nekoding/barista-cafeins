@@ -38,6 +38,8 @@ model Project {
   last_read            DateTime?
   is_migrated          Boolean           @default(false)
   assets               Asset[]
+  Cable                Cable[]           @relation("cable_project")
+  Segment              Segment[]         @relation("segment_project")
 
   @@map("projects")
 }
@@ -59,8 +61,12 @@ model SitePoint {
   last_read            DateTime?
   is_migrated          Boolean                  @default(false)
   assets               Asset[]
-  RouteFrom            Route[]                  @relation("sitepoint_from")
-  RouteTo              Route[]                  @relation("sitepoint_to")
+  RouteFrom            Route[]                  @relation("route_sitepoint_from")
+  RouteTo              Route[]                  @relation("route_sitepoint_to")
+  CableFrom            Cable[]                  @relation("cable_sitepoint_from")
+  CableTo              Cable[]                  @relation("cable_sitepoint_to")
+  SegmentFrom          Segment[]                @relation("segment_sitepoint_from")
+  SegmentTo            Segment[]                @relation("segment_sitepoint_to")
 
   @@map("site_points")
 }
@@ -122,8 +128,8 @@ model Route {
   status               MIGRATION_STATUS?
   last_read            DateTime?
   is_migrated          Boolean                  @default(false)
-  sitepoint_from       SitePoint                @relation(fields: [site_group_code_from], references: [site_group_code], name: "sitepoint_from")
-  sitepoint_to         SitePoint                @relation(fields: [site_group_code_to], references: [site_group_code], name: "sitepoint_to")
+  sitepoint_from       SitePoint                @relation(fields: [site_group_code_from], references: [site_group_code], name: "route_sitepoint_from")
+  sitepoint_to         SitePoint                @relation(fields: [site_group_code_to], references: [site_group_code], name: "route_sitepoint_to")
 
   @@map("routes")
 }
@@ -152,6 +158,9 @@ model Cable {
   status                    MIGRATION_STATUS?
   last_read                 DateTime?
   is_migrated               Boolean           @default(false)
+  sitepoint_from            SitePoint         @relation(fields: [site_group_code_from], references: [site_group_code], name: "cable_sitepoint_from")
+  sitepoint_to              SitePoint         @relation(fields: [site_group_code_to], references: [site_group_code], name: "cable_sitepoint_to")
+  project                   Project           @relation(fields: [project_group_code], references: [project_group_code], name: "cable_project")
 
   @@map("cables")
 }
@@ -172,6 +181,9 @@ model Segment {
   status                    MIGRATION_STATUS?
   last_read                 DateTime?
   is_migrated               Boolean           @default(false)
+  sitepoint_from            SitePoint         @relation(fields: [site_group_code_from], references: [site_group_code], name: "segment_sitepoint_from")
+  sitepoint_to              SitePoint         @relation(fields: [site_group_code_to], references: [site_group_code], name: "segment_sitepoint_to")
+  project                   Project           @relation(fields: [project_group_code], references: [project_group_code], name: "segment_project")
 
   @@map("segments")
 }

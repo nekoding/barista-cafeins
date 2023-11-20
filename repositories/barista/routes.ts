@@ -1,6 +1,7 @@
+import type { Route } from '../../prisma/barista/barista-client'
 import { baristaClient } from '../../utils/database'
 
-export const getRouteUnmigrated = async (
+const getRouteUnmigrated = async (
   limit: number = 100,
   offset: number = 0,
 ): Promise<BaristaRoute[] | []> => {
@@ -31,3 +32,13 @@ export const getRouteUnmigrated = async (
   LEFT JOIN site_points sp2 ON sp2.site_group_code = r.site_group_code_to
   WHERE r.is_migrated = false AND r.status IS NULL LIMIT ${limit} OFFSET ${offset}`
 }
+
+const getRouteByUniqueId = async (uniqueId: string): Promise<Route | null> => {
+  return await baristaClient.route.findFirst({
+    where: {
+      unique_id: uniqueId,
+    },
+  })
+}
+
+export { getRouteUnmigrated, getRouteByUniqueId }
