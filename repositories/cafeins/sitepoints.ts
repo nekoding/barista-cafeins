@@ -26,18 +26,20 @@ const getSitePointsByNearestCoords = async (
 
 const createSitePoint = async (
   prismaClient: PrismaClient,
-  uuid: string,
-  villageId: number | string,
-  siteCategoryId: number | string,
-  name: string,
-  code: string,
-  latitude: number,
-  longitude: number,
-  geometry: string,
-  createdUserId: number | string,
-  modifiedUserId: number | string,
-  createdAt: Date | string,
-  updatedAt: Date | string,
+  data: {
+    uuid: string
+    villageId: number | string
+    siteCategoryId: number | string
+    name: string
+    code: string
+    latitude: number
+    longitude: number
+    geometry: string
+    createdUserId: number | string
+    modifiedUserId: number | string
+    createdAt: Date | string
+    updatedAt: Date | string
+  },
 ): Promise<number> => {
   // value longitude and latitude is reversed in db cafeins
   return await prismaClient.$executeRaw`INSERT INTO site_point.site_points (
@@ -54,18 +56,18 @@ const createSitePoint = async (
       created_at, 
       updated_at 
   ) VALUES (
-    ${uuid}::uuid, 
-    ${villageId}, 
-    ${siteCategoryId}::bigint,
-    ${name}, 
-    ${code}, 
-    ${longitude}, 
-    ${latitude}, 
-    ${geometry}::geometry, 
-    ${createdUserId}::bigint, 
-    ${modifiedUserId}::bigint, 
-    ${createdAt}, 
-    ${updatedAt}
+    ${data.uuid}::uuid, 
+    ${data.villageId}, 
+    ${data.siteCategoryId}::bigint,
+    ${data.name}, 
+    ${data.code}, 
+    ${data.longitude}, 
+    ${data.latitude}, 
+    ${data.geometry}::geometry, 
+    ${data.createdUserId}::bigint, 
+    ${data.modifiedUserId}::bigint, 
+    ${data.createdAt}, 
+    ${data.updatedAt}
   )`
 }
 

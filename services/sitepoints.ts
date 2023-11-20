@@ -131,21 +131,20 @@ const syncSitePoint = async (): Promise<void> => {
 
         await cafeinsClient.$transaction(async (trx) => {
           // create sitepoint
-          await createSitePoint(
-            trx as PrismaClient,
-            sitePoint.uuid,
-            village.village_id,
-            process.env.SITEPOINT_CATEGORY_ID ?? 1,
-            sitePointCode,
-            sitePointCode,
-            sitePoint.latitude,
-            sitePoint.longitude,
-            sitePoint.geometry,
-            createdUser.id as unknown as string,
-            modifiedUser.id as unknown as string,
-            sitePoint.created_at,
-            sitePoint.updated_at,
-          )
+          await createSitePoint(trx as PrismaClient, {
+            uuid: sitePoint.uuid,
+            villageId: village.village_id,
+            siteCategoryId: process.env.SITEPOINT_CATEGORY_ID ?? 1,
+            name: sitePointCode,
+            code: sitePointCode,
+            latitude: sitePoint.latitude,
+            longitude: sitePoint.longitude,
+            geometry: sitePoint.geometry,
+            createdUserId: createdUser.id as unknown as string,
+            modifiedUserId: modifiedUser.id as unknown as string,
+            createdAt: sitePoint.created_at,
+            updatedAt: sitePoint.updated_at,
+          })
 
           // get last inserted data
           const lastInsertedSitePoint = await findSitePointByUuid(
