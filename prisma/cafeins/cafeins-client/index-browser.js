@@ -1395,6 +1395,8 @@ exports.Prisma.RoutesScalarFieldEnum = {
   site_from: 'site_from',
   site_to: 'site_to',
   length: 'length',
+  route_method_id: 'route_method_id',
+  route_ownership_id: 'route_ownership_id',
   uuid: 'uuid',
   site_category_uuid: 'site_category_uuid',
   site_from_uuid: 'site_from_uuid',
@@ -1419,6 +1421,7 @@ exports.Prisma.Segment_routesScalarFieldEnum = {
 exports.Prisma.SegmentsScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  code: 'code',
   site_from: 'site_from',
   site_to: 'site_to',
   created_at: 'created_at',
@@ -1479,6 +1482,18 @@ exports.Prisma.TopologyScalarFieldEnum = {
   srid: 'srid',
   precision: 'precision',
   hasz: 'hasz',
+}
+
+exports.Prisma.Project_segmentsScalarFieldEnum = {
+  id: 'id',
+  project_id: 'project_id',
+  segment_id: 'segment_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at',
+  created_user_id: 'created_user_id',
+  modified_user_id: 'modified_user_id',
+  deleted_user_id: 'deleted_user_id',
 }
 
 exports.Prisma.SortOrder = {
@@ -1591,6 +1606,7 @@ exports.Prisma.ModelName = {
   site_points: 'site_points',
   layer: 'layer',
   topology: 'topology',
+  project_segments: 'project_segments',
 }
 
 /**
