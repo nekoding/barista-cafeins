@@ -30,7 +30,7 @@ const getRouteUnmigrated = async (
   FROM routes r
   LEFT JOIN site_points sp1 ON sp1.site_group_code = r.site_group_code_from
   LEFT JOIN site_points sp2 ON sp2.site_group_code = r.site_group_code_to
-  WHERE r.is_migrated = false AND r.status IS NULL LIMIT ${limit} OFFSET ${offset}`
+  WHERE r.is_migrated = false AND r.status IS NULL AND r.cafeins_uuid IS NULL LIMIT ${limit} OFFSET ${offset}`
 }
 
 const getRouteByUniqueId = async (uniqueId: string): Promise<Route | null> => {

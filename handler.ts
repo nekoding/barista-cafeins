@@ -2,6 +2,7 @@ import { syncAssets } from './services/assets'
 import { syncCables } from './services/cables'
 import { syncProjects } from './services/projects'
 import { syncRoutes } from './services/routes'
+import { syncSegments } from './services/segments'
 import { syncSitePoint } from './services/sitepoints'
 
 export const syncronizeAction = async (arg: string): Promise<void> => {
@@ -20,6 +21,9 @@ export const syncronizeAction = async (arg: string): Promise<void> => {
       break
     case arg.match(/\bcables?\b/i)?.[0]:
       await syncCables()
+      break
+    case arg.match(/\bsegments?\b/i)?.[0]:
+      await syncSegments()
       break
     default:
       throw new Error('Invalid argument')

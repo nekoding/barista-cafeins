@@ -8,6 +8,7 @@ export const getAssetsUnmigrated = async (
   return await baristaClient.asset.findMany({
     where: {
       is_migrated: false,
+      cafeins_uuid: null,
       status: null,
     },
     include: {

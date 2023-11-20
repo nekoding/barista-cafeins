@@ -20,7 +20,7 @@ export const getSitePointUnmigrated = async (
     status,
     last_read,
     is_migrated
-  FROM site_points WHERE is_migrated = false AND status IS NULL LIMIT ${limit} OFFSET ${offset}`
+  FROM site_points WHERE is_migrated = false AND status IS NULL AND uuid IS NULL LIMIT ${limit} OFFSET ${offset}`
 }
 
 export const getMigratedSitePointByGroupCode = async (

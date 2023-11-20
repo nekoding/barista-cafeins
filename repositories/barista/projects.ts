@@ -8,6 +8,7 @@ export const getProjectsUnmigrated = async (
   return await baristaClient.project.findMany({
     where: {
       is_migrated: false,
+      cafeins_uuid: null,
       status: null,
     },
     take: limit,
