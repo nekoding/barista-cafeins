@@ -178,98 +178,107 @@ const syncAssets = async (): Promise<void> => {
     const assets = await getAssetsUnmigrated()
 
     for (const asset of assets) {
-      const [
-        createdUser,
-        modifiedUser,
-        assetOwnership,
-        areaOwnership,
-        project,
-        sitepoint,
-        assetCategory,
-        assetGroup,
-        assetCode,
-      ] = await validateData(asset)
+      try {
+        const [
+          createdUser,
+          modifiedUser,
+          assetOwnership,
+          areaOwnership,
+          project,
+          sitepoint,
+          assetCategory,
+          assetGroup,
+          assetCode,
+        ] = await validateData(asset)
 
-      await cafeinsClient.$transaction(async (trx) => {
-        // create asset
-        const createdAsset = await trx.assets.create({
-          data: {
-            uuid: asset.uuid,
-            asset_category_id: assetCategory.id,
-            asset_group_id: assetGroup.id,
-            site_point_id: sitepoint.id,
-            asset_ownership_id: assetOwnership.id,
-            area_ownership_id: areaOwnership.id,
-            name: assetCode,
-            code: assetCode,
-            description: asset.description,
-            created_at: asset.created_at,
-            updated_at: asset.updated_at,
-            created_user_id: createdUser.id,
-            modified_user_id: modifiedUser.id,
-          },
-        })
+        await cafeinsClient.$transaction(async (trx) => {
+          // create asset
+          const createdAsset = await trx.assets.create({
+            data: {
+              uuid: asset.uuid,
+              asset_category_id: assetCategory.id,
+              asset_group_id: assetGroup.id,
+              site_point_id: sitepoint.id,
+              asset_ownership_id: assetOwnership.id,
+              area_ownership_id: areaOwnership.id,
+              name: assetCode,
+              code: assetCode,
+              description: asset.description,
+              created_at: asset.created_at,
+              updated_at: asset.updated_at,
+              created_user_id: createdUser.id,
+              modified_user_id: modifiedUser.id,
+            },
+          })
 
-        // create log asset
-        const serializedAsset = serializeAssetData(createdAsset)
-        await trx.audits.create({
-          data: {
-            user_type: `App\\Models\\User`,
-            user_id: createdUser.id,
-            event: AuditEvent.CREATED,
-            auditable_type: `Modules\\Asset\\Entities\\Asset`,
-            auditable_id: createdAsset.id,
-            old_values: '[]',
-            new_values: serializedAsset,
-            user_agent: 'Barista',
-            created_at: new Date(),
-            updated_at: new Date(),
-          },
-        })
+          // create log asset
+          const serializedAsset = serializeAssetData(createdAsset)
+          await trx.audits.create({
+            data: {
+              user_type: `App\\Models\\User`,
+              user_id: createdUser.id,
+              event: AuditEvent.CREATED,
+              auditable_type: `Modules\\Asset\\Entities\\Asset`,
+              auditable_id: createdAsset.id,
+              old_values: '[]',
+              new_values: serializedAsset,
+              user_agent: 'Barista',
+              created_at: new Date(),
+              updated_at: new Date(),
+            },
+          })
 
-        // attach asset to project asset
-        const projectAssetCreated = await trx.project_assets.create({
-          data: {
-            project_id: project.id,
-            asset_id: createdAsset.id,
-            created_at: new Date(),
-            updated_at: new Date(),
-            created_user_id: createdUser.id,
-            modified_user_id: modifiedUser.id,
-          },
-        })
+          // attach asset to project asset
+          const projectAssetCreated = await trx.project_assets.create({
+            data: {
+              project_id: project.id,
+              asset_id: createdAsset.id,
+              created_at: new Date(),
+              updated_at: new Date(),
+              created_user_id: createdUser.id,
+              modified_user_id: modifiedUser.id,
+            },
+          })
 
-        // create log project asset
-        const serializedProjectAsset =
-          serializeProjectAssetData(projectAssetCreated)
-        await trx.audits.create({
-          data: {
-            user_type: `App\\Models\\User`,
-            user_id: createdUser.id,
-            event: AuditEvent.CREATED,
-            auditable_type: `Modules\\Master\\Entities\\ProjectAsset`,
-            auditable_id: projectAssetCreated.id,
-            old_values: '[]',
-            new_values: serializedProjectAsset,
-            user_agent: 'Barista',
-            created_at: new Date(),
-            updated_at: new Date(),
-          },
-        })
+          // create log project asset
+          const serializedProjectAsset =
+            serializeProjectAssetData(projectAssetCreated)
+          await trx.audits.create({
+            data: {
+              user_type: `App\\Models\\User`,
+              user_id: createdUser.id,
+              event: AuditEvent.CREATED,
+              auditable_type: `Modules\\Master\\Entities\\ProjectAsset`,
+              auditable_id: projectAssetCreated.id,
+              old_values: '[]',
+              new_values: serializedProjectAsset,
+              user_agent: 'Barista',
+              created_at: new Date(),
+              updated_at: new Date(),
+            },
+          })
 
-        // update data is migrated
-        await baristaClient.asset.update({
-          where: {
-            uuid: asset.uuid,
-          },
-          data: {
-            is_migrated: true,
-            status: 'CREATED',
-            last_read: new Date(),
-            cafeins_uuid: asset.uuid,
-          },
+          // update data is migrated
+          await baristaClient.asset.update({
+            where: {
+              uuid: asset.uuid,
+            },
+            data: {
+              is_migrated: true,
+              status: 'CREATED',
+              last_read: new Date(),
+              cafeins_uuid: asset.uuid,
+            },
+          })
         })
-      })
+      } catch (error: any) {
+        error.ctx = {
+          uuid: asset.uuid,
+          table: 'assets',
+        }
+
+        throw error
+      }
     }
 
     logger.info('sync asset finish')

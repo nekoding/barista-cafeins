@@ -108,107 +108,116 @@ const syncRoutes = async (): Promise<void> => {
     const routes = await getRouteUnmigrated()
 
     for (const route of routes) {
-      const [
-        createdUser,
-        modifiedUser,
-        sitePointFrom,
-        sitePointTo,
-        routeMethod,
-        routeOwnership,
-        routeName,
-      ] = await validateData(route)
+      try {
+        const [
+          createdUser,
+          modifiedUser,
+          sitePointFrom,
+          sitePointTo,
+          routeMethod,
+          routeOwnership,
+          routeName,
+        ] = await validateData(route)
 
-      // check if route already registered
-      const cafeinRoute = await cafeinsClient.routes.findFirst({
-        where: {
-          OR: [
-            {
-              site_from: sitePointFrom.id,
-              site_to: sitePointTo.id,
-            },
-            {
-              site_from: sitePointTo.id,
-              site_to: sitePointFrom.id,
-            },
-          ],
-        },
-      })
-
-      if (cafeinRoute != null) {
-        await baristaClient.route.update({
+        // check if route already registered
+        const cafeinRoute = await cafeinsClient.routes.findFirst({
           where: {
-            uuid: route.uuid,
-          },
-          data: {
-            status: 'UPDATED',
-            is_migrated: true,
-            last_read: new Date(),
-            cafeins_uuid: cafeinRoute.uuid,
+            OR: [
+              {
+                site_from: sitePointFrom.id,
+                site_to: sitePointTo.id,
+              },
+              {
+                site_from: sitePointTo.id,
+                site_to: sitePointFrom.id,
+              },
+            ],
           },
         })
 
-        continue
-      }
+        if (cafeinRoute != null) {
+          await baristaClient.route.update({
+            where: {
+              uuid: route.uuid,
+            },
+            data: {
+              status: 'UPDATED',
+              is_migrated: true,
+              last_read: new Date(),
+              cafeins_uuid: cafeinRoute.uuid,
+            },
+          })
 
-      // if not available register data
-      await cafeinsClient.$transaction(async (trx) => {
-        // create data
-        await createRoutes(trx as PrismaClient, {
-          uuid: route.uuid,
-          siteCategoryId: process.env.SITE_CATEGORY_ID ?? '1',
-          name: routeName,
-          siteFrom: sitePointFrom.id as unknown as string,
-          siteTo: sitePointTo.id as unknown as string,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          createdUserId: createdUser.id as unknown as string,
-          modifiedUserId: modifiedUser.id as unknown as string,
-          geometry: route.geometry,
-          length: route.length ?? 0,
-          routeMethodId: routeMethod.id as unknown as string,
-          routeOwnershipId: routeOwnership.id as unknown as string,
-        })
-
-        const routeCreated = await findRouteByUuid(
-          trx as PrismaClient,
-          route.uuid,
-        )
-
-        if (routeCreated == null) {
-          throw new Error('failed create route in database')
+          continue
         }
 
-        // write to audit log
-        const serialized = serializeRouteData(routeCreated)
-
-        await trx.audits.create({
-          data: {
-            user_type: `App\\Models\\User`,
-            user_id: createdUser.id,
-            event: AuditEvent.CREATED,
-            auditable_type: `Modules\\SitePoint\\Entities\\Route`,
-            auditable_id: routeCreated.id,
-            old_values: '[]',
-            new_values: serialized,
-            user_agent: 'Barista',
-            created_at: new Date(),
-            updated_at: new Date(),
-          },
-        })
-
-        // update status migration
-        await baristaClient.route.update({
-          where: {
+        // if not available register data
+        await cafeinsClient.$transaction(async (trx) => {
+          // create data
+          await createRoutes(trx as PrismaClient, {
             uuid: route.uuid,
-          },
-          data: {
-            status: 'CREATED',
-            is_migrated: true,
-            last_read: new Date(),
-            cafeins_uuid: routeCreated?.uuid,
-          },
+            siteCategoryId: process.env.SITE_CATEGORY_ID ?? '1',
+            name: routeName,
+            siteFrom: sitePointFrom.id as unknown as string,
+            siteTo: sitePointTo.id as unknown as string,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            createdUserId: createdUser.id as unknown as string,
+            modifiedUserId: modifiedUser.id as unknown as string,
+            geometry: route.geometry,
+            length: route.length ?? 0,
+            routeMethodId: routeMethod.id as unknown as string,
+            routeOwnershipId: routeOwnership.id as unknown as string,
+          })
+
+          const routeCreated = await findRouteByUuid(
+            trx as PrismaClient,
+            route.uuid,
+          )
+
+          if (routeCreated == null) {
+            throw new Error('failed create route in database')
+          }
+
+          // write to audit log
+          const serialized = serializeRouteData(routeCreated)
+
+          await trx.audits.create({
+            data: {
+              user_type: `App\\Models\\User`,
+              user_id: createdUser.id,
+              event: AuditEvent.CREATED,
+              auditable_type: `Modules\\SitePoint\\Entities\\Route`,
+              auditable_id: routeCreated.id,
+              old_values: '[]',
+              new_values: serialized,
+              user_agent: 'Barista',
+              created_at: new Date(),
+              updated_at: new Date(),
+            },
+          })
+
+          // update status migration
+          await baristaClient.route.update({
+            where: {
+              uuid: route.uuid,
+            },
+            data: {
+              status: 'CREATED',
+              is_migrated: true,
+              last_read: new Date(),
+              cafeins_uuid: routeCreated?.uuid,
+            },
+          })
         })
-      })
+      } catch (error: any) {
+        error.ctx = {
+          uuid: route.uuid,
+          table: 'routes',
+        }
+
+        throw error
+      }
     }
 
     logger.info('sync routes finish')

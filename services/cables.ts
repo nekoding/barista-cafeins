@@ -173,116 +173,125 @@ const syncCables = async (): Promise<void> => {
     logger.info('sync cables start')
     const cables = await getCablesUnmigrated()
     for (const cable of cables) {
-      const [
-        createdUser,
-        modifiedUser,
-        cableCategory,
-        cableGroup,
-        cableAssetOwnership,
-        cableAreaOwnership,
-        cablePlacementType,
-        cableFunction,
-        sitePointFrom,
-        sitePointTo,
-        cableRoutes,
-      ] = await validateData(cable)
+      try {
+        const [
+          createdUser,
+          modifiedUser,
+          cableCategory,
+          cableGroup,
+          cableAssetOwnership,
+          cableAreaOwnership,
+          cablePlacementType,
+          cableFunction,
+          sitePointFrom,
+          sitePointTo,
+          cableRoutes,
+        ] = await validateData(cable)
 
-      await cafeinsClient.$transaction(async (trx) => {
-        // create cable
-        const createdCable = await trx.cables.create({
-          data: {
-            uuid: cable.uuid,
-            cable_category_id: cableCategory.id,
-            cable_group_id: cableGroup.id,
-            name: cable.name,
-            code: generateCableCode(sitePointFrom, sitePointTo),
-            site_from: sitePointFrom.id,
-            site_to: sitePointTo.id,
-            description: cable.description,
-            length: cable.length,
-            is_active: true,
-            asset_ownership_id: cableAssetOwnership.id,
-            area_ownership_id: cableAreaOwnership.id,
-            placement_type_id: cablePlacementType.id,
-            function_id: cableFunction.id,
-            created_at: cable.created_at,
-            updated_at: cable.updated_at ?? cable.created_at,
-            created_user_id: createdUser.id,
-            modified_user_id: modifiedUser.id,
-          },
-        })
-
-        // create audit log cable
-        const serializedCable = serializeCableData(createdCable)
-        await trx.audits.create({
-          data: {
-            user_type: `App\\Models\\User`,
-            user_id: createdUser.id,
-            event: AuditEvent.CREATED,
-            auditable_type: `Modules\\Cable\\Entities\\Cable`,
-            auditable_id: createdCable.id,
-            old_values: '[]',
-            new_values: serializedCable,
-            user_agent: 'Barista',
-            created_at: new Date(),
-            updated_at: new Date(),
-          },
-        })
-
-        // create cable route
-        await trx.cable_routes.createMany({
-          data: cableRoutes.map((cableRoute) => {
-            return {
-              cable_id: createdCable.id,
-              route_id: cableRoute.id,
-              created_at: new Date(),
-              updated_at: new Date(),
+        await cafeinsClient.$transaction(async (trx) => {
+          // create cable
+          const createdCable = await trx.cables.create({
+            data: {
+              uuid: cable.uuid,
+              cable_category_id: cableCategory.id,
+              cable_group_id: cableGroup.id,
+              name: cable.name,
+              code: generateCableCode(sitePointFrom, sitePointTo),
+              site_from: sitePointFrom.id,
+              site_to: sitePointTo.id,
+              description: cable.description,
+              length: cable.length,
+              is_active: true,
+              asset_ownership_id: cableAssetOwnership.id,
+              area_ownership_id: cableAreaOwnership.id,
+              placement_type_id: cablePlacementType.id,
+              function_id: cableFunction.id,
+              created_at: cable.created_at,
+              updated_at: cable.updated_at ?? cable.created_at,
               created_user_id: createdUser.id,
               modified_user_id: modifiedUser.id,
+            },
+          })
+
+          // create audit log cable
+          const serializedCable = serializeCableData(createdCable)
+          await trx.audits.create({
+            data: {
+              user_type: `App\\Models\\User`,
+              user_id: createdUser.id,
+              event: AuditEvent.CREATED,
+              auditable_type: `Modules\\Cable\\Entities\\Cable`,
+              auditable_id: createdCable.id,
+              old_values: '[]',
+              new_values: serializedCable,
+              user_agent: 'Barista',
+              created_at: new Date(),
+              updated_at: new Date(),
+            },
+          })
+
+          // create cable route
+          await trx.cable_routes.createMany({
+            data: cableRoutes.map((cableRoute) => {
+              return {
+                cable_id: createdCable.id,
+                route_id: cableRoute.id,
+                created_at: new Date(),
+                updated_at: new Date(),
+                created_user_id: createdUser.id,
+                modified_user_id: modifiedUser.id,
+              }
+            }),
+            skipDuplicates: true,
+          })
+
+          const createdCableRoutes = await trx.cable_routes.findMany({
+            where: {
+              cable_id: createdCable.id,
+            },
+          })
+
+          // create audit log cable route
+          const auditDataCableRoutes = createdCableRoutes.map((cableRoute) => {
+            return {
+              user_type: `App\\Models\\User`,
+              user_id: createdUser.id,
+              event: AuditEvent.CREATED,
+              auditable_type: `Modules\\Cable\\Entities\\CableRoute`,
+              auditable_id: cableRoute.id,
+              old_values: '[]',
+              new_values: serializedCableRouteData(cableRoute),
+              user_agent: 'Barista',
+              created_at: new Date(),
+              updated_at: new Date(),
             }
-          }),
-          skipDuplicates: true,
-        })
+          })
 
-        const createdCableRoutes = await trx.cable_routes.findMany({
-          where: {
-            cable_id: createdCable.id,
-          },
-        })
+          await trx.audits.createMany({
+            data: auditDataCableRoutes,
+          })
 
-        // create audit log cable route
-        const auditDataCableRoutes = createdCableRoutes.map((cableRoute) => {
-          return {
-            user_type: `App\\Models\\User`,
-            user_id: createdUser.id,
-            event: AuditEvent.CREATED,
-            auditable_type: `Modules\\Cable\\Entities\\CableRoute`,
-            auditable_id: cableRoute.id,
-            old_values: '[]',
-            new_values: serializedCableRouteData(cableRoute),
-            user_agent: 'Barista',
-            created_at: new Date(),
-            updated_at: new Date(),
-          }
+          // mark data migrated
+          await baristaClient.cable.update({
+            where: {
+              uuid: cable.uuid,
+            },
+            data: {
+              is_migrated: true,
+              status: 'CREATED',
+              last_read: new Date(),
+              cafeins_uuid: createdCable.uuid,
+            },
+          })
         })
+      } catch (error: any) {
+        error.ctx = {
+          uuid: cable.uuid,
+          table: 'cables',
+        }
 
-        await trx.audits.createMany({
-          data: auditDataCableRoutes,
-        })
-
-        // mark data migrated
-        await baristaClient.cable.update({
-          where: {
-            uuid: cable.uuid,
-          },
-          data: {
-            is_migrated: true,
-            status: 'CREATED',
-            last_read: new Date(),
-            cafeins_uuid: createdCable.uuid,
-          },
-        })
-      })
+        throw error
+      }
     }
 
     logger.info('sync cables finish')

@@ -193,189 +193,198 @@ const syncSegments = async (): Promise<void> => {
     const segments = await getSegmentsUnmigrated()
 
     for (const segment of segments) {
-      const [
-        createdUser,
-        modifiedUser,
-        project,
-        sitePointFrom,
-        sitePointTo,
-        segmentRoutes,
-      ] = await validateData(segment)
+      try {
+        const [
+          createdUser,
+          modifiedUser,
+          project,
+          sitePointFrom,
+          sitePointTo,
+          segmentRoutes,
+        ] = await validateData(segment)
 
-      await cafeinsClient.$transaction(async (trx) => {
-        // check existing segment using data site from and site to
-        const existingSegment = await trx.segments.findFirst({
-          where: {
-            OR: [
-              {
-                site_from: sitePointFrom.id,
-                site_to: sitePointTo.id,
-              },
-              {
-                site_from: sitePointTo.id,
-                site_to: sitePointFrom.id,
-              },
-            ],
-          },
-        })
-
-        if (existingSegment != null) {
-          // create project segment using data site from and site to
-          const projectSegment = await createProjectSegmentBySitePoint(
-            trx as PrismaClient,
-            {
-              project,
-              createdUser,
-              modifiedUser,
-              sitePointFrom,
-              sitePointTo,
-              segment: existingSegment,
-            },
-          )
-
-          // create audit logs project segment
-          await trx.audits.create({
-            data: {
-              user_type: `App\\Models\\User`,
-              user_id: createdUser.id,
-              event: AuditEvent.CREATED,
-              auditable_type: `Modules\\Master\\Entities\\ProjectSegment`,
-              auditable_id: projectSegment.id,
-              old_values: '[]',
-              new_values: serializedDataProjectSegment(projectSegment),
-              user_agent: 'Barista',
-              created_at: new Date(),
-              updated_at: new Date(),
-            },
-          })
-
-          // mark data migrated
-          await baristaClient.segment.update({
+        await cafeinsClient.$transaction(async (trx) => {
+          // check existing segment using data site from and site to
+          const existingSegment = await trx.segments.findFirst({
             where: {
-              uuid: segment.uuid,
-            },
-            data: {
-              is_migrated: true,
-              status: 'UPDATED',
-              last_read: new Date(),
-              cafeins_uuid: existingSegment.uuid,
-            },
-          })
-        } else {
-          // create data segment
-          const createdSegment = await trx.segments.create({
-            data: {
-              uuid: segment.uuid,
-              name: segment.name,
-              code: generateSegmentCode(sitePointFrom, sitePointTo),
-              site_from: sitePointFrom.id,
-              site_to: sitePointTo.id,
-              created_at: segment.created_at,
-              updated_at: segment.updated_at,
-              created_user_id: createdUser.id,
-              modified_user_id: modifiedUser.id,
+              OR: [
+                {
+                  site_from: sitePointFrom.id,
+                  site_to: sitePointTo.id,
+                },
+                {
+                  site_from: sitePointTo.id,
+                  site_to: sitePointFrom.id,
+                },
+              ],
             },
           })
 
-          // create audit logs segment
-          await trx.audits.create({
-            data: {
-              user_type: `App\\Models\\User`,
-              user_id: createdUser.id,
-              event: AuditEvent.CREATED,
-              auditable_type: `Modules\\SitePoint\\Entities\\Segment`,
-              auditable_id: createdSegment.id,
-              old_values: '[]',
-              new_values: serializedDataSegment(createdSegment),
-              user_agent: 'Barista',
-              created_at: new Date(),
-              updated_at: new Date(),
-            },
-          })
+          if (existingSegment != null) {
+            // create project segment using data site from and site to
+            const projectSegment = await createProjectSegmentBySitePoint(
+              trx as PrismaClient,
+              {
+                project,
+                createdUser,
+                modifiedUser,
+                sitePointFrom,
+                sitePointTo,
+                segment: existingSegment,
+              },
+            )
 
-          // create project segment using data site from and site to
-          const projectSegment = await createProjectSegmentBySitePoint(
-            trx as PrismaClient,
-            {
-              project,
-              createdUser,
-              modifiedUser,
-              sitePointFrom,
-              sitePointTo,
-              segment: createdSegment,
-            },
-          )
-
-          // create audit logs project segment
-          await trx.audits.create({
-            data: {
-              user_type: `App\\Models\\User`,
-              user_id: createdUser.id,
-              event: AuditEvent.CREATED,
-              auditable_type: `Modules\\Master\\Entities\\ProjectSegment`,
-              auditable_id: projectSegment.id,
-              old_values: '[]',
-              new_values: serializedDataProjectSegment(projectSegment),
-              user_agent: 'Barista',
-              created_at: new Date(),
-              updated_at: new Date(),
-            },
-          })
-
-          // create segment routes
-          const segmentRoutesData = segmentRoutes.map((segmentRoute) => {
-            return {
-              segment_id: createdSegment.id,
-              route_id: segmentRoute.id,
-              created_at: new Date(),
-              updated_at: new Date(),
-              created_user_id: createdUser.id,
-              modified_user_id: modifiedUser.id,
-            }
-          })
-
-          await trx.segment_routes.createMany({
-            data: segmentRoutesData,
-          })
-
-          // create audit logs segment routes
-          const createdSegmentRoutes = await trx.segment_routes.findMany({
-            where: {
-              segment_id: createdSegment.id,
-            },
-          })
-
-          await trx.audits.createMany({
-            data: createdSegmentRoutes.map((createdSegmentRoute) => {
-              return {
+            // create audit logs project segment
+            await trx.audits.create({
+              data: {
                 user_type: `App\\Models\\User`,
                 user_id: createdUser.id,
                 event: AuditEvent.CREATED,
-                auditable_type: `Modules\\SitePoint\\Entities\\SegmentRoute`,
-                auditable_id: createdSegmentRoute.id,
+                auditable_type: `Modules\\Master\\Entities\\ProjectSegment`,
+                auditable_id: projectSegment.id,
                 old_values: '[]',
-                new_values: serializedDataSegmentRoute(createdSegmentRoute),
+                new_values: serializedDataProjectSegment(projectSegment),
                 user_agent: 'Barista',
                 created_at: new Date(),
                 updated_at: new Date(),
-              }
-            }),
-          })
+              },
+            })
 
-          // mark data migrated
-          await baristaClient.segment.update({
-            where: {
-              uuid: segment.uuid,
-            },
-            data: {
-              is_migrated: true,
-              status: 'CREATED',
-              last_read: new Date(),
-              cafeins_uuid: createdSegment.uuid,
-            },
-          })
+            // mark data migrated
+            await baristaClient.segment.update({
+              where: {
+                uuid: segment.uuid,
+              },
+              data: {
+                is_migrated: true,
+                status: 'UPDATED',
+                last_read: new Date(),
+                cafeins_uuid: existingSegment.uuid,
+              },
+            })
+          } else {
+            // create data segment
+            const createdSegment = await trx.segments.create({
+              data: {
+                uuid: segment.uuid,
+                name: segment.name,
+                code: generateSegmentCode(sitePointFrom, sitePointTo),
+                site_from: sitePointFrom.id,
+                site_to: sitePointTo.id,
+                created_at: segment.created_at,
+                updated_at: segment.updated_at,
+                created_user_id: createdUser.id,
+                modified_user_id: modifiedUser.id,
+              },
+            })
+
+            // create audit logs segment
+            await trx.audits.create({
+              data: {
+                user_type: `App\\Models\\User`,
+                user_id: createdUser.id,
+                event: AuditEvent.CREATED,
+                auditable_type: `Modules\\SitePoint\\Entities\\Segment`,
+                auditable_id: createdSegment.id,
+                old_values: '[]',
+                new_values: serializedDataSegment(createdSegment),
+                user_agent: 'Barista',
+                created_at: new Date(),
+                updated_at: new Date(),
+              },
+            })
+
+            // create project segment using data site from and site to
+            const projectSegment = await createProjectSegmentBySitePoint(
+              trx as PrismaClient,
+              {
+                project,
+                createdUser,
+                modifiedUser,
+                sitePointFrom,
+                sitePointTo,
+                segment: createdSegment,
+              },
+            )
+
+            // create audit logs project segment
+            await trx.audits.create({
+              data: {
+                user_type: `App\\Models\\User`,
+                user_id: createdUser.id,
+                event: AuditEvent.CREATED,
+                auditable_type: `Modules\\Master\\Entities\\ProjectSegment`,
+                auditable_id: projectSegment.id,
+                old_values: '[]',
+                new_values: serializedDataProjectSegment(projectSegment),
+                user_agent: 'Barista',
+                created_at: new Date(),
+                updated_at: new Date(),
+              },
+            })
+
+            // create segment routes
+            const segmentRoutesData = segmentRoutes.map((segmentRoute) => {
+              return {
+                segment_id: createdSegment.id,
+                route_id: segmentRoute.id,
+                created_at: new Date(),
+                updated_at: new Date(),
+                created_user_id: createdUser.id,
+                modified_user_id: modifiedUser.id,
+              }
+            })
+
+            await trx.segment_routes.createMany({
+              data: segmentRoutesData,
+            })
+
+            // create audit logs segment routes
+            const createdSegmentRoutes = await trx.segment_routes.findMany({
+              where: {
+                segment_id: createdSegment.id,
+              },
+            })
+
+            await trx.audits.createMany({
+              data: createdSegmentRoutes.map((createdSegmentRoute) => {
+                return {
+                  user_type: `App\\Models\\User`,
+                  user_id: createdUser.id,
+                  event: AuditEvent.CREATED,
+                  auditable_type: `Modules\\SitePoint\\Entities\\SegmentRoute`,
+                  auditable_id: createdSegmentRoute.id,
+                  old_values: '[]',
+                  new_values: serializedDataSegmentRoute(createdSegmentRoute),
+                  user_agent: 'Barista',
+                  created_at: new Date(),
+                  updated_at: new Date(),
+                }
+              }),
+            })
+
+            // mark data migrated
+            await baristaClient.segment.update({
+              where: {
+                uuid: segment.uuid,
+              },
+              data: {
+                is_migrated: true,
+                status: 'CREATED',
+                last_read: new Date(),
+                cafeins_uuid: createdSegment.uuid,
+              },
+            })
+          }
+        })
+      } catch (error: any) {
+        error.ctx = {
+          uuid: segment.uuid,
+          table: 'segments',
         }
-      })
+
+        throw error
+      }
     }
 
     console.log('sync segment finish')
