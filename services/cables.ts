@@ -147,6 +147,10 @@ const validateData = async (cable: Cable): Promise<ValidatedData> => {
     throw new Error('site point to not found')
   }
 
+  if (sitePointFrom.cafeins_uuid === sitePointTo.cafeins_uuid) {
+    throw new Error('site point from and site point to is same')
+  }
+
   // get sitepoint from db cafein & validate cable route
   const [cafeinSitePointFrom, cafeinSitePointTo, cableRoutes] =
     await Promise.all([
