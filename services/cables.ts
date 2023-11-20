@@ -10,22 +10,21 @@ import type {
   users,
 } from '../prisma/cafeins/cafeins-client'
 import { getCablesUnmigrated } from '../repositories/barista/cables'
-import { getRouteByUniqueId } from '../repositories/barista/routes'
-import { getMigratedSitePointByGroupCode } from '../repositories/barista/sitepoints'
 import { getApplicationParameterByCode } from '../repositories/cafeins/application_parameters'
 import { getCableGroupByName } from '../repositories/cafeins/cable_group'
 import { getCableCategoryByName } from '../repositories/cafeins/cables_category'
-import { findSitePointByUuid } from '../repositories/cafeins/sitepoints'
-import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import type { CafeinsSitePoint } from '../types/cafeins/sitepoint'
 import { baristaClient, cafeinsClient } from '../utils/database'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
 import { AuditEvent } from '../types/cafeins/audit'
-
-const getCreatedUserByEmployeeNo = getUserByEmployeeNo
-
-const getModifiedUserByEmployeeNo = getUserByEmployeeNo
+import {
+  getCreatedUserByEmployeeNo,
+  getModifiedUserByEmployeeNo,
+  getRoutesByUniqueIds,
+  getSitePointFromBySiteGroupCode,
+  getSitePointToBySiteGroupCode,
+} from './services'
 
 const getCableAssetOwnershipByCode = getApplicationParameterByCode
 
@@ -34,34 +33,6 @@ const getCableAreaOwnershipByCode = getApplicationParameterByCode
 const getCablePlacementTypeByCode = getApplicationParameterByCode
 
 const getCableFunctionByCode = getApplicationParameterByCode
-
-const getSitePointFromBySiteGroupCode = getMigratedSitePointByGroupCode
-
-const getSitePointToBySiteGroupCode = getMigratedSitePointByGroupCode
-
-const getCableRoutesByUniqueIds = async (routes: string): Promise<routes[]> => {
-  const routeUniqueIds = routes.split(',')
-  const cafeinRouteUuids = new Set<string>()
-  for (const routeUniqueId of routeUniqueIds) {
-    const baristaRoute = await getRouteByUniqueId(routeUniqueId)
-
-    if (baristaRoute?.cafeins_uuid == null) {
-      throw new Error('route id not migrated yet')
-    }
-
-    cafeinRouteUuids.add(baristaRoute.cafeins_uuid)
-  }
-
-  const cafeinRoutes = await cafeinsClient.routes.findMany({
-    where: {
-      uuid: {
-        in: [...cafeinRouteUuids],
-      },
-    },
-  })
-
-  return cafeinRoutes
-}
 
 type ValidatedData = [
   users,
@@ -92,6 +63,7 @@ const validateData = async (cable: Cable): Promise<ValidatedData> => {
     cableFunction,
     sitePointFrom,
     sitePointTo,
+    cableRoutes,
   ] = await Promise.all([
     getCreatedUserByEmployeeNo(cable.created_employee_no),
     getModifiedUserByEmployeeNo(
@@ -105,15 +77,8 @@ const validateData = async (cable: Cable): Promise<ValidatedData> => {
     getCableFunctionByCode(cable.function),
     getSitePointFromBySiteGroupCode(cable.site_group_code_from),
     getSitePointToBySiteGroupCode(cable.site_group_code_to),
+    getRoutesByUniqueIds(cable.route_unique_id_pembentuk ?? ''),
   ])
-
-  if (createdUser == null) {
-    throw new Error('created user not found')
-  }
-
-  if (modifiedUser == null) {
-    throw new Error('modified user not found')
-  }
 
   if (cableCategory == null) {
     throw new Error('cable category not found')
@@ -139,34 +104,6 @@ const validateData = async (cable: Cable): Promise<ValidatedData> => {
     throw new Error('cable function not found')
   }
 
-  if (sitePointFrom?.cafeins_uuid == null) {
-    throw new Error('site point from not found')
-  }
-
-  if (sitePointTo?.cafeins_uuid == null) {
-    throw new Error('site point to not found')
-  }
-
-  if (sitePointFrom.cafeins_uuid === sitePointTo.cafeins_uuid) {
-    throw new Error('site point from and site point to is same')
-  }
-
-  // get sitepoint from db cafein & validate cable route
-  const [cafeinSitePointFrom, cafeinSitePointTo, cableRoutes] =
-    await Promise.all([
-      findSitePointByUuid(cafeinsClient, sitePointFrom.cafeins_uuid),
-      findSitePointByUuid(cafeinsClient, sitePointTo.cafeins_uuid),
-      getCableRoutesByUniqueIds(cable.route_unique_id_pembentuk),
-    ])
-
-  if (cafeinSitePointFrom == null) {
-    throw new Error('site point from not found')
-  }
-
-  if (cafeinSitePointTo == null) {
-    throw new Error('site point to not found')
-  }
-
   return [
     createdUser,
     modifiedUser,
@@ -176,8 +113,8 @@ const validateData = async (cable: Cable): Promise<ValidatedData> => {
     cableAreaOwnership,
     cablePlacementType,
     cableFunction,
-    cafeinSitePointFrom,
-    cafeinSitePointTo,
+    sitePointFrom,
+    sitePointTo,
     cableRoutes,
   ]
 }

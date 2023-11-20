@@ -1,4 +1,4 @@
-export interface CafeinRoute {
+interface CafeinRoute {
   id: number
   uuid: string
   site_category_id: number
@@ -16,3 +16,5 @@ export interface CafeinRoute {
   modified_user_id?: number
   deleted_user_id?: number
 }
+
+export type { CafeinRoute }

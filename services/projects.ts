@@ -14,10 +14,10 @@ import { baristaClient, cafeinsClient } from '../utils/database'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
 import { AuditEvent } from '../types/cafeins/audit'
-
-const getCreatedUserByEmployeeNo = getUserByEmployeeNo
-
-const getModifiedUserByEmployeeNo = getUserByEmployeeNo
+import {
+  getCreatedUserByEmployeeNo,
+  getModifiedUserByEmployeeNo,
+} from './services'
 
 const getProjectOwnerByEmployeeNo = getUserByEmployeeNo
 
@@ -75,14 +75,6 @@ const validateData = async (project: Project): Promise<ValidatedData> => {
     generateCounterNumberByCreatedTime(project),
   ])
 
-  if (createdUser == null) {
-    throw new Error('project created user not found in database')
-  }
-
-  if (modifiedUser == null) {
-    throw new Error('project modified user not found in database')
-  }
-
   if (projectOwner == null) {
     throw new Error('project owner user not found in database')
   }
@@ -109,16 +101,23 @@ const serializedProjectData = (project: projects): string => {
   return JSON.stringify({
     ...project,
     id: project.id.toString(),
-    created_user_id: project.created_user_id?.toString(),
-    modified_user_id: project.modified_user_id?.toString(),
     company_id: project.company_id.toString(),
     vendor_id: project.vendor_id?.toString(),
     project_owner_id: project.project_owner_id?.toString(),
     project_group_id: project.project_group_id?.toString(),
+    created_user_id: project.created_user_id?.toString(),
+    modified_user_id: project.modified_user_id?.toString(),
+    deleted_user_id: project.deleted_user_id?.toString(),
+    created_at: moment(project.created_at).format('YYYY-MM-DD HH:mm:ss'),
+    updated_at: moment(project.updated_at).format('YYYY-MM-DD HH:mm:ss'),
+    deleted_at:
+      project.deleted_at != null
+        ? moment(project.deleted_at).format('YYYY-MM-DD HH:mm:ss')
+        : null,
   })
 }
 
-export const syncProjects = async (): Promise<void> => {
+const syncProjects = async (): Promise<void> => {
   try {
     logger.info('sync projects start')
     const projects = await getProjectsUnmigrated()
@@ -223,3 +222,5 @@ export const syncProjects = async (): Promise<void> => {
     throw new Error(error.message.replace(/\n/g, ''))
   }
 }
+
+export { syncProjects }

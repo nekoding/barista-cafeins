@@ -1,7 +1,7 @@
 import type { AssetUnmigrated } from '../../types/barista/assets'
 import { baristaClient } from '../../utils/database'
 
-export const getAssetsUnmigrated = async (
+const getAssetsUnmigrated = async (
   limit: number = 100,
   offset: number = 0,
 ): Promise<AssetUnmigrated[]> => {
@@ -31,3 +31,5 @@ export const getAssetsUnmigrated = async (
     skip: offset,
   })
 }
+
+export { getAssetsUnmigrated }

@@ -1,3 +1,4 @@
+import moment from 'moment'
 import type {
   application_parameters,
   asset_categories,
@@ -11,9 +12,6 @@ import { getAssetsUnmigrated } from '../repositories/barista/assets'
 import { getApplicationParameterByCode } from '../repositories/cafeins/application_parameters'
 import { findAssetCategoryByCode } from '../repositories/cafeins/asset_categories'
 import { findAssetGroupByCode } from '../repositories/cafeins/asset_groups'
-import { findProjectByUuid } from '../repositories/cafeins/projects'
-import { findSitePointByUuid } from '../repositories/cafeins/sitepoints'
-import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import { getVilagesByCoords } from '../repositories/cafeins/villages'
 import type { AssetUnmigrated } from '../types/barista/assets'
 import { AuditEvent } from '../types/cafeins/audit'
@@ -22,10 +20,12 @@ import type { BaristaVillage } from '../types/cafeins/villages'
 import { baristaClient, cafeinsClient } from '../utils/database'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
-
-const getCreatedUserByEmployeeNo = getUserByEmployeeNo
-
-const getModifiedUserByEmployeeNo = getUserByEmployeeNo
+import {
+  getCreatedUserByEmployeeNo,
+  getModifiedUserByEmployeeNo,
+  getProjectByGroupCode,
+  getSitePointBySiteGroupCode,
+} from './services'
 
 const getAssetOwnership = getApplicationParameterByCode
 
@@ -81,15 +81,6 @@ type ValidatedData = [
   string,
 ]
 const validateData = async (asset: AssetUnmigrated): Promise<ValidatedData> => {
-  if (
-    asset.project?.cafeins_uuid == null ||
-    asset.sitepoint?.cafeins_uuid == null
-  ) {
-    throw new Error(
-      'cannot migrate asset need migrate project and sitepoint first',
-    )
-  }
-
   const [
     createdUser,
     modifiedUser,
@@ -106,19 +97,11 @@ const validateData = async (asset: AssetUnmigrated): Promise<ValidatedData> => {
     ),
     getAssetOwnership(asset.asset_ownership),
     getAreaOwnership(asset.area_ownership),
-    findProjectByUuid(asset.project.cafeins_uuid),
-    findSitePointByUuid(cafeinsClient, asset.sitepoint.cafeins_uuid),
+    getProjectByGroupCode(asset.project_group_code),
+    getSitePointBySiteGroupCode(asset.site_group_code),
     findAssetCategoryByCode(asset.asset_category),
     findAssetGroupByCode(asset.asset_group_code),
   ])
-
-  if (createdUser == null) {
-    throw new Error('created user not found')
-  }
-
-  if (modifiedUser == null) {
-    throw new Error('modified user not found')
-  }
 
   if (assetOwnership == null) {
     throw new Error('asset ownership not found')
@@ -126,14 +109,6 @@ const validateData = async (asset: AssetUnmigrated): Promise<ValidatedData> => {
 
   if (areaOwnership == null) {
     throw new Error('area ownership not found')
-  }
-
-  if (project == null) {
-    throw new Error('project not found')
-  }
-
-  if (sitepoint == null) {
-    throw new Error('sitepoint not found')
   }
 
   if (assetCategory == null) {
@@ -145,8 +120,8 @@ const validateData = async (asset: AssetUnmigrated): Promise<ValidatedData> => {
   }
 
   const village = await getVilagesByCoords(
-    asset.sitepoint?.latitude,
-    asset.sitepoint?.longitude,
+    sitepoint.latitude,
+    sitepoint.longitude,
   )
   if (
     village?.village_code_area == null ||
@@ -182,6 +157,12 @@ const serializeAssetData = (asset: assets): string => {
     created_user_id: asset.created_user_id?.toString(),
     modified_user_id: asset.modified_user_id?.toString(),
     deleted_user_id: asset.deleted_user_id?.toString(),
+    created_at: moment(asset.created_at).format('YYYY-MM-DD HH:mm:ss'),
+    updated_at: moment(asset.updated_at).format('YYYY-MM-DD HH:mm:ss'),
+    deleted_at:
+      asset.deleted_at != null
+        ? moment(asset.deleted_at).format('YYYY-MM-DD HH:mm:ss')
+        : null,
   })
 }
 
@@ -197,7 +178,7 @@ const serializeProjectAssetData = (projectAsset: project_assets): string => {
   })
 }
 
-export const syncAssets = async (): Promise<void> => {
+const syncAssets = async (): Promise<void> => {
   try {
     logger.info('sync asset start')
     const assets = await getAssetsUnmigrated()
@@ -308,3 +289,5 @@ export const syncAssets = async (): Promise<void> => {
     throw new Error(error.message.replace(/\n/g, ''))
   }
 }
+
+export { syncAssets }

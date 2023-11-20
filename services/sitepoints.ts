@@ -1,3 +1,4 @@
+import moment from 'moment'
 import type { SitePoint } from '../prisma/barista/barista-client'
 import type { PrismaClient, users } from '../prisma/cafeins/cafeins-client'
 import { getSitePointUnmigrated } from '../repositories/barista/sitepoints'
@@ -6,18 +7,18 @@ import {
   findSitePointByUuid,
   getSitePointsByNearestCoords,
 } from '../repositories/cafeins/sitepoints'
-import { getUserByEmployeeNo } from '../repositories/cafeins/users'
-import { getVilagesByCoords } from '../repositories/cafeins/villages'
 import { AuditEvent } from '../types/cafeins/audit'
 import type { CafeinsSitePoint } from '../types/cafeins/sitepoint'
 import type { BaristaVillage } from '../types/cafeins/villages'
 import { baristaClient, cafeinsClient } from '../utils/database'
 import { logger } from '../utils/logger'
 import { LogLevel, writeToLog } from './logs'
-
-const getCreatedUserByEmployeeNo = getUserByEmployeeNo
-
-const getModifiedUserByEmployeeNo = getUserByEmployeeNo
+import {
+  getCreatedUserByEmployeeNo,
+  getModifiedUserByEmployeeNo,
+  getVillageByCoordinates,
+} from './services'
+import type { BaristaSitePoint } from '../types/barista/sitepoint'
 
 const serializedSitePointData = (sitePoint: CafeinsSitePoint): string => {
   return JSON.stringify({
@@ -28,6 +29,12 @@ const serializedSitePointData = (sitePoint: CafeinsSitePoint): string => {
     created_user_id: sitePoint.created_user_id?.toString(),
     modified_user_id: sitePoint.modified_user_id?.toString(),
     deleted_user_id: sitePoint.deleted_user_id?.toString(),
+    created_at: moment(sitePoint.created_at).format('YYYY-MM-DD HH:mm:ss'),
+    updated_at: moment(sitePoint.updated_at).format('YYYY-MM-DD HH:mm:ss'),
+    deleted_at:
+      sitePoint.deleted_at != null
+        ? moment(sitePoint.deleted_at).format('YYYY-MM-DD HH:mm:ss')
+        : null,
   })
 }
 
@@ -79,34 +86,18 @@ const validateData = async (
   sitePoint: SitePoint | BaristaSitePoint,
 ): Promise<ValidatedData> => {
   const [village, createdUser, modifiedUser] = await Promise.all([
-    getVilagesByCoords(sitePoint.latitude, sitePoint.longitude),
+    getVillageByCoordinates(sitePoint.latitude, sitePoint.longitude),
     getCreatedUserByEmployeeNo(sitePoint.created_employee_no),
     getModifiedUserByEmployeeNo(
       sitePoint.modified_employee_no ?? sitePoint.created_employee_no,
     ),
   ])
 
-  if (
-    village?.village_code_area == null ||
-    village?.city_code_area == null ||
-    village?.district_code_area == null
-  ) {
-    throw new Error('village not found')
-  }
-
-  if (createdUser == null) {
-    throw new Error('created user not found')
-  }
-
-  if (modifiedUser == null) {
-    throw new Error('modified user not found')
-  }
-
   const sitePointCode = await generateCounterNumber(sitePoint, village)
   return [village, createdUser, modifiedUser, sitePointCode]
 }
 
-export const syncSitePoint = async (): Promise<void> => {
+const syncSitePoint = async (): Promise<void> => {
   try {
     logger.info('sync sitepoint start')
     const sitePoints = await getSitePointUnmigrated()
@@ -218,3 +209,5 @@ export const syncSitePoint = async (): Promise<void> => {
     throw new Error(error.message.replace(/\n/g, ''))
   }
 }
+
+export { syncSitePoint }

@@ -1,6 +1,6 @@
 import type { Asset, Prisma } from '../../prisma/barista/barista-client'
 
-export type AssetUnmigrated = Asset &
+type AssetUnmigrated = Asset &
   Partial<
     Prisma.AssetGetPayload<{
       include: {
@@ -16,3 +16,5 @@ export type AssetUnmigrated = Asset &
       }
     }>
   >
+
+export type { AssetUnmigrated }

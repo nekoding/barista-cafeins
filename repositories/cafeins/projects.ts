@@ -4,7 +4,7 @@ import type {
 } from '../../prisma/cafeins/cafeins-client'
 import { cafeinsClient } from '../../utils/database'
 
-export const createProjects = async (
+const createProjects = async (
   c: PrismaClient,
   projectCompanyId: string,
   projectVendorId: string,
@@ -70,9 +70,7 @@ export const createProjects = async (
   `
 }
 
-export const findProjectByUuid = async (
-  uuid: string,
-): Promise<projects | null> => {
+const findProjectByUuid = async (uuid: string): Promise<projects | null> => {
   return await cafeinsClient.projects.findFirst({
     where: {
       uuid,
@@ -80,7 +78,7 @@ export const findProjectByUuid = async (
   })
 }
 
-export const getLatestProjectByCode = async (
+const getLatestProjectByCode = async (
   projectCreatedAt: string,
 ): Promise<projects | null> => {
   const result = await cafeinsClient.$queryRaw<projects[] | []>`
@@ -93,3 +91,5 @@ export const getLatestProjectByCode = async (
 
   return result[0]
 }
+
+export { createProjects, findProjectByUuid, getLatestProjectByCode }

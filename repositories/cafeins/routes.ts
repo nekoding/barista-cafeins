@@ -1,7 +1,7 @@
 import type { PrismaClient } from '../../prisma/cafeins/cafeins-client'
 import type { CafeinRoute } from '../../types/cafeins/route'
 
-export const createRoutes = async (
+const createRoutes = async (
   client: PrismaClient,
   data: {
     uuid: string
@@ -37,7 +37,7 @@ export const createRoutes = async (
     )`
 }
 
-export const findRouteByUuid = async (
+const findRouteByUuid = async (
   prismaClient: PrismaClient,
   uuid: string,
 ): Promise<CafeinRoute | null> => {
@@ -66,3 +66,5 @@ export const findRouteByUuid = async (
 
   return result[0]
 }
+
+export { createRoutes, findRouteByUuid }

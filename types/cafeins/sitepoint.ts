@@ -1,4 +1,4 @@
-export interface CafeinsSitePoint {
+interface CafeinsSitePoint {
   id: number
   village_id: number
   name: string
@@ -15,3 +15,5 @@ export interface CafeinsSitePoint {
   modified_user_id?: number
   deleted_user_id?: number
 }
+
+export type { CafeinsSitePoint }

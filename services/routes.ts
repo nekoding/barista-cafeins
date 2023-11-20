@@ -6,8 +6,6 @@ import type {
 } from '../prisma/cafeins/cafeins-client'
 import { getRouteUnmigrated } from '../repositories/barista/routes'
 import { createRoutes, findRouteByUuid } from '../repositories/cafeins/routes'
-import { findSitePointByUuid } from '../repositories/cafeins/sitepoints'
-import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import type { CafeinsSitePoint } from '../types/cafeins/sitepoint'
 import { baristaClient, cafeinsClient } from '../utils/database'
 import { logger } from '../utils/logger'
@@ -15,10 +13,17 @@ import { AuditEvent } from '../types/cafeins/audit'
 import type { CafeinRoute } from '../types/cafeins/route'
 import { getApplicationParameterByCode } from '../repositories/cafeins/application_parameters'
 import { LogLevel, writeToLog } from './logs'
+import {
+  getCreatedUserByEmployeeNo,
+  getModifiedUserByEmployeeNo,
+  getSitePointFromBySiteGroupCode,
+  getSitePointToBySiteGroupCode,
+} from './services'
+import type { BaristaRoute } from '../types/barista/routes'
 
-const getCreatedUserByEmployeeNo = getUserByEmployeeNo
+const getRouteMethodByCode = getApplicationParameterByCode
 
-const getModifiedUserByEmployeeNo = getUserByEmployeeNo
+const getRouteOwnershipByCode = getApplicationParameterByCode
 
 // example: SLA-BGX-BGEKAN-011-SITE POINT 23
 const generateRouteName = (
@@ -38,15 +43,6 @@ type ValidatedData = [
   string,
 ]
 const validateData = async (route: BaristaRoute): Promise<ValidatedData> => {
-  if (
-    route.site_group_from_cafein_uuid == null ||
-    route.site_group_to_cafein_uuid == null
-  ) {
-    throw new Error(
-      'site_group_from_cafein_uuid or site_group_to_cafein_uuid is null cannot migrate data',
-    )
-  }
-
   const [
     createdUser,
     modifiedUser,
@@ -59,27 +55,11 @@ const validateData = async (route: BaristaRoute): Promise<ValidatedData> => {
     getModifiedUserByEmployeeNo(
       route.modified_employee_no ?? route.created_employee_no,
     ),
-    findSitePointByUuid(cafeinsClient, route.site_group_from_cafein_uuid),
-    findSitePointByUuid(cafeinsClient, route.site_group_to_cafein_uuid),
-    getApplicationParameterByCode(route.route_method),
-    getApplicationParameterByCode(route.route_ownership),
+    getSitePointFromBySiteGroupCode(route.site_group_code_from),
+    getSitePointToBySiteGroupCode(route.site_group_code_to),
+    getRouteMethodByCode(route.route_method),
+    getRouteOwnershipByCode(route.route_ownership),
   ])
-
-  if (createdUser == null) {
-    throw new Error('route created user not found in database')
-  }
-
-  if (modifiedUser == null) {
-    throw new Error('route modified user not found in database')
-  }
-
-  if (sitePointFrom == null) {
-    throw new Error('route site group from not found in database')
-  }
-
-  if (sitePointTo == null) {
-    throw new Error('route site group to not found in database')
-  }
 
   if (routeMethod == null) {
     throw new Error('route method not found in database')
@@ -122,7 +102,7 @@ const serializeRouteData = (route: CafeinRoute): string => {
   })
 }
 
-export const syncRoutes = async (): Promise<void> => {
+const syncRoutes = async (): Promise<void> => {
   try {
     logger.info('sync routes start')
     const routes = await getRouteUnmigrated()
@@ -242,3 +222,5 @@ export const syncRoutes = async (): Promise<void> => {
     throw new Error(error.message.replace(/\n/g, ''))
   }
 }
+
+export { syncRoutes }

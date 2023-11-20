@@ -14,3 +14,5 @@ interface BaristaSitePoint {
   last_read?: Date | string
   is_migrated?: boolean
 }
+
+export type { BaristaSitePoint }

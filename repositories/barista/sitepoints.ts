@@ -1,7 +1,8 @@
 import type { SitePoint } from '../../prisma/barista/barista-client'
+import type { BaristaSitePoint } from '../../types/barista/sitepoint'
 import { baristaClient } from '../../utils/database'
 
-export const getSitePointUnmigrated = async (
+const getSitePointUnmigrated = async (
   limit: number = 100,
   offset: number = 0,
 ): Promise<BaristaSitePoint[] | []> => {
@@ -23,7 +24,7 @@ export const getSitePointUnmigrated = async (
   FROM site_points WHERE is_migrated = false AND status IS NULL AND uuid IS NULL LIMIT ${limit} OFFSET ${offset}`
 }
 
-export const getMigratedSitePointByGroupCode = async (
+const getMigratedSitePointByGroupCode = async (
   groupCode: string,
 ): Promise<SitePoint | null> => {
   return await baristaClient.sitePoint.findFirst({
@@ -36,3 +37,5 @@ export const getMigratedSitePointByGroupCode = async (
     },
   })
 }
+
+export { getSitePointUnmigrated, getMigratedSitePointByGroupCode }

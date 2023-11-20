@@ -21,3 +21,5 @@ interface BaristaRoute {
   site_group_to_uuid?: string
   site_group_to_cafein_uuid?: string
 }
+
+export type { BaristaRoute }

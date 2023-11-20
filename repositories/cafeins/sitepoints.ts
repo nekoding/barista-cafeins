@@ -5,7 +5,7 @@ import type {
 import type { CafeinsSitePoint } from '../../types/cafeins/sitepoint'
 import { cafeinsClient } from '../../utils/database'
 
-export const getSitePointsByNearestCoords = async (
+const getSitePointsByNearestCoords = async (
   lat: number,
   lng: number,
   distance: number = 4,
@@ -24,7 +24,7 @@ export const getSitePointsByNearestCoords = async (
   ) s WHERE s.distance <= ${distance} ORDER BY s.distance ASC LIMIT ${limit} OFFSET ${offset}`
 }
 
-export const createSitePoint = async (
+const createSitePoint = async (
   prismaClient: PrismaClient,
   uuid: string,
   villageId: number | string,
@@ -69,7 +69,7 @@ export const createSitePoint = async (
   )`
 }
 
-export const findSitePointByUuid = async (
+const findSitePointByUuid = async (
   prismaClient: PrismaClient,
   uuid: string,
 ): Promise<CafeinsSitePoint | null> => {
@@ -97,3 +97,5 @@ export const findSitePointByUuid = async (
 
   return result[0]
 }
+
+export { getSitePointsByNearestCoords, createSitePoint, findSitePointByUuid }

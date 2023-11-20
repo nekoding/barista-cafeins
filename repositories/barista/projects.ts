@@ -1,7 +1,7 @@
 import type { Project } from '../../prisma/barista/barista-client'
 import { baristaClient } from '../../utils/database'
 
-export const getProjectsUnmigrated = async (
+const getProjectsUnmigrated = async (
   limit: number = 100,
   offset: number = 0,
 ): Promise<Project[]> => {
@@ -16,7 +16,7 @@ export const getProjectsUnmigrated = async (
   })
 }
 
-export const getMigratedProjectByGroupCode = async (
+const getMigratedProjectByGroupCode = async (
   groupCode: string,
 ): Promise<Project | null> => {
   return await baristaClient.project.findFirst({
@@ -29,3 +29,5 @@ export const getMigratedProjectByGroupCode = async (
     },
   })
 }
+
+export { getProjectsUnmigrated, getMigratedProjectByGroupCode }

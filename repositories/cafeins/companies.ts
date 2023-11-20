@@ -1,7 +1,7 @@
 import type { companies } from '../../prisma/cafeins/cafeins-client'
 import { cafeinsClient } from '../../utils/database'
 
-export const getCompanyByCode = async (
+const getCompanyByCode = async (
   companyCode: string,
 ): Promise<companies | null> => {
   return await cafeinsClient.companies.findFirst({
@@ -10,3 +10,5 @@ export const getCompanyByCode = async (
     },
   })
 }
+
+export { getCompanyByCode }

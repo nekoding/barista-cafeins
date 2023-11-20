@@ -1,13 +1,13 @@
 import type { PrismaClient } from '../prisma/barista/barista-client'
 import { baristaClient } from '../utils/database'
 
-export enum LogLevel {
+enum LogLevel {
   ERROR = 'error',
   INFO = 'info',
   WARN = 'warn',
 }
 
-export const writeToLog = async (
+const writeToLog = async (
   level: LogLevel,
   message: string,
   meta?: object,
@@ -21,3 +21,5 @@ export const writeToLog = async (
     },
   })
 }
+
+export { writeToLog, LogLevel }

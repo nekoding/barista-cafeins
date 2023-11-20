@@ -1,4 +1,5 @@
 import type { Route } from '../../prisma/barista/barista-client'
+import type { BaristaRoute } from '../../types/barista/routes'
 import { baristaClient } from '../../utils/database'
 
 const getRouteUnmigrated = async (

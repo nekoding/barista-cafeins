@@ -1,5 +1,6 @@
 import type { projects, routes, users } from '../prisma/cafeins/cafeins-client'
 import type { CafeinsSitePoint } from '../types/cafeins/sitepoint'
+import type { BaristaVillage } from '../types/cafeins/villages'
 import { getMigratedProjectByGroupCode } from '../repositories/barista/projects'
 import { getRouteByUniqueId } from '../repositories/barista/routes'
 import { getMigratedSitePointByGroupCode } from '../repositories/barista/sitepoints'
@@ -7,6 +8,7 @@ import { findProjectByUuid } from '../repositories/cafeins/projects'
 import { findSitePointByUuid } from '../repositories/cafeins/sitepoints'
 import { getUserByEmployeeNo } from '../repositories/cafeins/users'
 import { cafeinsClient } from '../utils/database'
+import { getVilagesByCoords } from '../repositories/cafeins/villages'
 
 const getCreatedUserByEmployeeNo = async (
   employeeNo: string,
@@ -89,6 +91,23 @@ const getSitePointFromBySiteGroupCode = getSitePointBySiteGroupCode
 
 const getSitePointToBySiteGroupCode = getSitePointBySiteGroupCode
 
+const getVillageByCoordinates = async (
+  latitude: number,
+  longitude: number,
+): Promise<BaristaVillage> => {
+  const village = await getVilagesByCoords(latitude, longitude)
+
+  if (
+    village?.village_code_area == null ||
+    village?.city_code_area == null ||
+    village?.district_code_area == null
+  ) {
+    throw new Error('village not found')
+  }
+
+  return village
+}
+
 export {
   getCreatedUserByEmployeeNo,
   getModifiedUserByEmployeeNo,
@@ -97,4 +116,5 @@ export {
   getSitePointBySiteGroupCode,
   getSitePointFromBySiteGroupCode,
   getSitePointToBySiteGroupCode,
+  getVillageByCoordinates,
 }

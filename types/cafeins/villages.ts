@@ -1,4 +1,4 @@
-export interface BaristaVillage {
+interface BaristaVillage {
   village_id: string
   village_name: string
   village_code: string
@@ -15,3 +15,5 @@ export interface BaristaVillage {
   province_name: string
   province_code: string
 }
+
+export type { BaristaVillage }
