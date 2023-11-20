@@ -1,5 +1,6 @@
 interface BaristaSitePoint {
   uuid: string
+  cafeins_uuid: string
   name: string
   company_code: string
   site_group_code: string

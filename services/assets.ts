@@ -12,7 +12,6 @@ import { getAssetsUnmigrated } from '../repositories/barista/assets'
 import { getApplicationParameterByCode } from '../repositories/cafeins/application_parameters'
 import { findAssetCategoryByCode } from '../repositories/cafeins/asset_categories'
 import { findAssetGroupByCode } from '../repositories/cafeins/asset_groups'
-import { getVilagesByCoords } from '../repositories/cafeins/villages'
 import type { AssetUnmigrated } from '../types/barista/assets'
 import { AuditEvent } from '../types/cafeins/audit'
 import type { CafeinsSitePoint } from '../types/cafeins/sitepoint'
@@ -25,6 +24,7 @@ import {
   getModifiedUserByEmployeeNo,
   getProjectByGroupCode,
   getSitePointBySiteGroupCode,
+  getVillageByCoordinates,
 } from './services'
 
 const getAssetOwnership = getApplicationParameterByCode
@@ -119,17 +119,11 @@ const validateData = async (asset: AssetUnmigrated): Promise<ValidatedData> => {
     throw new Error('asset group not found')
   }
 
-  const village = await getVilagesByCoords(
-    sitepoint.latitude,
+  // reversed from cafein data
+  const village = await getVillageByCoordinates(
     sitepoint.longitude,
+    sitepoint.latitude,
   )
-  if (
-    village?.village_code_area == null ||
-    village?.city_code_area == null ||
-    village?.district_code_area == null
-  ) {
-    throw new Error('village not found')
-  }
 
   const assetCode = await generateCounterNumber(asset, village)
   return [

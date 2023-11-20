@@ -8,6 +8,7 @@ const getSitePointUnmigrated = async (
 ): Promise<BaristaSitePoint[] | []> => {
   return await baristaClient.$queryRaw`SELECT 
     uuid,
+    cafeins_uuid,
     name,
     company_code,
     site_group_code,
@@ -21,7 +22,7 @@ const getSitePointUnmigrated = async (
     status,
     last_read,
     is_migrated
-  FROM site_points WHERE is_migrated = false AND status IS NULL AND uuid IS NULL LIMIT ${limit} OFFSET ${offset}`
+  FROM site_points WHERE is_migrated = false AND status IS NULL AND cafeins_uuid IS NULL LIMIT ${limit} OFFSET ${offset}`
 }
 
 const getMigratedSitePointByGroupCode = async (
