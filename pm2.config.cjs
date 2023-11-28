@@ -6,6 +6,8 @@ module.exports = {
       args: ['barista:sync', 'project'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
+      instances: 1,
+      autorestart: false,
     },
     {
       name: 'sync sitepoints',
@@ -13,6 +15,8 @@ module.exports = {
       args: ['barista:sync', 'sitepoint'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
+      instances: 1,
+      autorestart: false,
     },
     {
       name: 'sync assets',
@@ -20,6 +24,8 @@ module.exports = {
       args: ['barista:sync', 'asset'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
+      instances: 1,
+      autorestart: false,
     },
     {
       name: 'sync routes',
@@ -27,6 +33,8 @@ module.exports = {
       args: ['barista:sync', 'route'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
+      instances: 1,
+      autorestart: false,
     },
     {
       name: 'sync cables',
@@ -34,6 +42,8 @@ module.exports = {
       args: ['barista:sync', 'cable'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
+      instances: 1,
+      autorestart: false,
     },
     {
       name: 'sync segments',
@@ -41,6 +51,8 @@ module.exports = {
       args: ['barista:sync', 'segment'],
       interpreter: 'bun',
       cron_restart: '*/30 * * * *',
+      instances: 1,
+      autorestart: false,
     },
   ],
 }
