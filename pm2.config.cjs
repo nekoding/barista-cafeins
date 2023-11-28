@@ -8,8 +8,6 @@ module.exports = {
       cron_restart: '*/30 * * * *', // if fail restart app in 30 minutes
       instances: 1,
       autorestart: true,
-      exec_mode: 'fork',
-      restart_delay: 1_800_000, // delay 30 minute before restart process after done
     },
     {
       name: 'sync sitepoints',
@@ -19,8 +17,6 @@ module.exports = {
       cron_restart: '*/30 * * * *', // if fail restart app in 30 minutes
       instances: 1,
       autorestart: true,
-      exec_mode: 'fork',
-      restart_delay: 1_800_000, // delay 30 minute before restart process after done
     },
     {
       name: 'sync assets',
@@ -30,8 +26,6 @@ module.exports = {
       cron_restart: '*/30 * * * *', // if fail restart app in 30 minutes
       instances: 1,
       autorestart: true,
-      exec_mode: 'fork',
-      restart_delay: 1_800_000, // delay 30 minute before restart process after done
     },
     {
       name: 'sync routes',
@@ -41,8 +35,6 @@ module.exports = {
       cron_restart: '*/30 * * * *', // if fail restart app in 30 minutes
       instances: 1,
       autorestart: true,
-      exec_mode: 'fork',
-      restart_delay: 1_800_000, // delay 30 minute before restart process after done
     },
     {
       name: 'sync cables',
@@ -52,8 +44,6 @@ module.exports = {
       cron_restart: '*/30 * * * *', // if fail restart app in 30 minutes
       instances: 1,
       autorestart: true,
-      exec_mode: 'fork',
-      restart_delay: 1_800_000, // delay 30 minute before restart process after done
     },
     {
       name: 'sync segments',
@@ -63,8 +53,6 @@ module.exports = {
       cron_restart: '*/30 * * * *', // if fail restart app in 30 minutes
       instances: 1,
       autorestart: true,
-      exec_mode: 'fork',
-      restart_delay: 1_800_000, // delay 30 minute before restart process after done
     },
   ],
 }

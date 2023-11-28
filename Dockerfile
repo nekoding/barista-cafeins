@@ -1,8 +1,7 @@
 FROM oven/bun:debian as base
 WORKDIR /usr/src/app
-RUN apt update && apt install -y bash curl git nodejs npm
+RUN apt update && apt install -y bash curl git nodejs npm cron
 RUN npm install pm2 -g
-
 
 # install dependencies into temp directory
 # this will cache them and speed up future builds
@@ -28,5 +27,17 @@ COPY --from=dev /temp/prod/node_modules node_modules
 COPY --from=prerelease /usr/src/app/. .
 COPY --from=prerelease /usr/src/app/package.json .
 
+# Copy the cron job file
+COPY cronjob /etc/cron.d/cronjob
+
+# Set the correct permissions
+RUN chmod 0644 /etc/cron.d/cronjob
+
+# Apply the cron job
+RUN crontab /etc/cron.d/cronjob
+
+# Start cron in the foreground
+CMD ["cron", "-f"]
+
 # run the app
-ENTRYPOINT [ "pm2-runtime", "start", "pm2.config.cjs" ]
+# ENTRYPOINT [ "pm2-runtime", "start", "pm2.config.cjs" ]
