@@ -134,7 +134,7 @@ const syncSitePoint = async (): Promise<void> => {
           await createSitePoint(trx as PrismaClient, {
             uuid: sitePoint.uuid,
             villageId: village.village_id,
-            siteCategoryId: process.env.SITEPOINT_CATEGORY_ID ?? 1,
+            siteCategoryId: process.env.SITEPOINT_CATEGORY_ID ?? '1',
             name: sitePointCode,
             code: sitePointCode,
             latitude: sitePoint.latitude,

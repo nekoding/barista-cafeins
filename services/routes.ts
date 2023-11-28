@@ -156,7 +156,7 @@ const syncRoutes = async (): Promise<void> => {
           // create data
           await createRoutes(trx as PrismaClient, {
             uuid: route.uuid,
-            siteCategoryId: process.env.SITE_CATEGORY_ID ?? '1',
+            siteCategoryId: process.env.SITEPOINT_CATEGORY_ID ?? '1',
             name: routeName,
             siteFrom: sitePointFrom.id as unknown as string,
             siteTo: sitePointTo.id as unknown as string,

@@ -29,7 +29,7 @@ const createSitePoint = async (
   data: {
     uuid: string
     villageId: number | string
-    siteCategoryId: number | string
+    siteCategoryId: string
     name: string
     code: string
     latitude: number
