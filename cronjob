@@ -1,6 +1,6 @@
-0 0 * * * bun app.ts barista:sync project
-0 0 * * * bun app.ts barista:sync sitepoint
-0 0 * * * bun app.ts barista:sync asset
-0 0 * * * bun app.ts barista:sync route
-0 0 * * * bun app.ts barista:sync cable
-0 0 * * * bun app.ts barista:sync segment
+0 0 * * * bun /usr/src/app/app.ts barista:sync project
+0 0 * * * bun /usr/src/app/app.ts barista:sync sitepoint
+0 0 * * * bun /usr/src/app/app.ts barista:sync asset
+0 0 * * * bun /usr/src/app/app.ts barista:sync route
+0 0 * * * bun /usr/src/app/app.ts barista:sync cable
+0 0 * * * bun /usr/src/app/app.ts barista:sync segment
