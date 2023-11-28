@@ -1,4 +1,4 @@
-FROM oven/bun:1 as base
+FROM oven/bun:1:debian as base
 WORKDIR /usr/src/app
 RUN apt install -y bash curl git nodejs npm
 RUN npm install pm2 -g
