@@ -1,6 +1,6 @@
-FROM oven/bun:1-alpine as base
+FROM oven/bun:1 as base
 WORKDIR /usr/src/app
-RUN apk add --no-cache bash curl git nodejs npm
+RUN apt install -y bash curl git nodejs npm
 RUN npm install pm2 -g
 
 
