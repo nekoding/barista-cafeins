@@ -1,6 +1,6 @@
-* * * * * bun /usr/src/app/app.ts barista:sync project > /var/log/project_sync.log 2>&1
-* * * * * bun /usr/src/app/app.ts barista:sync sitepoint > /var/log/sitepoint_sync.log 2>&1
-* * * * * bun /usr/src/app/app.ts barista:sync asset > /var/log/asset_sync.log 2>&1
-* * * * * bun /usr/src/app/app.ts barista:sync route > /var/log/route_sync.log 2>&1
-* * * * * bun /usr/src/app/app.ts barista:sync cable > /var/log/cable_sync.log 2>&1
-* * * * * bun /usr/src/app/app.ts barista:sync segment > /var/log/segment_sync.log 2>&1
+* * * * * NODE_ENV=DEBUG /usr/local/bin/bun /usr/src/app/app.ts barista:sync project > /var/log/cron/project_sync.log 2>&1
+* * * * * NODE_ENV=DEBUG /usr/local/bin/bun /usr/src/app/app.ts barista:sync sitepoint > /var/log/cron/sitepoint_sync.log 2>&1
+* * * * * NODE_ENV=DEBUG /usr/local/bin/bun /usr/src/app/app.ts barista:sync asset > /var/log/cron/asset_sync.log 2>&1
+* * * * * NODE_ENV=DEBUG /usr/local/bin/bun /usr/src/app/app.ts barista:sync route > /var/log/cron/route_sync.log 2>&1
+* * * * * NODE_ENV=DEBUG /usr/local/bin/bun /usr/src/app/app.ts barista:sync cable > /var/log/cron/cable_sync.log 2>&1
+* * * * * NODE_ENV=DEBUG /usr/local/bin/bun /usr/src/app/app.ts barista:sync segment > /var/log/cron/segment_sync.log 2>&1

@@ -1,6 +1,6 @@
 FROM oven/bun:debian as base
 WORKDIR /usr/src/app
-RUN apt update && apt install -y bash curl git nodejs npm cron
+RUN apt update && apt install -y bash curl nodejs npm cron vim
 RUN npm install pm2 -g
 
 # install dependencies into temp directory
@@ -13,7 +13,7 @@ RUN cd /temp/dev && bun install --frozen-lockfile
 # install with --production (exclude devDependencies)
 RUN mkdir -p /temp/prod
 COPY package.json bun.lockb /temp/prod/
-RUN cd /temp/prod && bun install --frozen-lockfile --ignore-scripts
+RUN cd /temp/prod && bun install --frozen-lockfile --ignore-scripts --production
 
 # copy node_modules from temp directory
 # then copy all (non-ignored) project files into the image
@@ -28,10 +28,7 @@ COPY --from=prerelease /usr/src/app/. .
 COPY --from=prerelease /usr/src/app/package.json .
 
 # Create log directory
-RUN mkdir -p /var/log
-
-# Set permissions
-RUN chmod 0777 /var/log
+RUN mkdir -p /var/log/cron
 
 # Copy the cron job file
 COPY cronjob /etc/cron.d/cronjob
