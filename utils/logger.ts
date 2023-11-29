@@ -6,12 +6,13 @@ const loggerTransports =
     ? [
         new transports.Console(),
         new DailyRotateFile({
-          filename: 'logs/%DATE%.log',
+          filename: `${import.meta.dir}/../logs/%DATE%.log`,
         }),
       ]
     : [
+        new transports.Console(),
         new DailyRotateFile({
-          filename: 'logs/%DATE%.log',
+          filename: `${import.meta.dir}/../logs/%DATE%.log`,
         }),
       ]
 
