@@ -27,6 +27,12 @@ COPY --from=dev /temp/prod/node_modules node_modules
 COPY --from=prerelease /usr/src/app/. .
 COPY --from=prerelease /usr/src/app/package.json .
 
+# Create log directory
+RUN mkdir -p /var/log
+
+# Set permissions
+RUN chmod 0777 /var/log
+
 # Copy the cron job file
 COPY cronjob /etc/cron.d/cronjob
 
