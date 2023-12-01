@@ -2,11 +2,9 @@ version: '3'
 services:
   app:
     build: .
-    container_name: barista-migrator
+    container_name: barista
     volumes:
       - ./logs:/usr/src/app/logs
-    networks:
-      - sail
     environment:
       DEBUG: "prisma*" # debugging prisma
       NODE_ENV: ${NODE_ENV:-PRODUCTION}
