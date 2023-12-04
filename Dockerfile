@@ -2,9 +2,21 @@ FROM oven/bun:debian as base
 WORKDIR /usr/src/app
 RUN apt update && apt install -y bash curl cron vim
 
+# Set environment variables for NVM
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION node
+
 # Install nvm with node and npm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash && source ~/.bashrc
-RUN nvm install node && nvm use node
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+
+# Load NVM and install Node.js
+RUN . $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_VERSION && nvm use default
+
+# Add NVM to bashrc for future use
+RUN echo 'export NVM_DIR="$HOME/.nvm"' >> /root/.bashrc && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> /root/.bashrc && \
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> /root/.bashrc
+
 RUN npm install pm2 -g
 
 # install dependencies into temp directory
@@ -12,7 +24,7 @@ RUN npm install pm2 -g
 FROM base AS dev
 RUN mkdir -p /temp/dev
 COPY package.json bun.lockb /temp/dev/
-RUN cd /temp/dev && bun install --frozen-lockfile
+RUN cd /temp/dev && bun install --frozen-lockfile --ignore-scripts
 
 # install with --production (exclude devDependencies)
 RUN mkdir -p /temp/prod
