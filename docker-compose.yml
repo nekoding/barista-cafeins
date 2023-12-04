@@ -1,7 +1,9 @@
 version: '3'
 services:
   app:
-    build: .
+    build: 
+      context: .
+      network: host # fixing error temporary failure resolving 'deb.debian.org'
     container_name: barista
     volumes:
       - ./logs:/usr/src/app/logs
@@ -21,3 +23,9 @@ services:
         reservations:
           cpus: '0.10'
           memory: 20M
+    networks:
+      - barista
+
+networks:
+  barista:
+    driver: bridge

@@ -1,6 +1,10 @@
 FROM oven/bun:debian as base
 WORKDIR /usr/src/app
-RUN apt update && apt install -y bash curl nodejs npm cron vim
+RUN apt update && apt install -y bash curl cron vim
+
+# Install nvm with node and npm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash && source ~/.bashrc
+RUN nvm install node && nvm use node
 RUN npm install pm2 -g
 
 # install dependencies into temp directory
