@@ -196,6 +196,8 @@ model assets {
   site_point_uuid      String?              @db.VarChar(255)
   asset_ownership_uuid String?              @db.VarChar(255)
   area_ownership_uuid  String?              @db.VarChar(255)
+  status               String?              @db.VarChar(255)
+  node_name            String?              @db.VarChar(255)
   splice_core_recaps   splice_core_recaps[]
 
   @@schema("asset")

@@ -261,6 +261,8 @@ exports.Prisma.AssetsScalarFieldEnum = {
   site_point_uuid: 'site_point_uuid',
   asset_ownership_uuid: 'asset_ownership_uuid',
   area_ownership_uuid: 'area_ownership_uuid',
+  status: 'status',
+  node_name: 'node_name',
 }
 
 exports.Prisma.Equipment_categoriesScalarFieldEnum = {

@@ -208,6 +208,7 @@ const syncAssets = async (): Promise<void> => {
               updated_at: asset.updated_at,
               created_user_id: createdUser.id,
               modified_user_id: modifiedUser.id,
+              status: 'installed', // set static to installed
             },
           })
 
