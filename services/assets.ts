@@ -31,8 +31,9 @@ const getAssetOwnership = getApplicationParameterByCode
 
 const getAreaOwnership = getApplicationParameterByCode
 
-// Example: PLLA-JKX-KBYKDN-001
+// Example: (S/B/P)PLLA-JKS-KBUSAN-012
 const generateCounterNumber = async (
+  siteCode: string,
   asset: AssetUnmigrated,
   village: BaristaVillage,
 ): Promise<string> => {
@@ -40,7 +41,7 @@ const generateCounterNumber = async (
     throw new Error('cannot migrate asset, due sitepoint not migrated')
   }
 
-  const prefixIdentifier = `${asset.sitepoint?.company_code}${asset.asset_category}`
+  const prefixIdentifier = `${siteCode}${asset.asset_category}${asset.sitepoint?.company_code}`
   const cityIdentifier = village.city_code_area
   const districtIdentifier = village.district_code_area
   const villageIdentitfier = village.village_code_area
@@ -119,13 +120,23 @@ const validateData = async (asset: AssetUnmigrated): Promise<ValidatedData> => {
     throw new Error('asset group not found')
   }
 
+  // validate sitepoint site category code
+  if (sitepoint.site_category_code == null) {
+    throw new Error('sitepoint site category code not found')
+  }
+
   // reversed from cafein data
   const village = await getVillageByCoordinates(
     sitepoint.longitude,
     sitepoint.latitude,
   )
 
-  const assetCode = await generateCounterNumber(asset, village)
+  const assetCode = await generateCounterNumber(
+    sitepoint.site_category_code,
+    asset,
+    village,
+  )
+
   return [
     createdUser,
     modifiedUser,

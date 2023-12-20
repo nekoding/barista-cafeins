@@ -276,6 +276,32 @@ model master_asset_group_items {
   @@schema("asset")
 }
 
+model asset_group_items {
+  id                    BigInt  @id @default(autoincrement())
+  asset_id              BigInt
+  asset_group_id        BigInt
+  equipment_id          BigInt
+  path                  String  @db.VarChar(255)
+  max_slot              Int?
+  max_port              Int?
+  core_in               Int?
+  core_out              Int?
+  port_type_id          BigInt
+  row                   Int?
+  column                Int?
+  orientation           String? @db.VarChar(255)
+  is_restart            Boolean @default(false)
+  number                Int?
+  front                 Int?
+  back                  Int?
+  transaction_status_id BigInt?
+  uuid                  String? @unique(map: "asset_asset_group_items_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  vendor_id             BigInt?
+  vendor_uuid           String? @db.VarChar(255)
+
+  @@schema("asset")
+}
+
 model port_categories {
   id               BigInt       @id @default(autoincrement())
   name             String       @db.VarChar(255)
@@ -1730,15 +1756,17 @@ model segments {
 }
 
 model site_categories {
-  created_at       DateTime? @default(now()) @db.Timestamp(6)
-  updated_at       DateTime? @default(now()) @db.Timestamp(6)
-  deleted_at       DateTime? @db.Timestamp(6)
+  created_at       DateTime?     @default(now()) @db.Timestamp(6)
+  updated_at       DateTime?     @default(now()) @db.Timestamp(6)
+  deleted_at       DateTime?     @db.Timestamp(6)
   created_user_id  BigInt
   modified_user_id BigInt
   deleted_user_id  BigInt?
-  id               BigInt    @id(map: "PK_5e04fd14d786ef58780bd8dd237") @default(autoincrement())
+  id               BigInt        @id(map: "PK_5e04fd14d786ef58780bd8dd237") @default(autoincrement())
   name             String
-  uuid             String?   @unique(map: "site_point_site_categories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  uuid             String?       @unique(map: "site_point_site_categories_uuid_unique") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  code             String?
+  site_points      site_points[]
 
   @@schema("site_point")
 }
@@ -1762,6 +1790,7 @@ model site_points {
   site_category_uuid                   String?                  @db.VarChar(255)
   cables_cables_site_fromTosite_points cables[]                 @relation("cables_site_fromTosite_points")
   cables_cables_site_toTosite_points   cables[]                 @relation("cables_site_toTosite_points")
+  site_category                        site_categories          @relation(fields: [site_category_id], references: [id], onUpdate: NoAction, map: "site_points_site_category_id_foreign")
 
   @@index([geometry], map: "IDX_a6bfa3085491b35911d722c187", type: Gist)
   @@schema("site_point")

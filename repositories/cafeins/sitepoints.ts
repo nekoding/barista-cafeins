@@ -76,22 +76,25 @@ const findSitePointByUuid = async (
   uuid: string,
 ): Promise<CafeinsSitePoint | null> => {
   const result = await prismaClient.$queryRaw<CafeinsSitePoint[]>`SELECT 
-      id,
-      village_id,
-      name,
-      latitude,
-      longitude,
-      site_category_id,
-      geometry::text,
-      code,
-      uuid,
-      created_at,
-      updated_at,
-      deleted_at,
-      created_user_id,
-      modified_user_id,
-      deleted_user_id
-    FROM site_point.site_points sp WHERE sp.uuid = ${uuid}::uuid LIMIT 1 OFFSET 0`
+      sp.id,
+      sp.village_id,
+      sp.name,
+      sp.latitude,
+      sp.longitude,
+      sp.site_category_id,
+      sp.geometry::text,
+      sp.code,
+      sp.uuid,
+      sp.created_at,
+      sp.updated_at,
+      sp.deleted_at,
+      sp.created_user_id,
+      sp.modified_user_id,
+      sp.deleted_user_id,
+      sc.name as site_category_name,
+      sc.code as site_category_code
+    FROM site_point.site_points sp
+    JOIN site_point.site_categories sc ON sc.id = sp.site_category_id WHERE sp.uuid = ${uuid}::uuid LIMIT 1 OFFSET 0`
 
   if (result.length < 1) {
     return null

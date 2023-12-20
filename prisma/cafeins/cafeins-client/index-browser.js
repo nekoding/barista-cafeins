@@ -325,6 +325,30 @@ exports.Prisma.Master_asset_group_itemsScalarFieldEnum = {
   port_type_uuid: 'port_type_uuid',
 }
 
+exports.Prisma.Asset_group_itemsScalarFieldEnum = {
+  id: 'id',
+  asset_id: 'asset_id',
+  asset_group_id: 'asset_group_id',
+  equipment_id: 'equipment_id',
+  path: 'path',
+  max_slot: 'max_slot',
+  max_port: 'max_port',
+  core_in: 'core_in',
+  core_out: 'core_out',
+  port_type_id: 'port_type_id',
+  row: 'row',
+  column: 'column',
+  orientation: 'orientation',
+  is_restart: 'is_restart',
+  number: 'number',
+  front: 'front',
+  back: 'back',
+  transaction_status_id: 'transaction_status_id',
+  uuid: 'uuid',
+  vendor_id: 'vendor_id',
+  vendor_uuid: 'vendor_uuid',
+}
+
 exports.Prisma.Port_categoriesScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1447,6 +1471,7 @@ exports.Prisma.Site_categoriesScalarFieldEnum = {
   id: 'id',
   name: 'name',
   uuid: 'uuid',
+  code: 'code',
 }
 
 exports.Prisma.Site_pointsScalarFieldEnum = {
@@ -1537,6 +1562,7 @@ exports.Prisma.ModelName = {
   equipment_categories: 'equipment_categories',
   equipments: 'equipments',
   master_asset_group_items: 'master_asset_group_items',
+  asset_group_items: 'asset_group_items',
   port_categories: 'port_categories',
   port_types: 'port_types',
   asset_recaps: 'asset_recaps',

@@ -14,6 +14,8 @@ interface CafeinsSitePoint {
   created_user_id?: number
   modified_user_id?: number
   deleted_user_id?: number
+  site_category_name?: string
+  site_category_code?: string
 }
 
 export type { CafeinsSitePoint }
