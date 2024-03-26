@@ -22,6 +22,7 @@ import {
 import { baristaClient, cafeinsClient } from '../utils/database'
 import moment from 'moment'
 import { AuditEvent } from '../types/cafeins/audit'
+import { logger } from '../utils/logger'
 
 type ValidatedData = [
   users,
@@ -189,7 +190,7 @@ const createProjectSegmentBySitePoint = async (
 
 const syncSegments = async (): Promise<void> => {
   try {
-    console.log('sync segment start')
+    logger.info('sync segment start')
     const segments = await getSegmentsUnmigrated()
 
     for (const segment of segments) {
@@ -387,7 +388,7 @@ const syncSegments = async (): Promise<void> => {
       }
     }
 
-    console.log('sync segment finish')
+    logger.info('sync segment finish')
   } catch (error: any) {
     await writeToLog(
       LogLevel.ERROR,
